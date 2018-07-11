@@ -11,6 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/','IndexController@showIndex')->name('showIndex');
+//切换语言
+Route::get('/lang/switch/zh','IndexController@switchZh')->name('langSwitchZh');
+Route::get('/lang/switch/en','IndexController@switchEn')->name('langSwitchEn');

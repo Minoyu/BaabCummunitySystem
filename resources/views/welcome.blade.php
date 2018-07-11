@@ -7,10 +7,8 @@
 
         <title>Laravel</title>
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
         <!-- Styles -->
+        <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
         <style>
             html, body {
                 background-color: #fff;
@@ -79,8 +77,10 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Laravel
+                    Laravel {{ __('index.home')}} {{App::getLocale()}} {{\Illuminate\Support\Facades\Session::get('language')}}
                 </div>
+                <a href="{{route('langSwitchZh')}}" class="mdui-btn mdui-ripple">中文</a>
+                <a href="{{route('langSwitchEn')}}" class="mdui-btn mdui-color-theme-accent mdui-ripple">English</a>
 
                 <div class="links">
                     <a href="https://laravel.com/docs">Documentation</a>

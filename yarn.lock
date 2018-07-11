@@ -4442,6 +4442,10 @@ mdn-data@^1.0.0, mdn-data@~1.1.0:
   version "1.1.4"
   resolved "http://registry.npm.taobao.org/mdn-data/download/mdn-data-1.1.4.tgz#50b5d4ffc4575276573c4eedb8780812a8419f01"
 
+mdui@^0.4.1:
+  version "0.4.1"
+  resolved "http://registry.npm.taobao.org/mdui/download/mdui-0.4.1.tgz#a9f109fc2d59d2e3ccb25a60eba2314afdcf86a3"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "http://registry.npm.taobao.org/media-typer/download/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"

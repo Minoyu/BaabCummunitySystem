@@ -11,6 +11,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap-sass');
+    //引入mdui
+    require('mdui')
 } catch (e) {}
 
 /**
