@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ env('APP_NAME','留学生网站') }} - @yield('title')</title>
+    <title>{{__('index.app_name')}} - @yield('title')</title>
 
     <!-- Styles -->
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
@@ -18,72 +18,15 @@
     @include('layout.appbar')
     {{--侧边抽屉导航--}}
     @include('layout.index-drawer')
+
+    <div class="mdui-container">
+        {{--主体部分--}}
+        @yield('content')
+    </div>
+
     {{--底部导航栏--}}
     @include('layout.bottom-nav')
 
-    {{--主体部分--}}
-    @yield('content')
-
-    1.test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    test<br>
-    lasttest<br>
     <!-- Js -->
     <script src="/js/mdui.min.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>

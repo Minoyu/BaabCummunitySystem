@@ -16,7 +16,7 @@
 }
 @media (min-width: 1024px){
     .drawer-padding-top{
-        top: 115px;
+        top: 20%;
     }
 }
 
@@ -24,6 +24,49 @@
 /*应用栏右下拉菜单*/
 .appbar-menu{
     width: auto;
+}
+
+/*抽屉菜单*/
+.drawer-menu{
+    padding: 0px 0px;
+}
+.drawer-top{
+    position: relative;
+}
+.drawer-top-img{
+    -webkit-filter: brightness(0.7);
+    filter: brightness(0.7);
+}
+.drawer-top-profile{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    position: absolute;
+    left:20px;
+    bottom:70px;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+.drawer-top-title{
+    position: absolute;
+    left:20px;
+    bottom:40px;
+    font-size: 18px;
+    font-weight: 800;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+
+.drawer-top-subtitle{
+    width: 180px;
+    position: absolute;
+    left:20px;
+    bottom: 17px;
+    font-weight: 500;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+.drawer-top-close{
+    position: absolute;
+    top:10px;
+    right:10px;
 }
 
 /*底部导航栏*/

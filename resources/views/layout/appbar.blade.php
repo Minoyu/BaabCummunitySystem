@@ -1,7 +1,7 @@
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide">
     <div class="mdui-toolbar mdui-color-theme-600">
         <button mdui-drawer="{target: '#index-drawer'}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></button>
-        <a href="javascript:;" class="mdui-typo-title">{{ env('APP_NAME','留学生网站') }}</a>
+        <a href="javascript:;" class="mdui-typo-title">{{ __('index.app_name') }}</a>
         <div class="mdui-toolbar-spacer "></div>
         <a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>
         <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></button>
