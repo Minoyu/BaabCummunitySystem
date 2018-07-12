@@ -10,16 +10,15 @@ class IndexController extends Controller
 {
     //
     public function showIndex(){
-        return view('welcome');
+        return view('index');
     }
 
-    public function switchZh(){
-        Session::put('language', 'zh');
-        return redirect()->back();
-    }
-
-    public function switchEn(){
-        Session::put('language', 'en');
+    public function switchLang(){
+        if (App::isLocale('en')) {
+            Session::put('language', 'zh');
+        }else{
+            Session::put('language', 'en');
+        }
         return redirect()->back();
     }
 }

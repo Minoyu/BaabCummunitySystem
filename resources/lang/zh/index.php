@@ -6,5 +6,9 @@
  */
 
 return [
+    //Appbar
     'home' => '首页',
+    'community' => '社区',
+    //Appbar-menu
+    'switchLang' => 'Switch English',
 ];

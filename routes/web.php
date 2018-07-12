@@ -13,5 +13,4 @@
 
 Route::get('/','IndexController@showIndex')->name('showIndex');
 //切换语言
-Route::get('/lang/switch/zh','IndexController@switchZh')->name('langSwitchZh');
-Route::get('/lang/switch/en','IndexController@switchEn')->name('langSwitchEn');
+Route::get('/switch/lang','IndexController@switchLang')->name('switchLang');

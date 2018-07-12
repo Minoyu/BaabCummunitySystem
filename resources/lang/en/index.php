@@ -6,5 +6,9 @@
  */
 
 return [
+    //Appbar
     'home' => 'Home',
+    'community' => 'Community',
+    //Appbar-menu
+    'switchLang' => '切换到中文',
 ];
