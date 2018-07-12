@@ -1,4 +1,4 @@
-<ul class="mdui-menu" style="width: auto" id="appbar-right-menu">
+<ul class="mdui-menu appbar-menu" style="width: auto" id="appbar-right-menu">
     <li class="mdui-menu-item">
         <a href="{{route('switchLang')}}" class="mdui-ripple">
             <i class="mdui-menu-item-icon mdui-icon material-icons">translate</i>{{__('index.switchLang')}}

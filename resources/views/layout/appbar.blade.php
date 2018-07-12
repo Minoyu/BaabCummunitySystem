@@ -7,7 +7,7 @@
         <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></button>
         @include('layout.appbar-right-menu')
     </div>
-    <div class="mdui-tab mdui-tab-centered mdui-color-theme-700" mdui-tab>
+    <div class="mdui-tab mdui-tab-centered mdui-color-theme-700 mdui-hidden-xs-down" mdui-tab>
         <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">{{ __('index.home')}}</a>
         <a href="#example3-tab1" class="mdui-ripple mdui-ripple-white">{{ __('index.community')}}</a>
     </div>

@@ -1,3 +1,6 @@
+var $$ = mdui.JQ;
+
+
 /************************
  * 顶部appbar right menu
  */

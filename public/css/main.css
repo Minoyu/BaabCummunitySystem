@@ -1,0 +1,33 @@
+/*顶部padding （移动端适配tab选项卡及drawer）*/
+
+/*无tab 有底部导航栏*/
+@media (min-width: 600px){
+    .body-padding{
+        padding-top: 120px;
+        padding-bottom: 0px;
+    }
+}
+/*有tab 无底部导航栏*/
+@media (max-width: 600px){
+    .body-padding{
+        padding-top: 60px;
+        padding-bottom: 56px;
+    }
+}
+@media (min-width: 1024px){
+    .drawer-padding-top{
+        top: 115px;
+    }
+}
+
+
+/*应用栏右下拉菜单*/
+.appbar-menu{
+    width: auto;
+}
+
+/*底部导航栏*/
+.bottom-nav{
+    background-color: white;
+    opacity:0.95;
+}

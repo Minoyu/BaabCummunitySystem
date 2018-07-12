@@ -13,13 +13,77 @@
     <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet" >
     <link href="/css/main.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mdui-appbar-with-toolbar mdui-drawer-body-left mdui-theme-primary-blue">
+<body class="mdui-drawer-body-left body-padding mdui-bottom-nav-fixed mdui-theme-primary-blue">
     {{--顶部应用栏--}}
     @include('layout.appbar')
     {{--侧边抽屉导航--}}
     @include('layout.index-drawer')
+    {{--底部导航栏--}}
+    @include('layout.bottom-nav')
+
     {{--主体部分--}}
     @yield('content')
+
+    1.test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    test<br>
+    lasttest<br>
     <!-- Js -->
     <script src="/js/mdui.min.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
