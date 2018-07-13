@@ -9,16 +9,16 @@
     <title>{{ env('APP_NAME','留学生网站') }} - @yield('title')</title>
 
     <!-- Styles -->
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
-    <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet" >
     <link href="/css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     {{--主体部分--}}
     @yield('content')
     <!-- Js -->
+    <script src="/layui/layui.js"></script>
     <script src="/js/mdui.min.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="/js/main.js"></script>
 </body>
 </html>

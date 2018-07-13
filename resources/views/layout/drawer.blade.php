@@ -3,7 +3,7 @@
 
         <div class="mdui-m-b-1 drawer-top">
             <img class="mdui-img-fluid drawer-top-img" src="/imgs/drawer_top.png"/>
-            <img class="drawer-top-profile" src="/imgs/user_profile.jpeg" />
+            <img class="drawer-top-profile mdui-hoverable" src="/imgs/user_profile.png" />
             <span class="drawer-top-title mdui-text-color-white">{{__('index.top-title')}}</span>
             <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
             <button class="mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple" mdui-drawer-close><i class="mdui-icon material-icons">clear_all</i></button>

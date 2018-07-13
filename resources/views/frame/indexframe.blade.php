@@ -9,15 +9,15 @@
     <title>{{__('index.app_name')}} - @yield('title')</title>
 
     <!-- Styles -->
+    <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
-    <link href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" rel="stylesheet" >
     <link href="/css/main.css" rel="stylesheet" type="text/css">
 </head>
 <body class="mdui-drawer-body-left body-padding mdui-bottom-nav-fixed mdui-theme-primary-blue">
     {{--顶部应用栏--}}
     @include('layout.appbar')
     {{--侧边抽屉导航--}}
-    @include('layout.index-drawer')
+    @include('layout.drawer')
 
     <div class="mdui-container">
         {{--主体部分--}}
@@ -28,8 +28,8 @@
     @include('layout.bottom-nav')
 
     <!-- Js -->
+    <script src="/layui/layui.js"></script>
     <script src="/js/mdui.min.js"></script>
-    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
     <script src="/js/main.js"></script>
 </body>
 </html>

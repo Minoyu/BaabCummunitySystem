@@ -21,7 +21,7 @@
 }
 
 
-/*应用栏右下拉菜单*/
+/*应用栏右方下拉菜单*/
 .appbar-menu{
     width: auto;
 }
@@ -73,4 +73,68 @@
 .bottom-nav{
     background-color: white;
     opacity:0.95;
+}
+
+/*首页轮播图高度自适应*/
+.index-carousel{
+    height:240px;
+}
+@media (min-width: 600px){
+    .index-carousel{
+        height:350px;
+    }
+}
+@media (min-width: 800px){
+    .index-carousel{
+        height:400px;
+    }
+}
+@media (min-width: 1024px){
+    .index-carousel{
+        height:320px;
+    }
+}
+@media (min-width: 1380px){
+    .index-carousel{
+        height:420px;
+    }
+}
+
+/*首页轮播图片高度自适应*/
+.index-carousel-img{
+    height: 240px;
+}
+@media (min-width: 600px){
+    .index-carousel-img{
+        height:350px;
+    }
+}
+@media (min-width: 800px){
+    .index-carousel-img{
+        height:400px;
+    }
+}
+@media (min-width: 1024px){
+    .index-carousel-img{
+        height:320px;
+    }
+}
+@media (min-width: 1380px){
+    .index-carousel-img{
+        height:420px;
+    }
+}
+
+/*轮播图标题框*/
+.index-carousel-primary {
+    position: relative;
+    padding: 10px 16px 10px 16px;
+}
+@media (max-width: 600px){
+    .index-carousel-primary .mdui-card-primary-title{
+        font-size: 20px;
+    }
+    .index-carousel-primary .mdui-card-primary-subtitle{
+        font-size: 16px;
+    }
 }
