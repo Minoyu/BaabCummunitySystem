@@ -9,7 +9,7 @@
         </div>
         <div class="mdui-col-md-5 mdui-col-xs-12">
             {{--PC轮播图右侧 移动端轮播图下方--}}
-            轮播图旁资讯
+            @include('index.carousel-right')
         </div>
     </div>
 @endsection

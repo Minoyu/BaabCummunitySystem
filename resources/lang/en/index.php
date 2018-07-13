@@ -18,4 +18,8 @@ return [
     //Drawer
     'top-title'=>'Click to login',
     'top-subtitle'=>'Welcome to '.env('APP_EN_NAME','AfricaSystem'),
+    //Carousel-right
+    'whatsHot'=>'Whats Hot',
+    'whatsNew'=>'Whats New',
+
 ];

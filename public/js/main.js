@@ -18,6 +18,8 @@ layui.use('carousel', function(){
         width: '100%', //设置容器宽度
         height: '100%', //设置容器宽度
         arrow: 'hover' //始终显示箭头
-        //anim: 'updown' //切换动画方式
     });
 });
+
+//轮播图右侧最新内容
+var carsouelRightTab = new mdui.Tab('#carousel-right',{trigger:'hover'});

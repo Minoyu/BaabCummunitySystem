@@ -18,4 +18,7 @@ return [
     //Drawer
     'top-title'=>'点此登录',
     'top-subtitle'=>'欢迎来到'.env('APP_ZH_NAME','留学生网站'),
+    //Carousel-right
+    'whatsHot'=>'热度',
+    'whatsNew'=>'最新',
 ];

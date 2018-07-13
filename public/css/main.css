@@ -1,3 +1,6 @@
+ion-icon {
+    font-size: 20px;
+}
 /*顶部padding （移动端适配tab选项卡及drawer）*/
 
 /*无tab 有底部导航栏*/
@@ -125,6 +128,13 @@
     }
 }
 
+/*宽度1024-1379之间的响应式工具*/
+@media (min-width: 1024px) and (max-width: 1397px){
+    .small-pc-hidden{
+        display: none !important;
+    }
+}
+
 /*轮播图标题框*/
 .index-carousel-primary {
     position: relative;
@@ -137,4 +147,15 @@
     .index-carousel-primary .mdui-card-primary-subtitle{
         font-size: 16px;
     }
+}
+
+.table-icon,
+.table-icon::before {
+    font-size: 18px;
+    padding-right: 5px;
+}
+.table-icon::before {
+    width: 18px;
+    height: 18px;
+    padding-right: 5px;
 }
