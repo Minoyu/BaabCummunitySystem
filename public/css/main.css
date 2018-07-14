@@ -149,6 +149,7 @@ ion-icon {
     }
 }
 
+/*轮播图右表格*/
 .table-icon,
 .table-icon::before {
     font-size: 18px;
@@ -158,4 +159,60 @@ ion-icon {
     width: 18px;
     height: 18px;
     padding-right: 5px;
+}
+
+/*板块标题*/
+.part-title,
+.part-title-blue,
+.part-title-red{
+    border-left: 8px solid rgba(0, 0, 0, 0.65);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.65);
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0px 10px 0px;
+    padding: 10px 20px 9px 10px;
+    line-height: 18px;
+    background-color: #fff;
+}
+/*板块标题蓝*/
+.part-title-blue{
+    border-left: 8px solid #42a5f5;
+    border-bottom: 2px solid #42a5f5;
+}
+/*板块标题红*/
+.part-title-red{
+    border-left: 8px solid #FF3338;
+    border-bottom: 2px solid #FF3338;
+}
+/*板块标题按钮*/
+.part-title-more-btn{
+    float: right !important;
+    margin: -10px 0px;
+}
+.part-title-blue>.part-title-more-btn{
+    color: #3c89d2;
+}
+.part-title-red>.part-title-more-btn{
+    color: #d1292d;
+}
+
+/*首页新闻头条板块左侧图片*/
+/*图片标题框*/
+.topnews-img-primary {
+    position: relative;
+    padding: 8px 10px 6px 10px;
+}
+.topnews-img-primary .mdui-card-primary-title{
+    line-height: 20px;
+}
+.topnews-img-primary .mdui-card-primary-subtitle{
+    line-height: 18px;
+}
+@media (max-width: 600px){
+    .topnews-img-primary .mdui-card-primary-title{
+        font-size: 18px;
+    }
+    .topnews-img-primary .mdui-card-primary-subtitle{
+        font-size: 14px;
+    }
 }

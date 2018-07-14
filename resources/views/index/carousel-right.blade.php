@@ -15,7 +15,7 @@
         <table class="mdui-table mdui-table-hoverable">
             <tbody>
             <tr>
-                <td><i class="mdui-icon table-icon ion-md-flame mdui-text-color-red"></i>test1test1test1</td>
+                <td><i class="mdui-icon table-icon ion-md-flame mdui-text-color-red"></i><a class="" href="#">test1test1test1</a></td>
             </tr>
             <tr>
                 <td><i class="mdui-icon table-icon ion-md-flame mdui-text-color-red-300"></i>test1test1test1</td>
