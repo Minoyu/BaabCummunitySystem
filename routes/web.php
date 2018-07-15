@@ -12,5 +12,6 @@
 */
 
 Route::get('/','IndexController@showIndex')->name('showIndex');
+Route::get('/news','NewsController@showNews')->name('showNews');
 //切换语言
 Route::get('/switch/lang','IndexController@switchLang')->name('switchLang');

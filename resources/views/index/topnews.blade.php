@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="mdui-col-xs-8">
-
+                <h2 class="topnews-h1">测试头条1</h2>
             </div>
         </div>
     </div>
