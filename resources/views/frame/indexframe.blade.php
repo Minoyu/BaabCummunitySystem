@@ -29,6 +29,10 @@
 
     {{--底部导航栏--}}
     @include('layout.bottom-nav')
+    {{--注册登录重置模块--}}
+    @include('layout.login')
+    @include('layout.register')
+    @include('layout.reset')
 
     <!-- Js -->
     <script src="/layui/layui.js"></script>

@@ -25,7 +25,6 @@
     </div>
     @include('index.community')
 
-
     <br>
     <br>
     <br>

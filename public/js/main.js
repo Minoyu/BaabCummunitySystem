@@ -29,3 +29,10 @@ var infoTab = new mdui.Tab('#info-tab',{trigger:'hover'});
 
 //首页地区板块tab
 var regionalTab = new mdui.Tab('#regional-tab',{trigger:'hover'});
+
+//登录对话框
+var loginDialog = new mdui.Dialog('#login-dialog',{modal:true});
+//注册对话框
+var registerDialog = new mdui.Dialog('#register-dialog',{modal:true});
+//密码重置对话框
+var resetDialog = new mdui.Dialog('#reset-dialog',{modal:true});

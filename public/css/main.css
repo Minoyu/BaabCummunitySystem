@@ -381,3 +381,107 @@
     line-height: 20px;
     opacity: .8;
 }
+
+/*登录部分CSS*/
+.login-dialog,.register-dialog,.reset-dialog {
+    max-width: 448px;
+    overflow-y: auto
+}
+
+.login-dialog .back,.login-dialog .close,.register-dialog .back,.register-dialog .close,.reset-dialog .back,.reset-dialog .close {
+    display: block;
+    position: absolute;
+    left: 4px;
+    top: 4px
+}
+
+.login-dialog .avatar,.register-dialog .avatar,.reset-dialog .avatar {
+    display: block;
+    position: absolute;
+    left: 36px;
+    top: 40px;
+    color: hsla(0,0%,100%,.56);
+    font-size: 76px
+}
+
+.login-dialog .mdui-dialog-title,.register-dialog .mdui-dialog-title,.reset-dialog .mdui-dialog-title {
+    padding: 146px 40px 28px;
+    margin-bottom: 24px
+}
+
+.login-dialog form,.register-dialog form,.reset-dialog form {
+    padding: 0 40px 62px
+}
+
+.login-dialog .more-option,.register-dialog .more-option,.reset-dialog .more-option {
+    margin-left: -16px
+}
+
+.login-dialog .captcha-field,.register-dialog .captcha-field,.reset-dialog .captcha-field {
+    margin-right: 116px;
+    overflow: visible
+}
+
+.login-dialog .captcha-image,.register-dialog .captcha-image,.reset-dialog .captcha-image {
+    position: absolute;
+    right: -116px;
+    bottom: 29px;
+    cursor: pointer
+}
+
+.login-dialog .send-email-field,.register-dialog .send-email-field,.reset-dialog .send-email-field {
+    margin-right: 116px;
+    overflow: visible
+}
+
+.login-dialog .send-email,.register-dialog .send-email,.reset-dialog .send-email {
+    position: absolute;
+    right: -116px;
+    bottom: 29px
+}
+
+.login-dialog .actions,.register-dialog .actions,.reset-dialog .actions {
+    margin-top: 24px
+}
+
+@media (max-width:599px) {
+    .login-dialog,.register-dialog,.reset-dialog {
+        position: fixed!important;
+        left: 0!important;
+        top: 0!important;
+        right: 0!important;
+        bottom: 0!important;
+        height: 100%!important;
+        width: 100%!important;
+        margin: 0!important;
+        max-width: none!important;
+        max-height: none!important;
+        border-radius: 0!important
+    }
+
+    .login-dialog .back,.login-dialog .close,.register-dialog .back,.register-dialog .close,.reset-dialog .back,.reset-dialog .close {
+        left: 8px;
+        top: 10px
+    }
+
+    .login-dialog .avatar,.register-dialog .avatar,.reset-dialog .avatar {
+        display: none
+    }
+
+    .login-dialog .mdui-dialog-title,.register-dialog .mdui-dialog-title,.reset-dialog .mdui-dialog-title {
+        line-height: 36px;
+        padding: 10px 16px 10px 52px
+    }
+
+    .login-dialog form,.register-dialog form,.reset-dialog form {
+        padding: 0 24px 24px
+    }
+
+    .login-dialog form .mdui-textfield,.register-dialog form .mdui-textfield,.reset-dialog form .mdui-textfield {
+        padding-top: 4px
+    }
+
+    .login-dialog .actions,.register-dialog .actions,.reset-dialog .actions {
+        margin-top: 14px
+    }
+}
