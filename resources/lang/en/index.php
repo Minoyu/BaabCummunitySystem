@@ -29,5 +29,7 @@ return [
     'info'=>'Information',
     //Regional
     'regional'=>'Regional',
+    //Community
+    'postsCount'=>'Posts'
 
 ];

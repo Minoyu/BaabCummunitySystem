@@ -26,3 +26,6 @@ var carsouelRightTab = new mdui.Tab('#carousel-right',{trigger:'hover'});
 
 //首页资讯板块tab
 var infoTab = new mdui.Tab('#info-tab',{trigger:'hover'});
+
+//首页地区板块tab
+var regionalTab = new mdui.Tab('#regional-tab',{trigger:'hover'});

@@ -29,5 +29,8 @@ return [
     'info'=>'资讯',
     //Regional
     'regional'=>'区域',
+    //Community
+    'postsCount'=>'帖数'
+
 
 ];

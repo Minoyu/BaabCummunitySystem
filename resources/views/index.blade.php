@@ -23,4 +23,15 @@
             @include('index.regional')
         </div>
     </div>
+    @include('index.community')
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 @endsection
