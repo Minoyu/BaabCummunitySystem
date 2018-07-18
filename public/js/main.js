@@ -23,3 +23,6 @@ layui.use('carousel', function(){
 
 //轮播图右侧最新内容
 var carsouelRightTab = new mdui.Tab('#carousel-right',{trigger:'hover'});
+
+//首页资讯板块tab
+var infoTab = new mdui.Tab('#info-tab',{trigger:'hover'});

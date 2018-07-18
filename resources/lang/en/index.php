@@ -25,6 +25,9 @@ return [
     'whatsNew'=>'Whats New',
     //Top News
     'topNews'=>'The Headlines',
-
+    //Information
+    'info'=>'Information',
+    //Regional
+    'regional'=>'Regional',
 
 ];

@@ -1,8 +1,4 @@
-ion-icon {
-    font-size: 20px;
-}
 /*顶部padding （移动端适配tab选项卡及drawer）*/
-
 /*无tab 有底部导航栏*/
 @media (min-width: 600px){
     .body-padding{
@@ -150,12 +146,15 @@ ion-icon {
 }
 
 /*轮播图右表格*/
-.table-icon,
-.table-icon::before {
+.index-carousel-r-table td{
+    white-space: nowrap;
+}
+.index-carousel-r-table td > .mdui-icon,
+.index-carousel-r-table td > .mdui-icon::before {
     font-size: 18px;
     padding-right: 5px;
 }
-.table-icon::before {
+.index-carousel-r-table td > .mdui-icon::before {
     width: 18px;
     height: 18px;
     padding-right: 5px;
@@ -197,6 +196,11 @@ ion-icon {
 }
 
 /*首页新闻头条板块*/
+/*图片*/
+.topnews-img-card{
+    max-height: 300px;
+    max-width: 200px;
+}
 /*图片标题框*/
 .topnews-img-primary {
     position: relative;
@@ -215,4 +219,91 @@ ion-icon {
     .topnews-img-primary .mdui-card-primary-subtitle{
         font-size: 14px;
     }
+}
+/*头条文字样式*/
+.topnews-h1,
+.topnews-h2,
+.topnews-part-name{
+    display: block;
+    overflow: hidden;/*溢出隐藏*/
+    text-overflow: ellipsis;/*文本溢出省略号*/
+    white-space: nowrap;/*不换行*/
+}
+.topnews-h1{
+    font-size: 20px;
+    font-weight: bold;
+}
+.topnews-h2{
+    font-size: 18px;
+    font-weight: 500;
+}
+.topnews-part-name{
+    font-size: 14px;
+    color: #cd0000;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+@media (max-width: 600px){
+    .topnews-h1{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .topnews-h2{
+        font-size: 16px;
+    }
+}
+
+.part-divider-tab > a{
+    min-width: 72px;
+    min-height: 48px;
+    max-height: 72px;
+    padding: 12px;
+    font-size: 14px;
+    opacity: .7;
+
+}
+
+/*首页资讯板块*/
+.info-first-img{
+    width: 100%;
+    max-width: 200px;
+}
+
+/*资讯文字样式*/
+.index-info-h {
+    font-size: 16px;
+}
+
+.index-info-img-h{
+    /*图片旁标题允许换行*/
+    word-wrap:break-word;
+    display: block;
+    padding: 20px 10px 0px 5px;
+    font-size: 22px;
+    line-height: 1.3em;
+    color: #1065cd;
+    font-weight: bold;
+}
+
+@media (max-width: 600px){
+    .index-info-h1{
+        font-size: 14px;
+    }
+    .index-info-img-h{
+        padding-top: 5px;
+        font-size: 18px;
+        color: #1065cd;
+        font-weight: bold;
+    }
+}
+.index-info-img-area{
+    float: left;
+}
+.index-info-text-area{
+    padding:12px;
+    float: left;
+}
+/*首页列表样式*/
+.index-list>.mdui-list-item{
+    padding-left: 0px;
 }

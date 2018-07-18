@@ -25,4 +25,9 @@ return [
     'whatsNew'=>'最新',
     //Top News
     'topNews'=>'最头条',
+    //Information
+    'info'=>'资讯',
+    //Regional
+    'regional'=>'区域',
+
 ];
