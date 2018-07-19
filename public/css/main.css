@@ -447,6 +447,20 @@
     padding: 146px 40px 28px;
     margin-bottom: 24px;
     line-height: 36px;
+    text-shadow: black 0.05em 0.05em 0.05em
+}
+
+.login-dialog .login-bg{
+    background: url("../imgs/login_dialog_bg.jpg");
+    background-size: 100% 100%;
+}
+.register-dialog .register-bg{
+    background: url("../imgs/register_dialog_bg.jpg");
+    background-size: 100% 100%;
+}
+.reset-dialog .reset-bg{
+    background: url("../imgs/reset_dialog_bg.jpg");
+    background-size: 100% 100%;
 }
 
 .login-dialog form,.register-dialog form,.reset-dialog form {

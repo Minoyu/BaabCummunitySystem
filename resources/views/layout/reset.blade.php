@@ -2,7 +2,7 @@
     <button class="mdui-btn mdui-btn-icon mdui-text-color-white close" mdui-dialog-close>
         <i class="mdui-icon material-icons">close</i>
     </button>
-    <div class="mdui-dialog-title mdui-color-deep-orange mdui-text-color-white">{{__('auth.resetPassword')}}</div>
+    <div class="mdui-dialog-title reset-bg mdui-text-color-white">{{__('auth.resetPassword')}}</div>
     <form class="">
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
             <label class="mdui-textfield-label">邮箱</label>
