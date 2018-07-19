@@ -270,13 +270,12 @@ body {
         font-size: 14px;
     }
 }
-<<<<<<< HEAD
 
 /*新闻页右侧两卡片间距*/
 .card-margin{
     margin-top: 10px;
 }
-=======
+
 /*头条文字样式*/
 .topnews-h1,
 .topnews-h2,
@@ -626,4 +625,3 @@ body {
     line-height: 45px;
     vertical-align: middle;
 }
->>>>>>> 9726cea1287e4d21f60393e80d8de5503ab458d3
