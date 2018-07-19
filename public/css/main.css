@@ -25,6 +25,45 @@
     width: auto;
 }
 
+.full-width-menu{
+    width:auto;
+}
+
+.appbar-menu .user-div{
+    width: 250px;
+    height: 90px;
+}
+
+.appbar-menu .user-div .user-profile{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    position: absolute;
+    top:27px;
+    left:15px;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+.appbar-menu-title{
+    line-height: 18px;
+    font-size: 18px;
+    position: absolute;
+    top: 25px;
+    left: 85px;
+}
+.appbar-menu-subtitle{
+    line-height: 14px;
+    font-size: 14px;
+    position: absolute;
+    top: 55px;
+    left: 85px;
+}
+
+.appbar-menu-subtitle button{
+    min-width: 0px;
+    padding: 0px 5px;
+    font-size: 14px;
+}
+
 /*抽屉菜单*/
 .drawer-menu{
     padding: 0px 0px;
@@ -406,7 +445,8 @@
 
 .login-dialog .mdui-dialog-title,.register-dialog .mdui-dialog-title,.reset-dialog .mdui-dialog-title {
     padding: 146px 40px 28px;
-    margin-bottom: 24px
+    margin-bottom: 24px;
+    line-height: 36px;
 }
 
 .login-dialog form,.register-dialog form,.reset-dialog form {

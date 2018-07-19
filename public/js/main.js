@@ -32,7 +32,43 @@ var regionalTab = new mdui.Tab('#regional-tab',{trigger:'hover'});
 
 //登录对话框
 var loginDialog = new mdui.Dialog('#login-dialog',{modal:true});
+
+//打开登录框
+function openLoginDialog() {
+    loginDialog.open();
+}
+function loginToRegister() {
+    loginDialog.close();
+    registerDialog.open();
+}
+function loginToReset() {
+    loginDialog.close();
+    resetDialog.open();
+}
 //注册对话框
 var registerDialog = new mdui.Dialog('#register-dialog',{modal:true});
+
+//打开注册框
+function openRegisterDialog() {
+    registerDialog.open();
+}
+function registerToLogin() {
+    registerDialog.close();
+    loginDialog.open();
+}
+
 //密码重置对话框
 var resetDialog = new mdui.Dialog('#reset-dialog',{modal:true});
+
+//打开重置框
+function openResetDialog() {
+    resetDialog.open();
+}
+function resetToRegister() {
+    resetDialog.close();
+    registerDialog.open();
+}
+function resetToLogin() {
+    resetDialog.close();
+    loginDialog.open();
+}

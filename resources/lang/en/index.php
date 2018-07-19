@@ -8,6 +8,11 @@
 return [
     //全局
     'app_name'=> env('APP_EN_NAME','AfricaSystem'),
+    'login'=>'Login',
+    'or'=>'or',
+    'next'=>'Next',
+    'register'=>'Register',
+    'submit'=>'Submit',
     //Appbar
     'home' => 'Home',
     'community' => 'Community',
@@ -15,8 +20,9 @@ return [
     'discover' => 'Discover',
     //Appbar-menu
     'switchLang' => '切换到中文',
+    'welcome'=>"Nice to meet you!",
     //Drawer
-    'top-title'=>'Click to login',
+    'top-title'=>'Click to',
     'top-subtitle'=>'Welcome to '.env('APP_EN_NAME','AfricaSystem'),
     //part-title
     'more'=>'More',

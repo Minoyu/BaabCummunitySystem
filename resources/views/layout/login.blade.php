@@ -2,7 +2,10 @@
     <button class="mdui-btn mdui-btn-icon mdui-text-color-white close" mdui-dialog-close>
         <i class="mdui-icon material-icons">close</i>
     </button>
-    <div class="mdui-dialog-title mdui-color-indigo">登录</div>
+    <div class="mdui-dialog-title mdui-color-indigo">
+        {{__('index.login')}}
+        <button onclick="loginToRegister()" class="mdui-btn mdui-ripple mdui-float-right" type="button">{{__('auth.notRegistered')}}</button>
+    </div>
     <form>
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
             <label class="mdui-textfield-label">用户名或邮箱</label>
@@ -10,21 +13,21 @@
             <div class="mdui-textfield-error">账号不能为空</div>
         </div>
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
-            <label class="mdui-textfield-label">密码</label>
+            <label class="mdui-textfield-label">{{__('auth.password')}}</label>
             <input class="mdui-textfield-input" name="password" type="password" required>
             <div class="mdui-textfield-error">密码不能为空</div>
         </div>
         <div class="actions mdui-clearfix">
-            <button class="mdui-btn mdui-ripple more-option" type="button" mdui-menu="{target: '#login-dialog-menu', position: 'top', covered: false}">更多选项</button>
-            <ul class="mdui-menu" id="login-dialog-menu">
+            <button class="mdui-btn mdui-ripple more-option" type="button" mdui-menu="{target: '#login-dialog-menu', position: 'top', covered: false}">{{__('auth.moreOptions')}}</button>
+            <ul class="mdui-menu full-width-menu" id="login-dialog-menu">
                 <li class="mdui-menu-item">
-                    <a class="mdui-ripple">忘记密码</a>
+                    <a onclick="loginToReset()" class="mdui-ripple">{{__('auth.forgotPassword')}}</a>
                 </li>
                 <li class="mdui-menu-item">
-                    <a class="mdui-ripple">创建新账号</a>
+                    <a onclick="loginToRegister()" class="mdui-ripple">{{__('auth.createAccount')}}</a>
                 </li>
             </ul>
-            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">登录</button>
+            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('auth.confirmLogin')}}</button>
         </div>
     </form>
 </div>

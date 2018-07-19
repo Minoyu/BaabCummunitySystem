@@ -8,6 +8,11 @@
 return [
     //全局
     'app_name'=> env('APP_ZH_NAME','留学生网站'),
+    'login'=>'登录',
+    'or'=>'或',
+    'next'=>'下一步',
+    'register'=>'注册',
+    'submit'=>'提交',
     //Appbar
     'home' => '首页',
     'community' => '社区',
@@ -15,8 +20,9 @@ return [
     'discover'=>'发现',
     //Appbar-menu
     'switchLang' => 'Switch English',
+    'welcome'=>"很高兴遇见你!",
     //Drawer
-    'top-title'=>'点此登录',
+    'top-title'=>'点此',
     'top-subtitle'=>'欢迎来到'.env('APP_ZH_NAME','留学生网站'),
     //part-title
     'more'=>'更多',

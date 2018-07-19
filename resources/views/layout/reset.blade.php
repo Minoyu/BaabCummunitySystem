@@ -2,7 +2,7 @@
     <button class="mdui-btn mdui-btn-icon mdui-text-color-white close" mdui-dialog-close>
         <i class="mdui-icon material-icons">close</i>
     </button>
-    <div class="mdui-dialog-title mdui-color-deep-orange mdui-text-color-white">重置密码</div>
+    <div class="mdui-dialog-title mdui-color-deep-orange mdui-text-color-white">{{__('auth.resetPassword')}}</div>
     <form class="">
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
             <label class="mdui-textfield-label">邮箱</label>
@@ -19,13 +19,13 @@
             <button type="button" class="mdui-btn mdui-ripple more-option" mdui-menu="{target: '#password-reset-menu', position: 'top', covered: false}">更多选项</button>
             <ul class="mdui-menu" id="password-reset-menu">
                 <li class="mdui-menu-item">
-                    <a class="mdui-ripple">登录账号</a>
+                    <a onclick="resetToLogin()" class="mdui-ripple">{{__('index.login')}}</a>
                 </li>
                 <li class="mdui-menu-item">
-                    <a class="mdui-ripple">创建新账号</a>
+                    <a onclick="resetToRegister()" class="mdui-ripple">{{__('auth.createAccount')}}</a>
                 </li>
             </ul>
-            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">下一步</button>
+            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.next')}}</button>
         </div>
     </form>
     <form class="mdui-hidden">

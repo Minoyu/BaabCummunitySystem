@@ -2,7 +2,10 @@
     <button class="mdui-btn mdui-btn-icon mdui-text-color-white close" mdui-dialog-close>
         <i class="mdui-icon material-icons">close</i>
     </button>
-    <div class="mdui-dialog-title mdui-color-green mdui-text-color-white">创建新账号</div>
+    <div class="mdui-dialog-title mdui-color-green mdui-text-color-white">
+        {{__('auth.createAccount')}}
+        <button onclick="registerToLogin()" class="mdui-btn mdui-ripple mdui-float-right" type="button">{{__('auth.Registered')}}</button>
+    </div>
     <form class="">
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
             <label class="mdui-textfield-label">邮箱</label>
@@ -16,8 +19,8 @@
             <button class="mdui-btn send-email" type="button">发送验证码</button>
         </div>
         <div class="actions">
-            <div class="mdui-btn mdui-ripple more-option">已有账号？</div>
-            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">下一步</button>
+            <a onclick="registerToLogin()" class="mdui-btn mdui-ripple more-option">{{__('auth.Registered')}}</a>
+            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.next')}}</button>
         </div>
     </form>
     <form class="">
@@ -27,11 +30,11 @@
             <div class="mdui-textfield-error">用户名不能为空</div>
         </div>
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
-            <label class="mdui-textfield-label">密码</label>
+            <label class="mdui-textfield-label">{{__('auth.password')}}</label>
             <input class="mdui-textfield-input" name="password" type="password" required>
             <div class="mdui-textfield-error">密码不能为空</div>
         </div><div class="actions mdui-clearfix">
-            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">注册</button>
+            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.register')}}</button>
         </div>
     </form>
 </div>
