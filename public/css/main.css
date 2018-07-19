@@ -89,9 +89,9 @@ body {
 }
 .drawer-top-title{
     position: absolute;
-    left:20px;
+    left:15px;
     bottom:40px;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 800;
     text-shadow: black 0.1em 0.1em 0.2em
 }
@@ -99,7 +99,7 @@ body {
 .drawer-top-subtitle{
     width: 180px;
     position: absolute;
-    left:20px;
+    left:15px;
     bottom: 17px;
     font-weight: 500;
     text-shadow: black 0.1em 0.1em 0.2em
@@ -108,6 +108,14 @@ body {
     position: absolute;
     top:10px;
     right:10px;
+}
+@media (min-width: 600px){
+    .drawer-top-title{
+        left:20px;
+    }
+    .drawer-top-subtitle{
+        left:20px;
+    }
 }
 
 /*底部导航栏*/
@@ -418,7 +426,7 @@ body {
     padding-bottom: 8px;
     padding-right: 8px;
     overflow: hidden;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
     line-height: 20px;
     opacity: .8;
@@ -541,4 +549,73 @@ body {
     .login-dialog .actions,.register-dialog .actions,.reset-dialog .actions {
         margin-top: 14px
     }
+}
+
+/*社区板块页*/
+.part-h{
+    font-size: 25px;
+    font-weight: 600;
+}
+.community-zones-card {
+    position: relative;
+    display: inline-block;
+    height: 45px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 2px 0;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #e0e0e0;
+    border-radius: 22.5px;
+    -webkit-transition: -webkit-box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+    transition: -webkit-box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+    transition:         box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+    transition:         box-shadow .25s cubic-bezier(.4, 0, .2, 1), -webkit-box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+
+    will-change: box-shadow;
+}
+.community-zones-card:hover,
+.community-zones-card:focus {
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+.community-zones-card:active {
+    background-color: #d6d6d6;
+}
+/* 左侧的图标 */
+.community-zones-card-icon {
+    position: absolute;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    bottom: 0px;
+    margin-right: -4px;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 32px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #989898;
+    border-radius: 50%;
+}
+.community-zones-card-icon .mdui-icon {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: #fff;
+}
+/* 文本 */
+.community-zones-card-title {
+    display: inline-block;
+    height: 45px;
+    padding-right: 12px;
+    padding-left: 65px;
+    font-size: 18px;
+    line-height: 45px;
+    vertical-align: middle;
 }

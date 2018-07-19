@@ -4,27 +4,16 @@
 @section('tabActiveVal','community-tab')
 @section('bottomNavActiveVal','community-bottom-nav')
 @section('content')
-    {{--新闻部分 分栏--}}
+    {{--PC端分两栏 移动端侧边栏隐藏--}}
     <div class="mdui-row">
-        <div class="mdui-col-md-8 mdui-col-xs-12 index-carousel">
-            {{--轮播图--}}
-            @include('index.carousel')
+        <div class="mdui-col-md-9 mdui-col-xs-12">
+            {{--一级分区列表--}}
+            @include('community.left-zones-list')
+            {{--详细二级版块分类列表--}}
+            @include('community.left-sections-list')
         </div>
-        <div class="mdui-col-md-4 mdui-col-xs-12">
-            {{--PC轮播图右侧 移动端轮播图下方--}}
-            @include('index.carousel-right')
+        <div class="mdui-col-md-3 mdui-hidden-sm">
+            侧边栏
         </div>
     </div>
-    {{--头条 此部分内容可后台自定义--}}
-    @include('index.topnews')
-    <div class="mdui-row">
-        <div class="mdui-col-md-6 mdui-col-xs-12">
-            {{--资讯 此部分内容分板块数据库拉取--}}
-            @include('index.info')
-        </div>
-        <div class="mdui-col-md-6 mdui-col-xs-12">
-            @include('index.regional')
-        </div>
-    </div>
-    @include('index.community')
 @endsection
