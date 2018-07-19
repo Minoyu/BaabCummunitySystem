@@ -1,8 +1,8 @@
 @extends('frame.indexframe')
-@section('title',__('index.home'))
-@section('subtitleUrl',route('showIndex'))
-@section('tabActiveVal','home-tab')
-@section('bottomNavActiveVal','home-bottom-nav')
+@section('title',__('index.community'))
+@section('subtitleUrl',route('showCommunity'))
+@section('tabActiveVal','community-tab')
+@section('bottomNavActiveVal','community-bottom-nav')
 @section('content')
     {{--新闻部分 分栏--}}
     <div class="mdui-row">

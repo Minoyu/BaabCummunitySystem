@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>{{__('index.app_name')}} - @yield('title')</title>
 
     <!-- Styles -->
@@ -34,6 +33,9 @@
     @include('layout.register')
     @include('layout.reset')
 
+    {{--激活导航栏值--}}
+    <div id="tabActiveVal" class="mdui-hidden">@yield('tabActiveVal')</div>
+    <div id="bottomNavActiveVal" class="mdui-hidden">@yield('bottomNavActiveVal')</div>
     <!-- Js -->
     <script src="/layui/layui.js"></script>
     <script src="/js/mdui.min.js"></script>

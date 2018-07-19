@@ -13,6 +13,7 @@ return [
     'next'=>'下一步',
     'register'=>'注册',
     'submit'=>'提交',
+    'news'=>'新闻',
     //Appbar
     'home' => '首页',
     'community' => '社区',

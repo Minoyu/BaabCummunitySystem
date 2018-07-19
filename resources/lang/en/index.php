@@ -13,6 +13,7 @@ return [
     'next'=>'Next',
     'register'=>'Register',
     'submit'=>'Submit',
+    'news'=>'News',
     //Appbar
     'home' => 'Home',
     'community' => 'Community',

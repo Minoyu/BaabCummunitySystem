@@ -1,3 +1,6 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, sans-serif;
+}
 /*顶部padding （移动端适配tab选项卡及drawer）*/
 /*无tab 有底部导航栏*/
 @media (min-width: 600px){
@@ -61,7 +64,7 @@
 .appbar-menu-subtitle button{
     min-width: 0px;
     padding: 0px 5px;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 /*抽屉菜单*/

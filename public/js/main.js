@@ -72,3 +72,15 @@ function resetToLogin() {
     resetDialog.close();
     loginDialog.open();
 }
+
+//页面跳转函数 tab使用
+function jumpTo(url){
+    location.href= url;
+}
+
+//页面顶部tab及底部nav的激活
+var tabVal = $$('#tabActiveVal').text();
+var bottomVal = $$('#bottomNavActiveVal').text();
+
+$$('#'+tabVal).addClass('mdui-tab-active');
+$$('#'+bottomVal).addClass('mdui-bottom-nav-active');
