@@ -23,7 +23,7 @@
             <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.next')}}</button>
         </div>
     </form>
-    <form class="">
+    <form class="mdui-hidden">
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
             <label class="mdui-textfield-label">用户名</label>
             <input class="mdui-textfield-input" name="username" type="text" required>

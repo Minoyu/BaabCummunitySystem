@@ -16,8 +16,8 @@
             <button class="mdui-btn send-email" type="button">发送验证码</button>
         </div>
         <div class="actions">
-            <button type="button" class="mdui-btn mdui-ripple more-option" mdui-menu="{target: '#password-reset-menu', position: 'top', covered: false}">更多选项</button>
-            <ul class="mdui-menu" id="password-reset-menu">
+            <button type="button" class="mdui-btn mdui-ripple more-option" mdui-menu="{target: '#password-reset-menu', position: 'top', covered: false}">{{__('auth.moreOptions')}}</button>
+            <ul class="mdui-menu full-width-menu" id="password-reset-menu">
                 <li class="mdui-menu-item">
                     <a onclick="resetToLogin()" class="mdui-ripple">{{__('index.login')}}</a>
                 </li>
