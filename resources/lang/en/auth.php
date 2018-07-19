@@ -12,6 +12,14 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    'password'=>'Password',
+    'forgotPassword'=>'Forgot password',
+    'confirmLogin'=>'Go',
+    'createAccount'=>'Create New Account',
+    'notRegistered'=>"Haven't registered？",
+    'Registered'=>"Have Account？",
+    'moreOptions'=>'More Options',
+    'resetPassword'=>'Reset password',
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',

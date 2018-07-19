@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{__('index.app_name')}} - @yield('title')</title>
 
     <!-- Styles -->
@@ -27,7 +28,14 @@
 
     {{--底部导航栏--}}
     @include('layout.bottom-nav')
+    {{--注册登录重置模块--}}
+    @include('layout.login')
+    @include('layout.register')
+    @include('layout.reset')
 
+    {{--激活导航栏值--}}
+    <div id="tabActiveVal" class="mdui-hidden">@yield('tabActiveVal')</div>
+    <div id="bottomNavActiveVal" class="mdui-hidden">@yield('bottomNavActiveVal')</div>
     <!-- Js -->
     <script src="/layui/layui.js"></script>
     <script src="/js/mdui.min.js"></script>

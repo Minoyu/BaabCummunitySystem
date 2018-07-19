@@ -1,8 +1,7 @@
-ion-icon {
-    font-size: 20px;
+body {
+    font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, sans-serif;
 }
 /*顶部padding （移动端适配tab选项卡及drawer）*/
-
 /*无tab 有底部导航栏*/
 @media (min-width: 600px){
     .body-padding{
@@ -29,6 +28,45 @@ ion-icon {
     width: auto;
 }
 
+.full-width-menu{
+    width:auto;
+}
+
+.appbar-menu .user-div{
+    width: 250px;
+    height: 90px;
+}
+
+.appbar-menu .user-div .user-profile{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    position: absolute;
+    top:27px;
+    left:15px;
+    text-shadow: black 0.1em 0.1em 0.2em
+}
+.appbar-menu-title{
+    line-height: 18px;
+    font-size: 18px;
+    position: absolute;
+    top: 25px;
+    left: 85px;
+}
+.appbar-menu-subtitle{
+    line-height: 14px;
+    font-size: 14px;
+    position: absolute;
+    top: 55px;
+    left: 85px;
+}
+
+.appbar-menu-subtitle button{
+    min-width: 0px;
+    padding: 0px 5px;
+    font-size: 13px;
+}
+
 /*抽屉菜单*/
 .drawer-menu{
     padding: 0px 0px;
@@ -51,9 +89,9 @@ ion-icon {
 }
 .drawer-top-title{
     position: absolute;
-    left:20px;
+    left:15px;
     bottom:40px;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 800;
     text-shadow: black 0.1em 0.1em 0.2em
 }
@@ -61,7 +99,7 @@ ion-icon {
 .drawer-top-subtitle{
     width: 180px;
     position: absolute;
-    left:20px;
+    left:15px;
     bottom: 17px;
     font-weight: 500;
     text-shadow: black 0.1em 0.1em 0.2em
@@ -70,6 +108,14 @@ ion-icon {
     position: absolute;
     top:10px;
     right:10px;
+}
+@media (min-width: 600px){
+    .drawer-top-title{
+        left:20px;
+    }
+    .drawer-top-subtitle{
+        left:20px;
+    }
 }
 
 /*底部导航栏*/
@@ -150,12 +196,15 @@ ion-icon {
 }
 
 /*轮播图右表格*/
-.table-icon,
-.table-icon::before {
+.index-carousel-r-table td{
+    white-space: nowrap;
+}
+.index-carousel-r-table td > .mdui-icon,
+.index-carousel-r-table td > .mdui-icon::before {
     font-size: 18px;
     padding-right: 5px;
 }
-.table-icon::before {
+.index-carousel-r-table td > .mdui-icon::before {
     width: 18px;
     height: 18px;
     padding-right: 5px;
@@ -197,6 +246,11 @@ ion-icon {
 }
 
 /*首页新闻头条板块*/
+/*图片*/
+.topnews-img-card{
+    max-height: 300px;
+    max-width: 200px;
+}
 /*图片标题框*/
 .topnews-img-primary {
     position: relative;
@@ -216,8 +270,360 @@ ion-icon {
         font-size: 14px;
     }
 }
+<<<<<<< HEAD
 
 /*新闻页右侧两卡片间距*/
 .card-margin{
     margin-top: 10px;
 }
+=======
+/*头条文字样式*/
+.topnews-h1,
+.topnews-h2,
+.topnews-part-name{
+    display: block;
+    overflow: hidden;/*溢出隐藏*/
+    text-overflow: ellipsis;/*文本溢出省略号*/
+    white-space: nowrap;/*不换行*/
+}
+.topnews-h1{
+    font-size: 20px;
+    font-weight: bold;
+}
+.topnews-h2{
+    font-size: 18px;
+    font-weight: 500;
+}
+.topnews-part-name{
+    font-size: 14px;
+    color: #cd0000;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+@media (max-width: 600px){
+    .topnews-h1{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .topnews-h2{
+        font-size: 16px;
+    }
+}
+
+.part-divider-tab > a{
+    min-width: 72px;
+    min-height: 48px;
+    max-height: 72px;
+    padding: 12px;
+    font-size: 14px;
+    opacity: .7;
+
+}
+
+/*首页资讯板块*/
+.info-first-img{
+    width: 100%;
+    max-width: 200px;
+}
+
+/*资讯文字样式*/
+.index-info-h {
+    font-size: 16px;
+}
+
+.index-info-img-h{
+    /*图片旁标题允许换行*/
+    word-wrap:break-word;
+    display: block;
+    padding: 20px 10px 0px 5px;
+    font-size: 22px;
+    line-height: 1.3em;
+    color: #1065cd;
+    font-weight: bold;
+}
+
+@media (max-width: 600px){
+    .index-info-h1{
+        font-size: 14px;
+    }
+    .index-info-img-h{
+        padding-top: 5px;
+        font-size: 18px;
+        color: #1065cd;
+        font-weight: bold;
+    }
+}
+.index-info-img-area{
+    float: left;
+}
+.index-info-text-area{
+    padding:12px;
+    float: left;
+}
+/*首页列表样式*/
+.index-list>.mdui-list-item{
+    padding-left: 0px;
+}
+
+/*首页社区一级分类样式*/
+.index-community-top-level-title{
+    padding: 15px 0 5px 40px;
+    font-size: 20px;
+    font-weight: 400;
+    opacity: .95;
+}
+
+/*首页社区板块（二级分类）卡片样式*/
+.category-card-header {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*首页社区板块（二级分类）卡*/
+.index-community-card {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: #000;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: url("../imgs/index_community_card_bg.jpg");
+    background-size: 100% 100%;
+}
+/* 卡片头像 */
+.index-community-card-header-avatar {
+    float: left;
+    width: 100px;
+    height: 100px;
+    margin: 7px;
+    border-radius: 5%;
+}
+/* 卡片标题 */
+.index-community-card-header-title {
+    display: block;
+    padding-top:15px;
+    margin-left: 52px;
+    overflow: hidden;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: .87;
+}
+/* 卡片副标题 */
+.index-community-card-header-count {
+    display: block;
+    margin-left: 52px;
+    padding-bottom: 5px;
+    padding-right: 8px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+}
+/* 卡片副标题 */
+.index-community-card-header-subtitle {
+    display: block;
+    margin-left: 52px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    opacity: .8;
+}
+
+/*登录部分CSS*/
+.login-dialog,.register-dialog,.reset-dialog {
+    max-width: 448px;
+    overflow-y: auto
+}
+
+.login-dialog .back,.login-dialog .close,.register-dialog .back,.register-dialog .close,.reset-dialog .back,.reset-dialog .close {
+    display: block;
+    position: absolute;
+    left: 4px;
+    top: 4px
+}
+
+.login-dialog .avatar,.register-dialog .avatar,.reset-dialog .avatar {
+    display: block;
+    position: absolute;
+    left: 36px;
+    top: 40px;
+    color: hsla(0,0%,100%,.56);
+    font-size: 76px
+}
+
+.login-dialog .mdui-dialog-title,.register-dialog .mdui-dialog-title,.reset-dialog .mdui-dialog-title {
+    padding: 146px 40px 28px;
+    margin-bottom: 24px;
+    line-height: 36px;
+    text-shadow: black 0.05em 0.05em 0.05em
+}
+
+.login-dialog .login-bg{
+    background: url("../imgs/login_dialog_bg.jpg");
+    background-size: 100% 100%;
+}
+.register-dialog .register-bg{
+    background: url("../imgs/register_dialog_bg.jpg");
+    background-size: 100% 100%;
+}
+.reset-dialog .reset-bg{
+    background: url("../imgs/reset_dialog_bg.jpg");
+    background-size: 100% 100%;
+}
+
+.login-dialog form,.register-dialog form,.reset-dialog form {
+    padding: 0 40px 62px
+}
+
+.login-dialog .more-option,.register-dialog .more-option,.reset-dialog .more-option {
+    margin-left: -16px
+}
+
+.login-dialog .captcha-field,.register-dialog .captcha-field,.reset-dialog .captcha-field {
+    margin-right: 116px;
+    overflow: visible
+}
+
+.login-dialog .captcha-image,.register-dialog .captcha-image,.reset-dialog .captcha-image {
+    position: absolute;
+    right: -116px;
+    bottom: 29px;
+    cursor: pointer
+}
+
+.login-dialog .send-email-field,.register-dialog .send-email-field,.reset-dialog .send-email-field {
+    margin-right: 116px;
+    overflow: visible
+}
+
+.login-dialog .send-email,.register-dialog .send-email,.reset-dialog .send-email {
+    position: absolute;
+    right: -116px;
+    bottom: 29px
+}
+
+.login-dialog .actions,.register-dialog .actions,.reset-dialog .actions {
+    margin-top: 24px
+}
+
+@media (max-width:599px) {
+    .login-dialog,.register-dialog,.reset-dialog {
+        position: fixed!important;
+        left: 0!important;
+        top: 0!important;
+        right: 0!important;
+        bottom: 0!important;
+        height: 100%!important;
+        width: 100%!important;
+        margin: 0!important;
+        max-width: none!important;
+        max-height: none!important;
+        border-radius: 0!important
+    }
+
+    .login-dialog .back,.login-dialog .close,.register-dialog .back,.register-dialog .close,.reset-dialog .back,.reset-dialog .close {
+        left: 8px;
+        top: 10px
+    }
+
+    .login-dialog .avatar,.register-dialog .avatar,.reset-dialog .avatar {
+        display: none
+    }
+
+    .login-dialog .mdui-dialog-title,.register-dialog .mdui-dialog-title,.reset-dialog .mdui-dialog-title {
+        line-height: 36px;
+        padding: 10px 16px 10px 52px
+    }
+
+    .login-dialog form,.register-dialog form,.reset-dialog form {
+        padding: 0 24px 24px
+    }
+
+    .login-dialog form .mdui-textfield,.register-dialog form .mdui-textfield,.reset-dialog form .mdui-textfield {
+        padding-top: 4px
+    }
+
+    .login-dialog .actions,.register-dialog .actions,.reset-dialog .actions {
+        margin-top: 14px
+    }
+}
+
+/*社区板块页*/
+.part-h{
+    font-size: 25px;
+    font-weight: 600;
+}
+.community-zones-card {
+    position: relative;
+    display: inline-block;
+    height: 45px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 2px 0;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: #e0e0e0;
+    border-radius: 22.5px;
+    -webkit-transition: -webkit-box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+    transition: -webkit-box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+    transition:         box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+    transition:         box-shadow .25s cubic-bezier(.4, 0, .2, 1), -webkit-box-shadow .25s cubic-bezier(.4, 0, .2, 1);
+
+    will-change: box-shadow;
+}
+.community-zones-card:hover,
+.community-zones-card:focus {
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+.community-zones-card:active {
+    background-color: #d6d6d6;
+}
+/* 左侧的图标 */
+.community-zones-card-icon {
+    position: absolute;
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+    bottom: 0px;
+    margin-right: -4px;
+    overflow: hidden;
+    font-size: 18px;
+    line-height: 32px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #989898;
+    border-radius: 50%;
+}
+.community-zones-card-icon .mdui-icon {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    color: #fff;
+}
+/* 文本 */
+.community-zones-card-title {
+    display: inline-block;
+    height: 45px;
+    padding-right: 12px;
+    padding-left: 65px;
+    font-size: 18px;
+    line-height: 45px;
+    vertical-align: middle;
+}
+>>>>>>> 9726cea1287e4d21f60393e80d8de5503ab458d3

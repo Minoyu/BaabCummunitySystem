@@ -23,3 +23,64 @@ layui.use('carousel', function(){
 
 //轮播图右侧最新内容
 var carsouelRightTab = new mdui.Tab('#carousel-right',{trigger:'hover'});
+
+//首页资讯板块tab
+var infoTab = new mdui.Tab('#info-tab',{trigger:'hover'});
+
+//首页地区板块tab
+var regionalTab = new mdui.Tab('#regional-tab',{trigger:'hover'});
+
+//登录对话框
+var loginDialog = new mdui.Dialog('#login-dialog',{modal:true});
+
+//打开登录框
+function openLoginDialog() {
+    loginDialog.open();
+}
+function loginToRegister() {
+    loginDialog.close();
+    registerDialog.open();
+}
+function loginToReset() {
+    loginDialog.close();
+    resetDialog.open();
+}
+//注册对话框
+var registerDialog = new mdui.Dialog('#register-dialog',{modal:true});
+
+//打开注册框
+function openRegisterDialog() {
+    registerDialog.open();
+}
+function registerToLogin() {
+    registerDialog.close();
+    loginDialog.open();
+}
+
+//密码重置对话框
+var resetDialog = new mdui.Dialog('#reset-dialog',{modal:true});
+
+//打开重置框
+function openResetDialog() {
+    resetDialog.open();
+}
+function resetToRegister() {
+    resetDialog.close();
+    registerDialog.open();
+}
+function resetToLogin() {
+    resetDialog.close();
+    loginDialog.open();
+}
+
+//页面跳转函数 tab使用
+function jumpTo(url){
+    location.href= url;
+}
+
+//页面顶部tab及底部nav的激活
+var tabVal = $$('#tabActiveVal').text();
+var bottomVal = $$('#bottomNavActiveVal').text();
+
+$$('#'+tabVal).addClass('mdui-tab-active');
+$$('#'+bottomVal).addClass('mdui-bottom-nav-active');
