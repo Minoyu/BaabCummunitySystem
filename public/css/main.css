@@ -276,6 +276,13 @@ body {
     margin-top: 10px;
 }
 
+/*二级新闻页列表字体样式*/
+.news-sec-list-pattern{
+    font-size: 20px;
+    padding: 0px 0px 8px 8px;
+}
+
+
 /*头条文字样式*/
 .topnews-h1,
 .topnews-h2,
@@ -630,6 +637,42 @@ body {
     font-size: 18px;
     line-height: 45px;
     vertical-align: middle;
+}
+
+/*侧边栏标题*/
+.side-column-title{
+    border-bottom: 5px solid #00b0ff;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0px 10px 0px;
+    padding: 10px 20px 10px 10px;
+    line-height: 28px;
+    background-color: #fff;
+    text-align: right;
+}
+/*二级新闻页列表标题*/
+.news-sec-list-title{
+    border-bottom: 5px solid #00b0ff;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0px 10px 0px;
+    padding: 10px 20px 10px 10px;
+    line-height: 28px;
+    background-color: #fff;
+}
+/*侧边栏列表*/
+.side-column-list{
+    font-weight: bold;
+    font-size: 20px;
+}
+/*二级新闻页列表图片样式*/
+.news-sec-list-img{
+    padding: 8px;
+    position: relative;
+}
+/*二级新闻页列表块样式*/
+.news-sec-list {
+
 }
 @media (max-width:600px) {
     .community-zones-card {
