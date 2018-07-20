@@ -1,5 +1,9 @@
 @extends('frame.indexframe')
 @section('title',__('index.news'))
+@section('subtitleUrl',route('showNews'))
+@section('tabActiveVal','news-tab')
+@section('bottomNavActiveVal','news-bottom-nav')
+
 @section('content')
     {{--新闻主页--}}
     <div class="mdui-row">
