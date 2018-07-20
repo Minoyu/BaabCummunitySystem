@@ -13,6 +13,8 @@ return [
     |
     */
     'password'=>'Password',
+    'email'=>'Email',
+    'rememberMe'=>'Remember Me',
     'forgotPassword'=>'Forgot password',
     'confirmLogin'=>'Go',
     'createAccount'=>'Create New Account',
@@ -21,7 +23,11 @@ return [
     'moreOptions'=>'More Options',
     'resetPassword'=>'Reset password',
 
-    'failed' => 'These credentials do not match our records.',
+    'atLeast6P'=>'Please enter at least 6 bit passwords',
+    'atLeast6'=>'The password is at least 6 bits',
+    'noEmpty'=>'Account cannot be empty',
+
+    'failed' => 'Mismatch of username and password',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
 ];

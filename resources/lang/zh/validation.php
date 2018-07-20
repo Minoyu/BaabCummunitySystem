@@ -37,8 +37,8 @@ return [
     ],
     'mimes'                => ':attribute 的文件类型必须是:values',
     'min'                  => [
-        'numeric' => ':attribute 的最小长度为 :min 位',
-        'string'  => ':attribute 的最小长度为 :min 字符',
+        'numeric' => ':attribute 至少为 :min 位',
+        'string'  => ':attribute 至少为 :min 字符',
         'file'    => ':attribute 大小至少为:min KB',
         'array'   => ':attribute 至少有 :min 项',
     ],

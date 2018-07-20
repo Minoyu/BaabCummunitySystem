@@ -6,16 +6,17 @@
         {{__('index.login')}}
         <button onclick="loginToRegister()" class="mdui-btn mdui-ripple mdui-float-right" type="button">{{__('auth.notRegistered')}}</button>
     </div>
-    <form>
-        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
-            <label class="mdui-textfield-label">用户名或邮箱</label>
-            <input class="mdui-textfield-input" name="name" type="text" required>
-            <div class="mdui-textfield-error">账号不能为空</div>
+    <form id="loginForm">
+        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom" id="loginEmailTextField">
+            <label class="mdui-textfield-label">{{__('auth.email')}}</label>
+            <input class="mdui-textfield-input" name="email" type="text" required>
+            <div class="mdui-textfield-error" id="loginEmailError">{{__('auth.noEmpty')}}</div>
         </div>
-        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
+        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom" id="loginPasswordTextField">
             <label class="mdui-textfield-label">{{__('auth.password')}}</label>
-            <input class="mdui-textfield-input" name="password" type="password" required>
-            <div class="mdui-textfield-error">密码不能为空</div>
+            <input class="mdui-textfield-input" name="password" type="password" pattern="^.*(?=.{6,}).*$" required/>
+            <div class="mdui-textfield-error" id="loginPasswordError">{{__('auth.atLeast6P')}}</div>
+            {{--<div class="mdui-textfield-helper">{{__('auth.atLeast6')}}</div>--}}
         </div>
         <div class="actions mdui-clearfix">
             <button class="mdui-btn mdui-ripple more-option" type="button" mdui-menu="{target: '#login-dialog-menu', position: 'top', covered: false}">{{__('auth.moreOptions')}}</button>
@@ -26,8 +27,12 @@
                 <li class="mdui-menu-item">
                     <a onclick="loginToRegister()" class="mdui-ripple">{{__('auth.createAccount')}}</a>
                 </li>
+                <label class="mdui-switch" style="margin: 0px 15px">
+                    <input type="checkbox" name="remember_me" checked/>
+                    <i class="mdui-switch-icon"></i>&nbsp;&nbsp;{{__('auth.rememberMe')}}
+                </label>
             </ul>
-            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('auth.confirmLogin')}}</button>
+            <a onclick="loginSubmit()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('auth.confirmLogin')}}</a>
         </div>
     </form>
 </div>

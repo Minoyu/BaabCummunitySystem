@@ -84,3 +84,65 @@ var bottomVal = $$('#bottomNavActiveVal').text();
 
 $$('#'+tabVal).addClass('mdui-tab-active');
 $$('#'+bottomVal).addClass('mdui-bottom-nav-active');
+
+//Ajax用户登录验证
+function loginSubmit() {
+    var email=$$('input[name="email"]').val();
+    var password=$$('input[name="password"]').val();
+    var remember_me=$$('input[name="remember_me"]').is(':checked');
+    var loginEmailErrorField=$$('#loginEmailError');
+    var loginPasswordErrorField=$$('#loginPasswordError');
+    var loginEmailTextField=$$('#loginEmailTextField');
+    var loginPasswordTextField=$$('#loginPasswordTextField');
+    var emailHasError=false;
+    var passwordHasError=false;
+
+
+    $$.ajax({
+        method: 'POST',
+        url: '/auth/login',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+            email:email,
+            password:password,
+            remember_me:remember_me
+        },
+        statusCode: {
+            422: function (data) {
+                data=JSON.parse(data.response);
+                if (data.errors.email){
+                    loginEmailErrorField.text(data.errors.email[0]);
+                    emailHasError=true;
+                }
+                if (data.errors.password){
+                    loginPasswordErrorField.text(data.errors.password[0]);
+                    passwordHasError=true;
+                }
+            }
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status===1){
+            //    登录成功
+
+            }else{
+                loginPasswordErrorField.text(data.msg);
+                passwordHasError=true;
+            }
+        },
+        complete: function (xhr, textStatus) {
+            if(emailHasError ===true){
+                loginEmailTextField.addClass('mdui-textfield-invalid');
+            }else{
+                loginEmailTextField.removeClass('mdui-textfield-invalid');
+            }
+            if(passwordHasError ===true){
+                loginPasswordTextField.addClass('mdui-textfield-invalid');
+            }else{
+                loginPasswordTextField.removeClass('mdui-textfield-invalid');
+            }
+        }
+    });
+}

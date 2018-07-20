@@ -591,13 +591,13 @@ body {
 .news-sec-list-item{
     position: relative;
     width: 100%;
-    min-height: 95px;
+    min-height: 80px;
+    padding: 10px;
 }
 .news-sec-list-item-img{
     position: absolute;
     width: 120px;
     height: 80px;
-    margin: 8px;
 }
 /*二级新闻页列表块图片*/
 .news-sec-list-item-title {
