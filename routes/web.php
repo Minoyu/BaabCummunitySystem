@@ -20,6 +20,7 @@ Route::get('/news/test','NewsController@showNewsSec')->name('showNewsSec');
 
 //社区页面
 Route::get('/community','CommunityController@showCommunity')->name('showCommunity');
+Route::get('/community/test','CommunityController@showCommunitySec')->name('showCommunitySec');
 
 //切换语言
 Route::get('/switch/lang','IndexController@switchLang')->name('switchLang');

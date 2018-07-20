@@ -562,6 +562,11 @@ body {
     font-size: 25px;
     font-weight: 600;
 }
+.part-h2{
+    padding-top: 10px;
+    font-size: 22px;
+    font-weight: 600;
+}
 .community-zones-card {
     position: relative;
     display: inline-block;
@@ -643,4 +648,64 @@ body {
         line-height: 32px;
         padding-left: 50px;
     }
+}
+
+.community-sec-top-card {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    color: #000;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    background: url("../imgs/index_community_card_bg.jpg");
+    background-size: 100% 100%;
+}
+/* 卡片头像 */
+.community-sec-top-card-header-avatar {
+    float: left;
+    width: 120px;
+    height: 120px;
+    margin: 15px;
+    border-radius: 5%;
+}
+/* 卡片标题 */
+.community-sec-top-card-header-title {
+    display: block;
+    padding-top:15px;
+    margin-left: 52px;
+    overflow: hidden;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 22px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    opacity: .87;
+}
+/* 卡片副标题 */
+.community-sec-top-card-header-count {
+    display: block;
+    margin-left: 52px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+    padding-right: 8px;
+    overflow: hidden;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 20px;
+}
+/* 卡片副标题 */
+.community-sec-top-card-header-subtitle {
+    display: block;
+    margin-left: 52px;
+    padding-bottom: 8px;
+    padding-right: 8px;
+    overflow: hidden;
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 20px;
+    opacity: .8;
 }

@@ -1,4 +1,4 @@
-<h1 class="part-h">Zones of community</h1>
+<h1 class="part-h">{{__('community.zonesOfCommunity')}}</h1>
 <a href="#">
     <div class="community-zones-card">
         <img class="community-zones-card-icon" src=http://via.placeholder.com/200x200"/>
