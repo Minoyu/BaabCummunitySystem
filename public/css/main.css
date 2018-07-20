@@ -568,7 +568,7 @@ body {
     height: 45px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 2px 0;
+    margin: 10px 10px;
     white-space: nowrap;
     cursor: pointer;
     -webkit-user-select: none;
@@ -598,6 +598,7 @@ body {
     display: inline-block;
     width: 60px;
     height: 60px;
+    left:-5px;
     bottom: 0px;
     margin-right: -4px;
     overflow: hidden;
@@ -624,4 +625,22 @@ body {
     font-size: 18px;
     line-height: 45px;
     vertical-align: middle;
+}
+@media (max-width:600px) {
+    .community-zones-card {
+        height: 32px;
+        margin: 8px 5px;
+    }
+    .community-zones-card-icon {
+        height: 45px;
+        width: 45px;
+        left: -3px;
+        bottom: 0px;
+    }
+    .community-zones-card-title {
+        height: 32px;
+        font-size: 14px;
+        line-height: 32px;
+        padding-left: 50px;
+    }
 }
