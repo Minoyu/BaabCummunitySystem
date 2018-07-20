@@ -12,7 +12,7 @@
             {{--详细二级版块分类列表--}}
             @include('community.left-sections-list')
         </div>
-        <div class="mdui-col-md-3 mdui-hidden-sm">
+        <div class="mdui-col-md-3 mdui-hidden-sm-down">
             侧边栏
         </div>
     </div>

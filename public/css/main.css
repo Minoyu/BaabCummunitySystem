@@ -282,6 +282,7 @@ body {
     padding: 0px 0px 8px 8px;
 }
 
+
 /*头条文字样式*/
 .topnews-h1,
 .topnews-h2,
@@ -574,7 +575,7 @@ body {
     height: 45px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    margin: 2px 0;
+    margin: 10px 10px;
     white-space: nowrap;
     cursor: pointer;
     -webkit-user-select: none;
@@ -604,6 +605,7 @@ body {
     display: inline-block;
     width: 60px;
     height: 60px;
+    left:-5px;
     bottom: 0px;
     margin-right: -4px;
     overflow: hidden;
@@ -664,6 +666,25 @@ body {
     position: relative;
 }
 /*二级新闻页列表块样式*/
-.news-sec-list{
+.news-sec-list {
 
+}
+@media (max-width:600px) {
+    .community-zones-card {
+        height: 32px;
+        margin: 8px 5px;
+    }
+    .community-zones-card-icon {
+        height: 45px;
+        width: 45px;
+        left: -3px;
+        bottom: 0px;
+    }
+    .community-zones-card-title {
+        height: 32px;
+        font-size: 14px;
+        line-height: 32px;
+        padding-left: 50px;
+    }
+>>>>>>> fd2e658e5d299c9b5a432c9ff9c5d91cabbb9f26
 }
