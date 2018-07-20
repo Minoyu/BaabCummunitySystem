@@ -3,13 +3,32 @@
         热点新闻
     </h2>
     <div class="news-sec-list">
-        <div class="mdui-hoverable">
-            <div class="news-sec-list-item">
-                <img class="news-sec-list-img" src="http://via.placeholder.com/150x150">
+        <a href="#">
+            <div class="news-sec-list-item mdui-hoverable">
+                <img class="news-sec-list-item-img" src="http://via.placeholder.com/150x150">
+                <div class="news-sec-list-item-title mdui-text-color-indigo">测试新闻测试新闻测试新闻测试新闻测试新闻测试新闻测试新闻测试新闻</div>
+                <div class="news-sec-list-item-content mdui-hidden-xs">测试新闻内容简略测试新闻内容简略</div>
             </div>
-            <div class="news-sec-list-pattern">
-                newsTitle
+        </a>
+        <a href="#">
+            <div class="news-sec-list-item mdui-hoverable">
+                <img class="news-sec-list-item-img" src="http://via.placeholder.com/150x150">
+                <div class="news-sec-list-item-title mdui-text-color-indigo">新闻测试新闻测试新闻测试新闻测试新闻</div>
+                <div class="news-sec-list-item-content mdui-hidden-xs">测试新闻内容简略测试新闻内容简略</div>
             </div>
-        </div>
+        </a>
+        <a href="#">
+            <div class="news-sec-list-item-without-img mdui-hoverable">
+                <div class="news-sec-list-item-title mdui-text-color-indigo">无图新闻测试新闻测试新闻测试新闻测试新闻</div>
+                <div class="news-sec-list-item-content mdui-hidden-xs">测试新闻内容简略测试新闻内容简略</div>
+            </div>
+        </a>
+        <a href="#">
+            <div class="news-sec-list-item-without-img mdui-hoverable">
+                <div class="news-sec-list-item-title mdui-text-color-indigo">无图新闻测试新闻测试新闻测试新闻测试新闻</div>
+                <div class="news-sec-list-item-content mdui-hidden-xs">测试新闻内容简略测试新闻内容简略</div>
+            </div>
+        </a>
+
     </div>
 </div>
