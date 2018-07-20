@@ -210,6 +210,7 @@ body {
     padding-right: 5px;
 }
 
+/*=====================公用标题部分类=========================*/
 /*板块标题*/
 .part-title,
 .part-title-blue,
@@ -243,6 +244,28 @@ body {
 }
 .part-title-red>.part-title-more-btn{
     color: #d1292d;
+}
+
+/*侧边栏标题*/
+.side-column-title{
+    border-bottom: 5px solid #00b0ff;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0px 10px 0px;
+    padding: 5px;
+    line-height: 22px;
+    background-color: #fff;
+    text-align: right;
+}
+/*二级新闻页列表标题*/
+.title-with-bottom-border{
+    border-bottom: 5px solid #00b0ff;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 20px 0px 10px 0px;
+    padding: 5px;
+    line-height: 22px;
+    background-color: #fff;
 }
 
 /*首页新闻头条板块*/
@@ -564,6 +587,22 @@ body {
     }
 }
 
+
+/*侧边栏列表*/
+.side-column-list{
+    font-weight: bold;
+    font-size: 16px;
+}
+/*二级新闻页列表图片样式*/
+.news-sec-list-img{
+    padding: 8px;
+    position: relative;
+}
+/*二级新闻页列表块样式*/
+.news-sec-list {
+
+}
+
 /*社区板块页*/
 .part-h{
     font-size: 25px;
@@ -574,6 +613,7 @@ body {
     font-size: 22px;
     font-weight: 600;
 }
+/*社区主页上方分区小卡片*/
 .community-zones-card {
     position: relative;
     display: inline-block;
@@ -604,7 +644,7 @@ body {
 .community-zones-card:active {
     background-color: #d6d6d6;
 }
-/* 左侧的图标 */
+/* 社区主页上方分区小卡片左侧的图标 */
 .community-zones-card-icon {
     position: absolute;
     display: inline-block;
@@ -628,7 +668,7 @@ body {
     left: 4px;
     color: #fff;
 }
-/* 文本 */
+/* 社区主页上方分区小卡片文本 */
 .community-zones-card-title {
     display: inline-block;
     height: 45px;
@@ -639,41 +679,6 @@ body {
     vertical-align: middle;
 }
 
-/*侧边栏标题*/
-.side-column-title{
-    border-bottom: 5px solid #00b0ff;
-    font-size: 30px;
-    font-weight: bold;
-    margin: 20px 0px 10px 0px;
-    padding: 10px 20px 10px 10px;
-    line-height: 28px;
-    background-color: #fff;
-    text-align: right;
-}
-/*二级新闻页列表标题*/
-.news-sec-list-title{
-    border-bottom: 5px solid #00b0ff;
-    font-size: 30px;
-    font-weight: bold;
-    margin: 20px 0px 10px 0px;
-    padding: 10px 20px 10px 10px;
-    line-height: 28px;
-    background-color: #fff;
-}
-/*侧边栏列表*/
-.side-column-list{
-    font-weight: bold;
-    font-size: 20px;
-}
-/*二级新闻页列表图片样式*/
-.news-sec-list-img{
-    padding: 8px;
-    position: relative;
-}
-/*二级新闻页列表块样式*/
-.news-sec-list {
-
-}
 @media (max-width:600px) {
     .community-zones-card {
         height: 32px;
@@ -693,6 +698,7 @@ body {
     }
 }
 
+/*社区二级页面顶部介绍卡*/
 .community-sec-top-card {
     position: relative;
     -webkit-box-sizing: border-box;
@@ -707,7 +713,7 @@ body {
     background: url("../imgs/index_community_card_bg.jpg");
     background-size: 100% 100%;
 }
-/* 卡片头像 */
+/* 社区二级页面顶部介绍卡片头像 */
 .community-sec-top-card-header-avatar {
     float: left;
     width: 120px;
@@ -715,7 +721,7 @@ body {
     margin: 15px;
     border-radius: 5%;
 }
-/* 卡片标题 */
+/* 社区二级页面顶部介绍卡片标题 */
 .community-sec-top-card-header-title {
     display: block;
     padding-top:15px;
@@ -728,7 +734,7 @@ body {
     white-space: nowrap;
     opacity: .87;
 }
-/* 卡片副标题 */
+/* 社区二级页面顶部介绍卡片副标题 */
 .community-sec-top-card-header-count {
     display: block;
     margin-left: 52px;
@@ -740,7 +746,7 @@ body {
     font-weight: 300;
     line-height: 20px;
 }
-/* 卡片副标题 */
+/* 社区二级页面顶部介绍卡片副标题 */
 .community-sec-top-card-header-subtitle {
     display: block;
     margin-left: 52px;
