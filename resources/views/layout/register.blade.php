@@ -6,35 +6,37 @@
         {{__('auth.createAccount')}}
         <button onclick="registerToLogin()" class="mdui-btn mdui-ripple mdui-float-right" type="button">{{__('auth.Registered')}}</button>
     </div>
-    <form class="">
-        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
-            <label class="mdui-textfield-label">邮箱</label>
-            <input class="mdui-textfield-input" name="email" type="email" required>
-            <div class="mdui-textfield-error">邮箱格式错误</div>
+    <form id="registerStep1Form" class="">
+        <div id="registerNameTextField" class="mdui-textfield mdui-textfield-has-bottom">
+            <label class="mdui-textfield-label">{{__('auth.username')}}</label>
+            <input id="registerNameError" class="mdui-textfield-input" name="registerName" type="text" placeholder="{{__('auth.needName')}}" required>
+            <div class="mdui-textfield-error">{{__('auth.nameEmpty')}}</div>
         </div>
-        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom send-email-field">
-            <label class="mdui-textfield-label">邮件验证码</label>
-            <input class="mdui-textfield-input" name="email_code" type="text" required>
-            <div class="mdui-textfield-error">验证码不能为空</div>
-            <button class="mdui-btn send-email" type="button">发送验证码</button>
+        <div id="registerEmailTextField" class="mdui-textfield mdui-textfield-has-bottom">
+            <label class="mdui-textfield-label">{{__('auth.email')}}</label>
+            <input id="registerEmailError" class="mdui-textfield-input" name="registerEmail" type="email" placeholder="{{__('auth.needEmail')}}" required>
+            <div class="mdui-textfield-error">{{__('auth.emailEmpty')}}</div>
         </div>
         <div class="actions">
             <a onclick="registerToLogin()" class="mdui-btn mdui-ripple more-option">{{__('auth.Registered')}}</a>
-            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.next')}}</button>
+            <a onclick="registerStep1Next()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.next')}}</a>
         </div>
     </form>
-    <form class="mdui-hidden">
-        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
-            <label class="mdui-textfield-label">用户名</label>
-            <input class="mdui-textfield-input" name="username" type="text" required>
-            <div class="mdui-textfield-error">用户名不能为空</div>
-        </div>
-        <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom">
+    <form id="registerStep2Form" class="mdui-hidden">
+        <div id="registerPasswordTextField" class="mdui-textfield mdui-textfield-has-bottom">
             <label class="mdui-textfield-label">{{__('auth.password')}}</label>
-            <input class="mdui-textfield-input" name="password" type="password" required>
-            <div class="mdui-textfield-error">密码不能为空</div>
-        </div><div class="actions mdui-clearfix">
-            <button type="submit" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.register')}}</button>
+            <input class="mdui-textfield-input" name="registerPassword" type="password" placeholder="{{__('auth.password_p')}}" required>
+            <div class="mdui-textfield-error" id="registerPasswordError">{{__('auth.atLeast6')}}</div>
+        </div>
+
+        <div id="registerPasswordConfirmTextField" class="mdui-textfield mdui-textfield-has-bottom">
+            <label class="mdui-textfield-label">{{__('auth.password_confirmation')}}</label>
+            <input class="mdui-textfield-input" name="registerPasswordConfirmation" type="password" placeholder="{{__('auth.password_confirmation_p')}}" required>
+            <div class="mdui-textfield-error" id="registerPasswordConfirmError">{{__('auth.password_confirmation_failed')}}</div>
+        </div>
+
+        <div class="actions mdui-clearfix">
+            <a onclick="registerStep2Submit()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.register')}}</a>
         </div>
     </form>
-</div>
+</div>`

@@ -9,12 +9,12 @@
     <form id="loginForm">
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom" id="loginEmailTextField">
             <label class="mdui-textfield-label">{{__('auth.email')}}</label>
-            <input class="mdui-textfield-input" name="email" type="text" required>
+            <input class="mdui-textfield-input" name="loginEmail" type="text" required>
             <div class="mdui-textfield-error" id="loginEmailError">{{__('auth.noEmpty')}}</div>
         </div>
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom" id="loginPasswordTextField">
             <label class="mdui-textfield-label">{{__('auth.password')}}</label>
-            <input class="mdui-textfield-input" name="password" type="password" pattern="^.*(?=.{6,}).*$" required/>
+            <input class="mdui-textfield-input" name="loginPassword" type="password" pattern="^.*(?=.{6,}).*$" required/>
             <div class="mdui-textfield-error" id="loginPasswordError">{{__('auth.atLeast6P')}}</div>
             {{--<div class="mdui-textfield-helper">{{__('auth.atLeast6')}}</div>--}}
         </div>

@@ -12,7 +12,12 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+//    登录注册相关
     'password'=>'Password',
+    'password_p'=>'Your account password requires at least 6 bits',
+    'password_confirmation'=>'Confirm Password',
+    'password_confirmation_p'=>'Retype your password to confirm',
+    'password_confirmation_failed'=>'Entered passwords differ from the another',
     'email'=>'Email',
     'rememberMe'=>'Remember Me',
     'forgotPassword'=>'Forgot password',
@@ -22,6 +27,11 @@ return [
     'Registered'=>"Have Account？",
     'moreOptions'=>'More Options',
     'resetPassword'=>'Reset password',
+    'username'=>'Username',
+    'needName'=>'How do we address you?',
+    'nameEmpty'=>'We need your Username',
+    'needEmail'=>'Your email address?',
+    'emailEmpty'=>'We need your email address',
 
     'atLeast6P'=>'Please enter at least 6 bit passwords',
     'atLeast6'=>'The password is at least 6 bits',

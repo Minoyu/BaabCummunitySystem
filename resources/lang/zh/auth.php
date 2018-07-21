@@ -13,6 +13,11 @@ return [
     |
     */
     'password'=>'密码',
+    'password_p'=>'你的账户密码至少需要6位',
+    'password_confirmation'=>'确认密码',
+    'password_confirmation_p'=>'再次输入密码确认',
+    'password_confirmation_failed'=>'两次输入的密码不一致',
+
     'email'=>'邮箱',
     'rememberMe'=>'保持登录',
     'forgotPassword'=>'忘记密码',
@@ -22,6 +27,11 @@ return [
     'Registered'=>'已有账号？',
     'moreOptions'=>'更多选项',
     'resetPassword'=>'重置密码',
+    'username'=>'用户名',
+    'needName'=>'我们怎么称呼你？',
+    'nameEmpty'=>'我们需要您的用户名',
+    'needEmail'=>'你的电子邮箱是?',
+    'emailEmpty'=>'我们需要你的电子邮箱地址',
 
     'atLeast6P'=>'请至少输入6位密码',
     'atLeast6'=>'密码至少6位',

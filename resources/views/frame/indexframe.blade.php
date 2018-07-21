@@ -12,6 +12,7 @@
     <!-- Styles -->
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
+    <link href="/css/animate.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.bootcss.com/ionicons/4.1.2/css/ionicons.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet" type="text/css">
 </head>

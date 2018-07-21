@@ -87,8 +87,8 @@ $$('#'+bottomVal).addClass('mdui-bottom-nav-active');
 
 //Ajax用户登录验证
 function loginSubmit() {
-    var email=$$('input[name="email"]').val();
-    var password=$$('input[name="password"]').val();
+    var email=$$('input[name="loginEmail"]').val();
+    var password=$$('input[name="loginPassword"]').val();
     var remember_me=$$('input[name="remember_me"]').is(':checked');
     var loginEmailErrorField=$$('#loginEmailError');
     var loginPasswordErrorField=$$('#loginPasswordError');
@@ -125,7 +125,7 @@ function loginSubmit() {
         success: function (data) {
             data=JSON.parse(data);
             if (data.status===1){
-            //    登录成功
+            //    TODO 登录成功
 
             }else{
                 loginPasswordErrorField.text(data.msg);
@@ -145,4 +145,109 @@ function loginSubmit() {
             }
         }
     });
+}
+
+//注册部分下一步
+function registerStep1Next() {
+    var userName = $$('input[name="registerName"]').val();
+    var email = $$('input[name="registerEmail"]').val();
+    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //邮箱正则表达式
+    var registerEmailTextField=$$('#registerEmailTextField');
+    var registerNameTextField=$$('#registerNameTextField');
+    var nameHasError=false;
+    var emailHasError=false;
+    //邮箱验证开始
+    if (email === ""){
+        emailHasError = true;
+    }else if(!reg.test(email)){ //邮箱正则验证不通过，格式不对
+        emailHasError = true;
+    }
+    //用户名验证
+    if (userName === ""){
+        nameHasError = true;
+    }
+
+    //跳转
+    if( nameHasError || emailHasError){
+        if(emailHasError ===true){
+            registerEmailTextField.addClass('mdui-textfield-invalid');
+        }else{
+            registerEmailTextField.removeClass('mdui-textfield-invalid');
+        }
+        if(nameHasError ===true){
+            registerNameTextField.addClass('mdui-textfield-invalid');
+        }else{
+            registerNameTextField.removeClass('mdui-textfield-invalid');
+        }
+    }else{
+        $$('#registerStep1Form').addClass('mdui-hidden');
+        $$('#registerStep2Form').removeClass('mdui-hidden');
+        registerDialog.handleUpdate();
+    }
+}
+
+//Ajax注册提交部分
+function registerStep2Submit() {
+    var userName = $$('input[name="registerName"]').val();
+    var email = $$('input[name="registerEmail"]').val();
+    var password = $$('input[name="registerPassword"]').val();
+    var password_confirmation = $$('input[name="registerPasswordConfirmation"]').val();
+    var registerPasswordErrorField=$$('#registerPasswordError');
+    var registerPasswordConfirmErrorField=$$('#registerPasswordConfirmError');
+    var registerPasswordTextField=$$('#registerPasswordTextField');
+    var registerPasswordConfirmTextField=$$('#registerPasswordConfirmTextField');
+    var passwordHasError=false;
+    var passwordConfirmHasError=false;
+
+    if (password.length<6){
+        passwordHasError = true;
+    }
+    if (password_confirmation!==password){
+        passwordConfirmHasError = true;
+    }
+
+    if (passwordHasError || passwordConfirmHasError){
+        if(passwordHasError ===true){
+            registerPasswordTextField.addClass('mdui-textfield-invalid');
+        }else{
+            registerPasswordTextField.removeClass('mdui-textfield-invalid');
+        }
+        if(passwordConfirmHasError ===true){
+            registerPasswordConfirmTextField.addClass('mdui-textfield-invalid');
+        }else{
+            registerPasswordConfirmTextField.removeClass('mdui-textfield-invalid');
+        }
+    }else{
+        $$.ajax({
+            method: 'POST',
+            url: '/auth/register',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                email:email,
+                name:userName,
+                password:password,
+                password_confirmation:password_confirmation
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    if (data.errors.password){
+                        loginPasswordErrorField.text(data.errors.password[0]);
+                        passwordHasError=true;
+                    }
+                }
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    //    TODO 注册成功
+                    console.log('注册成功')
+                }
+            }
+        });
+    }
+
+
 }

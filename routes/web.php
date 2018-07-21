@@ -25,5 +25,6 @@ Route::get('/community/test','CommunityController@showCommunitySec')->name('show
 //切换语言
 Route::get('/switch/lang','IndexController@switchLang')->name('switchLang');
 
-//用户登录
+//用户登录、注册
 Route::post('/auth/login','AuthController@login')->name('userLogin');
+Route::post('/auth/register','AuthController@register')->name('userRegister');
