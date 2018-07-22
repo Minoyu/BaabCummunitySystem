@@ -5,12 +5,13 @@
 @section('bottomNavActiveVal','news-bottom-nav')
 
 @section('content')
-    {{--二级新闻页主列表--}}
+    {{--内容块--}}
     <div class="mdui-col-md-9 mdui-col-xs-12">
-        @include('news-sec.lists')
+        @include('news-content.content')
+        @include('news-content.comment-area')
     </div>
-    {{--侧边栏，板块切换,小屏隐藏--}}
+    {{--侧边栏，小屏隐藏--}}
     <div class="mdui-col-md-3 mdui-hidden-sm-down">
-        @include('news-sec.side-clumn')
+        @include('news-content.side-clumn')
     </div>
 @endsection
