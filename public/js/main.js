@@ -149,8 +149,15 @@ function loginSubmit() {
         success: function (data) {
             data=JSON.parse(data);
             if (data.status===1){
-            //    TODO 登录成功
-
+            //登录成功
+                $$('#loginForm').addClass('mdui-hidden');
+                $$('.dialog-top-tip-button').addClass('mdui-hidden');
+                $$('#loginSuccessful').removeClass('mdui-hidden');
+                loginDialog.handleUpdate();
+                setTimeout(function(){
+                    //使用  setTimeout（）方法设定定时4000毫秒
+                    window.location.reload();//页面刷新
+                },4000);
             }else{
                 loginPasswordErrorField.text(data.msg);
                 passwordHasError=true;
@@ -178,36 +185,72 @@ function registerStep1Next() {
     var email = $$('input[name="registerEmail"]').val();
     var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //邮箱正则表达式
     var registerEmailTextField=$$('#registerEmailTextField');
+    var registerEmailErrorField=$$('#registerEmailErrorField');
     var registerNameTextField=$$('#registerNameTextField');
     var nameHasError=false;
     var emailHasError=false;
+    //用户名验证
+    if (userName === ""){
+        nameHasError = true;
+    }
     //邮箱验证开始
     if (email === ""){
         emailHasError = true;
     }else if(!reg.test(email)){ //邮箱正则验证不通过，格式不对
         emailHasError = true;
-    }
-    //用户名验证
-    if (userName === ""){
-        nameHasError = true;
-    }
-
-    //跳转
-    if( nameHasError || emailHasError){
-        if(emailHasError ===true){
-            registerEmailTextField.addClass('mdui-textfield-invalid');
-        }else{
-            registerEmailTextField.removeClass('mdui-textfield-invalid');
-        }
-        if(nameHasError ===true){
-            registerNameTextField.addClass('mdui-textfield-invalid');
-        }else{
-            registerNameTextField.removeClass('mdui-textfield-invalid');
-        }
     }else{
-        $$('#registerStep1Form').addClass('mdui-hidden');
-        $$('#registerStep2Form').removeClass('mdui-hidden');
-        registerDialog.handleUpdate();
+        $$.ajax({
+            method: 'POST',
+            url: '/auth/checkEmailUnique',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                email:email
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    if (data.errors.email){
+                        registerEmailErrorField.text(data.errors.email[0]);
+                        emailHasError=true;
+                    }
+                },
+                404:function (data) {
+                    data=JSON.parse(data.response);
+                    if (data.errors.email){
+                        registerEmailErrorField.text('Server internal error');
+                        emailHasError=true;
+                    }
+                },
+                500:function (data) {
+                    data=JSON.parse(data.response);
+                    if (data.errors.email){
+                        registerEmailErrorField.text('Server internal error');
+                        emailHasError=true;
+                    }
+                }
+            },
+            complete: function (xhr, textStatus) {
+                //跳转
+                if( nameHasError || emailHasError){
+                    if(emailHasError ===true){
+                        registerEmailTextField.addClass('mdui-textfield-invalid');
+                    }else{
+                        registerEmailTextField.removeClass('mdui-textfield-invalid');
+                    }
+                    if(nameHasError ===true){
+                        registerNameTextField.addClass('mdui-textfield-invalid');
+                    }else{
+                        registerNameTextField.removeClass('mdui-textfield-invalid');
+                    }
+                }else{
+                    $$('#registerStep1Form').addClass('mdui-hidden');
+                    $$('#registerStep2Form').removeClass('mdui-hidden');
+                    registerDialog.handleUpdate();
+                }
+            }
+        });
     }
 }
 
@@ -259,8 +302,9 @@ function registerStep2Submit() {
             success: function (data) {
                 data=JSON.parse(data);
                 if (data.status===1){
-                    //    TODO 注册成功
-                    console.log('注册成功')
+                    $$('#registerStep2Form').addClass('mdui-hidden');
+                    $$('#registerSuccessful').removeClass('mdui-hidden');
+                    registerDialog.handleUpdate();
                 }
             }
         });

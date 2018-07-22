@@ -511,6 +511,11 @@ body {
 .login-dialog .more-option,.register-dialog .more-option,.reset-dialog .more-option {
     margin-left: -16px
 }
+.login-dialog .dialog-top-tip-button,.register-dialog .dialog-top-tip-button,.reset-dialog .dialog-top-tip-button {
+    position: absolute;
+    right: 5px;
+    padding: 0 8px;
+}
 
 .login-dialog .captcha-field,.register-dialog .captcha-field,.reset-dialog .captcha-field {
     margin-right: 116px;
@@ -537,6 +542,22 @@ body {
 
 .login-dialog .actions,.register-dialog .actions,.reset-dialog .actions {
     margin-top: 24px
+}
+
+.login-dialog .success,.register-dialog .success,.reset-dialog .success {
+    min-height: 250px;
+    padding: 0 40px 62px
+}
+.login-dialog .success .icon,.register-dialog .success .icon,.reset-dialog .success .icon {
+    font-size: 100px;
+}
+.login-dialog .success h3,.register-dialog .success h3,.reset-dialog .success h3 {
+    text-align: center;
+    opacity: 0.8;
+}
+.login-dialog .success .btns,.register-dialog .success .btns,.reset-dialog .success .btns {
+    margin-top: 30px;
+    text-align: center;
 }
 
 @media (max-width:599px) {

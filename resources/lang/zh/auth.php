@@ -25,6 +25,8 @@ return [
     'createAccount'=>'创建新账号',
     'notRegistered'=>'还未注册？',
     'Registered'=>'已有账号？',
+    'RegisterSuccess'=>"感谢您的成功注册",
+    'LoginSuccess'=>"登录成功",
     'moreOptions'=>'更多选项',
     'resetPassword'=>'重置密码',
     'username'=>'用户名',

@@ -11,6 +11,7 @@ return [
     'login'=>'Login',
     'or'=>'or',
     'next'=>'Next',
+    'back'=>'Back',
     'register'=>'Register',
     'submit'=>'Submit',
     'news'=>'News',
@@ -18,6 +19,7 @@ return [
     'home' => 'Home',
     'community' => 'Community',
     'me' => 'Me',
+    'presonalCenter' => 'Personal Center',
     'discover' => 'Discover',
     //Appbar-menu
     'switchLang' => '切换到中文',

@@ -25,6 +25,8 @@ return [
     'createAccount'=>'Create New Account',
     'notRegistered'=>"Haven't registered？",
     'Registered'=>"Have Account？",
+    'RegisterSuccess'=>"Thank you for the successful registration",
+    'LoginSuccess'=>"Login Successful",
     'moreOptions'=>'More Options',
     'resetPassword'=>'Reset password',
     'username'=>'Username',

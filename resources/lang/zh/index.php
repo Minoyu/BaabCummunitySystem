@@ -11,6 +11,7 @@ return [
     'login'=>'登录',
     'or'=>'或',
     'next'=>'下一步',
+    'back'=>'返回',
     'register'=>'注册',
     'submit'=>'提交',
     'news'=>'新闻',
@@ -18,6 +19,7 @@ return [
     'home' => '首页',
     'community' => '社区',
     'me' => '我',
+    'presonalCenter' => '个人中心',
     'discover'=>'发现',
     //Appbar-menu
     'switchLang' => 'Switch English',
