@@ -55,10 +55,13 @@ body {
 }
 .appbar-menu-subtitle{
     line-height: 14px;
-    font-size: 14px;
+    font-size: 12px;
     position: absolute;
-    top: 55px;
+    top: 50px;
     left: 85px;
+    width:160px;
+    white-space: initial;
+    opacity: .7;
 }
 
 .appbar-menu-subtitle button{
@@ -83,7 +86,7 @@ body {
     height: 60px;
     border-radius: 50%;
     position: absolute;
-    left:20px;
+    left:15px;
     bottom:70px;
     text-shadow: black 0.1em 0.1em 0.2em
 }

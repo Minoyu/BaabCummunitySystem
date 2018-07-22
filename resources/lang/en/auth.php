@@ -18,7 +18,9 @@ return [
     'password_confirmation'=>'Confirm Password',
     'password_confirmation_p'=>'Retype your password to confirm',
     'password_confirmation_failed'=>'Entered passwords differ from the another',
+
     'email'=>'Email',
+    'logout'=>'Logout',
     'rememberMe'=>'Remember Me',
     'forgotPassword'=>'Forgot password',
     'confirmLogin'=>'Go',
@@ -26,7 +28,7 @@ return [
     'notRegistered'=>"Haven't registered？",
     'Registered'=>"Have Account？",
     'RegisterSuccess'=>"Thank you for the successful registration",
-    'LoginSuccess'=>"Login Successful",
+    'LoginSuccess'=>"Welcome home",
     'moreOptions'=>'More Options',
     'resetPassword'=>'Reset password',
     'username'=>'Username',

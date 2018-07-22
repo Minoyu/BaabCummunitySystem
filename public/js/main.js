@@ -152,12 +152,14 @@ function loginSubmit() {
             //登录成功
                 $$('#loginForm').addClass('mdui-hidden');
                 $$('.dialog-top-tip-button').addClass('mdui-hidden');
+                $$('.username').text(data.user.name);
+                console.log(data.user.name);
                 $$('#loginSuccessful').removeClass('mdui-hidden');
                 loginDialog.handleUpdate();
                 setTimeout(function(){
-                    //使用  setTimeout（）方法设定定时4000毫秒
+                    //使用  setTimeout（）方法设定定时5000毫秒
                     window.location.reload();//页面刷新
-                },4000);
+                },5000);
             }else{
                 loginPasswordErrorField.text(data.msg);
                 passwordHasError=true;

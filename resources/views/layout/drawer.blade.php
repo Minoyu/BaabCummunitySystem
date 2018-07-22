@@ -3,10 +3,18 @@
 
         <div class="mdui-m-b-1 drawer-top">
             <img class="mdui-img-fluid drawer-top-img" src="/imgs/drawer_top.png"/>
-            <a onclick="openLoginDialog()"><img class="drawer-top-profile mdui-hoverable" src="/imgs/user_profile.png" /></a>
-            <span class="drawer-top-title mdui-text-color-white">{{__('index.top-title')}} <a onclick="openLoginDialog()">{{__('index.login')}}</a> {{__('index.or')}} <a onclick="openRegisterDialog()">{{__('index.register')}}</a></span>
-            <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
-            <button class="mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple" mdui-drawer-close><i class="mdui-icon material-icons">clear_all</i></button>
+            @if(Auth::check())
+                <a href="#"><img class="drawer-top-profile mdui-hoverable" src="{{Auth::user()->avatar_url}}" /></a>
+                <span class="drawer-top-title mdui-text-color-white">{{Auth::user()->name}}</span>
+                <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
+            @else
+                <a onclick="openLoginDialog()"><img class="drawer-top-profile mdui-hoverable" src="/imgs/user_profile.png" /></a>
+                <span class="drawer-top-title mdui-text-color-white">{{__('index.top-title')}} <a onclick="openLoginDialog()">{{__('index.login')}}</a> {{__('index.or')}} <a onclick="openRegisterDialog()">{{__('index.register')}}</a></span>
+                <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
+            @endif
+            <button class="mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple" mdui-drawer-close>
+                <i class="mdui-icon material-icons">clear_all</i>
+            </button>
         </div>
 
         <a href="/">
@@ -22,20 +30,6 @@
                 <div class="mdui-list-item-content">{{__('index.community')}}</div>
             </li>
         </a>
-
-        {{--<a href="#">--}}
-            {{--<li class="mdui-list-item mdui-ripple">--}}
-                {{--<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">playlist_add_check</i>--}}
-                {{--<div class="mdui-list-item-content">任务清单</div>--}}
-            {{--</li>--}}
-        {{--</a>--}}
-
-        {{--<a href="#">--}}
-            {{--<li class="mdui-list-item mdui-ripple">--}}
-                {{--<i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-deep-orange">wb_incandescent</i>--}}
-                {{--<div class="mdui-list-item-content">愿望&想法</div>--}}
-            {{--</li>--}}
-        {{--</a>--}}
 
         <div class="mdui-divider"></div>
 

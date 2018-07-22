@@ -29,3 +29,7 @@ Route::get('/switch/lang','IndexController@switchLang')->name('switchLang');
 Route::post('/auth/login','AuthController@login')->name('userLogin');
 Route::post('/auth/checkEmailUnique','AuthController@checkEmailUnique')->name('userCheckEmail');
 Route::post('/auth/register','AuthController@register')->name('userRegister');
+
+Route::group(['middleware'=>'auth:web'],function (){
+    Route::get('/auth/logout','AuthController@logout')->name('userLogout');
+});

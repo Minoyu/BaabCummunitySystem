@@ -38,7 +38,7 @@
     <div id="loginSuccessful" class="mdui-valign success mdui-hidden">
         <div class="mdui-center">
             <i class="mdui-icon material-icons mdui-text-color-green mdui-center icon">&#xe862;</i>
-            <h3 class="mdui-center">{{__('auth.LoginSuccess')}}</h3>
+            <h3 class="mdui-center">{{__('auth.LoginSuccess')}} , <span class="username"></span></h3>
             <div class="btns">
                 <button class="mdui-btn mdui-btn-dense mdui-btn-raised mdui-ripple">{{__('index.presonalCenter')}}</button>
                 <button onclick="window.location.reload()" class="mdui-btn mdui-btn-dense mdui-btn-raised mdui-ripple mdui-color-pink-400 mdui-m-l-2">{{__('index.back')}}</button>
