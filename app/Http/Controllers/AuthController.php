@@ -44,11 +44,13 @@ class AuthController extends Controller
         $res = User::create(compact('name','email','password'));
         //渲染
         if ($res){
-            return \redirect(route('UsersList'))->with('tips',['用户'.$name.'创建成功',]);
+            $status = 1;
+            $msg = 'Create account successful';
         }else{
-            return \redirect(route('UsersList'))->withErrors('用户创建失败,内部错误,请联系管理员');
+            $status = 0;
+            $msg = 'Create account failed';
         }
-
+        return json_encode(compact('status','msg'));
     }
 
 }

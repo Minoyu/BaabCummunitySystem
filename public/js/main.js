@@ -88,6 +88,7 @@ $$('#'+bottomVal).addClass('mdui-bottom-nav-active');
 //Ajax用户登录验证
 function loginSubmit() {
     var email=$$('input[name="loginEmail"]').val();
+    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //邮箱正则表达式
     var password=$$('input[name="loginPassword"]').val();
     var remember_me=$$('input[name="remember_me"]').is(':checked');
     var loginEmailErrorField=$$('#loginEmailError');
@@ -98,7 +99,30 @@ function loginSubmit() {
     var passwordHasError=false;
 
 
-    $$.ajax({
+    //至少6位
+    if (password.length<6){
+        passwordHasError = true;
+    }
+    //邮箱验证开始
+    if (email === ""){
+        emailHasError = true;
+    }else if(!reg.test(email)){ //邮箱正则验证不通过，格式不对
+        emailHasError = true;
+    }
+
+    if (passwordHasError || emailHasError){
+        if(passwordHasError ===true){
+            loginPasswordTextField.addClass('mdui-textfield-invalid');
+        }else{
+            loginPasswordTextField.removeClass('mdui-textfield-invalid');
+        }
+        if(emailHasError ===true){
+            loginEmailTextField.addClass('mdui-textfield-invalid');
+        }else{
+            loginEmailTextField.removeClass('mdui-textfield-invalid');
+        }
+    }else{
+        $$.ajax({
         method: 'POST',
         url: '/auth/login',
         headers: {
@@ -145,6 +169,7 @@ function loginSubmit() {
             }
         }
     });
+    }
 }
 
 //注册部分下一步
@@ -199,6 +224,7 @@ function registerStep2Submit() {
     var passwordHasError=false;
     var passwordConfirmHasError=false;
 
+    //至少6位
     if (password.length<6){
         passwordHasError = true;
     }
@@ -229,15 +255,6 @@ function registerStep2Submit() {
                 name:userName,
                 password:password,
                 password_confirmation:password_confirmation
-            },
-            statusCode: {
-                422: function (data) {
-                    data=JSON.parse(data.response);
-                    if (data.errors.password){
-                        loginPasswordErrorField.text(data.errors.password[0]);
-                        passwordHasError=true;
-                    }
-                }
             },
             success: function (data) {
                 data=JSON.parse(data);
