@@ -28,6 +28,15 @@ class AuthController extends Controller
         //渲染
         return json_encode(compact('status','msg'));
     }
+    //检查邮箱重复
+    public function checkEmailUnique(Request $request){
+        //验证
+        $this->validate($request,[
+            'email' => 'required|unique:users|email',
+        ]);
+        $status = 1;
+        return json_encode(compact('status'));
+    }
 
     //注册操作
     public function register(Request $request){

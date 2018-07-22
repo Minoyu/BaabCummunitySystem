@@ -4,7 +4,7 @@
     </button>
     <div class="mdui-dialog-title mdui-color-indigo login-bg">
         {{__('index.login')}}
-        <button onclick="loginToRegister()" class="mdui-btn mdui-ripple mdui-float-right" type="button">{{__('auth.notRegistered')}}</button>
+        <button onclick="loginToRegister()" class="mdui-btn mdui-ripple mdui-float-right dialog-top-tip-button" type="button">{{__('auth.notRegistered')}}</button>
     </div>
     <form id="loginForm">
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom" id="loginEmailTextField">
@@ -35,4 +35,14 @@
             <a onclick="loginSubmit()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('auth.confirmLogin')}}</a>
         </div>
     </form>
+    <div id="loginSuccessful" class="mdui-valign success mdui-hidden">
+        <div class="mdui-center">
+            <i class="mdui-icon material-icons mdui-text-color-green mdui-center icon">&#xe862;</i>
+            <h3 class="mdui-center">{{__('auth.LoginSuccess')}}</h3>
+            <div class="btns">
+                <button class="mdui-btn mdui-btn-dense mdui-btn-raised mdui-ripple">{{__('index.presonalCenter')}}</button>
+                <button onclick="window.location.reload()" class="mdui-btn mdui-btn-dense mdui-btn-raised mdui-ripple mdui-color-pink-400 mdui-m-l-2">{{__('index.back')}}</button>
+            </div>
+        </div>
+    </div>
 </div>
