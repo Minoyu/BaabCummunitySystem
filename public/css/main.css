@@ -777,3 +777,56 @@ body {
     line-height: 20px;
     opacity: .8;
 }
+
+/*新闻内容页主标题*/
+.news-content-primary-title{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+/*新闻内容页新闻正文*/
+.news-content-primary-text{
+    font-size: 18px;
+    text-indent: 36px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+/*新闻内容页侧边栏标题*/
+.news-content-side-clumn-list a{
+    font-weight: bold;
+    font-size: 18px;
+}
+/*新闻内容页评论条*/
+.news-content-comment-list{
+    padding: 10px 0px;
+    position: relative;
+}
+/*新闻内容页评论区回复数量框*/
+.news-content-comment-number{
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+/*新闻内容页评论区用户名*/
+.news-content-comment-username{
+    padding-left: 90px;
+}
+/*新闻内容页评论区p标签样式*/
+.news-content-comment-p{
+    padding-left: 80px;
+}
+/*新闻内容页评论区用户头像样式*/
+.news-content-comment-users-img{
+    position: absolute;
+}
+/*新闻内容页评论区评论按钮*/
+.news-content-comment-pinglun-btn{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+/*新闻内容页评论区点赞按钮*/
+.news-content-comment-dianzan-btn{
+    position: absolute;
+    top: 0px;
+    right: 30px;
+}
