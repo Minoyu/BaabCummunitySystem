@@ -8,7 +8,8 @@
     {{--内容块--}}
     <div class="mdui-col-md-9 mdui-col-xs-12">
         @include('news-content.content')
-        @include('news-content.comment-area')
+        @include('news-content.comment-list')
+        @include('news-content.content-area')
     </div>
     {{--侧边栏，小屏隐藏--}}
     <div class="mdui-col-md-3 mdui-hidden-sm-down">

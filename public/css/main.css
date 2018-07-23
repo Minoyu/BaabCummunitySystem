@@ -825,6 +825,22 @@ body {
     padding: 10px 0px;
     position: relative;
 }
+/*新闻内容页评论条边框样式*/
+.news-content-comment-list-border{
+    background: white;
+    border-radius: 2px;
+    margin-top: 30px;
+    width: 95%;
+    height: auto;
+    display: block;
+    padding: 12px;
+    box-shadow: inset 0 1px 1px 0 #c7c7c7;
+    -webkit-border-radius: 5px;
+    /*margin: 20px auto;*/
+    /*-moz-border-radius: 5px;*/
+    /*-webkit-box-shadow: inset 0 1px 1px 0 #c7c7c7;*/
+    /*-moz-box-shadow: inset 0 1px 1px 0 #c7c7c7;*/
+}
 /*新闻内容页评论区回复数量框*/
 .news-content-comment-number{
     font-weight: bold;
@@ -841,6 +857,8 @@ body {
 /*新闻内容页评论区用户头像样式*/
 .news-content-comment-users-img{
     position: absolute;
+    top: 2.5px;
+    left: 0px;
 }
 /*新闻内容页评论区评论按钮*/
 .news-content-comment-pinglun-btn{
@@ -853,4 +871,29 @@ body {
     position: absolute;
     top: 0px;
     right: 30px;
+}
+/*新闻内容页评论输入区边框样式*/
+.news-content-comment-area{
+    background: white;
+    border-radius: 2px;
+    width: 95%;
+    margin-top: 30px;
+    height: auto;
+    display: block;
+    padding: 12px;
+    box-shadow: inset 0 1px 1px 0 #c7c7c7;
+    -webkit-border-radius: 5px;
+}
+/*新闻内容页评论输入区提交按钮*/
+.news-content-comment-area-btn{
+    float: right;
+}
+
+/*图片占比80%自适应*/
+.img-self-adaption-80{
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
 }
