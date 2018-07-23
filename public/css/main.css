@@ -1,5 +1,6 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, sans-serif;
+    background: #f6f6f6;
 }
 /*顶部padding （移动端适配tab选项卡及drawer）*/
 /*无tab 有底部导航栏*/
@@ -73,6 +74,7 @@ body {
 /*抽屉菜单*/
 .drawer-menu{
     padding: 0px 0px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
 }
 .drawer-top{
     position: relative;
@@ -853,4 +855,219 @@ body {
     position: absolute;
     top: 0px;
     right: 30px;
+}
+
+/*个人页面顶部封面cover*/
+.user-center-cover{
+    height: 0;
+    padding-bottom: 30%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    overflow: visible;
+    margin-bottom: 40px;
+}
+
+.user-center-cover .cover-upload{
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    display: none;
+}
+
+.user-center-cover:hover .cover-upload{
+    display: block;
+}
+/*渐变*/
+.user-center-cover .gradient {
+    height: 100px;
+}
+.user-center-cover-info {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 24px 16px 16px;
+    color: #fff;
+}
+.user-center-cover-info .avatar-box{
+    position: relative;
+    float: left;
+    margin-right: 16px;
+    height: 60px;
+}
+.user-center-cover-info .avatar-box .avatar{
+    width: 95px;
+    height: 95px;
+    border-radius: 10%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.user-center-cover-info .avatar-box .avatar:hover{
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, .2), 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12);
+}
+.user-center-cover-info .avatar-box .avatar-upload{
+    display: none;
+}
+.user-center-cover-info .avatar-box:hover .avatar-upload{
+    display: block;
+}
+.user-center-cover-info .username,
+.user-center-cover-info .meta{
+    margin-left: 76px;
+}
+.user-center-cover-info .username{
+    font-size: 30px;
+    display: block;
+    line-height: 36px;
+    opacity: 1;
+}
+.user-center-cover-info .meta{
+    position: relative;
+    opacity: 1;
+    line-height: 24px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.54);
+    margin-right: 188px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.user-center-cover-info .meta a{
+    color: #fff;
+    text-decoration: none;
+}
+.user-center-cover-info .meta a:hover{
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+}
+.user-center-cover-info .right-btn {
+    background-color: #fff;
+    color: rgba(0, 0, 0, 0.87);
+    width: 120px;
+    font-size: 15px;
+    height: 42px;
+    line-height: 42px;
+    position: absolute;
+    right: 16px;
+    bottom: 25px;
+}
+.user-center-cover-info .right-btn.following {
+    color: rgba(0, 0, 0, 0.54);
+}
+
+@media (max-width: 599px) {
+    .user-center-cover{
+        padding-bottom: 50%;
+        margin-bottom: 280px;
+    }
+    .user-center-cover-info {
+        padding: 0;
+        height: 0;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.87);
+    }
+    .user-center-cover-info .avatar-box {
+        float: none !important;
+        margin: -30px 0 0 0 !important;
+    }
+    .user-center-cover-info .username {
+        margin: 50px 0 0 0;
+        padding: 0 16px;
+        color: rgba(0, 0, 0, 0.87)
+    }
+    .user-center-cover-info .meta {
+        margin: 46px 0 0 0;
+        padding: 0 16px;
+        color: rgba(0, 0, 0, 0.54);
+        overflow: visible;
+    }
+    .user-center-cover-info .meta a {
+        color: rgba(0, 0, 0, 0.87);
+    }
+    .user-center-cover-info .meta a:hover {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+    }
+    .user-center-cover-info .meta .followers + span {
+        display: none;
+    }
+    .user-center-cover-info .meta .headline {
+        position: absolute;
+        top: -32px;
+        left: 16px;
+        right: 16px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .user-center-cover-info .menu {
+        right: 16px;
+        bottom: 16px;
+        text-align: left;
+    }
+    .user-center-cover-info .right-btn {
+        position: relative;
+        right: 0;
+        bottom: 0;
+        margin-top: 24px;
+    }
+}
+
+.avatar-upload{
+    overflow: hidden;
+    height: 95px;
+    width: 95px;
+}
+.cover-upload {
+    overflow: hidden;
+    height: 48px;
+    width: 48px;
+}
+.avatar-upload .upload-btn{
+    display: block;
+    width: 95px;
+    min-width: 95px;
+    height: 95px;
+    background-color: rgba(0, 0, 0, 0.26) !important;
+    border-radius: 10%;
+}
+.cover-upload .upload-btn {
+    display: block;
+    width: 48px;
+    min-width: 48px;
+    height: 48px;
+    background-color: rgba(0, 0, 0, 0.26) !important;
+}
+.avatar-upload .upload-btn i,
+.cover-upload .upload-btn i {
+    color: #fff !important;
+    opacity: .9;
+}
+.avatar-upload .upload-btn:hover,
+.cover-upload .upload-btn:hover,
+.avatar-upload .upload-btn:active,
+.cover-upload .upload-btn:active {
+    background-color: rgba(0, 0, 0, 0.26) !important;
+}
+.avatar-upload .upload-btn:hover i,
+.cover-upload .upload-btn:hover i,
+.avatar-upload .upload-btn:active i,
+.cover-upload .upload-btn:active i {
+    opacity: 1;
+}
+.avatar-upload .upload-btn + input[type="file"],
+.cover-upload .upload-btn + input[type="file"] {
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+}
+.avatar-upload {
+    position: absolute;
+    left: 49.5%;
+    top: 82%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }

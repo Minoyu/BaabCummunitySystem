@@ -11,8 +11,15 @@
         <i class="mdui-icon material-icons">explore</i>
         <label>{{__('index.news')}}</label>
     </a>
-    <a href="javascript:;" class="mdui-ripple">
-        <i class="mdui-icon material-icons">account_circle</i>
-        <label>{{__('index.me')}}</label>
-    </a>
+    @if(Auth::check())
+        <a id="me-bottom-nav" href="{{route('showPersonalCenter',Auth::user()->name)}}" class="mdui-ripple">
+            <i class="mdui-icon material-icons">account_circle</i>
+            <label>{{__('index.me')}}</label>
+        </a>
+    @else
+        <a id="me-bottom-nav" href="{{route('notLogin')}}" class="mdui-ripple">
+            <i class="mdui-icon material-icons">account_circle</i>
+            <label>{{__('index.me')}}</label>
+        </a>
+    @endif
 </div>

@@ -32,6 +32,9 @@ Route::get('/auth/not/login','AuthController@notLogin')->name('notLogin');
 Route::post('/auth/checkEmailUnique','AuthController@checkEmailUnique')->name('userCheckEmail');
 Route::post('/auth/register','AuthController@register')->name('userRegister');
 
+//用户相关
+Route::get('/user/{user}','UserController@showPersonalCenter')->name('showPersonalCenter');
+
 Route::group(['middleware'=>'auth:web'],function (){
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');
 });

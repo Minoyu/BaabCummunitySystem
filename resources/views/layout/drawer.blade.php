@@ -1,5 +1,5 @@
 <div class="mdui-drawer drawer-padding-top" id="index-drawer">
-    <ul class="mdui-list drawer-menu" id="drawerMenu" mdui-collapse>
+    <ul class="mdui-list drawer-menu mdui-color-white" id="drawerMenu" mdui-collapse>
 
         <div class="mdui-m-b-1 drawer-top">
             <img class="mdui-img-fluid drawer-top-img" src="/imgs/drawer_top.png"/>
@@ -9,7 +9,7 @@
                 <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
             @else
                 <a onclick="openLoginDialog()"><img class="drawer-top-profile mdui-hoverable" src="/imgs/user_profile.png" /></a>
-                <span class="drawer-top-title mdui-text-color-white">{{__('index.top-title')}} <a onclick="openLoginDialog()">{{__('index.login')}}</a> {{__('index.or')}} <a onclick="openRegisterDialog()">{{__('index.register')}}</a></span>
+                <span class="drawer-top-title mdui-text-color-white username">{{__('index.top-title')}} <a onclick="openLoginDialog()">{{__('index.login')}}</a> {{__('index.or')}} <a onclick="openRegisterDialog()">{{__('index.register')}}</a></span>
                 <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
             @endif
             <button class="mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple" mdui-drawer-close>
