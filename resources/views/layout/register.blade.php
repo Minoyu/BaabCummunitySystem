@@ -1,7 +1,7 @@
 <div class="register-dialog mdui-dialog" id="register-dialog">
-    <button class="mdui-btn mdui-btn-icon mdui-text-color-white close" mdui-dialog-close>
+    <a class="mdui-btn mdui-btn-icon mdui-text-color-white close" mdui-dialog-close>
         <i class="mdui-icon material-icons">close</i>
-    </button>
+    </a>
     <div class="mdui-dialog-title mdui-text-color-white register-bg">
         {{__('index.register')}}
         <button onclick="registerToLogin()" class="mdui-btn mdui-ripple mdui-float-right dialog-top-tip-button" type="button">{{__('auth.Registered')}}</button>

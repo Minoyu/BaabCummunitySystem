@@ -37,6 +37,10 @@ class AuthController extends Controller
         }
     }
 
+    public function notLogin(){
+        return Redirect::to("/?notLogged=true");
+    }
+
     /**检查邮箱重复
      * @param Request $request
      * @return string

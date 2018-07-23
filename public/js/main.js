@@ -1,5 +1,17 @@
 var $$ = mdui.JQ;
 
+/**
+ * 获取get参数
+ * @param name
+ * @returns {null}
+ * @constructor
+ */
+function GetQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
+}
 
 /************************
  * 顶部appbar right menu
@@ -45,6 +57,20 @@ function loginToReset() {
     loginDialog.close();
     resetDialog.open();
 }
+/*检测如果含有登录参数则打开登录对话框并提示登录*/
+setTimeout(function(){
+    var notLogged=GetQueryString("notLogged");
+    if(notLogged !==null && notLogged==='true')
+    {
+        openLoginDialog();
+        mdui.snackbar({
+            message:'You haven\'t logged in<br>你还没有登录本站',
+            position:'top'
+        });
+    }
+},600);
+
+
 //注册对话框
 var registerDialog = new mdui.Dialog('#register-dialog',{modal:true});
 
