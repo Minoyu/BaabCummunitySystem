@@ -1167,3 +1167,86 @@ body {
         padding-top: 40px;
     }
 }
+
+/*社区内容页侧边栏列表*/
+.community-content-side-clumn-list a{
+    font-weight: bold;
+    font-size: 18px;
+}
+/*社区内容页主标题*/
+.community-content-primary-title{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-weight: bold;
+}
+/*社区内容页新闻正文*/
+.community-content-primary-text{
+    font-size: 18px;
+    text-indent: 36px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+/*社区内容页评论条边框样式*/
+.community-content-comment-list-border{
+    background: white;
+    border-radius: 2px;
+    margin-top: 30px;
+    width: 95%;
+    height: auto;
+    display: block;
+    padding: 12px;
+    box-shadow: inset 0 1px 1px 0 #c7c7c7;
+    -webkit-border-radius: 5px;
+}
+/*社区内容页评论区回复数量框*/
+.community-content-comment-number{
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+/*社区内容页评论条*/
+.community-content-comment-list{
+    padding: 10px 0px;
+    position: relative;
+}
+/*社区内容页评论区用户头像样式*/
+.community-content-comment-users-img{
+    position: absolute;
+    top: 2.5px;
+    left: 0px;
+}
+/*社区内容页评论区用户名*/
+.community-content-comment-username{
+    padding-left: 90px;
+}
+/*社区内容页评论区评论按钮*/
+.community-content-comment-pinglun-btn{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+/*社区内容页评论区点赞按钮*/
+.community-content-comment-dianzan-btn{
+    position: absolute;
+    top: 0px;
+    right: 30px;
+}
+/*社区内容页评论区p标签样式*/
+.community-content-comment-p{
+    padding-left: 80px;
+}
+/*社区内容页评论输入区边框样式*/
+.community-content-comment-area{
+    background: white;
+    border-radius: 2px;
+    width: 95%;
+    margin-top: 30px;
+    height: auto;
+    display: block;
+    padding: 12px;
+    box-shadow: inset 0 1px 1px 0 #c7c7c7;
+    -webkit-border-radius: 5px;
+}
+/*社区内容页评论输入区提交按钮*/
+.community-content-comment-area-btn{
+    float: right;
+}
