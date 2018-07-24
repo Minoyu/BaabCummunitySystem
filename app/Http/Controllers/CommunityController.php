@@ -13,4 +13,7 @@ class CommunityController extends Controller
     public function showCommunitySec(){
         return view('community-sec');
     }
+    public function showCommunityContent(){
+        return view('community-content');
+    }
 }
