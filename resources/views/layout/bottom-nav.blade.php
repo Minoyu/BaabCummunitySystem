@@ -12,7 +12,7 @@
         <label>{{__('index.news')}}</label>
     </a>
     @if(Auth::check())
-        <a id="me-bottom-nav" href="{{route('showPersonalCenter',Auth::user()->name)}}" class="mdui-ripple">
+        <a id="me-bottom-nav" href="{{route('showPersonalCenter',Auth::user()->id)}}" class="mdui-ripple">
             <i class="mdui-icon material-icons">account_circle</i>
             <label>{{__('index.me')}}</label>
         </a>

@@ -37,4 +37,6 @@ Route::get('/user/{user}','UserController@showPersonalCenter')->name('showPerson
 
 Route::group(['middleware'=>'auth:web'],function (){
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');
+
+    Route::post('/user/{user}/edit/info','UserController@updateUserInfo')->name('editUserInfo');
 });

@@ -1,4 +1,10 @@
-<div class="mdui-card user-center-cover" style="background-image: url(https://www.mdui.org/upload/cover/f5/df/f63b9399cd92f2a4bd85302ed2ce8e5c_l.jpg);">
+<div class="mdui-card user-center-cover"
+     @if($user->info->cover_bg_url)
+        style="background-image: url('{{$user->info->cover_bg_url}}');"
+     @else
+        style="background-image: url('/imgs/cover_default_bg.webp');"
+    @endif
+>
     <div class="cover-upload">
         <label for="coverUploadInput">
             <a class="mdui-btn mdui-btn-icon mdui-ripple upload-btn" title="点击上传封面">
@@ -18,16 +24,12 @@
                 </label>
                 <input class="mdui-hidden" id="avatarUploadInput" type="file" title=" " accept="image/jpeg,image/png">
             </div>
-            <img src="https://www.mdui.org/upload/avatar/f5/df/20004ef43a3033d1c98d6492378f4c9b_l.jpg" class="avatar mdui-hoverable">
+            <img src="{{$user->info->avatar_url}}" class="avatar mdui-hoverable">
         </div>
-        <div class="username">Minoyu</div>
+        <div class="username">{{$user->name}}</div>
         <div class="meta">
-            <a href="" class="following">关注了 6 人</a>
-            <span class="mdui-m-x-1">|</span>
-            <a href="" class="followers">2 位关注者</a>
-            <span class="mdui-m-x-1">|</span>
-            <a href="" class="headline">https://we.sharelove.site/</a>
+            <a href="" class="headline">{{$user->info->motto}}</a>
         </div>
-        <button class="right-btn mdui-btn mdui-btn-raised">修改个人资料</button>
+        <a onclick="openEditUserInfoDialog()" class="right-btn mdui-btn mdui-btn-raised">修改个人资料</a>
     </div>
 </div>

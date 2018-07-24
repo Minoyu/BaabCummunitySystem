@@ -26,4 +26,20 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+    /**
+     * 为路由模型获取键名。
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+    /**
+     * 获取与用户关联的信息。
+     */
+    public function info()
+    {
+        return $this->hasOne('App\Model\UserInfo');
+    }
 }

@@ -13,7 +13,7 @@
         <a onclick="jumpTo('{{route('showNews')}}')" href="#" class="mdui-ripple mdui-ripple-white" id="news-tab">{{ __('index.news')}}</a>
         <a onclick="jumpTo('{{route('showCommunity')}}')" href="#" class="mdui-ripple mdui-ripple-white" id="community-tab">{{ __('index.community')}}</a>
         @if(Auth::check())
-            <a onclick="jumpTo('{{route('showPersonalCenter',Auth::user()->name)}}')" href="#" class="mdui-ripple mdui-ripple-white" id="me-tab">{{ __('index.me')}}</a>
+            <a onclick="jumpTo('{{route('showPersonalCenter',Auth::user()->id)}}')" href="#" class="mdui-ripple mdui-ripple-white" id="me-tab">{{ __('index.me')}}</a>
         @else
             <a href="#" class="mdui-ripple mdui-ripple-white mdui-hidden" id="me-tab">{{ __('index.me')}}</a>
         @endif

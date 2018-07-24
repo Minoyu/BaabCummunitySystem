@@ -899,6 +899,7 @@ body {
     margin-right: auto;
     margin-left: auto;
 }
+
 /*个人页面顶部封面cover*/
 .user-center-cover{
     height: 0;
@@ -1072,7 +1073,7 @@ body {
     width: 95px;
     min-width: 95px;
     height: 95px;
-    background-color: rgba(0, 0, 0, 0.26) !important;
+    background-color: rgba(0, 0, 0, 0.10) !important;
     border-radius: 10%;
 }
 .cover-upload .upload-btn {
@@ -1112,4 +1113,57 @@ body {
     top: 82%;
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
+}
+/*编辑用户资料对话框*/
+.edit-user-info-dialog .avatar-box{
+    position: absolute;
+    float: left;
+    margin-right: 16px;
+    height: 60px;
+}
+.edit-user-info-dialog .avatar-box .avatar{
+    width: 95px;
+    height: 95px;
+    border-radius: 10%;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.edit-user-info-dialog .user-info-box{
+    padding-left: 110px;
+}
+
+.edit-info-dialog-right-select{
+    float: right;
+}
+@media (max-width: 599px) {
+    .edit-user-info-dialog .avatar-box{
+        float: none;
+        position: relative;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        height: 60px;
+    }
+    .edit-user-info-dialog .avatar-box .avatar{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 95px;
+        height: 95px;
+        border-radius: 10%;
+        border: 2px solid #fff;
+        box-shadow: 0 1px 3px rgba(26,26,26,.1);
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .edit-user-info-dialog .user-info-box{
+        padding-left: 0px;
+        padding-top: 40px;
+    }
 }

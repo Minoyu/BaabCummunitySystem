@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\User;
+use App\Model\UserInfo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -69,9 +70,10 @@ class AuthController extends Controller
         $name = $request->name;
         $email = $request->email;
         $password = bcrypt($request->password);
-        $res = User::create(compact('name','email','password'));
+        $userRes = User::create(compact('name','email','password'));
+        $userInfoRes = UserInfo::create(['user_id'=>$userRes->id]);
         //渲染
-        if ($res){
+        if ($userRes&&$userInfoRes){
             $status = 1;
             $msg = 'Create account successful';
         }else{

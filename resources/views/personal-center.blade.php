@@ -1,6 +1,6 @@
 @extends('frame.indexframe')
-@section('title',$user)
-@section('subtitleUrl',route('showPersonalCenter',$user))
+@section('title',$user->name)
+@section('subtitleUrl',route('showPersonalCenter',$user->id))
 @section('tabActiveVal','me-tab')
 @section('bottomNavActiveVal','me-bottom-nav')
 
@@ -15,4 +15,5 @@
             侧边栏
         </div>
     </div>
+    @include('personal-center.edit-user-info')
 @endsection

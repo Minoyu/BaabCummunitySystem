@@ -337,6 +337,73 @@ function registerStep2Submit() {
             }
         });
     }
+}
 
+var editUserInfoDialog = new mdui.Dialog('#edit-user-info-dialog',{modal:true});
+//用户信息编辑框
+function openEditUserInfoDialog() {
+    editUserInfoDialog.open();
+}
+
+function editUserInfoDialogSubmit() {
+    var id = $$('input[name="userId"]').val();
+    var name = $$('input[name="editUserInfoName"]').val();
+    var sex = $$('input[name="editUserInfoSex"]').val();
+    var sex_open = $$('input[name="editUserInfoSexOpen"]').is(':checked');
+    var motto = $$('input[name="editUserInfoMotto"]').val();
+    var wechat = $$('input[name="editUserInfoWechat"]').val();
+    var wechat_open = $$('input[name="editUserInfoWechatOpen"]').is(':checked');
+    var nation = $$('input[name="editUserInfoNation"]').val();
+    var nation_open = $$('input[name="editUserInfoNationOpen"]').is(':checked');
+    var living_city = $$('input[name="editUserInfoLivingCity"]').val();
+    var living_city_open = $$('input[name="editUserInfoLivingCityOpen"]').is(':checked');
+    var engaged_in = $$('input[name="editUserInfoEngagedIn"]').val();
+    var engaged_in_open = $$('input[name="editUserInfoEngagedInOpen"]').is(':checked');
+
+    var editUserInfoNameTextField=$$('#editUserInfoNameTextField');
+    var nameHasError=false;
+
+    if (name===""){
+        nameHasError = true;
+    }
+    if(nameHasError ===true){
+        editUserInfoNameTextField.addClass('mdui-textfield-invalid');
+    }else{
+        editUserInfoNameTextField.removeClass('mdui-textfield-invalid');
+        $$.ajax({
+            method: 'POST',
+            url: '/user/'+id+'/edit/info',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                name:name,
+                sex:sex,
+                sex_open:sex_open,
+                motto:motto,
+                wechat:wechat,
+                wechat_open:wechat_open,
+                nation:nation,
+                nation_open:nation_open,
+                living_city:living_city,
+                living_city_open:living_city_open,
+                engaged_in:engaged_in,
+                engaged_in_open:engaged_in_open
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    mdui.snackbar({
+                        message:'Your personal information has been successfully updated<br/>你的个人资料已成功更新',
+                        position:'top'
+                        });
+                    setTimeout(function(){
+                        //使用  setTimeout（）方法设定定时5000毫秒
+                        window.location.reload();//页面刷新
+                    },2000);
+                }
+            }
+        });
+    }
 
 }
