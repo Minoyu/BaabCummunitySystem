@@ -38,8 +38,10 @@ class UserController extends Controller
         $engaged_in=$request->engaged_in;
         $engaged_in_open=$request->engaged_in_open;
 
-        $res=$user->update(compact(
-            'name',
+        $userRes=$user->update(compact(
+            'name'
+        ));
+        $userInfoRes=$user->info->update(compact(
             'sex',
             'sex_open',
             'motto',
@@ -54,7 +56,7 @@ class UserController extends Controller
         ));
 
         //渲染
-        if ($res) {
+        if ($userRes&&$userInfoRes) {
             $status = 1;
             $msg = 'Create account successful';
         }else{
