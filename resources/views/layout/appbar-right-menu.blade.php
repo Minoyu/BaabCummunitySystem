@@ -1,9 +1,9 @@
 <ul class="mdui-menu appbar-menu" style="width: auto" id="appbar-right-menu">
     <div class="user-div">
         @if(Auth::check())
-            <a href="#"><img class="user-profile mdui-hoverable" src="{{Auth::user()->avatar_url}}" /></a>
+            <a href="#"><img class="user-profile mdui-hoverable userAvatar" src="{{Auth::user()->info->avatar_url}}" /></a>
             <h2 class="appbar-menu-title">{{Auth::user()->name}}</h2>
-            <h3 class="appbar-menu-subtitle">{{Auth::user()->motto}}</h3>
+            <h3 class="appbar-menu-subtitle">{{Auth::user()->info->motto}}</h3>
         @else
             <a onclick="openLoginDialog()"><img class="user-profile mdui-hoverable" src="/imgs/user_profile.png" /></a>
             <h2 class="appbar-menu-title">{{__('index.welcome')}}</h2>

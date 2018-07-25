@@ -43,4 +43,5 @@ Route::group(['middleware'=>'auth:web'],function (){
     Route::post('/user/{user}/edit/info','UserController@updateUserInfo')->name('editUserInfo');
 //  上传用户头像
     Route::post('/user/{user}/upload/avatar','UserController@uploadAvatar')->name('uploadUserAvatar');
+    Route::post('/user/{user}/upload/cover','UserController@uploadCover')->name('uploadUserCover');
 });

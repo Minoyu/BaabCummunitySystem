@@ -16,8 +16,8 @@ class CreateUsersInfoTable extends Migration
         Schema::create('users_info', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->comment('用户ID');
-            $table->string('avatar_url')->nullable()->comment('头像地址');
-            $table->string('cover_bg_url')->nullable()->comment('封面背景图地址');
+            $table->string('avatar_url')->default('/imgs/user_default_avatar.jpg')->comment('头像地址');
+            $table->string('cover_bg_url')->default('/imgs/cover_default_bg.webp')->comment('封面背景图地址');
             $table->string('motto')->nullable()->comment('格言（一句话介绍）');
             $table->integer('phone')->nullable()->comment('手机号');
             $table->string('sex')->nullable()->comment('sex:{"male":"男","female":"女"}');

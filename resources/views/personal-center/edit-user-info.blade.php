@@ -1,5 +1,10 @@
 <div class="mdui-dialog edit-user-info-dialog" id="edit-user-info-dialog">
-    <div class="mdui-dialog-title">修改个人信息</div>
+    <div class="mdui-dialog-title">
+        <a class="mdui-btn mdui-btn-icon mdui-text-color-indigo" style="margin-top: -5px" mdui-dialog-close>
+            <i class="mdui-icon material-icons">chevron_left</i>
+        </a>
+        修改个人信息
+    </div>
     <div class="mdui-dialog-content">
         <div class="avatar-box">
             <div class="avatar-upload">

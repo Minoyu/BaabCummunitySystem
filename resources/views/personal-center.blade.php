@@ -15,7 +15,13 @@
             侧边栏
         </div>
     </div>
-    @include('personal-center.edit-user-info')
+    @if($userIsMe)
+        {{--用户信息修改--}}
+        @include('personal-center.edit-user-info')
+    @else
+
+    @endif
+
     {{--此个人页的用户ID--}}
     <input class="mdui-hidden" name="userId" value="{{$user->id}}"/>
 @endsection

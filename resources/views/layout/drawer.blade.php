@@ -2,12 +2,13 @@
     <ul class="mdui-list drawer-menu mdui-color-white" id="drawerMenu" mdui-collapse>
 
         <div class="mdui-m-b-1 drawer-top">
-            <img class="mdui-img-fluid drawer-top-img" src="/imgs/drawer_top.png"/>
             @if(Auth::check())
-                <a href="#"><img class="drawer-top-profile mdui-hoverable" src="{{Auth::user()->avatar_url}}" /></a>
+                <img class="mdui-img-fluid drawer-top-img coverDrawerImg" src="{{Auth::user()->info->cover_bg_url}}"/>
+                <a href="#"><img class="drawer-top-profile mdui-hoverable userAvatar" src="{{Auth::user()->info->avatar_url}}" /></a>
                 <span class="drawer-top-title mdui-text-color-white">{{Auth::user()->name}}</span>
                 <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
             @else
+                <img class="mdui-img-fluid drawer-top-img" src="/imgs/drawer_top.png"/>
                 <a onclick="openLoginDialog()"><img class="drawer-top-profile mdui-hoverable" src="/imgs/user_profile.png" /></a>
                 <span class="drawer-top-title mdui-text-color-white username">{{__('index.top-title')}} <a onclick="openLoginDialog()">{{__('index.login')}}</a> {{__('index.or')}} <a onclick="openRegisterDialog()">{{__('index.register')}}</a></span>
                 <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>

@@ -82,6 +82,9 @@ body {
 .drawer-top-img{
     -webkit-filter: brightness(0.7);
     filter: brightness(0.7);
+    width: 100%;
+    min-height: 175px;
+    max-height: 225px;
 }
 .drawer-top-profile{
     width: 60px;

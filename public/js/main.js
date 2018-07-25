@@ -408,7 +408,13 @@ function editUserInfoDialogSubmit() {
 
 }
 
+/**
+ * 处理头像上传
+ * @param obj
+ * @param className
+ */
 function handleAvatarUpdate(obj,className) {
+    var avatarImg = $$('.'+className);
     var avatar = obj.files[0];
     var id = $$('input[name="userId"]').val();
 
@@ -427,14 +433,49 @@ function handleAvatarUpdate(obj,className) {
         success: function (data) {
             data=JSON.parse(data);
             if (data.status===1){
+                avatarImg.attr('src',data.src);
                 mdui.snackbar({
-                    message:'Your personal information has been successfully updated<br/>你的个人资料已成功更新',
+                    message:'The Avatar has been uploaded successfully<br/>头像已成功上传',
                     position:'top'
                 });
-                setTimeout(function(){
-                    //使用  setTimeout（）方法设定定时5000毫秒
-                    window.location.reload();//页面刷新
-                },2000);
+            }
+        }
+    });
+
+}
+
+/**
+ * 处理封面上传
+ * @param obj
+ * @param className
+ */
+function handleCoverUpdate(obj,className) {
+    var coverImg = $$('.'+className);
+    var coverDrawerImg = $$('.coverDrawerImg');
+    var cover = obj.files[0];
+    var id = $$('input[name="userId"]').val();
+
+    var form = new FormData();
+    form.append('cover',cover);
+    $$.ajax({
+        method: 'POST',
+        url: '/user/'+id+'/upload/cover',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: form,
+        contentType: false, //禁止设置请求类型
+        processData: false, //禁止jquery对DAta数据的处理,默认会处理
+        //禁止的原因是,FormData已经帮我们做了处理
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status===1){
+                coverImg.css('background-image','url('+data.src+')');
+                coverDrawerImg.attr('src',data.src);
+                mdui.snackbar({
+                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
+                    position:'top'
+                });
             }
         }
     });
