@@ -407,3 +407,36 @@ function editUserInfoDialogSubmit() {
     }
 
 }
+
+function handleAvatarUpdate(obj,className) {
+    var avatar = obj.files[0];
+    var id = $$('input[name="userId"]').val();
+
+    var form = new FormData();
+    form.append('avatar',avatar);
+    $$.ajax({
+        method: 'POST',
+        url: '/user/'+id+'/upload/avatar',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: form,
+        contentType: false, //禁止设置请求类型
+        processData: false, //禁止jquery对DAta数据的处理,默认会处理
+        //禁止的原因是,FormData已经帮我们做了处理
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status===1){
+                mdui.snackbar({
+                    message:'Your personal information has been successfully updated<br/>你的个人资料已成功更新',
+                    position:'top'
+                });
+                setTimeout(function(){
+                    //使用  setTimeout（）方法设定定时5000毫秒
+                    window.location.reload();//页面刷新
+                },2000);
+            }
+        }
+    });
+
+}

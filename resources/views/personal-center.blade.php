@@ -16,4 +16,6 @@
         </div>
     </div>
     @include('personal-center.edit-user-info')
+    {{--此个人页的用户ID--}}
+    <input class="mdui-hidden" name="userId" value="{{$user->id}}"/>
 @endsection

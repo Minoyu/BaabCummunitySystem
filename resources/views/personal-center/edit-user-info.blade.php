@@ -3,14 +3,14 @@
     <div class="mdui-dialog-content">
         <div class="avatar-box">
             <div class="avatar-upload">
-                <label for="avatarUploadInput">
+                <label for="editInfoDialogAvatarUploadInput">
                     <a class="mdui-btn mdui-btn-icon mdui-ripple upload-btn" title="点击上传头像">
                         <i class="mdui-icon material-icons">photo_camera</i>
                     </a>
                 </label>
-                <input class="mdui-hidden" id="avatarUploadInput" type="file" title=" " accept="image/jpeg,image/png">
+                <input class="mdui-hidden" id="editInfoDialogAvatarUploadInput" type="file" onchange="handleAvatarUpdate(this,'userAvatar')" accept="image/jpeg,image/png">
             </div>
-            <img src="{{$user->info->avatar_url}}" class="avatar mdui-hoverable">
+            <img src="{{$user->info->avatar_url}}" class="avatar mdui-hoverable userAvatar">
         </div>
         <div class="user-info-box">
             <div id="editUserInfoNameTextField" class="mdui-textfield mdui-textfield-floating-label short-textfield mdui-p-t-0">
@@ -78,7 +78,6 @@
                     在个人页面公开展示
                 </label>
             </div>
-            <input class="mdui-hidden" name="userId" value="{{$user->id}}"/>
         </div>
     </div>
     <div class="mdui-dialog-actions">

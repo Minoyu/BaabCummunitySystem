@@ -39,5 +39,8 @@ Route::get('/user/{user}','UserController@showPersonalCenter')->name('showPerson
 Route::group(['middleware'=>'auth:web'],function (){
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');
 
+//  修改用户信息
     Route::post('/user/{user}/edit/info','UserController@updateUserInfo')->name('editUserInfo');
+//  上传用户头像
+    Route::post('/user/{user}/upload/avatar','UserController@uploadAvatar')->name('uploadUserAvatar');
 });
