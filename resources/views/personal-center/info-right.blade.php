@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="side-card-content">
-        @if($user->info->sex&&$user->info->sex_open)
+        @if($user->info->sex&&$user->info->sex_open=="true")
             <div class="side-card-content-item">
                 <div class="side-card-content-item-h">性别</div>
                 @if($user->info->sex)
@@ -28,7 +28,7 @@
                 @endif
             </div>
         </div>
-        @if($user->info->wechat&&$user->info->wechat_open)
+        @if($user->info->wechat&&$user->info->wechat_open=="true")
             <div class="side-card-content-item">
                 <div class="side-card-content-item-h">
                     微信号
@@ -38,7 +38,7 @@
                 </div>
             </div>
         @endif
-        @if($user->info->nation&&$user->info->nation_open)
+        @if($user->info->nation&&$user->info->nation_open=="true")
             <div class="side-card-content-item">
                 <div class="side-card-content-item-h">
                     国家
@@ -48,7 +48,7 @@
                 </div>
             </div>
         @endif
-        @if($user->info->living_city&&$user->info->living_city_open)
+        @if($user->info->living_city&&$user->info->living_city_open=="true")
             <div class="side-card-content-item">
                 <div class="side-card-content-item-h">
                     现居城市
@@ -58,7 +58,7 @@
                 </div>
             </div>
         @endif
-        @if($user->info->engaged_in&&$user->info->engaged_in_open)
+        @if($user->info->engaged_in&&$user->info->engaged_in_open=="true")
             <div class="side-card-content-item">
                 <div class="side-card-content-item-h">
                     职业/从事行业
