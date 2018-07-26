@@ -19,7 +19,7 @@ return [
     'home' => 'Home',
     'community' => 'Community',
     'me' => 'Me',
-    'presonalCenter' => 'Personal Center',
+    'personalCenter' => 'Personal Center',
     'discover' => 'Discover',
     //Appbar-menu
     'switchLang' => '切换到中文',

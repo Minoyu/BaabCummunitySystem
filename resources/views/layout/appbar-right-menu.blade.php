@@ -1,7 +1,7 @@
 <ul class="mdui-menu appbar-menu" style="width: auto" id="appbar-right-menu">
     <div class="user-div">
         @if(Auth::check())
-            <a href="#"><img class="user-profile mdui-hoverable userAvatar" src="{{Auth::user()->info->avatar_url}}" /></a>
+            <a href="{{route('showPersonalCenter',Auth::user()->id)}}"><img class="user-profile mdui-hoverable userAvatar" src="{{Auth::user()->info->avatar_url}}" /></a>
             <h2 class="appbar-menu-title">{{Auth::user()->name}}</h2>
             <h3 class="appbar-menu-subtitle">{{Auth::user()->info->motto}}</h3>
         @else
@@ -17,6 +17,11 @@
     </div>
     <div class="mdui-divider"></div>
     @if(Auth::check())
+        <li class="mdui-menu-item">
+            <a href="{{route('showPersonalCenter',Auth::user()->id)}}" class="mdui-ripple">
+                <i class="mdui-menu-item-icon mdui-icon material-icons">beach_access</i>{{__('index.personalCenter')}}
+            </a>
+        </li>
         <li class="mdui-menu-item">
             <a href="{{route('userLogout')}}" class="mdui-ripple">
                 <i class="mdui-menu-item-icon mdui-icon material-icons">exit_to_app</i>{{__('auth.logout')}}

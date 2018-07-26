@@ -1,6 +1,6 @@
 body {
     font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, sans-serif;
-    background: #f6f6f6;
+    background: #f9f9f9;
 }
 /*顶部padding （移动端适配tab选项卡及drawer）*/
 /*无tab 有底部导航栏*/
@@ -275,6 +275,36 @@ body {
     line-height: 22px;
     background-color: #fff;
 }
+.side-card-header{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    border-bottom: 1px solid #f6f6f6;
+    box-sizing: border-box;
+}
+.side-card-header-text{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 600;
+    color: #646464;
+}
+.side-card-content{
+    color: #646464;
+    padding: 12px 0;
+}
+.side-card-content-item{
+    padding: 3px 20px 3px 20px;
+}
+
 
 /*首页新闻头条板块*/
 /*图片*/
@@ -961,11 +991,11 @@ body {
 .user-center-cover-info .avatar-box:hover .avatar-upload{
     display: block;
 }
-.user-center-cover-info .username,
+.user-center-cover-info .username-cover,
 .user-center-cover-info .meta{
     margin-left: 76px;
 }
-.user-center-cover-info .username{
+.user-center-cover-info .username-cover{
     font-size: 30px;
     display: block;
     line-height: 36px;
@@ -1007,7 +1037,7 @@ body {
 @media (max-width: 599px) {
     .user-center-cover{
         padding-bottom: 50%;
-        margin-bottom: 280px;
+        margin-bottom: 250px;
     }
     .user-center-cover-info {
         padding: 0;
@@ -1019,7 +1049,7 @@ body {
         float: none !important;
         margin: -30px 0 0 0 !important;
     }
-    .user-center-cover-info .username {
+    .user-center-cover-info .username-cover {
         margin: 50px 0 0 0;
         padding: 0 16px;
         color: rgba(0, 0, 0, 0.87)
@@ -1170,6 +1200,58 @@ body {
         padding-top: 40px;
     }
 }
+/*个人资料侧边栏*/
+.side-card-content-item-h{
+    font-size: 12px;
+    color: #8590a6;
+    font-weight: bold;
+    margin-bottom: 3px;
+}
+.side-card-content-item-c{
+    padding-left: 10px;
+    font-size: 14px;
+}
+.right-focus-info{
+    color: #646464;
+    display: flex;
+}
+.right-focus-info-item{
+    display: flex;
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding: 0;
+    text-align: center;
+    height: auto;
+}
+.right-focus-info-item:hover{
+    transition: all .5s;
+    background-color: rgba(0, 0, 0, .1);
+}
+.right-focus-info-item:hover .right-focus-info-item-name{
+    color: #23232e;
+}
+.right-focus-info-item:not(.mdui-ripple):active{
+    background-color: rgba(0, 0, 0, .165);
+}
+
+.right-focus-info-item-inner{
+    width: 100%;
+    text-align: center;
+    line-height: 1.6;
+    padding: 6px 0;
+}
+.right-focus-info-item-name{
+    font-size: 14px;
+    color: #8590a6;
+}
+.right-focus-info-item-value{
+    display: inline-block;
+    font-size: 18px;
+    color: #1a1a1a;
+    font-weight: 600;
+}
+
 
 /*社区内容页侧边栏列表*/
 .community-content-side-clumn-list a{
@@ -1253,3 +1335,4 @@ body {
 .community-content-comment-area-btn{
     float: right;
 }
+
