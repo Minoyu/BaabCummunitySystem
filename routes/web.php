@@ -45,3 +45,15 @@ Route::group(['middleware'=>'auth:web'],function (){
     Route::post('/user/{user}/upload/avatar','UserController@uploadAvatar')->name('uploadUserAvatar');
     Route::post('/user/{user}/upload/cover','UserController@uploadCover')->name('uploadUserCover');
 });
+
+//TODO 后台测试路由
+Route::group(['prefix'=>'admin'],function () {
+    //新闻分类管理模块
+    Route::get("/news-category",'NewsCategoryController@adminListShow')->name('adminNewsCategoriesList');
+    Route::get("/news-category/create",'NewsCategoryController@adminCreateShow')->name('adminNewsCategoriesCreate');
+    Route::post("/news-category/store",'NewsCategoryController@store')->name('adminNewsCategoriesStore');
+    Route::get("/news-category/{newsCategory}/edit",'NewsCategoryController@adminEditShow')->name('adminNewsCategoriesEdit');
+    Route::post("/news-category/{newsCategory}/update",'NewsCategoryController@update')->name('adminNewsCategoriesUpdate');
+    Route::post("/news-category/delete",'NewsCategoryController@softDelete')->name('newsCategorySoftDelete');
+    Route::post("/news-category/deletes",'NewsCategoryController@softDeletes')->name('newsCategoriesSoftDeletes');
+});

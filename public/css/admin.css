@@ -1,0 +1,15 @@
+.admin-title {
+    font-weight: 500;
+    font-size: 24px;
+    margin: 0px 15px 5px -15px;
+    z-index: 15;
+}
+
+.admin-error-tip{
+    margin: 5px 50px 5px 0px;
+    padding: 15px 20px;
+    border-radius: 5px;
+}
+.admin-btn{
+    margin: 10px 10px 10px 0px;
+}

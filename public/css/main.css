@@ -1335,4 +1335,55 @@ body {
 .community-content-comment-area-btn{
     float: right;
 }
+/******
+分页
+ */
+.pagination{
+    padding-left: 0;
+    margin-top: 10px;
+    margin-bottom: 0;
+    list-style: none;
 
+    display: -webkit-box;
+
+    display: -ms-flexbox;
+
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+
+}
+
+.pagination__number{
+    line-height: 1;
+    text-decoration: none;
+    display: inline-block;
+    color: #fff;
+}
+
+.pagination__number:hover{
+    text-decoration: none;
+}
+
+.pagination__number_active{
+    font-weight: 700;
+}
+
+.pagination__control_prev{
+    margin-left: 10px;
+}
+
+.pagination__control_next{
+    margin-right: 10px;
+}
+
+.pagination .pagination__number{
+    padding: 10px 15px;
+}
+
+.pagination .pagination__number_active{
+    color: #fff;
+}

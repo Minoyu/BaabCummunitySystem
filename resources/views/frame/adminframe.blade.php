@@ -1,4 +1,4 @@
-{{--这是个什么都没有的空框架 区域：title content--}}
+{{--管理后台框架 区域：title content--}}
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ env('APP_NAME','留学生网站') }} - @yield('title')</title>
+    <title>{{ env('APP_NAME','留学生网站') }}管理后台 - @yield('title')</title>
 
     <!-- Styles -->
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
@@ -16,13 +16,22 @@
     <link href="/css/animate.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.bootcss.com/ionicons/4.1.2/css/ionicons.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/css/admin.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    {{--主体部分--}}
-    @yield('content')
+<body class="mdui-appbar-with-toolbar mdui-drawer-body-left">
+    {{--顶栏--}}
+    @include('admin.layout.appbar')
+
+    <div class="mdui-container">
+        {{--主体部分--}}
+        @yield('content')
+    </div>
+    {{--侧边栏--}}
+    @include('admin.layout.drawer')
     <!-- Js -->
     <script src="/layui/layui.js"></script>
     <script src="/js/mdui.min.js"></script>
     <script src="/js/main.js"></script>
+    <script src="/js/admin.js"></script>
 </body>
 </html>
