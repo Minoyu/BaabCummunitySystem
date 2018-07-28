@@ -17,7 +17,8 @@ class CreateNewsCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name')->index()->comment('名称');
             $table->text('description')->nullable()->comment('描述');
-            $table->integer('news_count')->default(0)->comment('分类下新闻数');
+            $table->string('icon')->default('send')->comment('MD图标');
+            $table->integer('news_count')->unsigned()->default(0)->comment('分类下新闻数');
             $table->string('status')->default('publish')->comment('status:{"publish":"公开","hidden":"隐藏/浏览"}');
             $table->softDeletes();
             $table->timestamps();

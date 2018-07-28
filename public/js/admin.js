@@ -110,6 +110,9 @@ function getSelectedNames() {
     return names;
 }
 
+/**
+ * 批量删除新闻分类
+ */
 function deleteNewsCategories() {
     //获取选中对象数组
     var ids=getSelectedIds();
@@ -169,4 +172,34 @@ function deleteNewsCategories() {
             }
         ]
     });
+}
+
+var E = window.wangEditor;
+if ($$('#newsEditor').length>0){
+    var editor = new E('#newsEditor');
+    var textArea = $$('#newsContentTextArea');
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        textArea.val(html);
+    };
+    editor.customConfig.zIndex = 0;
+    editor.customConfig.lang = {
+        '设置标题': 'title',
+        '正文': 'p',
+        '链接文字': 'link text',
+        '链接': 'link',
+        '上传图片': 'upload image',
+        '上传': 'upload',
+        '创建': 'init'
+        // 还可自定添加更多
+    };
+    editor.customConfig.uploadImgServer = '/admin/news/upload/img';
+    editor.customConfig.uploadImgHeaders = {
+        'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content'),
+        'X-Requested-With': 'XMLHttpRequest'
+    };
+    editor.customConfig.uploadFileName = 'img[]';
+    editor.create();
+    // 初始化 textarea 的值
+    textArea.val(editor.txt.html());
 }

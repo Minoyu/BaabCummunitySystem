@@ -31,6 +31,7 @@
     <!-- Js -->
     <script src="/layui/layui.js"></script>
     <script src="/js/mdui.min.js"></script>
+    <script src="/js/wangEditor.min.js"></script>
     <script src="/js/main.js"></script>
     <script src="/js/admin.js"></script>
 </body>

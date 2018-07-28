@@ -1,6 +1,6 @@
 @extends('frame.adminframe')
-@section('title','新闻分类管理')
-@section('subtitleUrl',route('adminNewsCategoriesList'))
+@section('title','新闻管理')
+@section('subtitleUrl',route('adminNewsList'))
 
 @section('content')
         <form id="editNewsCategoryForm" method="post" action="{{route('adminNewsCategoriesUpdate',$newsCategory->id)}}">

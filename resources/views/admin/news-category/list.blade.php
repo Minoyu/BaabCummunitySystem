@@ -20,13 +20,17 @@
             <tbody>
             @foreach($newsCategories as $newsCategory)
                 <tr class="mdui-table-row" id="{{$newsCategory->id}}" name="{{$newsCategory->name}}">
-                    <td>@if($newsCategory->status=='hidden')<span class="mdui-text-color-pink">[<i class="mdui-icon material-icons">local_cafe</i>暂存] </span>@endif{{$newsCategory->name}}</td>
+                    <td>@if($newsCategory->status=='hidden')<span class="mdui-text-color-pink">[<i class="mdui-icon material-icons">local_cafe</i>暂存] </span>@endif <i class="mdui-icon material-icons">{{$newsCategory->icon}}</i>{{$newsCategory->name}}</td>
                     <td>{{$newsCategory->id}}</td>
                     <td>{{$newsCategory->description}}</td>
                     <td>{{$newsCategory->news_count}}</td>
                     <td>
-                        <a href="{{route('adminNewsCategoriesEdit',$newsCategory->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense"><i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑</a><br/>
-                        <button onclick="deleteNewsCategory('{{$newsCategory->id}}','{{$newsCategory->name}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense mdui-color-pink-accent"><i class="mdui-icon material-icons mdui-icon-left">delete</i>删除</button>
+                        <a href="{{route('adminNewsCategoriesEdit',$newsCategory->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
+                            <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
+                        </a>
+                        <button onclick="deleteNewsCategory('{{$newsCategory->id}}','{{$newsCategory->name}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
+                            <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
+                        </button>
                     </td>
                 </tr>
             @endforeach

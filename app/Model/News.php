@@ -5,14 +5,15 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class NewsCategory extends Model
+class News extends Model
 {
     //
     use SoftDeletes;
-    protected $table = 'news_categories';
+    protected $table = 'news';
     protected $guarded = [];
 
-    public function news(){
-        return $this->hasMany(News::class);
+    //news-newsCategory many-one
+    public function newsCategory(){
+        return $this->belongsTo(NewsCategory::class);
     }
 }

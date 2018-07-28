@@ -41,7 +41,7 @@ Route::group(['middleware'=>'auth:web'],function (){
 
 //  修改用户信息
     Route::post('/user/{user}/edit/info','UserController@updateUserInfo')->name('editUserInfo');
-//  上传用户头像
+//  上传部分
     Route::post('/user/{user}/upload/avatar','UserController@uploadAvatar')->name('uploadUserAvatar');
     Route::post('/user/{user}/upload/cover','UserController@uploadCover')->name('uploadUserCover');
 });
@@ -56,4 +56,15 @@ Route::group(['prefix'=>'admin'],function () {
     Route::post("/news-category/{newsCategory}/update",'NewsCategoryController@update')->name('adminNewsCategoriesUpdate');
     Route::post("/news-category/delete",'NewsCategoryController@softDelete')->name('newsCategorySoftDelete');
     Route::post("/news-category/deletes",'NewsCategoryController@softDeletes')->name('newsCategoriesSoftDeletes');
+
+    //新闻管理模块
+    Route::get("/news",'NewsController@adminListShow')->name('adminNewsList');
+    Route::get("/news/create",'NewsController@adminCreateShow')->name('adminNewsCreate');
+    Route::post("/news/store",'NewsController@store')->name('adminNewsStore');
+    Route::get("/news/{news}/edit",'NewsController@adminEditShow')->name('adminNewsEdit');
+    Route::post("/news/{news}/update",'NewsController@update')->name('adminNewsUpdate');
+    Route::post("/news/delete",'NewsController@softDelete')->name('newsSoftDelete');
+    Route::post("/news/deletes",'NewsController@softDeletes')->name('newsSoftDeletes');
+    //新闻图片上传
+    Route::post('/news/upload/img','NewsController@uploadImg')->name('uploadNewsImg');
 });

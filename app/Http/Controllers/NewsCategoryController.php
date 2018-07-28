@@ -43,7 +43,8 @@ class NewsCategoryController extends Controller
         //逻辑
         $name = \request('name');
         $description = \request('description');
-        $data = compact('name','description','status');
+        $icon = \request('icon');
+        $data = compact('name','description','icon','status');
 
         $res=NewsCategory::create($data);
 
@@ -86,7 +87,8 @@ class NewsCategoryController extends Controller
         //逻辑
         $name = \request('name');
         $description = \request('description');
-        $data = compact('name','description','status');
+        $icon = \request('icon');
+        $data = compact('name','description','icon','status');
 
         $res=NewsCategory::where('id',$newsCategory->id)->update($data);
 

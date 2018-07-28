@@ -56,10 +56,17 @@ return [
             // 文件将上传到public/uploads目录 如果需要浏览器直接访问 请设置成这个
             'root' => public_path('uploads/avatar'),
         ],
-        // 新建一个本地端userAvatar空间（目录） 用于存储上传的图片
+
+        // 新建一个本地端userCover空间（目录） 用于存储上传的图片
         'userCover' => [
             'driver' => 'local',
             'root' => public_path('uploads/cover'),
+        ],
+
+        // 新建一个本地端newsImg空间（目录） 用于存储新闻上传的图片
+        'newsImg' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/news/img'),
         ],
 
 
