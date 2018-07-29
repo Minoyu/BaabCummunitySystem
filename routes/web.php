@@ -67,4 +67,6 @@ Route::group(['prefix'=>'admin'],function () {
     Route::post("/news/deletes",'NewsController@softDeletes')->name('newsSoftDeletes');
     //新闻图片上传
     Route::post('/news/upload/img','NewsController@uploadImg')->name('uploadNewsImg');
+    //新闻封面图片上传
+    Route::post('/news/upload/cover','NewsController@uploadCover')->name('uploadNewsCover');
 });

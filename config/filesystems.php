@@ -68,6 +68,11 @@ return [
             'driver' => 'local',
             'root' => public_path('uploads/news/img'),
         ],
+        // 新建一个本地端newsCover空间（目录） 用于存储新闻上传的封面
+        'newsCover' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/news/cover'),
+        ],
 
 
         'public' => [

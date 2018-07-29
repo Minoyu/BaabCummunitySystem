@@ -19,3 +19,18 @@
     height: 28px;
     padding: 0 8px;
 }
+
+.admin-editor-text{
+    min-height: 300px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+.admin-editor-middle-bar{
+    padding: 5px 0;
+    color: #6d6d6d;
+}
+.admin-editor-toolbar{
+    padding: 5px 0;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}

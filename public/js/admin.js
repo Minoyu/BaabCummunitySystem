@@ -5,19 +5,19 @@ function createNewsCategorySubmit() {
     tmpStatusInput.appendTo('#createNewsCategoryForm');
     $$('#createNewsCategoryForm').submit();
 }
-//创建暂存按钮
+//创建新闻分类暂存按钮
 function saveNewsCategorySubmit() {
     var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
     tmpStatusInput.appendTo('#createNewsCategoryForm');
     $$('#createNewsCategoryForm').submit();
 }
-//编辑提交按钮
+//编辑新闻分类提交按钮
 function editNewsCategorySubmit() {
     var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
     tmpStatusInput.appendTo('#editNewsCategoryForm');
     $$('#editNewsCategoryForm').submit();
 }
-//编辑暂存按钮
+//编辑新闻分类暂存按钮
 function editSaveNewsCategorySubmit() {
     var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
     tmpStatusInput.appendTo('#editNewsCategoryForm');
@@ -174,9 +174,10 @@ function deleteNewsCategories() {
     });
 }
 
+//新闻编辑器
 var E = window.wangEditor;
-if ($$('#newsEditor').length>0){
-    var editor = new E('#newsEditor');
+if ($$('#newsEditorToolbar').length>0){
+    var editor = new E('#newsEditorToolbar','#newsEditorText');
     var textArea = $$('#newsContentTextArea');
     editor.customConfig.onchange = function (html) {
         // 监控变化，同步更新到 textarea
@@ -202,4 +203,78 @@ if ($$('#newsEditor').length>0){
     editor.create();
     // 初始化 textarea 的值
     textArea.val(editor.txt.html());
+}
+
+/**
+ * 处理新闻封面上传
+ * @param obj
+ * @param className
+ */
+function handleNewsCoverUpdate(obj,className) {
+    var coverImg = $$('.'+className);
+    var coverInput = $$('input[name="cover_img"]');
+    var cover = obj.files[0];
+    var id = $$('input[name="userId"]').val();
+
+    var form = new FormData();
+    form.append('cover',cover);
+    $$.ajax({
+        method: 'POST',
+        url: '/admin/news/upload/cover',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: form,
+        contentType: false, //禁止设置请求类型
+        processData: false, //禁止jquery对DAta数据的处理,默认会处理
+        //禁止的原因是,FormData已经帮我们做了处理
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status===1){
+                coverImg.attr('src',data.src);
+                coverInput.val(data.src);
+                mdui.snackbar({
+                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
+                    position:'top'
+                });
+            }
+        }
+    });
+
+}
+//新闻失效日期选择
+if ($$('#selInvalidedAt').length>0){
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#selInvalidedAt', //指定元素
+            type:'datetime',
+            lang: 'en'
+        });
+    });
+}
+
+function createNewsSubmit() {
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
+    tmpStatusInput.appendTo('#createNewsForm');
+    $$('#createNewsForm').submit();
+}
+//创建新闻暂存按钮
+function saveNewsSubmit() {
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
+    tmpStatusInput.appendTo('#createNewsForm');
+    $$('#createNewsForm').submit();
+}
+//编辑新闻提交按钮
+function editNewsSubmit() {
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
+    tmpStatusInput.appendTo('#editNewsForm');
+    $$('#editNewsForm').submit();
+}
+//编辑新闻暂存按钮
+function editSaveNewsSubmit() {
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
+    tmpStatusInput.appendTo('#editNewsForm');
+    $$('#editNewsForm').submit();
 }
