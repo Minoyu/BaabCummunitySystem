@@ -16,4 +16,7 @@ class News extends Model
     public function newsCategory(){
         return $this->belongsTo(NewsCategory::class);
     }
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

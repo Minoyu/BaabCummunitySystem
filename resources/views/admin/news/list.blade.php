@@ -21,8 +21,8 @@
             </thead>
             <tbody>
             @foreach($newses as $news)
-                <tr class="mdui-table-row" id="{{$news->id}}" name="{{$news->name}}">
-                    <td>@if($news->status=='hidden')<span class="mdui-text-color-pink">[<i class="mdui-icon material-icons">local_cafe</i>暂存] </span>@endif {{$news->name}}</td>
+                <tr class="mdui-table-row" id="{{$news->id}}" name="{{$news->title}}">
+                    <td>@if($news->status=='hidden')<span class="mdui-text-color-pink">[<i class="mdui-icon material-icons">local_cafe</i>暂存] </span>@endif {{$news->title}}</td>
                     <td>{{$news->id}}</td>
                     <td>{{$news->user->name}}</td>
                     <td>{{$news->view_count}}</td>

@@ -33,7 +33,37 @@ class NewsController extends Controller
         return view('admin.news.create',compact('newsCategories'));
     }
     public function store(){
+        $status = \request('status');
+        //发布验证 暂存不验证
+//        if($status=='public') {
+            //验证
+        $this->validate(\request(), [
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+//        }
+        //逻辑
+        $title = \request('title');
+        $content = \request('content');
+        $cover_img = \request('cover_img');
+        $news_category_id = \request('news_category_id');
+        $order = \request('order');
+        $user_id = Auth::id();
+        $data = compact('title','content','cover_img','user_id','news_category_id','order','status');
 
+//        dd($data);
+        $res=News::create($data);
+
+        //渲染
+        if ($res) {
+            if ($status == 'public') {
+                return \redirect()->back()->with('tips', ['新闻' . $title . '创建成功',]);
+            } else {
+                return \redirect()->back()->with('tips', ['新闻' . $title . '暂存成功',]);
+            }
+        }else{
+            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+        }
     }
     public function adminEditShow(){
 
