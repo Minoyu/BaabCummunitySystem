@@ -278,3 +278,122 @@ function editSaveNewsSubmit() {
     tmpStatusInput.appendTo('#editNewsForm');
     $$('#editNewsForm').submit();
 }
+
+/**
+ * 删除新闻
+ * @param catId
+ * @param catName
+ */
+function deleteNews(newsId,newsTitle) {
+    mdui.dialog({
+        title: '删除新闻',
+        content: '您确定要删除此新闻吗<br/>'+newsTitle,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/news/delete',
+                        data: {
+                            id:newsId
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data)
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+/**
+ * 批量删除新闻
+ */
+function deleteNewses() {
+    //获取选中对象数组
+    var ids=getSelectedIds();
+    var titles=getSelectedNames();
+    //弹出确认对话框
+    mdui.dialog({
+        title: '批量删除新闻',
+        content: '您确定要删除我们吗<br/>'+titles,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/news/deletes',
+                        data: {
+                            ids:ids
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data=JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'OK',
+                                    buttonColor:'pink',
+                                    onButtonClick: function(){
+                                        window.location.reload();//页面刷新
+                                    }
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}

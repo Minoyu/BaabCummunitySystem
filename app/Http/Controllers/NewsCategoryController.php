@@ -95,12 +95,12 @@ class NewsCategoryController extends Controller
         //渲染
         if ($res) {
             if ($status == 'public') {
-                return \redirect()->back()->with('tips', ['新闻分类' . $name . '创建成功',]);
+                return \redirect()->back()->with('tips', ['新闻分类' . $name . '编辑成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['新闻分类' . $name . '暂存成功',]);
             }
         }else{
-            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
         }
 
     }

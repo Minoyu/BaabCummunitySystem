@@ -29,13 +29,13 @@
                     <td>{{$news->replay_count}}</td>
                     <td>{{$news->order}}</td>
                     <td>
-                        <a href="{{route('adminNewsEdit',$news->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
-                            <i class="mdui-icon material-icons mdui-icon-left">edit</i>查看
+                        <a href="#" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
+                            <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>查看
                         </a>
                         <a href="{{route('adminNewsEdit',$news->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
                         </a>
-                        <button onclick="deleteNewsCategory('{{$news->id}}','{{$news->name}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
+                        <button onclick="deleteNews('{{$news->id}}','{{$news->title}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
                             <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
                         </button>
                     </td>
@@ -45,7 +45,7 @@
         </table>
     </div>
     {{$newses->links()}}
-    <button onclick="deleteNewsCategories()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">delete</i>批量删除</button>
+    <button onclick="deleteNewses()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">delete</i>批量删除</button>
 
     <!--/内容-->
 

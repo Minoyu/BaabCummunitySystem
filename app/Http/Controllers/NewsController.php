@@ -65,18 +65,83 @@ class NewsController extends Controller
             return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
         }
     }
-    public function adminEditShow(){
+    public function adminEditShow(News $news){
+        $newsCategories = NewsCategory::all();
+        return view('admin.news.edit',compact('news','newsCategories'));
+    }
+    public function update(News $news){
+        $status = \request('status');
+        //发布验证 暂存不验证
+//        if($status=='public') {
+        //验证
+        $this->validate(\request(), [
+            'title' => 'required',
+            'content' => 'required',
+        ]);
+//        }
+        //逻辑
+        $title = \request('title');
+        $content = \request('content');
+        $cover_img = \request('cover_img');
+        $news_category_id = \request('news_category_id');
+        $order = \request('order');
+        $user_id = Auth::id();
+        $data = compact('title','content','cover_img','user_id','news_category_id','order','status');
+
+//        dd($data);
+        $res=News::where('id',$news->id)->update($data);
+
+        //渲染
+        if ($res) {
+            if ($status == 'public') {
+                return \redirect()->back()->with('tips', ['新闻' . $title . '编辑成功',]);
+            } else {
+                return \redirect()->back()->with('tips', ['新闻' . $title . '暂存成功',]);
+            }
+        }else{
+            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+        }
 
     }
-    public function update(){
+
+    /* 删除行为
+     * @param Request $companyId
+     * @return int 1 success 0 failed
+     */
+    public function softDelete(Request $request){
+        $news = News::where('id',$request->id)->first();
+        $news->delete();
+        if($news->trashed()){
+            $status = 1;
+            $msg = "The news has been deleted";
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+        }
+        return json_encode(compact('status','msg'));//ajax
 
     }
-    public function softDelete(){
 
-    }
-    public function softDeletes(){
 
+    public function softDeletes(Request $request){
+        $failedCount=0;
+        for($i=0;$i<count($request->ids);$i++){
+            $news = News::where('id',$request->ids[$i])->first();
+            $news->delete();
+            if(!$news->trashed()){
+                $failedCount++;
+            }
+        }
+        if($failedCount==0){
+            $status = 1;
+            $msg = "The selected news has been deleted";
+        }else{
+            $status = 0;
+            $msg = $failedCount."Server internal error";
+        }
+        return json_encode(compact('status','msg'));//ajax
     }
+
 
     /**
      * uploadImg
