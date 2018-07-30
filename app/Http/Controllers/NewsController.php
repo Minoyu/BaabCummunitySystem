@@ -25,7 +25,7 @@ class NewsController extends Controller
 
 
     public function adminListShow(){
-        $newses=News::paginate(10);
+        $newses=News::orderBy('order','desc')->paginate(10);
         return view('admin.news.list',compact('newses'));
     }
     public function adminCreateShow(){
@@ -48,8 +48,9 @@ class NewsController extends Controller
         $cover_img = \request('cover_img');
         $news_category_id = \request('news_category_id');
         $order = \request('order');
+        $invalided_at = \request('invalided_at');
         $user_id = Auth::id();
-        $data = compact('title','content','cover_img','user_id','news_category_id','order','status');
+        $data = compact('title','content','cover_img','user_id','news_category_id','order','invalided_at','status');
 
 //        dd($data);
         $res=News::create($data);
@@ -85,8 +86,9 @@ class NewsController extends Controller
         $cover_img = \request('cover_img');
         $news_category_id = \request('news_category_id');
         $order = \request('order');
+        $invalided_at = \request('invalided_at');
         $user_id = Auth::id();
-        $data = compact('title','content','cover_img','user_id','news_category_id','order','status');
+        $data = compact('title','content','cover_img','user_id','news_category_id','order','invalided_at','status');
 
 //        dd($data);
         $res=News::where('id',$news->id)->update($data);
@@ -140,6 +142,15 @@ class NewsController extends Controller
             $msg = $failedCount."Server internal error";
         }
         return json_encode(compact('status','msg'));//ajax
+    }
+
+    public function turnUpOrder(News $news){
+        $news->increment('order');
+        return \redirect()->back()->with('tips', ['优先级已自增1']);
+    }
+    public function turnDownOrder(News $news){
+        $news->decrement('order');
+        return \redirect()->back()->with('tips', ['优先级已自减1']);
     }
 
 

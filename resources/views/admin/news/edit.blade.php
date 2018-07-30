@@ -31,26 +31,26 @@
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.编辑新闻内容</h3>
             <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="newsEditorToolbar"></div>
             <div class="admin-editor-middle-bar">编辑区域</div>
-            <div id="newsEditorText" class="admin-editor-text mdui-hoverable" ><p>在此添加新闻内容</p></div>
+            <div id="newsEditorText" class="admin-editor-text mdui-hoverable" >{!!$news->content!!}</div>
             <textarea id="newsContentTextArea" name="content" class="mdui-hidden"></textarea>
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.封面图片
             <br><small class="show-file-title-sub">点击下方图片上传,留空则无封面</small></h3>
             <label for="newsCoverUploadInput">
-                <img src="/imgs/default_news_cover.png" class="avatar mdui-hoverable newsCover" style="width: 300px; height: 200px">
+                <img src="{{$news->cover_img}}" class="avatar mdui-hoverable newsCover" style="width: 300px; height: 200px">
             </label>
             <input class="mdui-hidden" id="newsCoverUploadInput" type="file" onchange="handleNewsCoverUpdate(this,'newsCover')" accept="image/jpeg,image/png">
-            <input class="mdui-hidden" type="text" name="cover_img">
+            <input class="mdui-hidden" value="{{$news->cover_img}}" type="text" name="cover_img">
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">5.失效日期
             <br><small class="show-file-title-sub">超过失效日期的文章将不在列表中显示，留空则不设置失效日期</small></h3>
-            <input type="text" class="layui-input" name="invalided_at" style="max-width: 300px" id="selInvalidedAt">
+            <input type="text" class="layui-input" name="invalided_at" style="max-width: 300px" value="{{$news->invalided_at}}" id="selInvalidedAt">
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">6.优先级
-            <br><small class="show-file-title-sub">优先级范围0-50，从左到右递增，默认为0</small>
+            <br><small class="show-file-title-sub">优先级范围0-20，从左到右递增，推荐默认为0</small>
             <br><small class="show-file-title-sub">文章将先依照优先级排序，相同优先级下依照发布时间排序</small></h3>
             <label class="mdui-slider mdui-slider-discrete">
-                <input type="range" step="1" min="0" max="50" value="0" name="order"/>
+                <input type="range" step="1" min="0" max="20" value="{{$news->order}}" name="order"/>
             </label>
 
             <div class="mdui-divider" style="margin-top: 50px"></div>

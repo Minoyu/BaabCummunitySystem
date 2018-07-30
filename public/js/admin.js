@@ -397,3 +397,5 @@ function deleteNewses() {
         ]
     });
 }
+
+

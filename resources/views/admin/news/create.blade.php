@@ -43,10 +43,10 @@
             <input type="text" class="layui-input" name="invalided_at" style="max-width: 300px" id="selInvalidedAt">
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">6.优先级
-            <br><small class="show-file-title-sub">优先级范围0-50，从左到右递增，默认为0</small>
+            <br><small class="show-file-title-sub">优先级范围0-20，从左到右递增，推荐默认为0</small>
             <br><small class="show-file-title-sub">文章将先依照优先级排序，相同优先级下依照发布时间排序</small></h3>
             <label class="mdui-slider mdui-slider-discrete">
-                <input type="range" step="1" min="0" max="50" value="0" name="order"/>
+                <input type="range" step="1" min="0" max="20" value="0" name="order"/>
             </label>
 
             <div class="mdui-divider" style="margin-top: 50px"></div>

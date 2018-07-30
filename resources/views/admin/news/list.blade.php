@@ -38,6 +38,23 @@
                         <button onclick="deleteNews('{{$news->id}}','{{$news->title}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
                             <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
                         </button>
+                        <br>
+                        @php
+                            $canTurnUpOrder = false;
+                            $canTurnDownOrder = false;
+                            if ($news->order>=0&&$news->order<20){
+                                $canTurnUpOrder= true;
+                            }
+                            if ($news->order>0&&$news->order<=20){
+                                $canTurnDownOrder= true;
+                            }
+                        @endphp
+                        <a @if($canTurnUpOrder) href="{{route('newsTurnUpNewsOrder',$news->id)}}" @endif class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-deep-orange" @if(!$canTurnUpOrder) disabled @endif>
+                            <i class="mdui-icon material-icons mdui-icon-left">arrow_upward</i>提高优先级
+                        </a>
+                        <a @if($canTurnDownOrder) href="{{route('newsTurnDownNewsOrder',$news->id)}}" @endif class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-blue" @if(!$canTurnDownOrder) disabled @endif>
+                            <i class="mdui-icon material-icons mdui-icon-left">arrow_downward</i>降低优先级
+                        </a>
                     </td>
                 </tr>
             @endforeach
