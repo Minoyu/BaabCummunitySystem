@@ -16,7 +16,7 @@
                 <th class="mdui-table-col-numeric">回复数</th>
                 <th class="mdui-table-col-numeric">浏览量</th>
                 <th class="mdui-table-col-numeric">优先级</th>
-                <th class="mdui-table-col-numeric">操作</th>
+                <th style="min-width: 275px" class="mdui-table-col-numeric">操作</th>
             </tr>
             </thead>
             <tbody>

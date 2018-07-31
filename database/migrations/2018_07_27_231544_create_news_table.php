@@ -25,7 +25,7 @@ class CreateNewsTable extends Migration
             $table->integer('order')->default(0)->comment('排序');
             $table->string('status')->default('publish')->comment('status:{"publish":"公开","hidden":"隐藏/浏览"}');
             $table->timestamps();
-            $table->timestamp('invalided_at')->nullable()>comment('失效时间');
+            $table->timestamp('invalided_at')->nullable()->comment('失效时间');
             $table->softDeletes();
         });
     }

@@ -193,6 +193,7 @@ function loginSubmit() {
                 $$('#loginForm').addClass('mdui-hidden');
                 $$('.dialog-top-tip-button').addClass('mdui-hidden');
                 $$('.username').text(data.user.name);
+                $$('.personalCenterUrl').attr('href','/user/'+data.user.id);
                 console.log(data.user.name);
                 $$('#loginSuccessful').removeClass('mdui-hidden');
                 loginDialog.handleUpdate();

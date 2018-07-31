@@ -37,7 +37,7 @@
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.封面图片
             <br><small class="show-file-title-sub">点击下方图片上传,留空则无封面</small></h3>
             <label for="newsCoverUploadInput">
-                <img src="{{$news->cover_img}}" class="avatar mdui-hoverable newsCover" style="width: 300px; height: 200px">
+                <img @if($news->cover_img) src="{{$news->cover_img}}" @else src="/imgs/default_news_cover.png" @endif class="avatar mdui-hoverable newsCover" style="width: 300px; height: 200px">
             </label>
             <input class="mdui-hidden" id="newsCoverUploadInput" type="file" onchange="handleNewsCoverUpdate(this,'newsCover')" accept="image/jpeg,image/png">
             <input class="mdui-hidden" value="{{$news->cover_img}}" type="text" name="cover_img">

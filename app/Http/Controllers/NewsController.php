@@ -13,8 +13,10 @@ use Intervention\Image\Facades\Image;
 class NewsController extends Controller
 {
     //
+
     public function showNews(){
-        return view('news');
+        $newsCategories = NewsCategory::all();
+        return view('news',compact('newsCategories'));
     }
     public function showNewsSec(){
         return view('news-sec');
