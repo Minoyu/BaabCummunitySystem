@@ -13,8 +13,8 @@
                 <th>新闻名称</th>
                 <th class="mdui-table-col-numeric">ID</th>
                 <th class="mdui-table-col-numeric">发布者</th>
-                <th class="mdui-table-col-numeric">回复数</th>
                 <th class="mdui-table-col-numeric">浏览量</th>
+                <th class="mdui-table-col-numeric">回复量</th>
                 <th class="mdui-table-col-numeric">优先级</th>
                 <th style="min-width: 275px" class="mdui-table-col-numeric">操作</th>
             </tr>
@@ -26,7 +26,11 @@
                     <td>{{$news->id}}</td>
                     <td>{{$news->user->name}}</td>
                     <td>{{$news->view_count}}</td>
-                    <td>{{$news->replay_count}}</td>
+                    <td>
+                        <a href="{{route('adminNewsReplyList',$news->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense mdui-color-indigo-400 admin-table-btn">
+                            <i class="mdui-icon material-icons mdui-icon-left">comment</i>{{$news->replay_count}}
+                        </a>
+                    </td>
                     <td>{{$news->order}}</td>
                     <td>
                         <a href="#" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">

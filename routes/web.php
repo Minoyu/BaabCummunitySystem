@@ -68,6 +68,15 @@ Route::group(['prefix'=>'admin'],function () {
     Route::get("/news/{news}/up/order",'NewsController@turnUpOrder')->name('newsTurnUpNewsOrder');
     Route::get("/news/{news}/down/order",'NewsController@turnDownOrder')->name('newsTurnDownNewsOrder');
 
+    //新闻回复管理模块
+    Route::get("/news/{news}/reply",'NewsReplyController@adminListShow')->name('adminNewsReplyList');
+    Route::get("/news/{news}/reply/create",'NewsReplyController@adminCreateShow')->name('adminNewsReplyCreate');
+    Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('adminNewsReplyStore');
+    Route::get("/news/{news}/reply/{reply}/edit",'NewsReplyController@adminEditShow')->name('adminNewsReplyEdit');
+    Route::post("/news/{news}/reply/{reply}/update",'NewsReplyController@update')->name('adminNewsReplyUpdate');
+    Route::post("/news/reply/delete",'NewsReplyController@softDelete')->name('newsReplySoftDelete');
+    Route::post("/news/reply/deletes",'NewsReplyController@softDeletes')->name('newsReplySoftDeletes');
+
     //新闻图片上传
     Route::post('/news/upload/img','NewsController@uploadImg')->name('uploadNewsImg');
     //新闻封面图片上传

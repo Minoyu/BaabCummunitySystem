@@ -18,6 +18,8 @@ class CreateNewsRepliesTable extends Migration
             $table->text('content');
             $table->integer('user_id')->unsigned();
             $table->integer('news_id')->unsigned();
+            $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
         });
