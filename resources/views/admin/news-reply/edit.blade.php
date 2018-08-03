@@ -3,7 +3,7 @@
 @section('subtitleUrl',route('adminNewsReplyList',$news->id))
 
 @section('content')
-    <form id="createNewsReplyForm" method="post" action="{{route('adminNewsReplyStore',$news->id)}}">
+    <form id="editNewsReplyForm" method="post" action="{{route('adminNewsReplyUpdate',[$news->id,$reply->id])}}">
         {{csrf_field()}}
         <h3 class="admin-title mdui-text-color-indigo">{{str_limit($news->title, $limit = 30, $end = '...')}}－编辑回复</h3>
         @include('admin.layout.msg')

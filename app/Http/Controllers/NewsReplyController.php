@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Auth;
 class NewsReplyController extends Controller
 {
     //
+    public function adminListShowAll(){
+        $replies=NewsReply::paginate(20);
+        return view('admin.news-reply.all-list',compact('replies'));
+    }
     public function adminListShow(News $news){
         $replies=$news->replies()->paginate(15);
         return view('admin.news-reply.list',compact('news','replies'));
@@ -31,44 +35,29 @@ class NewsReplyController extends Controller
 
         //渲染
         if ($res) {
+            $news->increment('reply_count');
             return \redirect()->back()->with('tips', ['回复创建成功',]);
         }else{
             return \redirect()->back()->withErrors('创建失败,服务器内部错误,请联系管理员');
         }
     }
-    public function adminEditShow(News $news,NewsReply $newsReply){
-        return view('admin.news-reply.edit',compact('news','newsReply'));
+    public function adminEditShow(News $news,NewsReply $reply){
+        return view('admin.news-reply.edit',compact('news','reply'));
     }
-    public function update(News $news){
-        $status = \request('status');
-        //发布验证 暂存不验证
-//        if($status=='public') {
+    public function update(News $news,NewsReply $reply){
         //验证
         $this->validate(\request(), [
-            'title' => 'required',
-            'content' => 'required',
+            'content' => 'required|min:2',
         ]);
-//        }
         //逻辑
-        $title = \request('title');
         $content = \request('content');
-        $cover_img = \request('cover_img');
-        $news_category_id = \request('news_category_id');
-        $order = \request('order');
-        $invalided_at = \request('invalided_at');
-        $user_id = Auth::id();
-        $data = compact('title','content','cover_img','user_id','news_category_id','order','invalided_at','status');
+        $data = compact('content');
 
-//        dd($data);
-        $res=News::where('id',$news->id)->update($data);
+        $res=NewsReply::where('id',$reply->id)->update($data);
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
-                return \redirect()->back()->with('tips', ['新闻' . $title . '编辑成功',]);
-            } else {
-                return \redirect()->back()->with('tips', ['新闻' . $title . '暂存成功',]);
-            }
+            return \redirect()->back()->with('tips', ['回复编辑成功',]);
         }else{
             return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
         }
@@ -80,11 +69,12 @@ class NewsReplyController extends Controller
      * @return int 1 success 0 failed
      */
     public function softDelete(Request $request){
-        $news = News::where('id',$request->id)->first();
-        $news->delete();
-        if($news->trashed()){
+        $newsReply = NewsReply::where('id',$request->id)->first();
+        $newsReply->delete();
+        if($newsReply->trashed()){
+            $newsReply->news()->decrement('reply_count');
             $status = 1;
-            $msg = "The news has been deleted";
+            $msg = "The reply has been deleted";
         }else{
             $status = 0;
             $msg = "Server internal error";
@@ -97,15 +87,17 @@ class NewsReplyController extends Controller
     public function softDeletes(Request $request){
         $failedCount=0;
         for($i=0;$i<count($request->ids);$i++){
-            $news = News::where('id',$request->ids[$i])->first();
-            $news->delete();
-            if(!$news->trashed()){
+            $newsReply = NewsReply::where('id',$request->ids[$i])->first();
+            $newsReply->delete();
+            if(!$newsReply->trashed()){
                 $failedCount++;
+            }else{
+                $newsReply->news()->decrement('reply_count');
             }
         }
         if($failedCount==0){
             $status = 1;
-            $msg = "The selected news has been deleted";
+            $msg = "The selected replies has been deleted";
         }else{
             $status = 0;
             $msg = $failedCount."Server internal error";

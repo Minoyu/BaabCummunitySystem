@@ -28,7 +28,7 @@
                     <td>{{$news->view_count}}</td>
                     <td>
                         <a href="{{route('adminNewsReplyList',$news->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense mdui-color-indigo-400 admin-table-btn">
-                            <i class="mdui-icon material-icons mdui-icon-left">comment</i>{{$news->replay_count}}
+                            <i class="mdui-icon material-icons mdui-icon-left">comment</i>{{$news->reply_count}}
                         </a>
                     </td>
                     <td>{{$news->order}}</td>

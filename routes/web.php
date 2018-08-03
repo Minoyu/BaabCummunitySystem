@@ -69,6 +69,7 @@ Route::group(['prefix'=>'admin'],function () {
     Route::get("/news/{news}/down/order",'NewsController@turnDownOrder')->name('newsTurnDownNewsOrder');
 
     //新闻回复管理模块
+    Route::get("/news/reply/all",'NewsReplyController@adminListShowAll')->name('adminNewsReplyAllList');
     Route::get("/news/{news}/reply",'NewsReplyController@adminListShow')->name('adminNewsReplyList');
     Route::get("/news/{news}/reply/create",'NewsReplyController@adminCreateShow')->name('adminNewsReplyCreate');
     Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('adminNewsReplyStore');
