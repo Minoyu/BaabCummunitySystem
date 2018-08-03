@@ -14,6 +14,7 @@
                 <th class="mdui-table-col-numeric">ID</th>
                 <th class="mdui-table-col-numeric">介绍</th>
                 <th class="mdui-table-col-numeric">新闻数</th>
+                <th class="mdui-table-col-numeric">优先级</th>
                 <th class="mdui-table-col-numeric">操作</th>
             </tr>
             </thead>
@@ -24,6 +25,7 @@
                     <td>{{$newsCategory->id}}</td>
                     <td>{{$newsCategory->description}}</td>
                     <td>{{$newsCategory->news_count}}</td>
+                    <td>{{$newsCategory->order}}</td>
                     <td>
                         <a href="{{route('adminNewsCategoriesEdit',$newsCategory->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
@@ -31,6 +33,24 @@
                         <button onclick="deleteNewsCategory('{{$newsCategory->id}}','{{$newsCategory->name}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
                             <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
                         </button>
+                        <br>
+                        @php
+                            $canTurnUpOrder = false;
+                            $canTurnDownOrder = false;
+                            if ($newsCategory->order>=0&&$newsCategory->order<20){
+                                $canTurnUpOrder= true;
+                            }
+                            if ($newsCategory->order>0&&$newsCategory->order<=20){
+                                $canTurnDownOrder= true;
+                            }
+                        @endphp
+                        <a @if($canTurnUpOrder) href="{{route('newsCategoryTurnUpNewsOrder',$newsCategory->id)}}" @endif class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-deep-orange" @if(!$canTurnUpOrder) disabled @endif>
+                            <i class="mdui-icon material-icons mdui-icon-left">arrow_upward</i>提高优先级
+                        </a>
+                        <a @if($canTurnDownOrder) href="{{route('newsCategoryTurnDownNewsOrder',$newsCategory->id)}}" @endif class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-blue" @if(!$canTurnDownOrder) disabled @endif>
+                            <i class="mdui-icon material-icons mdui-icon-left">arrow_downward</i>降低优先级
+                        </a>
+
                     </td>
                 </tr>
             @endforeach

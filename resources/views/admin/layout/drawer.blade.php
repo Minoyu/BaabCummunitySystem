@@ -1,7 +1,7 @@
 <div class="mdui-drawer drawer-padding-top" id="admin-drawer">
-    <ul class="mdui-list drawer-menu mdui-color-white" id="adminDrawerMenu" mdui-collapse>
+    <ul class="mdui-list drawer-menu mdui-color-white" id="adminDrawerMenu" mdui-collapse="{accordion:true}">
 
-        <li class="mdui-collapse-item mdui-panel-item-open">
+        <li class="mdui-collapse-item mdui-collapse-item-open">
             <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
                 <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">settings</i>
                 <div class="mdui-list-item-content">新闻管理</div>
@@ -13,6 +13,22 @@
                 </a>
                 <a href="{{route('adminNewsCreate')}}">
                     <li class="mdui-list-item mdui-ripple">创建新闻</li>
+                </a>
+            </ul>
+        </li>
+
+        <li class="mdui-collapse-item">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">settings</i>
+                <div class="mdui-list-item-content">新闻分类管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a href="{{route('adminNewsCategoriesList')}}">
+                    <li class="mdui-list-item mdui-ripple">新闻分类列表</li>
+                </a>
+                <a href="{{route('adminNewsCategoriesCreate')}}">
+                    <li class="mdui-list-item mdui-ripple">创建新闻分类</li>
                 </a>
             </ul>
         </li>

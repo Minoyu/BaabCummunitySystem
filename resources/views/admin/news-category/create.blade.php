@@ -31,7 +31,12 @@
                 </div>
             </div>
 
-
+            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.优先级
+                <br><small class="show-file-title-sub">优先级范围0-20，从左到右递增，推荐默认为0</small>
+                <br><small class="show-file-title-sub">分类将先依照优先级排序，相同优先级下依照发布时间排序</small></h3>
+            <label class="mdui-slider mdui-slider-discrete">
+                <input type="range" step="1" min="0" max="20" name="order"/>
+            </label>
 
             <div class="mdui-divider" style="margin-top: 50px"></div>
             <button onclick="createNewsCategorySubmit()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>发布</button>

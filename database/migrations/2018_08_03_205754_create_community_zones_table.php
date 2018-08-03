@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNewsCategoriesTable extends Migration
+class CreateCommunityZonesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateNewsCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('news_categories', function (Blueprint $table) {
+        Schema::create('community_zones', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->index()->comment('名称');
             $table->text('description')->nullable()->comment('描述');
             $table->string('icon')->default('send')->comment('MD图标');
             $table->integer('news_count')->unsigned()->default(0)->comment('分类下新闻数');
-            $table->integer('order')->default(0)->comment('排序');
             $table->string('status')->default('publish')->comment('status:{"publish":"公开","hidden":"隐藏/浏览"}');
             $table->softDeletes();
             $table->timestamps();
@@ -33,6 +32,6 @@ class CreateNewsCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_categories');
+        Schema::dropIfExists('community_zones');
     }
 }

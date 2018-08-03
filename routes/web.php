@@ -56,6 +56,8 @@ Route::group(['prefix'=>'admin'],function () {
     Route::post("/news-category/{newsCategory}/update",'NewsCategoryController@update')->name('adminNewsCategoriesUpdate');
     Route::post("/news-category/delete",'NewsCategoryController@softDelete')->name('newsCategorySoftDelete');
     Route::post("/news-category/deletes",'NewsCategoryController@softDeletes')->name('newsCategoriesSoftDeletes');
+    Route::get("/news-category/{newsCategory}/up/order",'NewsCategoryController@turnUpOrder')->name('newsCategoryTurnUpNewsOrder');
+    Route::get("/news-category/{newsCategory}/down/order",'NewsCategoryController@turnDownOrder')->name('newsCategoryTurnDownNewsOrder');
 
     //新闻管理模块
     Route::get("/news",'NewsController@adminListShow')->name('adminNewsList');

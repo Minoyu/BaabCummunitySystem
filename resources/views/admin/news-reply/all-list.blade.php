@@ -11,7 +11,6 @@
             <tr>
                 <th>内容</th>
                 <th class="mdui-table-col-numeric">来自新闻</th>
-                <th class="mdui-table-col-numeric">ID</th>
                 <th class="mdui-table-col-numeric">用户</th>
                 <th class="mdui-table-col-numeric">回复时间</th>
                 <th style="min-width: 275px" class="mdui-table-col-numeric">操作</th>
@@ -26,7 +25,6 @@
                             {{str_limit($reply->news->title , $limit = 30, $end = '...')}}
                         </a>
                     </td>
-                    <td>{{$reply->id}}</td>
                     <td>{{$reply->user->name}}</td>
                     <td>{{$reply->created_at}}</td>
                     <td>

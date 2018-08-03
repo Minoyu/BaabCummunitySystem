@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "760cd5770003703e0ee2929ec3215186",
+    "content-hash": "46d574e26786c136ef024fe9f76784fe",
     "packages": [
         {
             "name": "barryvdh/laravel-ide-helper",
@@ -1012,6 +1012,52 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "jiaxincui/closure-table",
+            "version": "2.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jiaxincui/closure-table.git",
+                "reference": "fba86702dac047186c085858ba963965ad68ba0c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jiaxincui/closure-table/zipball/fba86702dac047186c085858ba963965ad68ba0c",
+                "reference": "fba86702dac047186c085858ba963965ad68ba0c",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jiaxincui\\ClosureTable\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "jiaxincui",
+                    "email": "jenkincei@hotmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A closure table tree package for laravel eloquent",
+            "keywords": [
+                "closure-table",
+                "eloquent",
+                "laravel",
+                "laravel-tree",
+                "tree"
+            ],
+            "time": "2018-07-11T12:03:21+00:00"
         },
         {
             "name": "laravel/framework",

@@ -44,7 +44,8 @@ class NewsCategoryController extends Controller
         $name = \request('name');
         $description = \request('description');
         $icon = \request('icon');
-        $data = compact('name','description','icon','status');
+        $order = \request('order');
+        $data = compact('name','description','order','icon','status');
 
         $res=NewsCategory::create($data);
 
@@ -88,7 +89,8 @@ class NewsCategoryController extends Controller
         $name = \request('name');
         $description = \request('description');
         $icon = \request('icon');
-        $data = compact('name','description','icon','status');
+        $order = \request('order');
+        $data = compact('name','description','icon','order','status');
 
         $res=NewsCategory::where('id',$newsCategory->id)->update($data);
 
@@ -155,5 +157,13 @@ class NewsCategoryController extends Controller
         return json_encode(compact('status','msg'));//ajax
     }
 
+    public function turnUpOrder(NewsCategory $newsCategory){
+        $newsCategory->increment('order');
+        return \redirect()->back()->with('tips', ['优先级已自增1']);
+    }
+    public function turnDownOrder(NewsCategory $newsCategory){
+        $newsCategory->decrement('order');
+        return \redirect()->back()->with('tips', ['优先级已自减1']);
+    }
 
 }
