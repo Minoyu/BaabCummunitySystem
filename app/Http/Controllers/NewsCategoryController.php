@@ -32,20 +32,23 @@ class NewsCategoryController extends Controller
      */
     public function store(){
         $status = \request('status');
-        //发布验证 暂存不验证
-        if($status=='public') {
-            //验证
-            $this->validate(\request(), [
-                'name' => 'required',
-                'description' => 'required',
-            ]);
-        }
+        //验证
+        $this->validate(\request(), [
+            'name' => 'required',
+            'description' => 'required',
+        ]);
         //逻辑
         $name = \request('name');
         $description = \request('description');
         $icon = \request('icon');
         $order = \request('order');
-        $data = compact('name','description','order','icon','status');
+        if ($icon!=""){
+            $data = compact('name','description','order','icon','status');
+
+        }else{
+            $data = compact('name','description','order','status');
+
+        }
 
         $res=NewsCategory::create($data);
 

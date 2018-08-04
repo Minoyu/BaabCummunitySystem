@@ -1,6 +1,7 @@
 @extends('frame.adminframe')
 @section('title','新闻分类管理')
 @section('subtitleUrl',route('adminNewsCategoriesList'))
+@section('adminDrawerActiveVal','drawer-newsCategoryItem')
 
 @section('content')
     <h3 class="admin-title mdui-text-color-indigo">新闻分类列表</h3>

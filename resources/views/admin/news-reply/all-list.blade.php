@@ -1,6 +1,7 @@
 @extends('frame.adminframe')
 @section('title','新闻回复管理')
 @section('subtitleUrl',route('adminNewsReplyAllList'))
+@section('adminDrawerActiveVal','drawer-newsReplyItem')
 
 @section('content')
     <h3 class="admin-title mdui-text-color-indigo">全站新闻回复列表</h3>

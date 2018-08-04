@@ -1,28 +1,24 @@
+//表单提交按钮
+function formPublicSubmit(formid) {
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
+    tmpStatusInput.appendTo(formid);
+    $$(formid).submit();
+}
+function formHiddenSubmit(formid) {
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
+    tmpStatusInput.appendTo(formid);
+    $$(formid).submit();
+}
+
+//后台侧边栏展开激活
+var adminDrawerMenuCollapse = new mdui.Collapse('#adminDrawerMenu',{accordion:true});
+var adminDrawerActiveVal = $$('#adminDrawerActiveVal').text();
+
+adminDrawerMenuCollapse.open('#'+adminDrawerActiveVal);
+$$('#'+adminDrawerActiveVal).addClass('mdui-list-item-active');
+
+
 //新闻分类部分
-//创建提交按钮
-function createNewsCategorySubmit() {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
-    tmpStatusInput.appendTo('#createNewsCategoryForm');
-    $$('#createNewsCategoryForm').submit();
-}
-//创建新闻分类暂存按钮
-function saveNewsCategorySubmit() {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
-    tmpStatusInput.appendTo('#createNewsCategoryForm');
-    $$('#createNewsCategoryForm').submit();
-}
-//编辑新闻分类提交按钮
-function editNewsCategorySubmit() {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
-    tmpStatusInput.appendTo('#editNewsCategoryForm');
-    $$('#editNewsCategoryForm').submit();
-}
-//编辑新闻分类暂存按钮
-function editSaveNewsCategorySubmit() {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
-    tmpStatusInput.appendTo('#editNewsCategoryForm');
-    $$('#editNewsCategoryForm').submit();
-}
 
 /**
  * 删除新闻分类
@@ -255,30 +251,6 @@ if ($$('#selInvalidedAt').length>0){
     });
 }
 
-function createNewsSubmit() {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
-    tmpStatusInput.appendTo('#createNewsForm');
-    $$('#createNewsForm').submit();
-}
-//创建新闻暂存按钮
-function saveNewsSubmit() {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
-    tmpStatusInput.appendTo('#createNewsForm');
-    $$('#createNewsForm').submit();
-}
-//编辑新闻提交按钮
-function editNewsSubmit() {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
-    tmpStatusInput.appendTo('#editNewsForm');
-    $$('#editNewsForm').submit();
-}
-//编辑新闻暂存按钮
-function editSaveNewsSubmit() {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
-    tmpStatusInput.appendTo('#editNewsForm');
-    $$('#editNewsForm').submit();
-}
-
 /**
  * 删除新闻
  * @param newsId
@@ -506,6 +478,166 @@ function deleteNewsReplies() {
                                     onButtonClick: function(){
                                         window.location.reload();//页面刷新
                                     }
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
+/**
+ * 处理zone封面图上传
+ * @param obj
+ * @param className
+ */
+function handleZoneImgUpdate(obj,className) {
+    var Img = $$('.'+className);
+    var Input = $$('input[name="img_url"]');
+    var file = obj.files[0];
+
+    var form = new FormData();
+    form.append('img',file);
+    $$.ajax({
+        method: 'POST',
+        url: '/admin/community/category/zones/upload/img',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: form,
+        contentType: false, //禁止设置请求类型
+        processData: false, //禁止jquery对DAta数据的处理,默认会处理
+        //禁止的原因是,FormData已经帮我们做了处理
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status===1){
+                Img.attr('src',data.src);
+                Input.val(data.src);
+                mdui.snackbar({
+                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
+                    position:'top'
+                });
+            }
+        }
+    });
+
+}
+
+//社区分类管理页collapse
+var adminCommunityCategoryCollapse = new mdui.Collapse('#adminCommunityCategoryCollapse');
+
+function adminCommunityCatOpenAll(){
+    adminCommunityCategoryCollapse.openAll()
+}
+function adminCommunityCatCloseAll(){
+    adminCommunityCategoryCollapse.closeAll()
+}
+
+/**
+ * 删除社区zone
+ * @param zoneId
+ * @param zoneContent
+ */
+function deleteCommunityZone(zoneId,zoneContent) {
+    mdui.dialog({
+        title: '删除新闻回复',
+        content: '您确定要删除此社区分区吗<br/>'+zoneContent,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/community/category/zone/delete',
+                        data: {
+                            id:zoneId
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
+
+/**
+ * 删除社区section
+ * @param sectionId
+ * @param sectionContent
+ */
+function deleteCommunitySection(sectionId,sectionContent) {
+    mdui.dialog({
+        title: '删除新闻回复',
+        content: '您确定要删除此社区板块吗<br/>'+sectionContent,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/community/category/section/delete',
+                        data: {
+                            id:sectionId
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
                                 });
                             }
 

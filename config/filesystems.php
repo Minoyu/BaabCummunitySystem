@@ -73,6 +73,11 @@ return [
             'driver' => 'local',
             'root' => public_path('uploads/news/cover'),
         ],
+        // 新建一个本地端communityCategoryImg空间（目录） 用于存储社区分区封面图
+        'communityCategoryImg' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/community/category/img'),
+        ],
 
 
         'public' => [

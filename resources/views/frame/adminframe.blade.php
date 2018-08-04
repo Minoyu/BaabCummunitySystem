@@ -28,6 +28,9 @@
     </div>
     {{--侧边栏--}}
     @include('admin.layout.drawer')
+
+    {{--激活导航栏值--}}
+    <div id="adminDrawerActiveVal" class="mdui-hidden">@yield('adminDrawerActiveVal')</div>
     <!-- Js -->
     <script src="/layui/layui.js"></script>
     <script src="/js/mdui.min.js"></script>

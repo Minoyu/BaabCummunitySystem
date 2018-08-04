@@ -12,5 +12,10 @@ class CommunityZone extends Model
     protected $table = 'community_zones';
     protected $guarded = [];
 
-
+    public function communitySections(){
+        return $this->hasMany(CommunitySection::class,'zone_id');
+    }
+    public function communityTopics(){
+        return $this->hasMany(CommunityTopic::class,'zone_id');
+    }
 }

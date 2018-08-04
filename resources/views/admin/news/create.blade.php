@@ -1,6 +1,7 @@
 @extends('frame.adminframe')
 @section('title','新闻管理')
 @section('subtitleUrl',route('adminNewsList'))
+@section('adminDrawerActiveVal','drawer-newsItem')
 
 @section('content')
         <form id="createNewsForm" method="post" action="{{route('adminNewsStore')}}">
@@ -50,8 +51,8 @@
             </label>
 
             <div class="mdui-divider" style="margin-top: 50px"></div>
-            <button onclick="createNewsSubmit()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>发布</button>
-            <button onclick="saveNewsSubmit()" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">local_cafe</i>暂存</button>
+            <button onclick="formPublicSubmit('#createNewsForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>发布</button>
+            <button onclick="formHiddenSubmit('#createNewsForm')" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">local_cafe</i>暂存</button>
             <a href="{{route('adminNewsList')}}" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">arrow_back</i>返回</a>
             <div class="mdui-divider" style="margin-bottom: 200px"></div>
 

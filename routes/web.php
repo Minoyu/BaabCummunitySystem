@@ -84,4 +84,23 @@ Route::group(['prefix'=>'admin'],function () {
     Route::post('/news/upload/img','NewsController@uploadImg')->name('uploadNewsImg');
     //新闻封面图片上传
     Route::post('/news/upload/cover','NewsController@uploadCover')->name('uploadNewsCover');
+
+    //社区一二级分类管理模块
+    Route::get("/community/category/zones-and-sections",'CommunityCategoryController@showZonesAndSections')->name('adminCommunityZonesAndSectionsShow');
+    Route::get("/community/category/zone/create",'CommunityCategoryController@adminZoneCreateShow')->name('adminCommunityZoneCreate');
+    Route::post("/community/category/zone/store",'CommunityCategoryController@adminZoneStore')->name('adminCommunityZoneStore');
+    Route::get("/community/category/zone/{zone}/edit",'CommunityCategoryController@adminZoneEditShow')->name('adminCommunityZoneEdit');
+    Route::post("/community/category/zone/{zone}/update",'CommunityCategoryController@adminZoneUpdate')->name('adminCommunityZoneUpdate');
+    Route::post("/community/category/zone/delete",'CommunityCategoryController@zoneSoftDelete')->name('communityZoneSoftDelete');
+
+    Route::get("/community/category/section/create",'CommunityCategoryController@adminSectionCreateShow')->name('adminCommunitySectionCreate');
+    Route::post("/community/category/section/store",'CommunityCategoryController@adminSectionStore')->name('adminCommunitySectionStore');
+    Route::get("/community/category/section/{section}/edit",'CommunityCategoryController@adminSectionEditShow')->name('adminCommunitySectionEdit');
+    Route::post("/community/category/section/{section}/update",'CommunityCategoryController@adminSectionUpdate')->name('adminCommunitySectionUpdate');
+    Route::post("/community/category/section/delete",'CommunityCategoryController@sectionSoftDelete')->name('communitySectionSoftDelete');
+
+    //zone封面图片上传
+    Route::post('/community/category/zones/upload/img','CommunityCategoryController@uploadZoneImg')->name('uploadZoneImg');
+
+
 });

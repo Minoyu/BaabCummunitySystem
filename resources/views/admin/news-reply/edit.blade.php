@@ -1,6 +1,7 @@
 @extends('frame.adminframe')
 @section('title','新闻回复管理')
 @section('subtitleUrl',route('adminNewsReplyList',$news->id))
+@section('adminDrawerActiveVal','drawer-newsReplyItem')
 
 @section('content')
     <form id="editNewsReplyForm" method="post" action="{{route('adminNewsReplyUpdate',[$news->id,$reply->id])}}">
