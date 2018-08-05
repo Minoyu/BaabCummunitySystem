@@ -134,11 +134,13 @@ class CommunityTopicController extends Controller
      * @return int 1 success 0 failed
      */
     public function softDelete(Request $request){
-        $news = News::where('id',$request->id)->first();
-        $news->delete();
-        if($news->trashed()){
+        $topic = CommunityTopic::where('id',$request->id)->first();
+        $topic->delete();
+        if($topic->trashed()){
+            $topic->communityZone()->decrement('topic_count');
+            $topic->communitySection()->decrement('topic_count');
             $status = 1;
-            $msg = "The news has been deleted";
+            $msg = "The topic has been deleted";
         }else{
             $status = 0;
             $msg = "Server internal error";
@@ -151,15 +153,18 @@ class CommunityTopicController extends Controller
     public function softDeletes(Request $request){
         $failedCount=0;
         for($i=0;$i<count($request->ids);$i++){
-            $news = News::where('id',$request->ids[$i])->first();
-            $news->delete();
-            if(!$news->trashed()){
+            $topic = CommunityTopic::where('id',$request->ids[$i])->first();
+            $topic->delete();
+            if(!$topic->trashed()){
                 $failedCount++;
+            }else{
+                $topic->communityZone()->decrement('topic_count');
+                $topic->communitySection()->decrement('topic_count');
             }
         }
         if($failedCount==0){
             $status = 1;
-            $msg = "The selected news has been deleted";
+            $msg = "The selected topic has been deleted";
         }else{
             $status = 0;
             $msg = $failedCount."Server internal error";
