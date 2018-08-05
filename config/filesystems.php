@@ -68,6 +68,11 @@ return [
             'driver' => 'local',
             'root' => public_path('uploads/news/img'),
         ],
+        // 新建一个本地端newsReplyImg空间（目录） 用于存储新闻回复上传的图片
+        'newsReplyImg' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/news/reply/img'),
+        ],
         // 新建一个本地端newsCover空间（目录） 用于存储新闻上传的封面
         'newsCover' => [
             'driver' => 'local',
@@ -77,6 +82,11 @@ return [
         'communityCategoryImg' => [
             'driver' => 'local',
             'root' => public_path('uploads/community/category/img'),
+        ],
+        // 新建一个本地端communityTopicImg空间（目录） 用于存储社区话题封面图
+        'communityTopicImg' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/community/topic/img'),
         ],
 
 

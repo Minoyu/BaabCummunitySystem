@@ -26,10 +26,10 @@
             </select>
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.新闻内容</h3>
-            <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="newsEditorToolbar"></div>
+            <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="news"></div>
             <div class="admin-editor-middle-bar">编辑区域</div>
-            <div id="newsEditorText" class="admin-editor-text mdui-hoverable" ><p>在此添加新闻内容</p></div>
-            <textarea id="newsContentTextArea" name="content" class="mdui-hidden"></textarea>
+            <div id="editorText" class="admin-editor-text mdui-hoverable" ><p>在此添加新闻内容</p></div>
+            <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.封面图片
             <br><small class="show-file-title-sub">点击下方图片上传,留空则无封面</small></h3>

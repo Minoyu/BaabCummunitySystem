@@ -48,6 +48,7 @@
                 </a>
             </ul>
         </li>
+        <div class="mdui-divider"></div>
         <li class="mdui-collapse-item" id="drawer-communityCategoryItem">
             <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
                 <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">settings</i>
@@ -60,6 +61,27 @@
                 </a>
                 <a href="{{route('adminCommunityZoneCreate')}}">
                     <li class="mdui-list-item mdui-ripple">创建新分区</li>
+                </a>
+                <a href="{{route('adminCommunitySectionCreate')}}">
+                    <li class="mdui-list-item mdui-ripple">创建新板块</li>
+                </a>
+            </ul>
+        </li>
+        <li class="mdui-collapse-item" id="drawer-communityTopicItem">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">settings</i>
+                <div class="mdui-list-item-content">话题及回复管理</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a href="{{route('adminCommunityTopicListByCategory')}}">
+                    <li class="mdui-list-item mdui-ripple">按分区检索话题</li>
+                </a>
+                <a href="{{route('adminCommunityTopicList')}}">
+                    <li class="mdui-list-item mdui-ripple">全站话题列表</li>
+                </a>
+                <a href="{{route('adminCommunityTopicCreate')}}">
+                    <li class="mdui-list-item mdui-ripple">创建新话题</li>
                 </a>
                 <a href="{{route('adminCommunitySectionCreate')}}">
                     <li class="mdui-list-item mdui-ripple">创建新板块</li>

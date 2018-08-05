@@ -15,7 +15,6 @@ class CommunityCategoryController extends Controller
     //
     public function showZonesAndSections(){
         $zones = CommunityZone::with('communitySections')->get();
-//        dd($zones);
         return view('admin.community-category.zones-and-sections-list',compact('zones'));
     }
     public function adminZoneCreateShow(){
@@ -201,6 +200,14 @@ class CommunityCategoryController extends Controller
         }
         return json_encode(compact('status','msg'));//ajax
 
+    }
+
+    public function getSectionsByZoneId(Request $request){
+        $this->validate($request,[
+            'id'=>'required|integer|exists:community_zones'
+        ]);
+        $sections = CommunityZone::where('id',$request->id)->first()->communitySections()->get();
+        return json_encode(compact('sections'));
     }
 
 

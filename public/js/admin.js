@@ -172,9 +172,9 @@ function deleteNewsCategories() {
 
 //新闻编辑器
 var E = window.wangEditor;
-if ($$('#newsEditorToolbar').length>0){
-    var editor = new E('#newsEditorToolbar','#newsEditorText');
-    var textArea = $$('#newsContentTextArea');
+if ($$('#editorToolbar').length>0){
+    var editor = new E('#editorToolbar','#editorText');
+    var textArea = $$('#editorTextArea');
     editor.customConfig.onchange = function (html) {
         // 监控变化，同步更新到 textarea
         textArea.val(html);
@@ -190,7 +190,17 @@ if ($$('#newsEditorToolbar').length>0){
         '创建': 'init'
         // 还可自定添加更多
     };
-    editor.customConfig.uploadImgServer = '/admin/news/upload/img';
+    switch ($$('#editorToolbar').attr('type')){
+        case 'community-topic':
+            editor.customConfig.uploadImgServer = '/admin/community/topic/upload/img';
+            break;
+        case 'news':
+            editor.customConfig.uploadImgServer = '/admin/news/upload/img';
+            break;
+        case 'news-reply':
+            editor.customConfig.uploadImgServer = '/admin/news/reply/upload/img';
+            break;
+    }
     editor.customConfig.uploadImgHeaders = {
         'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content'),
         'X-Requested-With': 'XMLHttpRequest'
@@ -649,4 +659,29 @@ function deleteCommunitySection(sectionId,sectionContent) {
     });
 }
 
+//初始化新建话题页面选择section
+var adminSelectSection = new mdui.Select('#adminSelectSection',{position: 'bottom'});
 
+function handleSelGetSections(zoneId,classToAppend){
+    $$.ajax({
+        method: 'POST',
+        url: '/admin/community/category/getSectionsByZoneId',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data:{
+            id:zoneId
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            var sectionsHtmlToAppend='<option value="null">请选择分区</option>';
+            $$.each(data.sections,function (i,value) {
+                sectionsHtmlToAppend+='<option value="'+value.id+'">'+value.name+'</option>'
+            });
+            $$('.'+classToAppend).empty();
+            $$('.'+classToAppend).append(sectionsHtmlToAppend);
+            adminSelectSection.handleUpdate();
+        }
+    });
+
+}

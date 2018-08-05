@@ -60,7 +60,9 @@
                                         <button onclick="deleteCommunitySection('{{$section->id}}','{{$section->name}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-m-r-1 mdui-color-pink-accent">
                                             <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
                                         </button>
-                                        <i class="mdui-collapse-item-arrow mdui-icon material-icons">more_vert</i>
+                                        <button class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-theme-accent mdui-ripple" style="margin-right: -8px;">
+                                            <i class="mdui-icon material-icons">more_vert</i>
+                                        </button>
                                     </div>
                                 @endforeach
                             @else

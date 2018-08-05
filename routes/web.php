@@ -82,6 +82,8 @@ Route::group(['prefix'=>'admin'],function () {
 
     //新闻图片上传
     Route::post('/news/upload/img','NewsController@uploadImg')->name('uploadNewsImg');
+    //新闻回复图片上传
+    Route::post('/news/reply/upload/img','NewsController@uploadReplyImg')->name('uploadNewsImg');
     //新闻封面图片上传
     Route::post('/news/upload/cover','NewsController@uploadCover')->name('uploadNewsCover');
 
@@ -99,6 +101,23 @@ Route::group(['prefix'=>'admin'],function () {
     Route::post("/community/category/section/{section}/update",'CommunityCategoryController@adminSectionUpdate')->name('adminCommunitySectionUpdate');
     Route::post("/community/category/section/delete",'CommunityCategoryController@sectionSoftDelete')->name('communitySectionSoftDelete');
 
+    //ajax通过zoneid获取sections
+    Route::post('/community/category/getSectionsByZoneId','CommunityCategoryController@getSectionsByZoneId')->name('communitygetSectionsByZoneId');
+
+    //社区话题管理模块
+    Route::get("/community/topic",'CommunityTopicController@adminListShow')->name('adminCommunityTopicList');
+    Route::get("/community/topic/show-by-category",'CommunityTopicController@adminListShowByCategory')->name('adminCommunityTopicListByCategory');
+    Route::get("/community/topic/create",'CommunityTopicController@adminCreateShow')->name('adminCommunityTopicCreate');
+    Route::post("/community/topic/store",'CommunityTopicController@store')->name('adminCommunityTopicStore');
+    Route::get("/community/topic/{topic}/edit",'CommunityTopicController@adminEditShow')->name('adminCommunityTopicEdit');
+    Route::post("/community/topic/{topic}/update",'CommunityTopicController@update')->name('adminCommunityTopicUpdate');
+    Route::post("/community/topic/delete",'CommunityTopicController@softDelete')->name('communityTopicSoftDelete');
+    Route::post("/community/topic/deletes",'CommunityTopicController@softDeletes')->name('communityTopicSoftDeletes');
+    Route::get("/community/topic/{topic}/up/order",'CommunityTopicController@turnUpOrder')->name('communityTopicTurnUpOrder');
+    Route::get("/community/topic/{topic}/down/order",'CommunityTopicController@turnDownOrder')->name('communityTopicTurnDownOrder');
+
+    //社区话题图片上传
+    Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')->name('uploadCommunityTopicImg');
     //zone封面图片上传
     Route::post('/community/category/zones/upload/img','CommunityCategoryController@uploadZoneImg')->name('uploadZoneImg');
 
