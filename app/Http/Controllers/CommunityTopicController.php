@@ -30,10 +30,16 @@ class CommunityTopicController extends Controller
         return view('admin.community-topic.list',compact('topics','section','selectedSection'));
     }
 
-    public function adminCreateShow(){
+    public function adminCreateShow(Request $request){
         $zones = CommunityZone::all();
-        return view('admin.community-topic.create',compact('zones'));
+        if($request->input('zone_id')&&$request->input('section_id')){
+            $zone_id = $request->input('zone_id');
+            $section_id = $request->input('section_id');
+            $selectedSections = CommunityZone::where('id',$zone_id)->first()->communitySections;
+        }
+        return view('admin.community-topic.create',compact('zones','zone_id','section_id','selectedSections'));
     }
+
     public function store(){
         $status = \request('status');
         //发布验证 暂存不验证
@@ -59,6 +65,8 @@ class CommunityTopicController extends Controller
 
         //渲染
         if ($res) {
+            CommunityZone::find($zone_id)->increment('topic_count');
+            CommunitySection::find($section_id)->increment('topic_count');
             if ($status == 'public') {
                 return \redirect()->back()->with('tips', ['话题' . $title . '创建成功',]);
             } else {
@@ -68,11 +76,19 @@ class CommunityTopicController extends Controller
             return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
         }
     }
-    public function adminEditShow(News $news){
-        $newsCategories = NewsCategory::all();
-        return view('admin.news.edit',compact('news','newsCategories'));
+
+    public function adminEditShow(CommunityTopic $topic){
+        $zones = CommunityZone::all();
+        $selectedSections = CommunityZone::where('id',$topic->zone_id)->first()->communitySections;
+
+        return view('admin.community-topic.edit',compact('topic','zones','selectedSections'));
     }
-    public function update(News $news){
+
+    public function update(CommunityTopic $topic){
+        //获取旧分类id
+        $old_zone_id = $topic->zone_id;
+        $old_section_id = $topic->section_id;
+
         $status = \request('status');
         //发布验证 暂存不验证
 //        if($status=='public') {
@@ -80,32 +96,37 @@ class CommunityTopicController extends Controller
         $this->validate(\request(), [
             'title' => 'required',
             'content' => 'required',
+            'zone_id' => 'required|integer|exists:community_zones,id',
+            'section_id' => 'required|integer|exists:community_sections,id',
         ]);
 //        }
         //逻辑
         $title = \request('title');
+        $zone_id = \request('zone_id');
+        $section_id = \request('section_id');
         $content = \request('content');
-        $cover_img = \request('cover_img');
-        $news_category_id = \request('news_category_id');
         $order = \request('order');
-        $invalided_at = \request('invalided_at');
         $user_id = Auth::id();
-        $data = compact('title','content','cover_img','user_id','news_category_id','order','invalided_at','status');
+        $data = compact('title','zone_id','section_id','content','user_id','order','status');
 
-//        dd($data);
-        $res=News::where('id',$news->id)->update($data);
+        $res=$topic->update($data);
 
         //渲染
         if ($res) {
+            //旧分类计数器更新
+            CommunityZone::find($old_zone_id)->update(['topic_count'=>CommunityTopic::where('zone_id',$old_zone_id)->count()]);
+            CommunitySection::find($old_section_id)->update(['topic_count'=>CommunityTopic::where('section_id',$old_section_id)->count()]);
+            //新分类计数器更新
+            CommunityZone::find($zone_id)->update(['topic_count'=>CommunityTopic::where('zone_id',$zone_id)->count()]);
+            CommunitySection::find($section_id)->update(['topic_count'=>CommunityTopic::where('section_id',$section_id)->count()]);
             if ($status == 'public') {
-                return \redirect()->back()->with('tips', ['新闻' . $title . '编辑成功',]);
+                return \redirect()->back()->with('tips', ['话题' . $title . '编辑成功',]);
             } else {
-                return \redirect()->back()->with('tips', ['新闻' . $title . '暂存成功',]);
+                return \redirect()->back()->with('tips', ['话题' . $title . '暂存成功',]);
             }
         }else{
             return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
         }
-
     }
 
     /* 删除行为

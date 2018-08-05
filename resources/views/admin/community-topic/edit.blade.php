@@ -1,62 +1,61 @@
 @extends('frame.adminframe')
-@section('title','新闻管理')
-@section('subtitleUrl',route('adminNewsList'))
-@section('adminDrawerActiveVal','drawer-newsItem')
+@section('title','社区话题管理')
+@section('subtitleUrl',route('adminCommunityTopicList'))
+@section('adminDrawerActiveVal','drawer-communityTopicItem')
 
 @section('content')
-        <form id="editNewsForm" method="post" action="{{route('adminNewsUpdate',$news->id)}}">
+        <form id="editCommunityTopicForm" method="post" action="{{route('adminCommunityTopicUpdate',$topic->id)}}">
             {{csrf_field()}}
-            <h3 class="admin-title mdui-text-color-indigo">编辑新闻</h3>
+            <h3 class="admin-title mdui-text-color-indigo">编辑话题</h3>
 
             @include('admin.layout.msg')
             <div class="mdui-row">
                 <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-12 mdui-col-sm-10 mdui-col-md-6">
-                    <h3 class="admin-index-title mdui-text-color-indigo">1.编辑新闻标题</h3>
-                    <label class="mdui-textfield-label">请输入新闻标题</label>
-                    <input class="mdui-textfield-input" name="title" value="{{$news->title}}"/>
+                    <h3 class="admin-index-title mdui-text-color-indigo">1.话题标题</h3>
+                    <label class="mdui-textfield-label">请输入话题标题</label>
+                    <input class="mdui-textfield-input" name="title" value="{{$topic->title}}"/>
                 </div>
             </div>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">2.编辑新闻分类</h3>
-            <select name="news_category_id" class="mdui-select" mdui-select="{position: 'bottom'}">
-                <option value="null">请选择分类</option>
-                @foreach($newsCategories as $newsCategory)
-                    @if($newsCategory->id==$news->news_category_id)
-                        <option value="{{$newsCategory->id}}" selected>当前：{{$newsCategory->name}}</option>
+            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">2.所属分区及板块</h3>
+            <select name="zone_id" class="mdui-select" mdui-select="{position: 'bottom'}" onchange="handleSelGetSections(this.value,'sections-to-select')">
+                <option value="null">请选择分区</option>
+                @foreach($zones as $zone)
+                    @if($topic->zone_id==$zone->id)
+                        <option value="{{$zone->id}}" selected>当前:{{$zone->name}}</option>
                     @else
-                        <option value="{{$newsCategory->id}}">{{$newsCategory->name}}</option>
+                        <option value="{{$zone->id}}">{{$zone->name}}</option>
+                    @endif
+                @endforeach
+            </select>
+            &nbsp;&nbsp;&nbsp;
+            <select name="section_id" class="mdui-select sections-to-select" id="adminSelectSection">
+                <option value="null">请先选择分区</option>
+                @foreach($selectedSections as $section)
+                    @if($topic->section_id==$section->id)
+                        <option value="{{$section->id}}" selected>当前:{{$section->name}}</option>
+                    @else
+                        <option value="{{$section->id}}">{{$section->name}}</option>
                     @endif
                 @endforeach
             </select>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.编辑新闻内容</h3>
-            <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="newsEditorToolbar"></div>
+            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.话题内容</h3>
+            <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
             <div class="admin-editor-middle-bar">编辑区域</div>
-            <div id="newsEditorText" class="admin-editor-text mdui-hoverable" >{!!$news->content!!}</div>
-            <textarea id="newsContentTextArea" name="content" class="mdui-hidden"></textarea>
+            <div id="editorText" contenteditable="true" class="admin-editor-text mdui-hoverable" >{!! $topic->content !!}</div>
+            <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.封面图片
-            <br><small class="show-file-title-sub">点击下方图片上传,留空则无封面</small></h3>
-            <label for="newsCoverUploadInput">
-                <img @if($news->cover_img) src="{{$news->cover_img}}" @else src="/imgs/default_news_cover.png" @endif class="avatar mdui-hoverable newsCover" style="width: 300px; height: 200px">
-            </label>
-            <input class="mdui-hidden" id="newsCoverUploadInput" type="file" onchange="handleNewsCoverUpdate(this,'newsCover')" accept="image/jpeg,image/png">
-            <input class="mdui-hidden" value="{{$news->cover_img}}" type="text" name="cover_img">
-
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">5.失效日期
-            <br><small class="show-file-title-sub">超过失效日期的文章将不在列表中显示，留空则不设置失效日期</small></h3>
-            <input type="text" class="layui-input" name="invalided_at" style="max-width: 300px" value="{{$news->invalided_at}}" id="selInvalidedAt">
-
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">6.优先级
+            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.优先级
             <br><small class="show-file-title-sub">优先级范围0-20，从左到右递增，推荐默认为0</small>
-            <br><small class="show-file-title-sub">文章将先依照优先级排序，相同优先级下依照发布时间排序</small></h3>
+            <br><small class="show-file-title-sub">话题将先依照优先级排序，相同优先级下依照发布时间排序</small></h3>
             <label class="mdui-slider mdui-slider-discrete">
-                <input type="range" step="1" min="0" max="20" value="{{$news->order}}" name="order"/>
+                <input type="range" step="1" min="0" max="20" value="{{$topic->order}}" name="order"/>
             </label>
 
             <div class="mdui-divider" style="margin-top: 50px"></div>
-            <button onclick="formPublicSubmit('#editNewsForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>发布</button>
-            <button onclick="formHiddenSubmit('#editNewsForm')" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">local_cafe</i>暂存</button>
+            <button onclick="formPublicSubmit('#editCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>发布</button>
+            <button onclick="formHiddenSubmit('#editCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">local_cafe</i>暂存</button>
             <a href="{{route('adminNewsList')}}" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">arrow_back</i>返回</a>
             <div class="mdui-divider" style="margin-bottom: 200px"></div>
 

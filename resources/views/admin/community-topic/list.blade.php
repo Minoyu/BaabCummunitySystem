@@ -48,7 +48,7 @@
                         <a href="#" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>查看
                         </a>
-                        <a href="" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
+                        <a href="{{route('adminCommunityTopicEdit',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
                         </a>
                         <button onclick="deleteNews('{{$topic->id}}','{{$topic->title}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
@@ -77,7 +77,11 @@
             </tbody>
         </table>
     </div>
-    {{$topics->appends(['section_id'=>$section->id])->links()}}
+    @if($selectedSection)
+        {{$topics->appends(['section_id'=>$section->id])->links()}}
+    @else
+        {{$topics->links()}}
+    @endif
     <button onclick="deleteNewses()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">delete</i>批量删除</button>
 
     <!--/内容-->

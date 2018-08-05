@@ -28,7 +28,7 @@
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.新闻内容</h3>
             <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="news"></div>
             <div class="admin-editor-middle-bar">编辑区域</div>
-            <div id="editorText" class="admin-editor-text mdui-hoverable" ><p>在此添加新闻内容</p></div>
+            <div contenteditable="true" id="editorText" class="admin-editor-text mdui-hoverable" ><p>在此添加新闻内容</p></div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.封面图片

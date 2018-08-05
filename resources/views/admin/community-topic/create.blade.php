@@ -21,12 +21,25 @@
             <select name="zone_id" class="mdui-select" mdui-select="{position: 'bottom'}" onchange="handleSelGetSections(this.value,'sections-to-select')">
                 <option value="null">请选择分区</option>
                 @foreach($zones as $zone)
-                    <option value="{{$zone->id}}">{{$zone->name}}</option>
+                    @if(isset($zone_id)&&$zone_id==$zone->id)
+                        <option value="{{$zone->id}}" selected>已选中:{{$zone->name}}</option>
+                    @else
+                        <option value="{{$zone->id}}">{{$zone->name}}</option>
+                    @endif
                 @endforeach
             </select>
             &nbsp;&nbsp;&nbsp;
             <select name="section_id" class="mdui-select sections-to-select" id="adminSelectSection">
                 <option value="null">请先选择分区</option>
+                @if(isset($section_id))
+                    @foreach($selectedSections as $section)
+                        @if($section_id&&$section_id==$section->id)
+                            <option value="{{$section->id}}" selected>已选中:{{$section->name}}</option>
+                        @else
+                            <option value="{{$section->id}}">{{$section->name}}</option>
+                        @endif
+                    @endforeach
+                @endif
             </select>
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.话题内容</h3>

@@ -41,7 +41,7 @@
                                         <a href="{{route('adminCommunityTopicList',["section_id"=>$section->id])}}" class="mdui-btn mdui-ripple mdui-btn-dense admin-table-btn mdui-m-r-1">
                                             <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>浏览其下{{$section->topic_count}}条话题
                                         </a>
-                                        <a href="{{route('adminCommunityTopicCreate',["section_id"=>$section->id])}}" class="mdui-btn mdui-ripple mdui-btn-dense admin-table-btn mdui-m-r-1">
+                                        <a href="{{route('adminCommunityTopicCreate',["zone_id"=>$zone->id,"section_id"=>$section->id])}}" class="mdui-btn mdui-ripple mdui-btn-dense admin-table-btn mdui-m-r-1">
                                             <i class="mdui-icon material-icons mdui-icon-left">add</i>创建话题
                                         </a>
                                     </div>
