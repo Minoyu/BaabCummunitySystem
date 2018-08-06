@@ -39,7 +39,7 @@
                     <td>{{$topic->user->name}}</td>
                     <td>{{$topic->view_count}}</td>
                     <td>
-                        <a href="" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense mdui-color-indigo-400 admin-table-btn">
+                        <a href="{{route('adminCommunityTopicReplyList',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense mdui-color-indigo-400 admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">comment</i>{{$topic->reply_count}}
                         </a>
                     </td>

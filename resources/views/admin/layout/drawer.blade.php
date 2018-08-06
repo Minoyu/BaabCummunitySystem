@@ -83,8 +83,8 @@
                 <a href="{{route('adminCommunityTopicCreate')}}">
                     <li class="mdui-list-item mdui-ripple">创建新话题</li>
                 </a>
-                <a href="{{route('adminCommunitySectionCreate')}}">
-                    <li class="mdui-list-item mdui-ripple">创建新板块</li>
+                <a href="{{route('adminCommunityTopicReplyAllList')}}">
+                    <li class="mdui-list-item mdui-ripple">全站话题回复列表</li>
                 </a>
             </ul>
         </li>

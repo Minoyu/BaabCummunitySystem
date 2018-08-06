@@ -10,12 +10,15 @@ function formHiddenSubmit(formid) {
     $$(formid).submit();
 }
 
-//后台侧边栏展开激活
-var adminDrawerMenuCollapse = new mdui.Collapse('#adminDrawerMenu',{accordion:true});
-var adminDrawerActiveVal = $$('#adminDrawerActiveVal').text();
+$$(function () {
+    //后台侧边栏展开激活
+    var adminDrawerMenuCollapse = new mdui.Collapse('#adminDrawerMenu',{accordion:true});
+    var adminDrawerActiveVal = $$('#adminDrawerActiveVal').text();
 
-adminDrawerMenuCollapse.open('#'+adminDrawerActiveVal);
-$$('#'+adminDrawerActiveVal).addClass('mdui-list-item-active');
+    adminDrawerMenuCollapse.open('#'+adminDrawerActiveVal);
+    $$('#'+adminDrawerActiveVal).addClass('mdui-list-item-active');
+});
+
 
 
 //新闻分类部分
@@ -804,4 +807,119 @@ function deleteCommunityTopics() {
         ]
     });
 }
+
+function deleteCommunityTopicReply(Id,Content) {
+    mdui.dialog({
+        title: '删除话题回复',
+        content: '您确定要删除此话题回复吗<br/>'+Content,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/community/topic/reply/delete',
+                        data: {
+                            id:Id
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+/**
+ * 批量删除新闻回复
+ */
+function deleteCommunityTopicReplies() {
+    //获取选中对象数组
+    var ids=getSelectedIds();
+    var titles=getSelectedNames();
+    //弹出确认对话框
+    mdui.dialog({
+        title: '批量删除话题回复',
+        content: '您确定要删除我们吗<br/>'+titles,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/community/topic/reply/deletes',
+                        data: {
+                            ids:ids
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data=JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'OK',
+                                    buttonColor:'pink',
+                                    onButtonClick: function(){
+                                        window.location.reload();//页面刷新
+                                    }
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
 

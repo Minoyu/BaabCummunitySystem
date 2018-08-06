@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateNewsRepliesTable extends Migration
+class CreateCommunityTopicRepliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateNewsRepliesTable extends Migration
      */
     public function up()
     {
-        Schema::create('news_replies', function (Blueprint $table) {
+        Schema::create('community_topic_replies', function (Blueprint $table) {
             $table->increments('id');
             $table->text('content');
             $table->integer('user_id')->unsigned();
-            $table->integer('news_id')->unsigned();
+            $table->integer('topic_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });
@@ -30,6 +30,6 @@ class CreateNewsRepliesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_replies');
+        Schema::dropIfExists('community_topic_replies');
     }
 }

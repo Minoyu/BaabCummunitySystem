@@ -27,7 +27,7 @@ class NewsController extends Controller
 
 
     public function adminListShow(){
-        $newses=News::orderBy('order','desc')->paginate(10);
+        $newses=News::with('user')->orderBy('order','desc')->paginate(10);
         return view('admin.news.list',compact('newses'));
     }
     public function adminCreateShow(){

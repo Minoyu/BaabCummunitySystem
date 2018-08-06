@@ -20,6 +20,9 @@ class CommunityTopic extends Model
     public function user(){
         return $this->belongsTo(User::class,'user_id');
     }
+    public function replies(){
+        return $this->hasMany(CommunityTopicReply::class,'topic_id');
+    }
 
 
 }

@@ -116,6 +116,17 @@ Route::group(['prefix'=>'admin'],function () {
     Route::get("/community/topic/{topic}/up/order",'CommunityTopicController@turnUpOrder')->name('communityTopicTurnUpOrder');
     Route::get("/community/topic/{topic}/down/order",'CommunityTopicController@turnDownOrder')->name('communityTopicTurnDownOrder');
 
+    //社区话题回复管理模块
+    Route::get("/community/topic/reply/all",'CommunityTopicReplyController@adminListShowAll')->name('adminCommunityTopicReplyAllList');
+    Route::get("/community/topic/{topic}/reply",'CommunityTopicReplyController@adminListShow')->name('adminCommunityTopicReplyList');
+    Route::get("/community/topic/{topic}/reply/create",'CommunityTopicReplyController@adminCreateShow')->name('adminCommunityTopicReplyCreate');
+    Route::post("/community/topic/{topic}/reply/store",'CommunityTopicReplyController@store')->name('adminCommunityTopicReplyStore');
+    Route::get("/community/topic/{topic}/reply/{reply}/edit",'CommunityTopicReplyController@adminEditShow')->name('adminCommunityTopicReplyEdit');
+    Route::post("/community/topic/{topic}/reply/{reply}/update",'CommunityTopicReplyController@update')->name('adminCommunityTopicReplyUpdate');
+    Route::post("/community/topic/reply/delete",'CommunityTopicReplyController@softDelete')->name('topicReplySoftDelete');
+    Route::post("/community/topic/reply/deletes",'CommunityTopicReplyController@softDeletes')->name('topicReplySoftDeletes');
+
+
     //社区话题图片上传
     Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')->name('uploadCommunityTopicImg');
     //zone封面图片上传
