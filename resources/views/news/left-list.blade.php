@@ -7,44 +7,26 @@
         <div class="mdui-panel-item-body">
             <ul class="mdui-list">
                 @foreach($newsCategories as $newsCategory)
-                    <li class="mdui-list-item mdui-ripple">
-                        <i class="mdui-list-item-icon mdui-icon material-icons">{{$newsCategory->icon}}</i>
-                        <div class="mdui-list-item-content">{{$newsCategory->name}}</div>
-                    </li>
+                    <a href="{{route('showNewsSec',$newsCategory->id)}}">
+                        <li class="mdui-list-item mdui-ripple">
+                            <i class="mdui-list-item-icon mdui-icon material-icons">{{$newsCategory->icon}}</i>
+                            <div class="mdui-list-item-content">{{$newsCategory->name}}</div>
+                        </li>
+                    </a>
                 @endforeach
             </ul>
         </div>
     </div>
 </div>
-<div class="mdui-card mdui-m-y-2">
-    <a href="#">
-        <div class="news-list-item mdui-hoverable">
-            <img class="news-list-item-img" src="http://via.placeholder.com/150x150">
-            <div class="news-list-item-title mdui-text-color-indigo">测试新闻测试新闻测试新闻测试新闻测试新闻测试新闻测试新闻测试新闻</div>
-            <a href="#" class="news-list-item-part-name">测试板块</a>
-        </div>
-    </a>
-    <a href="#">
-        <div class="news-list-item mdui-hoverable">
-            <img class="news-list-item-img" src="http://via.placeholder.com/150x150">
-            <div class="news-list-item-title mdui-text-color-indigo">新闻测试新闻测试新闻测试新闻测试新闻</div>
-            <a href="#" class="news-list-item-part-name">测试板块</a>
-        </div>
-    </a>
-    <a href="#">
-        <div class="news-list-item-without-img mdui-hoverable">
-            <div class="news-list-item-title mdui-text-color-indigo">无图新闻测试新闻测试新闻测试新闻测试新闻</div>
-            <div class="news-list-item-content mdui-hidden-xs">测试新闻内容简略测试新闻内容简略</div>
-            <a href="#1" class="news-list-item-part-name">测试板块</a>
+<h2 class="title-with-bottom-border mdui-m-t-2 mdui-p-t-1  mdui-m-b-0 mdui-card">
+    热点新闻
+</h2>
+<div class="mdui-card mdui-p-t-1 mdui-m-b-5">
+    @include('news.left-list-data')
+    <div  id="NewsCenterData"></div>
+    <div id="NewsCenterLoadingTip" class="mdui-m-y-2" style="display:none">
+        <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>
+        <span class="loading-tip-text">正在加载更多</span>
+    </div>
 
-        </div>
-    </a>
-    <a href="#">
-        <div class="news-list-item-without-img mdui-hoverable">
-            <div class="news-list-item-title mdui-text-color-indigo">无图新闻测试新闻测试新闻测试新闻测试新闻</div>
-            <div class="news-list-item-content mdui-hidden-xs">测试新闻内容简略测试新闻内容简略</div>
-            <a href="#" class="news-list-item-part-name">测试板块</a>
-
-        </div>
-    </a>
 </div>

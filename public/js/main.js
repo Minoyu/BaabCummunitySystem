@@ -496,3 +496,34 @@ function handleCoverUpdate(obj,className) {
     });
 
 }
+
+//新闻页面的ajax翻页
+if ($$('#NewsCenterData').length>0){
+    var page = 1;
+    $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() +2 >= $(document).height()) {
+                page++;
+                loadMoreData(page);
+            }
+    });
+    function loadMoreData(page) {
+        $$.ajax({
+            method: 'get',
+            url: '?page=' + page,
+            beforeSend: function(){
+                $$('#NewsCenterLoadingTip').show();
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.html == ""){
+                    $$('#NewsCenterLoadingTip').html("<i class=\"mdui-icon material-icons mdui-center mdui-text-color-grey-600\">mood_bad</i><span class=\"loading-tip-text\">没有更多了</span>");
+                    return;
+                }
+                $$('#NewsCenterLoadingTip').hide();
+                $$("#NewsCenterData").append('<div class="animated fadeInUp">'+data.html+'</div>');
+            }
+        });
+
+    }
+
+}

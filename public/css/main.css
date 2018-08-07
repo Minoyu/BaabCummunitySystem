@@ -275,6 +275,13 @@ body {
     line-height: 22px;
     background-color: #fff;
 }
+.title-with-bottom-border small{
+    font-size: 14px;
+    padding-left: 5px;
+    font-weight:normal;
+    opacity: .9;
+}
+
 .side-card-header{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -670,19 +677,27 @@ body {
 /*无图新闻列表块*/
 .news-list-item-without-img{
     padding: 10px;
-    width: 100%;
 }
 .news-list-item-without-img .news-list-item-title{
     padding-left: 5px;
 }
 .news-list-item-without-img .news-list-item-content{
     padding-left: 5px;
+    padding-bottom: 2px;
 }
 .news-list-item-without-img .news-list-item-part-name{
     padding-top: 12px;
     padding-left: 5px;
 }
-
+/*新闻页加载文字提示*/
+.loading-tip-text{
+    margin-top: 5px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    opacity: .6;
+}
 
 /*二级新闻侧边栏列表*/
 .news-sec-side-column-list a{
@@ -692,7 +707,6 @@ body {
 /*二级新闻页列表块*/
 .news-sec-list-item{
     position: relative;
-    width: 100%;
     min-height: 80px;
     padding: 10px;
 }
@@ -714,7 +728,6 @@ body {
 /*无图新闻列表块*/
 .news-sec-list-item-without-img{
     padding: 10px;
-    width: 100%;
 }
 .news-sec-list-item-without-img .news-sec-list-item-title{
     padding-left: 5px;
@@ -1430,3 +1443,4 @@ body {
 .pagination .pagination__number_active{
     color: #fff;
 }
+

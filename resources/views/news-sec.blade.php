@@ -7,11 +7,11 @@
 @section('content')
     <div class="mdui-row">
         {{--二级新闻页主列表--}}
-        <div class="mdui-col-md-9 mdui-col-xs-12">
+        <div class="mdui-col-md-9 mdui-col-xs-12" style="padding-top: 20px">
             @include('news-sec.lists')
         </div>
         {{--侧边栏，板块切换,小屏隐藏--}}
-        <div class="mdui-col-md-3 mdui-hidden-sm-down">
+        <div class="mdui-col-md-3 mdui-hidden-sm-down" style="padding-top: 20px">
             @include('news-sec.side-clumn')
         </div>
     </div>

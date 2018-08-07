@@ -14,13 +14,31 @@ class NewsController extends Controller
 {
     //
 
-    public function showNews(){
-        $newsCategories = NewsCategory::all();
-        return view('news',compact('newsCategories'));
+    public function showNews(Request $request){
+        $newses = News::orderBy('order','desc')->with('newsCategory')->paginate(10);
+
+        if ($request->ajax()) {
+            $view = view('news.left-list-data',compact('newses'))->render();
+            return response()->json(['html'=>$view]);
+        }else{
+            $newsCategories = NewsCategory::all();
+            return view('news',compact('newsCategories','newses'));
+        }
     }
-    public function showNewsSec(){
-        return view('news-sec');
+
+    public function showNewsSec(NewsCategory $cat,Request $request)
+    {
+        $newses = $cat->news()->paginate(15);
+        if ($request->ajax()) {
+            $view = view('news-sec.list-data', compact('newses'))->render();
+            return response()->json(['html' => $view]);
+        }else{
+            $newsCategories = NewsCategory::all();
+            return view('news-sec', compact('newses','cat','newsCategories'));
+        }
     }
+
+
     public function showNewsContent(){
         return view('news-content');
     }
