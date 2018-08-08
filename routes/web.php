@@ -16,8 +16,8 @@ Route::get('/','IndexController@showIndex')->name('showIndex');
 
 //新闻页面
 Route::get('/news','NewsController@showNews')->name('showNews');
-Route::get('/news/{cat}','NewsController@showNewsSec')->name('showNewsSec');
-Route::get('/news/content','NewsController@showNewsContent')->name('showNewsContent');
+Route::get('/news/category/{cat}','NewsController@showNewsSec')->name('showNewsSec');
+Route::get('/news/{news}','NewsController@showNewsContent')->name('showNewsContent');
 
 //社区页面
 Route::get('/community','CommunityController@showCommunity')->name('showCommunity');

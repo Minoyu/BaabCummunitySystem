@@ -652,6 +652,7 @@ body {
     position: relative;
     min-height: 80px;
     padding: 10px;
+    transition: background-color .3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .news-list-item-img{
     position: absolute;
@@ -677,6 +678,12 @@ body {
 /*无图新闻列表块*/
 .news-list-item-without-img{
     padding: 10px;
+    transition: background-color .3s cubic-bezier(0.4, 0, 0.2, 1);
+
+}
+.news-list-item:hover,
+.news-list-item-without-img:hover{
+    background-color: #f3f3f3;
 }
 .news-list-item-without-img .news-list-item-title{
     padding-left: 5px;
@@ -896,8 +903,33 @@ body {
 /*新闻内容页主标题*/
 .news-content-primary-title{
     padding-top: 5px;
-    padding-bottom: 5px;
-    font-weight: bold;
+    text-align: center;
+}
+.news-content-primary-title small{
+    font-size: 50%;
+    opacity: .6;
+}
+.news-content-primary-title small .mdui-icon{
+    opacity: .6;
+    font-size: 18px;
+}
+.news-content-cover-img{
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: -30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 0;
+    padding-bottom: 35%;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+@media (max-width: 600px){
+    .news-content-cover-img{
+        margin-bottom: -5px;
+        padding-bottom: 40%;
+    }
 }
 /*新闻内容页新闻正文*/
 .news-content-primary-text{
@@ -906,56 +938,117 @@ body {
     padding-top: 5px;
     padding-bottom: 5px;
 }
+/*新闻图片80%自适应*/
+.news-content-primary-text img{
+    max-width: 80%;
+    height: auto;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
 /*新闻内容页侧边栏标题*/
 .news-content-side-clumn-list a{
     font-weight: bold;
     font-size: 18px;
 }
 /*新闻内容页评论条*/
-.news-content-comment-list{
-    padding: 10px 0px;
+.news-content-comment-list {
+    padding: 10px 10px 35px 10px;
     position: relative;
-}
-/*新闻内容页评论条边框样式*/
-.news-content-comment-list-border{
-    background: white;
-    border-radius: 2px;
-    margin-top: 30px;
-    width: 95%;
-    height: auto;
-    display: block;
-    padding: 12px;
-    box-shadow: inset 0 1px 1px 0 #c7c7c7;
-    -webkit-border-radius: 5px;
-    /*margin: 20px auto;*/
-    /*-moz-border-radius: 5px;*/
-    /*-webkit-box-shadow: inset 0 1px 1px 0 #c7c7c7;*/
-    /*-moz-box-shadow: inset 0 1px 1px 0 #c7c7c7;*/
-}
-/*新闻内容页评论区回复数量框*/
-.news-content-comment-number{
-    font-weight: bold;
-    padding-bottom: 5px;
+    transition: background-color .3s cubic-bezier(.4,0,.2,1);
 }
 /*新闻内容页评论区用户名*/
 .news-content-comment-username{
-    padding-left: 90px;
+    padding-left: 70px;
+    font-size: 18px;
 }
 /*新闻内容页评论区p标签样式*/
 .news-content-comment-p{
-    padding-left: 80px;
+    padding-left: 70px;
+    font-size: 15px;
+    opacity: .8;
+    line-height: 1.5em;
 }
 /*新闻内容页评论区用户头像样式*/
 .news-content-comment-users-img{
     position: absolute;
-    top: 2.5px;
-    left: 0px;
+    width: 50px;
+    height: 50px;
+    top: 12.5px;
+    left: 15px;
+    border-radius: 50%;
+    z-index: 1;
 }
 /*新闻内容页评论区评论按钮*/
-.news-content-comment-pinglun-btn{
+.news-content-comment-reply-btn{
     position: absolute;
-    top: 0px;
-    right: 0px;
+    right: 12px;
+    opacity: .8;
+    display: none;
+    padding: 0 10px;
+    min-width: 0;
+}
+
+.news-content-comment-list:hover{
+    background-color: #f3f3f3;
+}
+.news-content-comment-list:hover .news-content-comment-reply-btn{
+    display: inline;
+}
+
+/*新闻内容页评论区评论按钮*/
+.news-content-comment-time{
+    position: absolute;
+    font-size: 14px;
+    top: 10px;
+    right: 10px;
+    opacity: .8;
+}
+.news-content-comment-time .mdui-icon{
+    font-size: 14px;
+}
+.news-content-create-comment{
+    background-color: #f0f0f0;
+    padding: 25px 20px 60px;
+}
+.news-content-create-comment .title{
+    font-size: 20px;
+}
+.news-content-create-comment .title .mdui-icon{
+    font-size: 22px;
+    opacity: .7;
+    padding-right: 10px;
+    margin-bottom: 3px;
+}
+@media (max-width: 599px) {
+    .news-content-create-comment .avatar-img {
+        width: 80px;
+        height: 80px;
+        margin: 20px 0;
+        border-radius: 10%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+@media (min-width: 600px) {
+    .news-content-create-comment .avatar-img{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        top: 65px;
+    }
+    .news-content-create-comment .comment-edit-area{
+        padding-left: 70px;
+    }
+}
+
+
+.news-content-create-comment .submit-btn{
+    display: block;
+    margin-top: 10px;
+    float: right;
 }
 /*新闻内容页评论区点赞按钮*/
 .news-content-comment-dianzan-btn{
@@ -978,15 +1071,6 @@ body {
 /*新闻内容页评论输入区提交按钮*/
 .news-content-comment-area-btn{
     float: right;
-}
-
-/*图片占比80%自适应*/
-.img-self-adaption-80{
-    max-width: 80%;
-    height: auto;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
 }
 
 /*个人页面顶部封面cover*/
@@ -1444,3 +1528,24 @@ body {
     color: #fff;
 }
 
+/*编辑器*/
+.editor-text{
+    min-height: 80px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+@media (min-width: 600px) {
+    .editor-text{
+        min-height: 120px;
+    }
+}
+.editor-middle-bar{
+    padding: 5px 0;
+    color: #6d6d6d;
+}
+.editor-toolbar{
+    padding: 5px 0;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}

@@ -39,8 +39,11 @@ class NewsController extends Controller
     }
 
 
-    public function showNewsContent(){
-        return view('news-content');
+    public function showNewsContent(News $news){
+        $news->increment('view_count');
+        $cat = $news->newsCategory;
+        $newsCategories = NewsCategory::all();
+        return view('news-content',compact('news','cat','newsCategories'));
     }
 
 

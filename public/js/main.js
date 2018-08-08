@@ -84,6 +84,55 @@ setTimeout(function(){
     }
 },600);
 
+//新闻编辑器
+var E = window.wangEditor;
+if ($$('#editorToolbar').length>0){
+    var editor = new E('#editorToolbar','#editorText');
+    var textArea = $$('#editorTextArea');
+    editor.customConfig.onchange = function (html) {
+        // 监控变化，同步更新到 textarea
+        textArea.val(html);
+    };
+    editor.customConfig.zIndex = 0;
+    editor.customConfig.lang = {
+        '设置标题': 'title',
+        '正文': 'p',
+        '链接文字': 'link text',
+        '链接': 'link',
+        '上传图片': 'upload image',
+        '上传': 'upload',
+        '创建': 'init'
+        // 还可自定添加更多
+    };
+    switch ($$('#editorToolbar').attr('type')){
+        case 'community-topic':
+            editor.customConfig.uploadImgServer = '/admin/community/topic/upload/img';
+            break;
+        case 'news':
+            editor.customConfig.uploadImgServer = '/admin/news/upload/img';
+            break;
+        case 'news-reply':
+            editor.customConfig.uploadImgServer = '/admin/news/reply/upload/img';
+            editor.customConfig.menus = [
+                'emoticon',  // 表情
+                'image', // 插入图片
+                'bold',  // 粗体
+                'italic',  // 斜体
+                'underline',  // 下划线
+                'quote'  // 引用
+            ];
+            break;
+    }
+    editor.customConfig.uploadImgHeaders = {
+        'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content'),
+        'X-Requested-With': 'XMLHttpRequest'
+    };
+    editor.customConfig.uploadFileName = 'img[]';
+    editor.create();
+    // 初始化 textarea 的值
+    textArea.val(editor.txt.html());
+}
+
 
 //注册对话框
 var registerDialog = new mdui.Dialog('#register-dialog',{modal:true});
