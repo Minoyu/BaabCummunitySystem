@@ -21,7 +21,7 @@ class NewsReplyController extends Controller
     public function adminCreateShow(News $news){
         return view('admin.news-reply.create',compact('news'));
     }
-    public function store(News $news){
+    public function store(News $news,Request $request){
         //验证
         $this->validate(\request(), [
             'content' => 'required|min:2',
@@ -30,15 +30,27 @@ class NewsReplyController extends Controller
         $content = \request('content');
         $user_id = Auth::id();
         $data = compact('content','user_id');
-
         $res=$news->replies()->create($data);
 
-        //渲染
-        if ($res) {
-            $news->increment('reply_count');
-            return \redirect()->back()->with('tips', ['回复创建成功',]);
+        if ($request->ajax()) {
+            //渲染
+            if ($res) {
+                $news->increment('reply_count');
+                $status = 1;
+                $msg = "Reply Successfully";
+            }else{
+                $status = 0;
+                $msg = "Server internal error";
+            }
+            return json_encode(compact('status','msg'));//ajax
         }else{
-            return \redirect()->back()->withErrors('创建失败,服务器内部错误,请联系管理员');
+            //渲染
+            if ($res) {
+                $news->increment('reply_count');
+                return \redirect()->back()->with('tips', ['回复成功',]);
+            }else{
+                return \redirect()->back()->withErrors('创建失败,服务器内部错误,请联系管理员');
+            }
         }
     }
     public function adminEditShow(News $news,NewsReply $reply){

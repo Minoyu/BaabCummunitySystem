@@ -18,6 +18,8 @@ Route::get('/','IndexController@showIndex')->name('showIndex');
 Route::get('/news','NewsController@showNews')->name('showNews');
 Route::get('/news/category/{cat}','NewsController@showNewsSec')->name('showNewsSec');
 Route::get('/news/{news}','NewsController@showNewsContent')->name('showNewsContent');
+Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('newsReplyStore');
+
 
 //社区页面
 Route::get('/community','CommunityController@showCommunity')->name('showCommunity');

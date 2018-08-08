@@ -1,4 +1,4 @@
-<div class="mdui-card mdui-m-t-2">
+<div id="createNewsComment" class="mdui-card mdui-m-t-2">
     @if(Auth::check())
         <div class="news-content-create-comment">
             <div class="title"><i class="mdui-icon material-icons">comment</i>发表你的看法</div>
@@ -8,7 +8,7 @@
                     <div class="editor-middle-bar">写点什么</div>
                     <div contenteditable="true" id="editorText" class="editor-text mdui-hoverable" ></div>
                     <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
-                    <button class="mdui-btn mdui-color-pink-400 submit-btn"><i class="mdui-icon material-icons mdui-icon-left">send</i>发射</button>
+                    <a onclick="ajaxSubmitNewsCommentForm('{{route('newsReplyStore',$news->id)}}')" class="mdui-btn mdui-color-pink-400 submit-btn"><i class="mdui-icon material-icons mdui-icon-left">send</i>发射</a>
                 </div>
         </div>
     @else
@@ -31,34 +31,15 @@
         </div>
     </div>
     <div class="side-card-content">
-        <div class="news-content-comment-list">
-            <a href="#"><img src="http://via.placeholder.com/75x75" alt="users" class="news-content-comment-users-img mdui-hoverable"></a>
-            <a href="#" class="news-content-comment-username">ss</a>
-            {{--<a href="#" class="news-content-comment-dianzan-btn"><i class="mdui-icon material-icons">thumb_up</i></a>--}}
-            <div class="news-content-comment-time" ><i class="mdui-icon material-icons">&#xe192;</i> time</div>
-            <p class="news-content-comment-p">评论内容评论内容评论内容评容评论内容评论内容论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</p>
-            <a href="#" class="mdui-btn mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i>回复</a>
-
+        @include('news-content.comment-data')
+        <div  id="NewsReplyData"></div>
+        <div id="NewsReplyLoadingTip" class="mdui-m-y-2" style="display:none">
+            <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>
+            <span class="loading-tip-text">正在加载更多</span>
         </div>
-        <li class="mdui-divider-inset mdui-m-y-0" style="margin-left: 80px"></li>
-        <div class="news-content-comment-list">
-            <a href="#"><img src="http://via.placeholder.com/75x75" alt="users" class="news-content-comment-users-img mdui-hoverable"></a>
-            <a href="#" class="news-content-comment-username">ss</a>
-            {{--<a href="#" class="news-content-comment-dianzan-btn"><i class="mdui-icon material-icons">thumb_up</i></a>--}}
-            {{--<a href="#" class="news-content-comment-reply-btn" ><i class="mdui-icon material-icons ">comment</i>回复</a>--}}
-            <p class="news-content-comment-p">评论内容评论内容评论内容评容评论内容评论内容论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</p>
-            <a href="#" class="mdui-btn mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i>回复</a>
-
-        </div>
-        <li class="mdui-divider-inset mdui-m-y-0" style="margin-left: 80px"></li>
-        <div class="news-content-comment-list">
-            <a href="#"><img src="http://via.placeholder.com/75x75" alt="users" class="news-content-comment-users-img mdui-hoverable"></a>
-            <a href="#" class="news-content-comment-username">ss</a>
-            {{--<a href="#" class="news-content-comment-dianzan-btn"><i class="mdui-icon material-icons">thumb_up</i></a>--}}
-            {{--<a href="#" class="news-content-comment-reply-btn" ><i class="mdui-icon material-icons ">comment</i>回复</a>--}}
-            <p class="news-content-comment-p">评论内容评论内容评论内容评容评论内容评论内容论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容评论内容</p>
-            <a href="#" class="mdui-btn mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i>回复</a>
-
+        <div id="NewsReplyLoadingFailed" style="display:none">
+            <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600">mood_bad</i>
+            <span class="loading-tip-text">没有更多了</span>
         </div>
     </div>
 </div>

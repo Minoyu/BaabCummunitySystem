@@ -552,10 +552,10 @@ if ($$('#NewsCenterData').length>0){
     $(window).scroll(function() {
             if ($(window).scrollTop() + $(window).height() +2 >= $(document).height()) {
                 page++;
-                loadMoreData(page);
+                loadMoreNews(page);
             }
     });
-    function loadMoreData(page) {
+    function loadMoreNews(page) {
         $$.ajax({
             method: 'get',
             url: '?page=' + page,
@@ -565,7 +565,8 @@ if ($$('#NewsCenterData').length>0){
             success: function (data) {
                 data=JSON.parse(data);
                 if(data.html == ""){
-                    $$('#NewsCenterLoadingTip').html("<i class=\"mdui-icon material-icons mdui-center mdui-text-color-grey-600\">mood_bad</i><span class=\"loading-tip-text\">没有更多了</span>");
+                    $$('#NewsCenterLoadingTip').empty();
+                    $$('#NewsCenterLoadingFailed').show();
                     return;
                 }
                 $$('#NewsCenterLoadingTip').hide();
@@ -575,4 +576,159 @@ if ($$('#NewsCenterData').length>0){
 
     }
 
+}
+//新闻回复的ajax翻页
+if ($$('#NewsReplyData').length>0){
+    var page = 1;
+    $(window).scroll(function() {
+            if ($(window).scrollTop() + $(window).height() +2 >= $(document).height()) {
+                page++;
+                loadMoreNewsReply(page);
+            }
+    });
+    function loadMoreNewsReply(page) {
+        $$.ajax({
+            method: 'get',
+            url: '?page=' + page,
+            beforeSend: function(){
+                $$('#NewsReplyLoadingTip').show();
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.html == ""){
+                    $$('#NewsReplyLoadingTip').empty();
+                    $$('#NewsReplyLoadingFailed').show();
+                    return;
+                }
+                $$('#NewsReplyLoadingTip').hide();
+                $$("#NewsReplyData").append('<div class="animated fadeInUp">'+data.html+'</div>');
+            }
+        });
+
+    }
+
+}
+
+//Ajax提交新闻评论
+function ajaxSubmitNewsCommentForm(url) {
+    var content = $$('textarea[name="content"]').val();
+    // 简单表单验证
+    if (removeHTMLTag(content).length<2){
+        mdui.snackbar('News replies need at least 2 characters<br>新闻回复至少需要2个字符',{
+            position:'top',
+            timeout:0,
+            buttonText:'ok'
+        });
+        return;
+    }
+    $$.ajax({
+        method: 'POST',
+        url: url,
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+            content:content
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status === 1){
+                mdui.snackbar({
+                    message:data.msg,
+                    position:'top'
+                });
+                setTimeout(function(){
+                    //使用  setTimeout（）方法设定定时2000毫秒
+                    window.location.reload();//页面刷新
+                },2000);
+            }else{
+                mdui.snackbar(data.msg,{
+                    position:'top',
+                    timeout:0,
+                    buttonText:'ok'
+                });
+            }
+        },
+        statusCode: {
+            422: function (data) {
+                data=JSON.parse(data.response);
+                mdui.snackbar(data.errors.content,{
+                    position:'top',
+                    timeout:0,
+                    buttonText:'ok'
+                });
+            }
+        }
+
+    });
+
+}
+
+/**
+ * 删除新闻回复
+ * @param newsReplyId
+ * @param newsReplyContent
+ */
+function deleteNewsReply(newsReplyId,newsReplyContent) {
+    mdui.dialog({
+        title: '删除新闻回复',
+        content: '您确定要删除此新闻回复吗<br/>'+newsReplyContent,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/news/reply/delete',
+                        data: {
+                            id:newsReplyId
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
+function replyToNewsReply(userName,userId) {
+    editor.txt.html('<a href="/user/'+userId+'">@'+userId+'-'+userName+' :</a>');
+    location.href = "#createNewsComment";
+    $('#editorText').focus();
+}
+
+// 过滤html标签
+function removeHTMLTag(str) {
+    str = str.replace(/<\/?[^>]*>/g,''); //去除HTML tag
+    return str;
 }

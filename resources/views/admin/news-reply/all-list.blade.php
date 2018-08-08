@@ -19,8 +19,8 @@
             </thead>
             <tbody>
             @foreach($replies as $reply)
-                <tr class="mdui-table-row" id="{{$reply->id}}" name="{{str_limit($reply->content, $limit = 30, $end = '...')}}">
-                    <td>{!! str_limit($reply->content, $limit = 50, $end = '...')!!}</td>
+                <tr class="mdui-table-row" id="{{$reply->id}}" name="{{str_limit(strip_tags($reply->content), $limit = 30, $end = '...')}}">
+                    <td>{!! str_limit(strip_tags($reply->content), $limit = 50, $end = '...')!!}</td>
                     <td>
                         <a href="#">
                             {{str_limit($reply->news->title , $limit = 30, $end = '...')}}
@@ -35,7 +35,7 @@
                         <a href="{{route('adminNewsReplyEdit',[$reply->news->id,$reply->id])}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
                         </a>
-                        <button onclick="deleteNewsReply('{{$reply->id}}','{{str_limit($reply->content, $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
+                        <button onclick="deleteNewsReply('{{$reply->id}}','{{str_limit(strip_tags($reply->content), $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
                             <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
                         </button>
                     </td>

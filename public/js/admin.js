@@ -65,9 +65,10 @@ function deleteNewsCategory(catId,catName) {
                                     window.location.reload();//页面刷新
                                 },2000);
                             } else {
-                                mdui.snackbar({
-                                    message:data.msg,
-                                    position:'top'
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
                                 });
                             }
 
@@ -306,9 +307,10 @@ function deleteNews(newsId,newsTitle) {
                                     window.location.reload();//页面刷新
                                 },2000);
                             } else {
-                                mdui.snackbar({
-                                    message:data.msg,
-                                    position:'top'
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
                                 });
                             }
 
@@ -363,15 +365,10 @@ function deleteNewses() {
                                     window.location.reload();//页面刷新
                                 },2000);
                             } else {
-                                mdui.snackbar({
-                                    message:data.msg,
+                                mdui.snackbar(data.msg,{
                                     position:'top',
                                     timeout:0,
-                                    buttonText:'OK',
-                                    buttonColor:'pink',
-                                    onButtonClick: function(){
-                                        window.location.reload();//页面刷新
-                                    }
+                                    buttonText:'ok'
                                 });
                             }
 
@@ -425,9 +422,10 @@ function deleteNewsReply(newsReplyId,newsReplyContent) {
                                     window.location.reload();//页面刷新
                                 },2000);
                             } else {
-                                mdui.snackbar({
-                                    message:data.msg,
-                                    position:'top'
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
                                 });
                             }
 

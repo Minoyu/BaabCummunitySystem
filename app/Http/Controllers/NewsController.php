@@ -39,12 +39,17 @@ class NewsController extends Controller
     }
 
 
-    public function showNewsContent(News $news){
+    public function showNewsContent(News $news,Request $request){
         $news->increment('view_count');
+        $replies = $news->replies()->orderBy('created_at','DESC')->with(['user.info'])->paginate(10);
         $cat = $news->newsCategory;
         $newsCategories = NewsCategory::all();
-        return view('news-content',compact('news','cat','newsCategories'));
-    }
+        if ($request->ajax()) {
+            $view = view('news-content.comment-data', compact('replies','news'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('news-content',compact('news','cat','newsCategories','replies'));
+        }
 
 
     public function adminListShow(){
@@ -265,8 +270,8 @@ class NewsController extends Controller
                     $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
 //                // 如果宽大于900 裁剪图片
                     $img=Image::make($realPath);
-                    if ($img->width()>900){
-                        $img->resize(900, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
+                    if ($img->width()>600){
+                        $img->resize(600, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
                             $constraint->aspectRatio();
                         })->save();
                     }
