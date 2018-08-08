@@ -1,15 +1,30 @@
 <div class="mdui-card mdui-m-t-2">
-    <div class="news-content-create-comment">
-        <div class="title"><i class="mdui-icon material-icons">comment</i>发表你的看法</div>
-        <img src="{{\Auth::user()->info->avatar_url}}" class="avatar-img mdui-hoverable">
-        <div class="comment-edit-area">
-            <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="news-reply"></div>
-            <div class="editor-middle-bar">写点什么</div>
-            <div contenteditable="true" id="editorText" class="editor-text mdui-hoverable" ></div>
-            <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
-            <button class="mdui-btn mdui-color-pink-400 submit-btn"><i class="mdui-icon material-icons mdui-icon-left">send</i>发射</button>
+    @if(Auth::check())
+        <div class="news-content-create-comment">
+            <div class="title"><i class="mdui-icon material-icons">comment</i>发表你的看法</div>
+                <img src="{{\Auth::user()->info->avatar_url}}" class="avatar-img mdui-hoverable">
+                <div class="comment-edit-area">
+                    <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="news-reply"></div>
+                    <div class="editor-middle-bar">写点什么</div>
+                    <div contenteditable="true" id="editorText" class="editor-text mdui-hoverable" ></div>
+                    <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
+                    <button class="mdui-btn mdui-color-pink-400 submit-btn"><i class="mdui-icon material-icons mdui-icon-left">send</i>发射</button>
+                </div>
         </div>
-    </div>
+    @else
+        <div class="news-content-create-comment news-content-create-comment-without-login">
+            <div class="title"><i class="mdui-icon material-icons">comment</i>发表你的看法</div>
+            <i class="mdui-icon material-icons tip-icon">&#xe811;</i>
+            <div class="tip-text">
+                对不起，你还没有登录
+            </div>
+            <div class="tip-action">
+                <button onclick="openLoginDialog()" class="mdui-btn mdui-btn-dense mdui-color-blue-100 mdui-ripple">{{__('index.login')}}</button>
+                {{__('index.or')}}
+                <button onclick="openRegisterDialog()" class="mdui-btn mdui-btn-dense mdui-color-blue-grey mdui-ripple">{{__('index.register')}}</button>
+            </div>
+        </div>
+    @endif
     <div class="side-card-header" style="height: 40px">
         <div class="side-card-header-text">
             共有{{$news->reply_count}}条回复

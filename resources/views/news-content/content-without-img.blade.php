@@ -1,4 +1,4 @@
-<div class="mdui-card" style="border-radius: 10px">
+<div class="mdui-card news-content-card" style="border-radius: 10px">
     <h1 class="news-content-primary-title">
         {{$news->title}}
         <br>

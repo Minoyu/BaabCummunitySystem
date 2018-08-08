@@ -249,7 +249,7 @@ function loginSubmit() {
                 setTimeout(function(){
                     //使用  setTimeout（）方法设定定时5000毫秒
                     window.location.reload();//页面刷新
-                },5000);
+                },4000);
             }else{
                 loginPasswordErrorField.text(data.msg);
                 passwordHasError=true;

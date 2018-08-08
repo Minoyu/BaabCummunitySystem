@@ -900,6 +900,9 @@ body {
     opacity: .8;
 }
 
+.news-content-card{
+    padding: 10px;
+}
 /*新闻内容页主标题*/
 .news-content-primary-title{
     padding-top: 5px;
@@ -1010,6 +1013,28 @@ body {
 .news-content-create-comment{
     background-color: #f0f0f0;
     padding: 25px 20px 60px;
+}
+.news-content-create-comment-without-login{
+    padding: 25px 20px 20px;
+}
+.news-content-create-comment .tip-icon{
+    display: block;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 50px;
+    opacity: 0.5;
+}
+.news-content-create-comment .tip-text{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 20px;
+    opacity: 0.5;
+}
+.news-content-create-comment .tip-action{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
 }
 .news-content-create-comment .title{
     font-size: 20px;
