@@ -3,7 +3,7 @@
         <a href="#"><img src="{{$reply->user->info->avatar_url}}" alt="users" class="news-content-comment-users-img mdui-hoverable"></a>
         <a href="#" class="news-content-comment-username">{{$reply->user->name}}</a>
         {{--<a href="#" class="news-content-comment-dianzan-btn"><i class="mdui-icon material-icons">thumb_up</i></a>--}}
-        <div class="news-content-comment-time" ><i class="mdui-icon material-icons">&#xe192;</i> time</div>
+        <div class="news-content-comment-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$reply->created_at->diffForHumans()}}</div>
         <div class="news-content-comment-p">{!! $reply->content !!}</div>
         <div class="action-area">
             <a onclick="replyToNewsReply('{{$reply->user->name}}','{{$reply->user->id}}')" class="mdui-btn mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i>回复</a>

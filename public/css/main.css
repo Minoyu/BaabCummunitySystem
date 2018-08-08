@@ -696,6 +696,28 @@ body {
     padding-top: 12px;
     padding-left: 5px;
 }
+.news-page-divider{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.news-page-divider .page-num{
+    position: absolute;
+    left: 35px;
+    top: -25px;
+    font-size: 40px;
+    opacity: 0.2;
+    font-weight: bold;
+    font-family: -webkit-pictograph;
+}
+.news-page-divider .page-text{
+    position: absolute;
+    left: 72px;
+    top: -15px;
+    font-size: 14px;
+    opacity: 0.2;
+    font-weight: bold;
+    font-family: -webkit-pictograph;
+}
 /*新闻页加载文字提示*/
 .loading-tip-text{
     margin-top: 5px;

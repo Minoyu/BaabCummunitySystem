@@ -570,7 +570,14 @@ if ($$('#NewsCenterData').length>0){
                     return;
                 }
                 $$('#NewsCenterLoadingTip').hide();
-                $$("#NewsCenterData").append('<div class="animated fadeInUp">'+data.html+'</div>');
+                $$("#NewsCenterData").append('' +
+                    '<div class="animated fadeInUp">' +
+                        '<div class="mdui-divider-inset news-page-divider">' +
+                    '       <span class="page-num">'+page+'</span>' +
+                    '       <span class="page-text">Page</span>' +
+                    '    </div>' +
+                        ''+data.html+'' +
+                    '</div>');
             }
         });
 
