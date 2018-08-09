@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\News;
+use App\Model\NewsCarousel;
 use App\Model\NewsCategory;
 use App\Model\User;
 use Illuminate\Http\Request;
@@ -15,25 +16,38 @@ class NewsController extends Controller
     //
 
     public function showNews(Request $request){
-        $newses = News::orderBy('order','desc')->with('newsCategory')->paginate(10);
+        $newses = News::where('status','publish')
+            ->orderBy('order','desc')
+            ->with('newsCategory')
+            ->paginate(10);
 
         if ($request->ajax()) {
             $view = view('news.left-list-data',compact('newses'))->render();
             return response()->json(['html'=>$view]);
         }else{
-            $newsCategories = NewsCategory::all();
-            return view('news',compact('newsCategories','newses'));
+            $newsCategories = NewsCategory::where('status','publish')
+                ->orderBy('order','desc')
+                ->get();
+            $newsCarousels = NewsCarousel::where('status','publish')
+                ->orderBy('order','desc')
+                ->get();
+            return view('news',compact('newsCategories','newses','newsCarousels'));
         }
     }
 
     public function showNewsSec(NewsCategory $cat,Request $request)
     {
-        $newses = $cat->news()->paginate(15);
+        $newses = $cat->news()
+            ->where('status','publish')
+            ->orderBy('order','desc')
+            ->paginate(15);
         if ($request->ajax()) {
             $view = view('news-sec.list-data', compact('newses'))->render();
             return response()->json(['html' => $view]);
         }else{
-            $newsCategories = NewsCategory::all();
+            $newsCategories = NewsCategory::where('status','publish')
+                ->orderBy('order','desc')
+                ->get();
             return view('news-sec', compact('newses','cat','newsCategories'));
         }
     }
@@ -117,8 +131,7 @@ class NewsController extends Controller
         $news_category_id = \request('news_category_id');
         $order = \request('order');
         $invalided_at = \request('invalided_at');
-        $user_id = Auth::id();
-        $data = compact('title','content','cover_img','user_id','news_category_id','order','invalided_at','status');
+        $data = compact('title','content','cover_img','news_category_id','order','invalided_at','status');
 
 //        dd($data);
         $res=News::where('id',$news->id)->update($data);

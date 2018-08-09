@@ -23,7 +23,7 @@
             <tbody>
             @foreach($newses as $news)
                 <tr class="mdui-table-row" id="{{$news->id}}" name="{{$news->title}}">
-                    <td>@if($news->status=='hidden')<span class="mdui-text-color-pink">[<i class="mdui-icon material-icons">local_cafe</i>暂存] </span>@endif {{$news->title}}</td>
+                    <td>@if($news->status=='hidden')<span class="mdui-text-color-pink">[<i class="mdui-icon material-icons">local_cafe</i>暂存] </span>@endif <a href="{{route('showNewsContent',$news->id)}}" target="_blank">{{$news->title}}</a></td>
                     <td>{{$news->id}}</td>
                     <td>{{$news->user->name}}</td>
                     <td>{{$news->view_count}}</td>
@@ -34,7 +34,7 @@
                     </td>
                     <td>{{$news->order}}</td>
                     <td>
-                        <a href="#" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
+                        <a href="{{route('showNewsContent',$news->id)}}" target="_blank" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>查看
                         </a>
                         <a href="{{route('adminNewsEdit',$news->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">

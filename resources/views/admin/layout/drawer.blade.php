@@ -30,6 +30,7 @@
                 <a href="{{route('adminNewsCategoriesCreate')}}">
                     <li class="mdui-list-item mdui-ripple">创建新闻分类</li>
                 </a>
+
             </ul>
         </li>
 
@@ -48,6 +49,19 @@
                 </a>
             </ul>
         </li>
+        <li class="mdui-collapse-item" id="drawer-newsOtherItem">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">settings</i>
+                <div class="mdui-list-item-content">新闻综合设置</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a href="{{route('adminNewsCarouselsList')}}">
+                    <li class="mdui-list-item mdui-ripple">新闻中心轮播图</li>
+                </a>
+            </ul>
+        </li>
+
         <div class="mdui-divider"></div>
         <li class="mdui-collapse-item" id="drawer-communityCategoryItem">
             <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">

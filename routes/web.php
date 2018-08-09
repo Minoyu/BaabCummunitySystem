@@ -20,11 +20,18 @@ Route::get('/news/category/{cat}','NewsController@showNewsSec')->name('showNewsS
 Route::get('/news/{news}','NewsController@showNewsContent')->name('showNewsContent');
 Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('newsReplyStore');
 
+//新闻回复图片上传
+Route::post('/news/reply/upload/img','NewsController@uploadReplyImg')->name('uploadNewsImg');
+
 
 //社区页面
 Route::get('/community','CommunityController@showCommunity')->name('showCommunity');
 Route::get('/community/test','CommunityController@showCommunitySec')->name('showCommunitySec');
 Route::get('/community/content','CommunityController@showCommunityContent')->name('showCommunityContent');
+
+//社区话题图片上传
+Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')->name('uploadCommunityTopicImg');
+
 
 //切换语言
 Route::get('/switch/lang','IndexController@switchLang')->name('switchLang');
@@ -82,12 +89,23 @@ Route::group(['prefix'=>'admin'],function () {
     Route::post("/news/reply/delete",'NewsReplyController@softDelete')->name('newsReplySoftDelete');
     Route::post("/news/reply/deletes",'NewsReplyController@softDeletes')->name('newsReplySoftDeletes');
 
+    //新闻轮播图管理模块
+    Route::get("/news-carousel",'NewsCarouselController@adminListShow')->name('adminNewsCarouselsList');
+    Route::get("/news-carousel/create",'NewsCarouselController@adminCreateShow')->name('adminNewsCarouselCreate');
+    Route::post("/news-carousel/store",'NewsCarouselController@store')->name('adminNewsCarouselStore');
+    Route::get("/news-carousel/{newsCarousel}/edit",'NewsCarouselController@adminEditShow')->name('adminNewsCarouselEdit');
+    Route::post("/news-carousel/{newsCarousel}/update",'NewsCarouselController@update')->name('adminNewsCarouselUpdate');
+    Route::post("/news-carousel/delete",'NewsCarouselController@softDelete')->name('newsCarouselSoftDelete');
+    Route::get("/news-carousel/{newsCarousel}/up/order",'NewsCarouselController@turnUpOrder')->name('newsCarouselTurnUpNewsOrder');
+    Route::get("/news-carousel/{newsCarousel}/down/order",'NewsCarouselController@turnDownOrder')->name('newsCarouselTurnDownNewsOrder');
+
+
     //新闻图片上传
     Route::post('/news/upload/img','NewsController@uploadImg')->name('uploadNewsImg');
-    //新闻回复图片上传
-    Route::post('/news/reply/upload/img','NewsController@uploadReplyImg')->name('uploadNewsImg');
     //新闻封面图片上传
     Route::post('/news/upload/cover','NewsController@uploadCover')->name('uploadNewsCover');
+    //新闻轮播图上传
+    Route::post('/news-carousel/upload','NewsCarouselController@uploadCover')->name('uploadNewsCover');
 
     //社区一二级分类管理模块
     Route::get("/community/category/zones-and-sections",'CommunityCategoryController@showZonesAndSections')->name('adminCommunityZonesAndSectionsShow');
@@ -128,9 +146,6 @@ Route::group(['prefix'=>'admin'],function () {
     Route::post("/community/topic/reply/delete",'CommunityTopicReplyController@softDelete')->name('topicReplySoftDelete');
     Route::post("/community/topic/reply/deletes",'CommunityTopicReplyController@softDeletes')->name('topicReplySoftDeletes');
 
-
-    //社区话题图片上传
-    Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')->name('uploadCommunityTopicImg');
     //zone封面图片上传
     Route::post('/community/category/zones/upload/img','CommunityCategoryController@uploadZoneImg')->name('uploadZoneImg');
 

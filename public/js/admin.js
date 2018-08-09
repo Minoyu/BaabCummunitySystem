@@ -1,6 +1,6 @@
 //表单提交按钮
 function formPublicSubmit(formid) {
-    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='public'/>");
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='publish'/>");
     tmpStatusInput.appendTo(formid);
     $$(formid).submit();
 }
@@ -174,6 +174,64 @@ function deleteNewsCategories() {
     });
 }
 
+/**
+ * 删除新闻轮播图
+ * @param id
+ * @param name
+ */
+function deleteNewsCarousel(id,name) {
+    mdui.dialog({
+        title: '删除新闻轮播图',
+        content: '您确定要删除此新闻轮播图吗<br/>'+name,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/news-carousel/delete',
+                        data: {
+                            id:id
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
+
 //新闻编辑器
 var E = window.wangEditor;
 if ($$('#editorToolbar').length>0){
@@ -196,13 +254,21 @@ if ($$('#editorToolbar').length>0){
     };
     switch ($$('#editorToolbar').attr('type')){
         case 'community-topic':
-            editor.customConfig.uploadImgServer = '/admin/community/topic/upload/img';
+            editor.customConfig.uploadImgServer = '/community/topic/upload/img';
             break;
         case 'news':
             editor.customConfig.uploadImgServer = '/admin/news/upload/img';
             break;
         case 'news-reply':
-            editor.customConfig.uploadImgServer = '/admin/news/reply/upload/img';
+            editor.customConfig.uploadImgServer = '/news/reply/upload/img';
+            editor.customConfig.menus = [
+                'emoticon',  // 表情
+                'image', // 插入图片
+                'bold',  // 粗体
+                'italic',  // 斜体
+                'underline',  // 下划线
+                'quote'  // 引用
+            ];
             break;
     }
     editor.customConfig.uploadImgHeaders = {
@@ -231,6 +297,44 @@ function handleNewsCoverUpdate(obj,className) {
     $$.ajax({
         method: 'POST',
         url: '/admin/news/upload/cover',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: form,
+        contentType: false, //禁止设置请求类型
+        processData: false, //禁止jquery对DAta数据的处理,默认会处理
+        //禁止的原因是,FormData已经帮我们做了处理
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status===1){
+                coverImg.attr('src',data.src);
+                coverInput.val(data.src);
+                mdui.snackbar({
+                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
+                    position:'top'
+                });
+            }
+        }
+    });
+
+}
+
+/**
+ * 处理新闻轮播图上传
+ * @param obj
+ * @param className
+ */
+function handleNewsCarouselUpdate(obj,className) {
+    var coverImg = $$('.'+className);
+    var coverInput = $$('input[name="cover_img"]');
+    var cover = obj.files[0];
+    var id = $$('input[name="userId"]').val();
+
+    var form = new FormData();
+    form.append('cover',cover);
+    $$.ajax({
+        method: 'POST',
+        url: '/admin/news-carousel/upload',
         headers: {
             'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
         },

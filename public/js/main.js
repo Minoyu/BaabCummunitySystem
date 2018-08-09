@@ -106,13 +106,13 @@ if ($$('#editorToolbar').length>0){
     };
     switch ($$('#editorToolbar').attr('type')){
         case 'community-topic':
-            editor.customConfig.uploadImgServer = '/admin/community/topic/upload/img';
+            editor.customConfig.uploadImgServer = '/community/topic/upload/img';
             break;
         case 'news':
             editor.customConfig.uploadImgServer = '/admin/news/upload/img';
             break;
         case 'news-reply':
-            editor.customConfig.uploadImgServer = '/admin/news/reply/upload/img';
+            editor.customConfig.uploadImgServer = '/news/reply/upload/img';
             editor.customConfig.menus = [
                 'emoticon',  // 表情
                 'image', // 插入图片
