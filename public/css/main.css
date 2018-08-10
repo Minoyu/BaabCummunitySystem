@@ -727,6 +727,25 @@ body {
     display: block;
     opacity: .6;
 }
+.news-sec-cat-panel-mobile{
+    border-radius: 8px;
+}
+.news-sec-cat-panel-mobile .mdui-panel-item-header{
+    background-color: #fcfcfc;
+    border-radius: 8px;
+}
+.news-sec-cat-panel-mobile .mdui-panel-item-title{
+    opacity: 0.7;
+}
+
+.news-sec-description{
+    background: #f6f6f6;
+    padding: 20px 30px;
+    font-size: 18px;
+    opacity: 0.8;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
 
 /*二级新闻侧边栏列表*/
 .news-sec-side-column-list a{
