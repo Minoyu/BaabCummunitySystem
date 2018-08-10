@@ -18,7 +18,7 @@
         </div>
     </div>
 </div>
-<h2 class="title-with-bottom-border mdui-m-t-2 mdui-p-a-2 mdui-m-b-0 mdui-card">
+<h2 class="title-with-bottom-border mdui-m-t-2 mdui-p-x-2 mdui-p-t-2 mdui-m-b-0 mdui-card" style="padding-bottom: 12px">
     热点新闻
 </h2>
 <div class="mdui-card mdui-p-t-1 mdui-m-b-5">
