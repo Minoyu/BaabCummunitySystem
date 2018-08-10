@@ -26,7 +26,8 @@ Route::post('/news/reply/upload/img','NewsController@uploadReplyImg')->name('upl
 
 //社区页面
 Route::get('/community','CommunityController@showCommunity')->name('showCommunity');
-Route::get('/community/test','CommunityController@showCommunitySec')->name('showCommunitySec');
+Route::get('/community/zone/{zone}','CommunityController@showCommunityZone')->name('showCommunityZone');
+Route::get('/community/section/{section}','CommunityController@showCommunitySection')->name('showCommunitySection');
 Route::get('/community/content','CommunityController@showCommunityContent')->name('showCommunityContent');
 
 //社区话题图片上传

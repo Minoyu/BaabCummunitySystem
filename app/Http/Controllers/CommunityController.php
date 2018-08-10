@@ -2,15 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\CommunityZone;
 use Illuminate\Http\Request;
 
 class CommunityController extends Controller
 {
     //
     public function showCommunity(){
-        return view('community');
+        $zones = CommunityZone::with('communitySections')
+            ->where('status','publish')
+            ->orderBy('order','desc')
+            ->get();
+        return view('community',compact('zones'));
     }
-    public function showCommunitySec(){
+    public function showCommunityZone(){
+        return view('community-zones');
+    }
+    public function showCommunitySection(){
         return view('community-sec');
     }
     public function showCommunityContent(){

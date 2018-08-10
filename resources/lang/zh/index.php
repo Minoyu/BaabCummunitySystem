@@ -39,7 +39,7 @@ return [
     //Regional
     'regional'=>'区域',
     //Community
-    'postsCount'=>'帖数'
+    'postsCount'=>'话题数'
 
 
 ];

@@ -312,6 +312,10 @@ body {
     padding: 3px 20px 3px 20px;
 }
 
+.content-card{
+    border-radius: 10px;
+    padding: 10px 20px;
+}
 
 /*首页新闻头条板块*/
 /*图片*/
@@ -455,12 +459,13 @@ body {
     overflow: hidden;
     color: #000;
     border-radius: 5px;
-    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .1), 0 2px 2px 0 rgba(0, 0, 0, .07), 0 1px 5px 0 rgba(0, 0, 0, .06);
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .1), 0 2px 2px 0 rgba(0, 0, 0, .07), 0 1px 5px 0 rgba(0, 0, 0, .06);
     margin-top: 10px;
     margin-bottom: 10px;
     background: url("../imgs/index_community_card_bg.jpg");
     background-size: 100% 100%;
+    height: 115px;
 }
 /* 卡片头像 */
 .index-community-card-header-avatar {
@@ -476,9 +481,9 @@ body {
     padding-top:15px;
     margin-left: 52px;
     overflow: hidden;
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 18px;
     text-overflow: ellipsis;
     white-space: nowrap;
     opacity: .87;
@@ -487,24 +492,28 @@ body {
 .index-community-card-header-count {
     display: block;
     margin-left: 52px;
-    padding-bottom: 5px;
+    padding-bottom: 3px;
     padding-right: 8px;
     overflow: hidden;
-    font-size: 14px;
-    font-weight: 300;
-    line-height: 20px;
+    font-size: 12px;
+    opacity: .7;
+    line-height: 16px;
 }
 /* 卡片副标题 */
 .index-community-card-header-subtitle {
-    display: block;
     margin-left: 52px;
     padding-bottom: 8px;
     padding-right: 8px;
     overflow: hidden;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 300;
     line-height: 20px;
-    opacity: .8;
+    opacity: .6;
+    text-overflow:ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
 }
 
 /*登录部分CSS*/
@@ -799,7 +808,7 @@ body {
 .community-zones-card {
     position: relative;
     display: inline-block;
-    height: 45px;
+    height: 38px;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     margin: 10px 10px;
@@ -832,8 +841,8 @@ body {
     display: inline-block;
     width: 60px;
     height: 60px;
-    left:-5px;
-    bottom: 0px;
+    left:-6px;
+    bottom: -2px;
     margin-right: -4px;
     overflow: hidden;
     font-size: 18px;
@@ -853,11 +862,11 @@ body {
 /* 社区主页上方分区小卡片文本 */
 .community-zones-card-title {
     display: inline-block;
-    height: 45px;
+    height: 38px;
     padding-right: 12px;
     padding-left: 65px;
-    font-size: 18px;
-    line-height: 45px;
+    font-size: 17px;
+    line-height: 38px;
     vertical-align: middle;
 }
 
