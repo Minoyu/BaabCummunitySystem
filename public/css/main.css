@@ -7,7 +7,7 @@ body {
 @media (min-width: 600px){
     .body-padding{
         padding-top: 120px;
-        padding-bottom: 0px;
+        padding-bottom: 0;
     }
 }
 /*有tab 无底部导航栏*/
@@ -66,14 +66,14 @@ body {
 }
 
 .appbar-menu-subtitle button{
-    min-width: 0px;
-    padding: 0px 5px;
+    min-width: 0;
+    padding: 0 5px;
     font-size: 13px;
 }
 
 /*抽屉菜单*/
 .drawer-menu{
-    padding: 0px 0px;
+    padding: 0 0;
     box-shadow: 0 1px 3px rgba(26,26,26,.1);
 }
 .drawer-top{
@@ -227,7 +227,7 @@ body {
     border-bottom: 2px solid rgba(0, 0, 0, 0.65);
     font-size: 22px;
     font-weight: bold;
-    margin: 20px 0px 10px 0px;
+    margin: 20px 0 10px 0;
     padding: 10px 20px 9px 10px;
     line-height: 18px;
     background-color: #fff;
@@ -242,10 +242,11 @@ body {
     border-left: 8px solid #FF3338;
     border-bottom: 2px solid #FF3338;
 }
+
 /*板块标题按钮*/
 .part-title-more-btn{
     float: right !important;
-    margin: -10px 0px;
+    margin: -10px 0;
 }
 .part-title-blue>.part-title-more-btn{
     color: #3c89d2;
@@ -254,12 +255,31 @@ body {
     color: #d1292d;
 }
 
+/*板块标题*/
+.part-title-with-bg,
+.part-title-with-bg-blue,
+.part-title-with-bg-red{
+    font-size: 16px;
+    font-weight: 500;
+    margin: 20px 0 10px 0;
+    padding: 10px 20px 9px 10px;
+    line-height: 18px;
+    background-color: #f6f6f6;
+    border-radius: 8px;
+}
+
+.part-title-with-bg .part-title-more-btn{
+    float: right !important;
+    margin: -7px 0;
+}
+
+
 /*侧边栏标题*/
 .side-column-title{
     border-bottom: 5px solid #00b0ff;
     font-size: 22px;
     font-weight: bold;
-    margin: 20px 0px 10px 0px;
+    margin: 20px 0 10px 0;
     padding: 5px;
     line-height: 22px;
     background-color: #fff;
@@ -270,7 +290,7 @@ body {
     border-bottom: 5px solid #00b0ff;
     font-size: 22px;
     font-weight: bold;
-    margin: 20px 0px 10px 0px;
+    margin: 20px 0 10px 0;
     padding: 5px;
     line-height: 22px;
     background-color: #fff;
@@ -407,7 +427,7 @@ body {
     /*图片旁标题允许换行*/
     word-wrap:break-word;
     display: block;
-    padding: 20px 10px 0px 5px;
+    padding: 20px 10px 0 5px;
     font-size: 22px;
     line-height: 1.3em;
     color: #1065cd;
@@ -434,7 +454,7 @@ body {
 }
 /*首页列表样式*/
 .index-list>.mdui-list-item{
-    padding-left: 0px;
+    padding-left: 0;
 }
 
 /*首页社区一级分类样式*/
@@ -879,7 +899,7 @@ body {
         height: 45px;
         width: 45px;
         left: -3px;
-        bottom: 0px;
+        bottom: 0;
     }
     .community-zones-card-title {
         height: 32px;
@@ -1131,7 +1151,7 @@ body {
 /*新闻内容页评论区点赞按钮*/
 .news-content-comment-dianzan-btn{
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 30px;
 }
 /*新闻内容页评论输入区边框样式*/
@@ -1414,7 +1434,7 @@ body {
         user-select: none;
     }
     .edit-user-info-dialog .user-info-box{
-        padding-left: 0px;
+        padding-left: 0;
         padding-top: 40px;
     }
 }
@@ -1508,14 +1528,14 @@ body {
 }
 /*社区内容页评论条*/
 .community-content-comment-list{
-    padding: 10px 0px;
+    padding: 10px 0;
     position: relative;
 }
 /*社区内容页评论区用户头像样式*/
 .community-content-comment-users-img{
     position: absolute;
     top: 2.5px;
-    left: 0px;
+    left: 0;
 }
 /*社区内容页评论区用户名*/
 .community-content-comment-username{
@@ -1524,13 +1544,13 @@ body {
 /*社区内容页评论区评论按钮*/
 .community-content-comment-pinglun-btn{
     position: absolute;
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
 }
 /*社区内容页评论区点赞按钮*/
 .community-content-comment-dianzan-btn{
     position: absolute;
-    top: 0px;
+    top: 0;
     right: 30px;
 }
 /*社区内容页评论区p标签样式*/

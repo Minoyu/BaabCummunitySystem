@@ -1,5 +1,5 @@
 @foreach($zones as $zone)
-    <h2 class="part-title-red">
+    <h2 class="part-title-with-bg">
         {{$zone->name}}
         <a href="{{route('showCommunityZone',$zone->id)}}" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple">{{__('index.more')}}
             <i class="mdui-icon material-icons mdui-icon-right">chevron_right</i>
@@ -11,7 +11,7 @@
                 <a href="{{route('showCommunitySection',$communitySection->id)}}">
                     <div class="index-community-card mdui-hoverable">
                         <div class="index-community-card-header">
-                            <img class="index-community-card-header-avatar" src="http://via.placeholder.com/200x200"/>
+                            <img class="index-community-card-header-avatar" src="{{$communitySection->img_url}}"/>
                             <div class="index-community-card-header-title">{{$communitySection->name}}</div>
                             <div class="index-community-card-header-count">{{__('index.postsCount')}}：{{$communitySection->topic_count}}</div>
                             <div class="index-community-card-header-subtitle">{{$communitySection->description}}</div>
