@@ -15,8 +15,8 @@ class CommunityController extends Controller
             ->get();
         return view('community',compact('zones'));
     }
-    public function showCommunityZone(){
-        return view('community-zones');
+    public function showCommunityZone(CommunityZone $zone){
+        return view('community-zone',compact('zone'));
     }
     public function showCommunitySection(){
         return view('community-sec');

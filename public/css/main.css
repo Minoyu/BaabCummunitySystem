@@ -260,7 +260,7 @@ body {
 .part-title-with-bg-blue,
 .part-title-with-bg-red{
     font-size: 16px;
-    font-weight: 500;
+    font-weight: bold;
     margin: 20px 0 10px 0;
     padding: 10px 20px 9px 10px;
     line-height: 18px;
@@ -333,6 +333,7 @@ body {
 }
 
 .content-card{
+    overflow: visible;
     border-radius: 10px;
     padding: 10px 20px;
 }
@@ -908,6 +909,75 @@ body {
         padding-left: 50px;
     }
 }
+
+.community-zone-content{
+    margin-top: 60px;
+}
+.community-zone-top-img{
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    top: -60px;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    border-radius: 10px;
+}
+.community-zone-top-txt-area{
+    min-height: 90px;
+}
+.community-zone-top-name{
+    padding-left: 165px;
+    font-size: 22px;
+    font-weight: 500;
+}
+.community-zone-top-sub-area{
+    padding-left: 165px;
+    padding-top: 5px;
+}
+.community-zone-top-sub-area .mdui-icon{
+    font-size: 22px;
+    padding-top: 2px;
+    padding-left: 1px;
+}
+.community-zone-top-description{
+    padding:0 30px;
+    margin-top: 10px;
+    font-size: 18px;
+    opacity: .8;
+}
+@media (max-width: 600px) {
+    .community-zone-top-img{
+        height: 120px;
+        width: 120px;
+        top: -80px;
+        left: calc(50% - 60px);
+    }
+    .community-zone-content{
+        margin-top: 70px;
+        padding-top: 50px;
+    }
+    .community-zone-top-name{
+        padding-left: 0;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 500;
+    }
+    .community-zone-top-sub-area{
+        padding-left: 0;
+        padding-top: 5px;
+        text-align: center;
+    }
+    .community-zone-top-description{
+        padding:0 10px;
+        margin-top: 5px;
+        font-size: 18px;
+        opacity: .8;
+        font-style: italic;
+    }
+
+
+}
+
 
 /*社区二级页面顶部介绍卡*/
 .community-sec-top-card {

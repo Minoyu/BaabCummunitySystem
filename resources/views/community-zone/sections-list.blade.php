@@ -1,4 +1,4 @@
-<h1 class="title-with-bottom-border">{{__('community.zonesOfCommunity')}}</h1>
+<h1 class="part-title-with-bg">{{__('community.zonesOfCommunity')}}</h1>
 <div class="community-sec-top-card mdui-hoverable">
     <div class="community-sec-top-card-header">
         <img class="community-sec-top-card-header-avatar" src="http://via.placeholder.com/200x200"/>
