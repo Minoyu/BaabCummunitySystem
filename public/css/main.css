@@ -978,6 +978,74 @@ body {
 
 }
 
+.community-section-content{
+    margin-top: 60px;
+}
+.community-section-top-img{
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    top: -60px;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    border-radius: 10px;
+}
+.community-section-top-txt-area{
+    min-height: 90px;
+}
+.community-section-top-name{
+    padding-left: 165px;
+    font-size: 22px;
+    font-weight: 500;
+}
+.community-section-top-sub-area{
+    padding-left: 165px;
+    padding-top: 5px;
+}
+.community-section-top-sub-area .mdui-icon{
+    font-size: 22px;
+    padding-top: 2px;
+    padding-left: 1px;
+}
+.community-section-top-description{
+    padding:0 30px;
+    margin-top: 10px;
+    font-size: 16px;
+    opacity: .8;
+}
+@media (max-width: 600px) {
+    .community-section-top-img{
+        height: 120px;
+        width: 120px;
+        top: -80px;
+        left: calc(50% - 60px);
+    }
+    .community-section-content{
+        margin-top: 70px;
+        padding-top: 50px;
+    }
+    .community-section-top-name{
+        padding-left: 0;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 500;
+    }
+    .community-section-top-sub-area{
+        padding-left: 0;
+        padding-top: 5px;
+        text-align: center;
+    }
+    .community-section-top-description{
+        padding:0 10px;
+        margin-top: 5px;
+        font-size: 16px;
+        opacity: .8;
+        font-style: italic;
+    }
+
+
+}
+
 
 /*社区二级页面顶部介绍卡*/
 .community-sec-top-card {
@@ -987,8 +1055,6 @@ body {
     overflow: hidden;
     color: #000;
     border-radius: 5px;
-    -webkit-box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
-    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
     margin-top: 10px;
     margin-bottom: 10px;
     background: url("../imgs/index_community_card_bg.jpg");
@@ -997,10 +1063,10 @@ body {
 /* 社区二级页面顶部介绍卡片头像 */
 .community-sec-top-card-header-avatar {
     float: left;
-    width: 120px;
-    height: 120px;
+    width: 80px;
+    height: 80px;
     margin: 15px;
-    border-radius: 5%;
+    border-radius: 50%;
 }
 /* 社区二级页面顶部介绍卡片标题 */
 .community-sec-top-card-header-title {
@@ -1039,7 +1105,59 @@ body {
     line-height: 20px;
     opacity: .8;
 }
+.community-section-top-tip,
+.community-zone-top-tip{
+    position: absolute;
+    right: 20px;
+    top: -50px;
+    font-size: 50px;
+    font-weight: bold;
+    font-style: italic;
+    opacity: .1;
+    z-index: -1;
+}
 
+@media (max-width: 600px){
+    .community-section-top-tip,
+    .community-zone-top-tip{
+        right: 10px;
+        top: -30px;
+        font-size: 30px;
+    }
+}
+
+.community-topic-list .mdui-list-item-avatar {
+    min-width: 40px;
+    max-width: 40px;
+    height: 40px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    line-height: 40px;
+    color: #fff;
+    text-align: center;
+    background-color: #bdbdbd;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+.community-topic-list .mdui-list-item {
+    border-bottom: 1px solid #f2f2f2;
+}
+.community-topic-list .mdui-list-item-content {
+    font-size: 15px;
+    opacity: .8;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    height: 40px;
+    -webkit-line-clamp: 2;
+}
+.community-topic-list .item-info {
+    float: right;
+    opacity: .4;
+    text-align: right;
+    font-size: 14px;
+}
 .news-content-card{
     padding: 10px;
 }
@@ -1088,6 +1206,9 @@ body {
     display: block;
     margin-right: auto;
     margin-left: auto;
+    box-shadow: 0 0 30px #ccc;
+    -moz-box-shadow: 0 0 30px #ccc;
+    -webkit-box-shadow: 0 0 30px #ccc;
 }
 /*新闻内容页侧边栏标题*/
 .news-content-side-clumn-list a{

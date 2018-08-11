@@ -24,6 +24,9 @@ class CreateCommunityTopicsTable extends Migration
             $table->integer('thumb_up_count')->unsigned()->default(0)->comment('赞数');
             $table->integer('view_count')->unsigned()->default(0)->comment('查看数');
             $table->integer('order')->default(0)->comment('排序');
+            $table->boolean('is_excellent')->default(false)->comment('是否精华');
+            $table->integer('last_reply_id')->unsigned()->nullable()->comment('最后回复ID');
+            $table->timestamp('last_reply_at')->nullable()->comment('最后回复时间');
             $table->string('status')->default('publish')->comment('status:{"publish":"公开","hidden":"隐藏/浏览"}');
             $table->timestamps();
             $table->softDeletes();
