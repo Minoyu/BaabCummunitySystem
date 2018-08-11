@@ -1,7 +1,5 @@
 @foreach($topics as $topic)
-    {{--@php--}}
-    {{--dd($topic)--}}
-    {{--@endphp--}}
+<a href="{{route('showCommunityContent',$topic->id)}}">
     <li class="mdui-list-item mdui-ripple">
         <div class="mdui-list-item-avatar"><img src="{{$topic->user->info->avatar_url}}"/></div>
         <div class="mdui-list-item-content mdui-list-item-three-line">{{$topic->title}}</div>
@@ -17,4 +15,5 @@
             @endif
         </div>
     </li>
+</a>
 @endforeach
