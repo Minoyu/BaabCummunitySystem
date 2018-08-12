@@ -68,6 +68,10 @@ class CommunityController extends Controller
                         ->paginate(15);
                     break;
             }
+        if ($request->ajax()) {
+            $view = view('community-section.topics-list-data', compact('topics'))->render();
+            return response()->json(['html' => $view]);
+        }
         return view('community-section',compact('section','topics','orderBy'));
     }
     public function showCommunityContent(){

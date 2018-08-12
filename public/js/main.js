@@ -1,4 +1,30 @@
 var $$ = mdui.JQ;
+$$.fn.extend({
+    animateCss: function(animationName, callback) {
+        var animationEnd = (function(el) {
+            var animations = {
+                animation: 'animationend',
+                OAnimation: 'oAnimationEnd',
+                MozAnimation: 'mozAnimationEnd',
+                WebkitAnimation: 'webkitAnimationEnd',
+            };
+
+            for (var t in animations) {
+                if (el.style[t] !== undefined) {
+                    return animations[t];
+                }
+            }
+        })(document.createElement('div'));
+
+        this.addClass('animated ' + animationName).one(animationEnd, function() {
+            $(this).removeClass('animated ' + animationName);
+
+            if (typeof callback === 'function') callback();
+        });
+
+        return this;
+    },
+});
 
 /**
  * 获取get参数
@@ -732,6 +758,42 @@ function replyToNewsReply(userName,userId) {
     editor.txt.html('<a href="/user/'+userId+'">@'+userId+'-'+userName+' :</a>');
     location.href = "#createNewsComment";
     $('#editorText').focus();
+}
+
+//社区列表页的ajax加载
+var page = 1;
+function ajaxLoadCommunityTopics(){
+    page++;
+    var orderBy = GetQueryString('orderBy');
+    $$.ajax({
+        method: 'get',
+        url: '?'+$$.param({
+            orderBy:orderBy,
+            page:page
+        }),
+        beforeSend: function(){
+            $$('#CommunityTopicsLoadingBtn').hide();
+            $$('#CommunityTopicsLoadingTip').show();
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            if(data.html == ""){
+                $$('#CommunityTopicsLoadingTip').empty();
+                $$('#CommunityTopicsLoadingFailed').show();
+                return;
+            }
+            $$('#CommunityTopicsLoadingTip').hide();
+            $$("#CommunityTopicsData").append('' +
+                '<div class="animated fadeInUp mdui-m-t-3">' +
+                '<div class="mdui-divider-inset news-page-divider">' +
+                '       <span class="page-num">'+page+'</span>' +
+                '       <span class="page-text">Page</span>' +
+                '    </div>' +
+                ''+data.html+'' +
+                '</div>');
+            $$('#CommunityTopicsLoadingBtn').show();
+        }
+    });
 }
 
 // 过滤html标签

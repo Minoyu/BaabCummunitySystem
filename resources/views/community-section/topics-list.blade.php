@@ -8,4 +8,20 @@
 </div>
 <ul class="mdui-list community-topic-list">
     @include('community-section.topics-list-data')
+    <div  id="CommunityTopicsData"></div>
+    <div id="CommunityTopicsLoadingBtn" class="mdui-m-y-1" style="">
+        <button onclick="ajaxLoadCommunityTopics()" class="mdui-btn mdui-color-pink-a200 mdui-ripple mdui-center">
+            <i class="mdui-icon material-icons mdui-icon-left">&#xe627;</i>
+            加载更多
+        </button>
+    </div>
+    <div id="CommunityTopicsLoadingTip" class="mdui-m-y-1" style="display:none">
+        <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>
+        <span class="loading-tip-text">正在加载更多</span>
+    </div>
+    <div id="CommunityTopicsLoadingFailed" class="animated fadeIn faster" style="display:none">
+        <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600">mood_bad</i>
+        <span class="loading-tip-text">没有更多了</span>
+    </div>
+
 </ul>

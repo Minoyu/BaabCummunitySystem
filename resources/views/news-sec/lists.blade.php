@@ -9,7 +9,7 @@
         <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>
         <span class="loading-tip-text">正在加载更多</span>
     </div>
-    <div id="NewsCenterLoadingFailed" style="display:none">
+    <div id="NewsCenterLoadingFailed" class="animated fadeIn faster" style="display:none">
         <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600">mood_bad</i>
         <span class="loading-tip-text">没有更多了</span>
     </div>
