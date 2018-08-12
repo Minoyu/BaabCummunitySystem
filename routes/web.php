@@ -18,7 +18,6 @@ Route::get('/','IndexController@showIndex')->name('showIndex');
 Route::get('/news','NewsController@showNews')->name('showNews');
 Route::get('/news/category/{cat}','NewsController@showNewsSec')->name('showNewsSec');
 Route::get('/news/{news}','NewsController@showNewsContent')->name('showNewsContent');
-Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('newsReplyStore');
 
 //新闻回复图片上传
 Route::post('/news/reply/upload/img','NewsController@uploadReplyImg')->name('uploadNewsImg');
@@ -28,7 +27,7 @@ Route::post('/news/reply/upload/img','NewsController@uploadReplyImg')->name('upl
 Route::get('/community','CommunityController@showCommunity')->name('showCommunity');
 Route::get('/community/zone/{zone}','CommunityController@showCommunityZone')->name('showCommunityZone');
 Route::get('/community/section/{section}','CommunityController@showCommunitySection')->name('showCommunitySection');
-Route::get('/community/content','CommunityController@showCommunityContent')->name('showCommunityContent');
+Route::get('/community/topic/{topic}','CommunityController@showCommunityContent')->name('showCommunityContent');
 
 //社区话题图片上传
 Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')->name('uploadCommunityTopicImg');
@@ -48,6 +47,11 @@ Route::get('/user/{user}','UserController@showPersonalCenter')->name('showPerson
 
 Route::group(['middleware'=>'auth:web'],function (){
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');
+
+//  新闻回复
+    Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('newsReplyStore');
+//  社区话题回复
+    Route::post("/community/topic/{topic}/reply/store",'CommunityTopicReplyController@store')->name('communityTopicReplyStore');
 
 //  修改用户信息
     Route::post('/user/{user}/edit/info','UserController@updateUserInfo')->name('editUserInfo');

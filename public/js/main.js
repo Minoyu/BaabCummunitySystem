@@ -796,6 +796,99 @@ function ajaxLoadCommunityTopics(){
     });
 }
 
+//Ajax提交话题评论
+function ajaxSubmitTopicCommentForm(url) {
+    var content = $$('textarea[name="content"]').val();
+    // 简单表单验证
+    if (removeHTMLTag(content).length<2){
+        mdui.snackbar('Topic replies need at least 2 characters<br>话题回复至少需要2个字符',{
+            position:'top',
+            timeout:0,
+            buttonText:'ok'
+        });
+        return;
+    }
+    $$.ajax({
+        method: 'POST',
+        url: url,
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+            content:content
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status === 1){
+                mdui.snackbar({
+                    message:data.msg,
+                    position:'top'
+                });
+                setTimeout(function(){
+                    //使用  setTimeout（）方法设定定时2000毫秒
+                    window.location.reload();//页面刷新
+                },2000);
+            }else{
+                mdui.snackbar(data.msg,{
+                    position:'top',
+                    timeout:0,
+                    buttonText:'ok'
+                });
+            }
+        },
+        statusCode: {
+            422: function (data) {
+                data=JSON.parse(data.response);
+                mdui.snackbar(data.errors.content,{
+                    position:'top',
+                    timeout:0,
+                    buttonText:'ok'
+                });
+            }
+        }
+
+    });
+
+}
+
+//话题回复的ajax加载
+var page = 1;
+function ajaxLoadTopicReplies(){
+    page++;
+    var orderBy = GetQueryString('orderBy');
+    $$.ajax({
+        method: 'get',
+        url: '?'+$$.param({
+            orderBy:orderBy,
+            page:page
+        }),
+        beforeSend: function(){
+            $$('#TopicRepliesLoadingBtn').hide();
+            $$('#TopicRepliesLoadingTip').show();
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            if(data.html == ""){
+                $$('#TopicRepliesLoadingTip').empty();
+                $$('#TopicRepliesLoadingFailed').show();
+                return;
+            }
+            $$('#TopicRepliesLoadingTip').hide();
+            $$("#TopicRepliesData").append('' +
+                '<div class="animated fadeInUp mdui-m-t-3">' +
+                '<div class="mdui-divider-inset news-page-divider">' +
+                '       <span class="page-num">'+page+'</span>' +
+                '       <span class="page-text">Page</span>' +
+                '    </div>' +
+                ''+data.html+'' +
+                '</div>');
+            $$('#TopicRepliesLoadingBtn').show();
+        }
+    });
+}
+
+
+
 // 过滤html标签
 function removeHTMLTag(str) {
     str = str.replace(/<\/?[^>]*>/g,''); //去除HTML tag

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\CommunitySection;
+use App\Model\CommunityTopic;
 use App\Model\CommunityZone;
 use Illuminate\Http\Request;
 
@@ -74,7 +75,26 @@ class CommunityController extends Controller
         }
         return view('community-section',compact('section','topics','orderBy'));
     }
-    public function showCommunityContent(){
-        return view('community-content');
+
+    public function showCommunityContent(CommunityTopic $topic,Request $request){
+        $orderBy = $request->input('orderBy');
+        switch ($orderBy){
+            case 'thumb_up':
+                $replies = $topic->replies()
+                    ->orderBy('thumb_up_count','desc')
+                    ->with('user.info')
+                    ->paginate(10);;
+                break;
+            default:
+                $replies = $topic->replies()
+                    ->with('user.info')
+                    ->paginate(10);;
+                break;
+        }
+        if ($request->ajax()) {
+            $view = view('community-content.comment-data', compact('replies'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('community-content',compact('topic','replies','orderBy'));
     }
 }

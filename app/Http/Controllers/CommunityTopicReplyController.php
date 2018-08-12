@@ -22,7 +22,7 @@ class CommunityTopicReplyController extends Controller
     public function adminCreateShow(CommunityTopic $topic){
         return view('admin.community-topic-reply.create',compact('topic'));
     }
-    public function store(CommunityTopic $topic){
+    public function store(CommunityTopic $topic,Request $request){
         //验证
         $this->validate(\request(), [
             'content' => 'required|min:2',
@@ -34,12 +34,25 @@ class CommunityTopicReplyController extends Controller
 
         $res=$topic->replies()->create($data);
 
-        //渲染
-        if ($res) {
-            $topic->increment('reply_count');
-            return \redirect()->back()->with('tips', ['回复创建成功',]);
+        if ($request->ajax()) {
+            //渲染
+            if ($res) {
+                $topic->increment('reply_count');
+                $status = 1;
+                $msg = "Reply Successfully";
+            }else{
+                $status = 0;
+                $msg = "Server internal error";
+            }
+            return json_encode(compact('status','msg'));//ajax
         }else{
-            return \redirect()->back()->withErrors('创建失败,服务器内部错误,请联系管理员');
+            //渲染
+            if ($res) {
+                $topic->increment('reply_count');
+                return \redirect()->back()->with('tips', ['回复创建成功',]);
+            }else{
+                return \redirect()->back()->withErrors('创建失败,服务器内部错误,请联系管理员');
+            }
         }
     }
 

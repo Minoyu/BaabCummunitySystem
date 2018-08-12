@@ -18,6 +18,7 @@ class CreateCommunityTopicRepliesTable extends Migration
             $table->text('content');
             $table->integer('user_id')->unsigned();
             $table->integer('topic_id')->unsigned();
+            $table->integer('thumb_up_count')->unsigned()->default(0)->comment('赞数');
             $table->timestamps();
             $table->softDeletes();
         });

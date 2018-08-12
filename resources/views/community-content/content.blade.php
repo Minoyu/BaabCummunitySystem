@@ -1,8 +1,17 @@
-<h1 class="community-content-primary-title mdui-text-center">
-    帖标题
-</h1>
-<div class="community-content-primary-text">
-    帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容帖内容
-    帖内容帖内容帖内容帖内容帖内容帖内容
+<div class="mdui-card news-content-card" style="border-radius: 10px">
+    <h1 class="topic-content-primary-title">
+        {{$topic->title}}
+        <br>
+        <small>
+            <span style="white-space: nowrap;">
+            · <i class="mdui-icon material-icons" style="padding-bottom: 3px">&#xe417;</i> <span class="mdui-hidden-xs">访问量</span>{{$topic->view_count}}
+            · <i class="mdui-icon material-icons">&#xe0b9;</i> <span class="mdui-hidden-xs">评论量</span>{{$topic->reply_count}}
+            · <i class="mdui-icon material-icons">&#xe192;</i> <span class="mdui-hidden-xs">发表于</span>{{$topic->created_at->diffForHumans()}}
+            </span>
+        </small>
+    </h1>
+
+    <div class="topic-content-primary-text">
+        {!! $topic->content !!}
+    </div>
 </div>
-<img class="img-self-adaption-80" src="http://via.placeholder.com/900x600">

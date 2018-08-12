@@ -302,6 +302,10 @@ body {
     opacity: .9;
 }
 
+.side-card{
+    border-radius: 5px;
+}
+
 .side-card-header{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -317,6 +321,10 @@ body {
     border-bottom: 1px solid #f6f6f6;
     box-sizing: border-box;
 }
+.side-card-header .reply-order-tab{
+    float: right;
+    margin: 0;
+}
 .side-card-header-text{
     overflow: hidden;
     text-overflow: ellipsis;
@@ -325,8 +333,58 @@ body {
     color: #646464;
 }
 .side-card-content{
-    color: #646464;
+    color: #2e2e2e;
     padding: 12px 0;
+}
+.side-card-user-avatar{
+    display: block;
+    width: 70px;
+    height: 70px;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50%;
+}
+.side-card-user-name{
+    text-align: center;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.side-card-user-motto{
+    padding: 0 20px;
+    text-align: center;
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+.side-card-user-info{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    margin-top: 10px;
+}
+.side-card-user-info .mdui-panel-item-header{
+    padding: 0;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.side-card-user-info .mdui-panel-item-arrow{
+    right: 0;
+}
+.side-card-user-info .mdui-panel-item-body{
+    width: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.side-card-user-btn{
+    width: 80%;
+}
+.side-card-user-btn .mdui-icon{
+    font-size: 18px;
+    padding-bottom: 2px;
 }
 .side-card-content-item{
     padding: 3px 20px 3px 20px;
@@ -1277,6 +1335,7 @@ body {
 .news-content-create-comment{
     background-color: #f0f0f0;
     padding: 25px 20px 60px;
+    position: relative;
 }
 .news-content-create-comment-without-login{
     padding: 25px 20px 20px;
@@ -1681,89 +1740,60 @@ body {
     font-weight: 600;
 }
 
-
-/*社区内容页侧边栏列表*/
-.community-content-side-clumn-list a{
-    font-weight: bold;
+/*社区话题页主标题*/
+.topic-content-primary-title{
+    padding-top: 5px;
+    padding-left: 20px;
+}
+.topic-content-primary-title small{
+    font-size: 50%;
+    opacity: .6;
+}
+.topic-content-primary-title small .mdui-icon{
+    opacity: .6;
     font-size: 18px;
 }
-/*社区内容页主标题*/
-.community-content-primary-title{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-weight: bold;
+.topic-content-cover-img{
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: -30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 0;
+    padding-bottom: 35%;
+    background-repeat: no-repeat;
+    background-size: 100%;
 }
-/*社区内容页新闻正文*/
-.community-content-primary-text{
+@media (max-width: 600px){
+    .topic-content-primary-title{
+        font-size: 1.8em;
+    }
+    .topic-content-cover-img{
+        margin-bottom: -5px;
+        padding-bottom: 40%;
+    }
+}
+/*社区话题页新闻正文*/
+.topic-content-primary-text{
     font-size: 18px;
     text-indent: 36px;
     padding-top: 5px;
     padding-bottom: 5px;
 }
-/*社区内容页评论条边框样式*/
-.community-content-comment-list-border{
-    background: white;
-    border-radius: 2px;
-    margin-top: 30px;
-    width: 95%;
+/*新闻图片80%自适应*/
+.topic-content-primary-text img{
+    max-width: 80%;
     height: auto;
     display: block;
-    padding: 12px;
-    box-shadow: inset 0 1px 1px 0 #c7c7c7;
-    -webkit-border-radius: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 0 0 30px #ccc;
+    -moz-box-shadow: 0 0 30px #ccc;
+    -webkit-box-shadow: 0 0 30px #ccc;
 }
-/*社区内容页评论区回复数量框*/
-.community-content-comment-number{
-    font-weight: bold;
-    padding-bottom: 5px;
-}
-/*社区内容页评论条*/
-.community-content-comment-list{
-    padding: 10px 0;
-    position: relative;
-}
-/*社区内容页评论区用户头像样式*/
-.community-content-comment-users-img{
-    position: absolute;
-    top: 2.5px;
-    left: 0;
-}
-/*社区内容页评论区用户名*/
-.community-content-comment-username{
-    padding-left: 90px;
-}
-/*社区内容页评论区评论按钮*/
-.community-content-comment-pinglun-btn{
-    position: absolute;
-    top: 0;
-    right: 0;
-}
-/*社区内容页评论区点赞按钮*/
-.community-content-comment-dianzan-btn{
-    position: absolute;
-    top: 0;
-    right: 30px;
-}
-/*社区内容页评论区p标签样式*/
-.community-content-comment-p{
-    padding-left: 80px;
-}
-/*社区内容页评论输入区边框样式*/
-.community-content-comment-area{
-    background: white;
-    border-radius: 2px;
-    width: 95%;
-    margin-top: 30px;
-    height: auto;
-    display: block;
-    padding: 12px;
-    box-shadow: inset 0 1px 1px 0 #c7c7c7;
-    -webkit-border-radius: 5px;
-}
-/*社区内容页评论输入区提交按钮*/
-.community-content-comment-area-btn{
-    float: right;
-}
+
+
 /******
 分页
  */
