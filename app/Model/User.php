@@ -4,10 +4,13 @@ namespace App\Model;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Overtrue\LaravelFollow\Traits\CanFollow;
+use Overtrue\LaravelFollow\Traits\CanBeFollowed;
+use Jcc\LaravelVote\Vote;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable,CanFollow,CanBeFollowed,Vote;
 
     /**
      * The attributes that are mass assignable.

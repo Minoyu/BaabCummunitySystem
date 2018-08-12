@@ -4,11 +4,12 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Jcc\LaravelVote\CanBeVoted;
 
 class NewsReply extends Model
 {
     //
-    use SoftDeletes;
+    use SoftDeletes,CanBeVoted;
     protected $table = 'news_replies';
     protected $guarded = [];
 

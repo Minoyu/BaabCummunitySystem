@@ -94,6 +94,8 @@ class CommunityController extends Controller
         if ($request->ajax()) {
             $view = view('community-content.comment-data', compact('replies'))->render();
             return response()->json(['html' => $view]);
+        }else{
+            $topic->increment('view_count');
         }
         return view('community-content',compact('topic','replies','orderBy'));
     }

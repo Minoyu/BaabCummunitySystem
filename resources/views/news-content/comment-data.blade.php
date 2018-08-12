@@ -6,7 +6,7 @@
         <div class="news-content-comment-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$reply->created_at->diffForHumans()}}</div>
         <div class="news-content-comment-p">{!! $reply->content !!}</div>
         <div class="action-area">
-            <a onclick="replyToNewsReply('{{$reply->user->name}}','{{$reply->user->id}}')" class="mdui-btn mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i>回复</a>
+            <a onclick="replyToReply('{{$reply->user->name}}','{{$reply->user->id}}')" class="mdui-btn mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i>回复</a>
             <a href="{{route('adminNewsReplyEdit',[$news->id,$reply->id])}}" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
                 <i class="mdui-icon material-icons">edit</i>
             </a>

@@ -10,6 +10,41 @@ use Illuminate\Support\Facades\Auth;
 class CommunityTopicReplyController extends Controller
 {
     //
+    public function handleAjaxVote(Request $request){
+        //验证
+        $this->validate($request, [
+            'replyId' => 'required|exists:community_topic_replies,id',
+        ]);
+        $reply = CommunityTopicReply::find($request->replyId);
+        if (Auth::user()->upVote($reply)){
+            $thumb_up_count = $reply->countVoters();
+            $reply->update(compact('thumb_up_count'));
+            $status = 1;
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+        }
+        return json_encode(compact('status','msg','thumb_up_count'));//ajax
+    }
+
+    public function handleAjaxCancelVote(Request $request){
+        //验证
+        $this->validate($request, [
+            'replyId' => 'required|exists:community_topic_replies,id',
+        ]);
+        $reply = CommunityTopicReply::find($request->replyId);
+        if (Auth::user()->cancelVote($reply)){
+            $thumb_up_count = $reply->countVoters();
+            $reply->update(compact('thumb_up_count'));
+            $status = 1;
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+        }
+        return json_encode(compact('status','msg','thumb_up_count'));//ajax
+
+    }
+
     public function adminListShowAll(){
         $replies=CommunityTopicReply::with(['user','communityTopic'])->paginate(15);
         return view('admin.community-topic-reply.all-list',compact('replies'));

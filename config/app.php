@@ -180,7 +180,12 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         //代码提示
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class
+        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+
+        //Follow服务
+        Overtrue\LaravelFollow\FollowServiceProvider::class,
+        //Vote服务
+        Jcc\LaravelVote\VoteServiceProvider::class
 
     ],
 

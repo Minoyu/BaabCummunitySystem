@@ -1,4 +1,4 @@
-<div id="createNewsComment" class="mdui-card mdui-m-t-2">
+<div id="createComment" class="mdui-card mdui-m-t-2">
     @if(Auth::check())
         <div class="news-content-create-comment">
             <div class="title"><i class="mdui-icon material-icons">comment</i>发表你的看法</div>

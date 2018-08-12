@@ -52,6 +52,10 @@ Route::group(['middleware'=>'auth:web'],function (){
     Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('newsReplyStore');
 //  社区话题回复
     Route::post("/community/topic/{topic}/reply/store",'CommunityTopicReplyController@store')->name('communityTopicReplyStore');
+//  社区话题回复投票相关
+    Route::post("/community/topic/reply/vote",'CommunityTopicReplyController@handleAjaxVote')->name('communityTopicReplyVote');
+    Route::post("/community/topic/reply/cancelVote",'CommunityTopicReplyController@handleAjaxCancelVote')->name('communityTopicReplyCancelVote');
+
 
 //  修改用户信息
     Route::post('/user/{user}/edit/info','UserController@updateUserInfo')->name('editUserInfo');

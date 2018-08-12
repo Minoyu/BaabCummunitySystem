@@ -754,9 +754,9 @@ function deleteNewsReply(newsReplyId,newsReplyContent) {
     });
 }
 
-function replyToNewsReply(userName,userId) {
+function replyToReply(userName,userId) {
     editor.txt.html('<a href="/user/'+userId+'">@'+userId+'-'+userName+' :</a>');
-    location.href = "#createNewsComment";
+    location.href = "#createComment";
     $('#editorText').focus();
 }
 
@@ -885,6 +885,87 @@ function ajaxLoadTopicReplies(){
             $$('#TopicRepliesLoadingBtn').show();
         }
     });
+}
+
+//Ajax评论投票
+function ajaxHandleVote(voteUrl,cancelVoteUrl,replyId,obj) {
+    var num = obj.getElementsByTagName("span")[0];
+    if ($$(obj).hasClass('mdui-text-color-pink-accent')){
+        //已经投票过
+        $$.ajax({
+            method: 'POST',
+            url: cancelVoteUrl,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                replyId:replyId
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    $$(obj).removeClass('mdui-text-color-pink-accent');
+                    $$(num).text(data.thumb_up_count)
+
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    mdui.snackbar(data.errors.content,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+
+        });
+    }else{
+        //还未投票过
+        $$.ajax({
+            method: 'POST',
+            url: voteUrl,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                replyId:replyId
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    $$(obj).addClass('mdui-text-color-pink-accent');
+                    $$(num).text(data.thumb_up_count)
+
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    mdui.snackbar(data.errors.content,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+
+        });
+    }
+
 }
 
 
