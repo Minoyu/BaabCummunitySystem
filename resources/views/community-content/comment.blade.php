@@ -3,7 +3,7 @@
         <div class="side-card-header-text">
             共有{{$topic->reply_count}}条回复
         </div>
-        <div class="mdui-tab part-divider-tab reply-order-tab" mdui-tab>
+        <div class="mdui-tab part-divider-tab reply-order-tab " mdui-tab>
             <a mdui-tooltip="{content: '按发表时间排序', position: 'top'}" onclick="jumpTo('?orderBy=default')" href="#" class="mdui-ripple">时间</a>
             <a mdui-tooltip="{content: '按赞数排序回复', position: 'top'}" onclick="jumpTo('?orderBy=thumb_up')" href="#" class="mdui-ripple @if($orderBy == 'thumb_up') mdui-tab-active @endif">赞数</a>
         </div>

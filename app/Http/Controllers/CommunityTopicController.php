@@ -84,8 +84,6 @@ class CommunityTopicController extends Controller
         return view('community-edit-topic',compact('topic','zones','selectedSections'));
     }
 
-
-
     public function adminListShowByCategory(){
         $zones = CommunityZone::with('communitySections')->get();
         return view('admin.community-topic.show-by-category',compact('zones'));
@@ -94,11 +92,18 @@ class CommunityTopicController extends Controller
     public function adminListShow(Request $request){
         $selectedSection = false;
         if ($request->input('section_id')){
-            $topics=CommunityTopic::where('section_id',$request->input('section_id'))->with('user','communitySection')->orderBy('order','desc')->paginate(15);
+            $topics=CommunityTopic::where('section_id',$request->input('section_id'))
+                ->with('user','communitySection')
+                ->orderBy('order','desc')
+                ->orderBy('created_at','desc')
+                ->paginate(15);
             $section = CommunitySection::find($request->input('section_id'));
             $selectedSection=true;
         }else{
-            $topics=CommunityTopic::orderBy('order','desc')->with('user','communitySection')->paginate(15);
+            $topics=CommunityTopic::orderBy('order','desc')
+                ->orderBy('created_at','desc')
+                ->with('user','communitySection')
+                ->paginate(15);
         }
         return view('admin.community-topic.list',compact('topics','section','selectedSection'));
     }

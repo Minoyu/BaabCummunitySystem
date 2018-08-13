@@ -204,7 +204,10 @@ function resetToLogin() {
 
 //页面跳转函数 tab使用
 function jumpTo(url){
-    location.href= url;
+    setTimeout(function () {
+        location.href= url;
+    },300);
+
 }
 
 //页面顶部tab及底部nav的激活

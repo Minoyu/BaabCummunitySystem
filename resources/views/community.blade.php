@@ -16,7 +16,7 @@
 
 
         </div>
-        <div class="mdui-col-md-3 mdui-hidden-sm-down" style="padding-top: 20px; ">
+        <div class="mdui-col-md-3 mdui-col-xs-12" style="padding-top: 20px; ">
             侧边栏
         </div>
     </div>
