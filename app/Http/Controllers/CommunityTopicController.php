@@ -13,6 +13,60 @@ use Intervention\Image\Facades\Image;
 class CommunityTopicController extends Controller
 {
     //
+    public function ajaxGetVoters(Request $request){
+        //验证
+        $this->validate($request, [
+            'id' => 'required|exists:community_topics',
+        ]);
+        $voters = CommunityTopic::find($request->id)->voters()->with('info')->get();
+
+        if ($voters){
+            $status = 1;
+            $html = view('community-content.voters-data', compact('voters'))->render();
+            return json_encode(compact('status','html'));//ajax
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+            return json_encode(compact('status','msg'));//ajax
+        }
+    }
+
+    public function handleAjaxVote(Request $request){
+        //验证
+        $this->validate($request, [
+            'id' => 'required|exists:community_topics',
+        ]);
+        $topic = CommunityTopic::find($request->id);
+        if (Auth::user()->upVote($topic)){
+            $thumb_up_count = $topic->countVoters();
+            $topic->update(compact('thumb_up_count'));
+            $status = 1;
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+        }
+        return json_encode(compact('status','msg','thumb_up_count'));//ajax
+    }
+
+    public function handleAjaxCancelVote(Request $request){
+        //验证
+        $this->validate($request, [
+            'id' => 'required|exists:community_topics',
+        ]);
+        $topic = CommunityTopic::find($request->id);
+        if (Auth::user()->cancelVote($topic)){
+            $thumb_up_count = $topic->countVoters();
+            $topic->update(compact('thumb_up_count'));
+            $status = 1;
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+        }
+        return json_encode(compact('status','msg','thumb_up_count'));//ajax
+
+    }
+
+
     public function adminListShowByCategory(){
         $zones = CommunityZone::with('communitySections')->get();
         return view('admin.community-topic.show-by-category',compact('zones'));

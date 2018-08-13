@@ -1184,18 +1184,15 @@ body {
     }
 }
 
-.community-topic-list .mdui-list-item-avatar {
-    min-width: 40px;
-    max-width: 40px;
+.community-topic-list .mdui-list-item-avatar{
+    width: 40px;
     height: 40px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    line-height: 40px;
-    color: #fff;
-    text-align: center;
-    background-color: #bdbdbd;
-    border-radius: 50%;
+    padding: 3px;
+    background-color: #fff;
     border: 1px solid #ddd;
+}
+.community-topic-list .mdui-list-item-avatar img{
+    margin-bottom: 5px;
 }
 .community-topic-list .mdui-list-item {
     border-bottom: 1px solid #f2f2f2;
@@ -1216,6 +1213,42 @@ body {
     text-align: right;
     font-size: 14px;
 }
+
+.community-topic-thumb-up-card{
+    padding: 20px 5px 10px;
+}
+
+.community-topic-thumb-up-card .thumb-up-btn{
+    width:50px;
+    height: 50px;
+    border: 1px solid #ff4081;
+}
+.community-topic-thumb-up-card .mdui-panel-item{
+    padding-top: 5px;
+    -webkit-box-shadow: none;
+    box-shadow:none;
+}
+.community-topic-thumb-up-card .mdui-panel-item-title{
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    padding-right: 0;
+}
+.community-topic-thumb-up-card .topic-voters-list{
+    text-align: center;
+}
+.community-topic-thumb-up-card .topic-voters-list .user-avatar{
+    height: 48px;
+    width: 48px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    padding: 3px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+
 .news-content-card{
     padding: 10px;
 }
@@ -1320,6 +1353,9 @@ body {
     left: 15px;
     border-radius: 50%;
     z-index: 1;
+    padding: 3px;
+    background-color: #fff;
+    border: 1px solid #ddd;
 }
 
 

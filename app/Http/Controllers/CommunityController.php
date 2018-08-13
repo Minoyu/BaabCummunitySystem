@@ -65,6 +65,7 @@ class CommunityController extends Controller
                 default:
                     $topics = $section->communityTopics()->where('status','publish')
                         ->orderBy('order','desc')
+                        ->orderBy('last_reply_at','desc')
                         ->with('user.info')
                         ->paginate(15);
                     break;

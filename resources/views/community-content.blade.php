@@ -9,6 +9,7 @@
         {{--内容块--}}
         <div class="mdui-col-md-9 mdui-col-xs-12" style="padding-top: 20px">
             @include('community-content.content')
+            @include('community-content.thumb-up')
             @include('community-content.comment')
         </div>
         {{--侧边栏，小屏隐藏--}}

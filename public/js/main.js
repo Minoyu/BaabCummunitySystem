@@ -888,8 +888,9 @@ function ajaxLoadTopicReplies(){
 }
 
 //Ajax评论投票
-function ajaxHandleVote(voteUrl,cancelVoteUrl,replyId,obj) {
+function ajaxHandleReplyVote(voteUrl,cancelVoteUrl,replyId,obj) {
     var num = obj.getElementsByTagName("span")[0];
+    var icon = obj.getElementsByTagName("i")[0];
     if ($$(obj).hasClass('mdui-text-color-pink-accent')){
         //已经投票过
         $$.ajax({
@@ -905,7 +906,8 @@ function ajaxHandleVote(voteUrl,cancelVoteUrl,replyId,obj) {
                 data=JSON.parse(data);
                 if (data.status === 1){
                     $$(obj).removeClass('mdui-text-color-pink-accent');
-                    $$(num).text(data.thumb_up_count)
+                    $$(num).text(data.thumb_up_count);
+                    $$(icon).animateCss('jello');
 
                 }else{
                     mdui.snackbar(data.msg,{
@@ -942,7 +944,8 @@ function ajaxHandleVote(voteUrl,cancelVoteUrl,replyId,obj) {
                 data=JSON.parse(data);
                 if (data.status === 1){
                     $$(obj).addClass('mdui-text-color-pink-accent');
-                    $$(num).text(data.thumb_up_count)
+                    $$(num).text(data.thumb_up_count);
+                    $$(icon).animateCss('swing');
 
                 }else{
                     mdui.snackbar(data.msg,{
@@ -968,6 +971,127 @@ function ajaxHandleVote(voteUrl,cancelVoteUrl,replyId,obj) {
 
 }
 
+//Ajax话题投票
+function ajaxHandleTopicVote(voteUrl,cancelVoteUrl,topicId,obj,numClass) {
+    var num = $$('.'+numClass);
+    if ($$(obj).hasClass('mdui-color-pink-accent')){
+        //已经投票过
+        $$.ajax({
+            method: 'POST',
+            url: cancelVoteUrl,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                id:topicId
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    $$(obj).removeClass('mdui-color-pink-accent');
+                    $$(obj).addClass('mdui-text-color-pink-accent');
+                    $$(obj).animateCss('jello');
+                    num.text(data.thumb_up_count);
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    mdui.snackbar(data.errors.content,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+
+        });
+    }else{
+        //还未投票过
+        $$.ajax({
+            method: 'POST',
+            url: voteUrl,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                id:topicId
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    $$(obj).removeClass('mdui-text-color-pink-accent');
+                    $$(obj).addClass('mdui-color-pink-accent');
+                    $$(obj).animateCss('swing');
+                    num.text(data.thumb_up_count)
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    mdui.snackbar(data.errors.content,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+
+        });
+    }
+}
+
+//监听查看topic点赞
+function ajaxGetTopicVoters(url,topicId) {
+    setTimeout(function () {
+        $$.ajax({
+            method: 'post',
+            url:url,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                id:topicId
+            },
+            beforeSend: function(){
+                $$('TopicVotersLoadingTip').show();
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    if(data.html == ""){
+                        $$("#TopicVotersData").empty();
+                        $$('#TopicVotersLoadingTip').hide();
+                        $$('#TopicVotersLoadingFailed').show();
+                        return;
+                    }
+                    $$('#TopicVotersLoadingTip').hide();
+                    $$('#TopicVotersLoadingFailed').hide();
+                    $$("#TopicVotersData").empty();
+                    $$("#TopicVotersData").append(data.html);
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+        });
+    },500);
+}
 
 
 // 过滤html标签

@@ -28,6 +28,7 @@ Route::get('/community','CommunityController@showCommunity')->name('showCommunit
 Route::get('/community/zone/{zone}','CommunityController@showCommunityZone')->name('showCommunityZone');
 Route::get('/community/section/{section}','CommunityController@showCommunitySection')->name('showCommunitySection');
 Route::get('/community/topic/{topic}','CommunityController@showCommunityContent')->name('showCommunityContent');
+Route::post("/community/topic/vote/getVoters",'CommunityTopicController@ajaxGetVoters')->name('communityTopicGetVoters');
 
 //社区话题图片上传
 Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')->name('uploadCommunityTopicImg');
@@ -55,6 +56,9 @@ Route::group(['middleware'=>'auth:web'],function (){
 //  社区话题回复投票相关
     Route::post("/community/topic/reply/vote",'CommunityTopicReplyController@handleAjaxVote')->name('communityTopicReplyVote');
     Route::post("/community/topic/reply/cancelVote",'CommunityTopicReplyController@handleAjaxCancelVote')->name('communityTopicReplyCancelVote');
+//  社区话题投票相关
+    Route::post("/community/topic/vote",'CommunityTopicController@handleAjaxVote')->name('communityTopicVote');
+    Route::post("/community/topic/cancelVote",'CommunityTopicController@handleAjaxCancelVote')->name('communityTopicCancelVote');
 
 
 //  修改用户信息

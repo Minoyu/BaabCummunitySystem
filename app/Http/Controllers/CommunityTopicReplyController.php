@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Model\CommunityTopic;
 use App\Model\CommunityTopicReply;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -72,7 +73,10 @@ class CommunityTopicReplyController extends Controller
         if ($request->ajax()) {
             //渲染
             if ($res) {
-                $topic->increment('reply_count');
+                $reply_count = $topic->reply_count + 1;
+                $last_reply_at = Carbon::now();
+                $last_reply_id = $res->id;
+                $topic->update(compact('reply_count','last_reply_at','last_reply_id'));
                 $status = 1;
                 $msg = "Reply Successfully";
             }else{
@@ -83,7 +87,10 @@ class CommunityTopicReplyController extends Controller
         }else{
             //渲染
             if ($res) {
-                $topic->increment('reply_count');
+                $reply_count = $topic->reply_count + 1;
+                $last_reply_at = Carbon::now();
+                $last_reply_id = $res->id;
+                $topic->update(compact('reply_count','last_reply_at','last_reply_id'));
                 return \redirect()->back()->with('tips', ['回复创建成功',]);
             }else{
                 return \redirect()->back()->withErrors('创建失败,服务器内部错误,请联系管理员');
