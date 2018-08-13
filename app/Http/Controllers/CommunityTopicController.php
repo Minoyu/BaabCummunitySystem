@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\CommunitySection;
 use App\Model\CommunityTopic;
 use App\Model\CommunityZone;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -66,6 +67,24 @@ class CommunityTopicController extends Controller
 
     }
 
+    public function create(Request $request){
+        $zones = CommunityZone::all();
+        if($request->input('zone_id')&&$request->input('section_id')){
+            $zone_id = $request->input('zone_id');
+            $section_id = $request->input('section_id');
+            $selectedSections = CommunityZone::where('id',$zone_id)->first()->communitySections;
+        }
+        return view('community-create-topic',compact('zones','zone_id','section_id','selectedSections'));
+    }
+
+    public function edit(CommunityTopic $topic,Request $request){
+        $zones = CommunityZone::all();
+        $selectedSections = CommunityZone::where('id',$topic->zone_id)->first()->communitySections;
+
+        return view('community-edit-topic',compact('topic','zones','selectedSections'));
+    }
+
+
 
     public function adminListShowByCategory(){
         $zones = CommunityZone::with('communitySections')->get();
@@ -97,7 +116,7 @@ class CommunityTopicController extends Controller
     public function store(){
         $status = \request('status');
         //发布验证 暂存不验证
-//        if($status=='public') {
+//        if($status=='publish') {
         //验证
         $this->validate(\request(), [
             'title' => 'required',
@@ -113,7 +132,8 @@ class CommunityTopicController extends Controller
         $content = \request('content');
         $order = \request('order');
         $user_id = Auth::id();
-        $data = compact('title','zone_id','section_id','content','user_id','order','status');
+        $last_reply_at = Carbon::now();
+        $data = compact('title','zone_id','section_id','content','user_id','order','status','last_reply_at');
 
         $res=CommunityTopic::create($data);
 
@@ -121,10 +141,44 @@ class CommunityTopicController extends Controller
         if ($res) {
             CommunityZone::find($zone_id)->increment('topic_count');
             CommunitySection::find($section_id)->increment('topic_count');
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['话题' . $title . '创建成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['话题' . $title . '暂存成功',]);
+            }
+        }else{
+            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+        }
+    }
+
+    public function storeMini(){
+        $status = \request('status');
+        //验证
+        $this->validate(\request(), [
+            'title' => 'required',
+            'content' => 'required',
+            'zone_id' => 'required|integer|exists:community_zones,id',
+            'section_id' => 'required|integer|exists:community_sections,id',
+        ]);
+        //逻辑
+        $title = \request('title');
+        $zone_id = \request('zone_id');
+        $section_id = \request('section_id');
+        $content = \request('content');
+        $user_id = Auth::id();
+        $last_reply_at = Carbon::now();
+        $data = compact('title','zone_id','section_id','content','user_id','last_reply_at','status');
+
+        $res=CommunityTopic::create($data);
+
+        //渲染
+        if ($res) {
+            CommunityZone::find($zone_id)->increment('topic_count');
+            CommunitySection::find($section_id)->increment('topic_count');
+            if ($status == 'publish') {
+                return \redirect()->route('showCommunitySection', $section_id)->with('tips', ['话题' . $title . '创建成功',]);
+            }else{
+                return \redirect()->route('showCommunityContent', $res->id)->with('tips', ['话题暂存成功，你可以在本页或个人中心中继续编辑、发布此话题。',]);
             }
         }else{
             return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
@@ -145,7 +199,7 @@ class CommunityTopicController extends Controller
 
         $status = \request('status');
         //发布验证 暂存不验证
-//        if($status=='public') {
+//        if($status=='publish') {
         //验证
         $this->validate(\request(), [
             'title' => 'required',
@@ -160,7 +214,6 @@ class CommunityTopicController extends Controller
         $section_id = \request('section_id');
         $content = \request('content');
         $order = \request('order');
-        $user_id = Auth::id();
         $data = compact('title','zone_id','section_id','content','user_id','order','status');
 
         $res=$topic->update($data);
@@ -173,11 +226,55 @@ class CommunityTopicController extends Controller
             //新分类计数器更新
             CommunityZone::find($zone_id)->update(['topic_count'=>CommunityTopic::where('zone_id',$zone_id)->count()]);
             CommunitySection::find($section_id)->update(['topic_count'=>CommunityTopic::where('section_id',$section_id)->count()]);
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['话题' . $title . '编辑成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['话题' . $title . '暂存成功',]);
             }
+        }else{
+            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+        }
+    }
+
+    public function updateMini(CommunityTopic $topic){
+        //获取旧分类id
+        $old_zone_id = $topic->zone_id;
+        $old_section_id = $topic->section_id;
+
+        $status = \request('status');
+        //发布验证 暂存不验证
+//        if($status=='publish') {
+        //验证
+        $this->validate(\request(), [
+            'title' => 'required',
+            'content' => 'required',
+            'zone_id' => 'required|integer|exists:community_zones,id',
+            'section_id' => 'required|integer|exists:community_sections,id',
+        ]);
+//        }
+        //逻辑
+        $title = \request('title');
+        $zone_id = \request('zone_id');
+        $section_id = \request('section_id');
+        $content = \request('content');
+        $data = compact('title','zone_id','section_id','content','status');
+
+        $res=$topic->update($data);
+
+        //渲染
+        if ($res) {
+            //旧分类计数器更新
+            CommunityZone::find($old_zone_id)->update(['topic_count'=>CommunityTopic::where('zone_id',$old_zone_id)->count()]);
+            CommunitySection::find($old_section_id)->update(['topic_count'=>CommunityTopic::where('section_id',$old_section_id)->count()]);
+            //新分类计数器更新
+            CommunityZone::find($zone_id)->update(['topic_count'=>CommunityTopic::where('zone_id',$zone_id)->count()]);
+            CommunitySection::find($section_id)->update(['topic_count'=>CommunityTopic::where('section_id',$section_id)->count()]);
+            if ($status == 'publish') {
+                return \redirect()->route('showCommunitySection', $section_id)->with('tips', ['话题' . $title . '编辑成功',]);
+            } else {
+                return \redirect()->route('showCommunityContent', $topic->id)->with('tips', ['话题暂存成功，你可以在本页或个人中心中继续编辑、发布此话题。']);
+            }
+
         }else{
             return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
         }

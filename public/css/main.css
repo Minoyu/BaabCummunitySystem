@@ -2,6 +2,9 @@ body {
     font-family: "Helvetica Neue", Helvetica, Microsoft Yahei, sans-serif;
     background: #f6f6f6;
 }
+.mdui-bottom-nav-fixed .mdui-bottom-nav{
+    z-index: 1000;
+}
 /*顶部padding （移动端适配tab选项卡及drawer）*/
 /*无tab 有底部导航栏*/
 @media (min-width: 600px){
@@ -1352,10 +1355,10 @@ body {
     top: 12.5px;
     left: 15px;
     border-radius: 50%;
-    z-index: 1;
     padding: 3px;
     background-color: #fff;
     border: 1px solid #ddd;
+    z-index: 0;
 }
 
 
@@ -1812,12 +1815,13 @@ body {
         padding-bottom: 40%;
     }
 }
-/*社区话题页新闻正文*/
+/*社区话题页正文*/
 .topic-content-primary-text{
-    font-size: 18px;
     text-indent: 36px;
+    color: #525252;
     padding-top: 5px;
     padding-bottom: 5px;
+    font-size: 16px;
 }
 /*新闻图片80%自适应*/
 .topic-content-primary-text img{
@@ -1886,15 +1890,24 @@ body {
 }
 
 /*编辑器*/
-.editor-text{
+.editor-text,.editor-text-for-create-page{
     min-height: 80px;
     background: #fff;
     box-shadow: 0 1px 3px rgba(26,26,26,.1);
 }
 
+.editor-text-for-create-page{
+    min-height: 120px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
 @media (min-width: 600px) {
     .editor-text{
         min-height: 120px;
+    }
+    .editor-text-for-create-page{
+        min-height: 150px;
     }
 }
 .editor-middle-bar{
@@ -1905,4 +1918,31 @@ body {
     padding: 5px 0;
     background: #fff;
     box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+
+.create-page-title{
+    line-height: 60px;
+    font-size: 30px;
+    text-align: center;
+}
+.create-page-title .mdui-icon{
+    font-size: 30px;
+    padding-right: 10px;
+}
+
+.create-page-card{
+    overflow: hidden;
+    border-radius: 10px;
+    padding: 20px 70px;
+}
+@media (max-width: 599px) {
+    .create-page-card{
+        padding: 20px 20px;
+    }
+}
+
+.admin-error-tip{
+    margin: 15px 0 5px 0;
+    padding: 15px 20px;
+    border-radius: 5px;
 }

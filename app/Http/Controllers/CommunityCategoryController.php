@@ -42,7 +42,7 @@ class CommunityCategoryController extends Controller
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['社区分区' . $name . '创建成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['社区分区' . $name . '暂存成功',]);
@@ -74,7 +74,7 @@ class CommunityCategoryController extends Controller
         $res=$zone->update($data);
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['社区分区' . $name . '编辑成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['社区分区' . $name . '暂存成功',]);
@@ -137,7 +137,7 @@ class CommunityCategoryController extends Controller
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['社区板块' . $name . '创建成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['社区板块' . $name . '暂存成功',]);
@@ -173,7 +173,7 @@ class CommunityCategoryController extends Controller
         $res=$section->update($data);
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['社区板块' . $name . '编辑成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['社区板块' . $name . '暂存成功',]);

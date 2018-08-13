@@ -54,7 +54,7 @@ class NewsCarouselController extends Controller
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['新闻轮播图' . $title . '创建成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['新闻轮播图' . $title . '暂存成功',]);
@@ -100,7 +100,7 @@ class NewsCarouselController extends Controller
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['新闻轮播图' . $title . '编辑成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['新闻轮播图' . $title . '暂存成功',]);

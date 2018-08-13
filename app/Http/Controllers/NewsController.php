@@ -55,14 +55,30 @@ class NewsController extends Controller
 
     public function showNewsContent(News $news,Request $request){
         $news->increment('view_count');
-        $replies = $news->replies()->orderBy('created_at','DESC')->with(['user.info'])->paginate(10);
         $cat = $news->newsCategory;
         $newsCategories = NewsCategory::all();
+        $orderBy = $request->input('orderBy');
+        switch ($orderBy){
+            case 'thumb_up':
+                $replies = $news->replies()
+                    ->orderBy('thumb_up_count','desc')
+                    ->orderBy('created_at','desc')
+                    ->with('user.info')
+                    ->paginate(10);;
+                break;
+            default:
+                $replies = $news->replies()
+                    ->orderBy('created_at','desc')
+                    ->with('user.info')
+                    ->paginate(10);;
+                break;
+        }
+
         if ($request->ajax()) {
             $view = view('news-content.comment-data', compact('replies','news'))->render();
             return response()->json(['html' => $view]);
         }
-        return view('news-content',compact('news','cat','newsCategories','replies'));
+        return view('news-content',compact('news','cat','newsCategories','replies','orderBy'));
         }
 
 
@@ -77,7 +93,7 @@ class NewsController extends Controller
     public function store(){
         $status = \request('status');
         //发布验证 暂存不验证
-//        if($status=='public') {
+//        if($status=='publish') {
             //验证
         $this->validate(\request(), [
             'title' => 'required',
@@ -100,7 +116,7 @@ class NewsController extends Controller
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['新闻' . $title . '创建成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['新闻' . $title . '暂存成功',]);
@@ -116,7 +132,7 @@ class NewsController extends Controller
     public function update(News $news){
         $status = \request('status');
         //发布验证 暂存不验证
-//        if($status=='public') {
+//        if($status=='publish') {
         //验证
         $this->validate(\request(), [
             'title' => 'required',
@@ -138,7 +154,7 @@ class NewsController extends Controller
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['新闻' . $title . '编辑成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['新闻' . $title . '暂存成功',]);

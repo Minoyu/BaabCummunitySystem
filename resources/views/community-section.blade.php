@@ -26,6 +26,7 @@
                 <div class="community-section-top-description">
                     {{$section->description}}
                 </div>
+                @include('admin.layout.msg')
                 @include('community-section.topics-list')
             </div>
 

@@ -53,9 +53,23 @@ Route::group(['middleware'=>'auth:web'],function (){
     Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('newsReplyStore');
 //  社区话题回复
     Route::post("/community/topic/{topic}/reply/store",'CommunityTopicReplyController@store')->name('communityTopicReplyStore');
+
+//  社区话题创建
+    Route::get("/community/create/topic",'CommunityTopicController@create')->name('communityTopicCreate');
+    Route::post("/community/create/topic/store",'CommunityTopicController@storeMini')->name('communityTopicStore');
+    Route::get("/community/edit/topic/{topic}",'CommunityTopicController@edit')->name('communityTopicEdit');
+    Route::post("/community/edit/topic/{topic}/update",'CommunityTopicController@updateMini')->name('communityTopicUpdate');
+
+
+    //ajax通过zoneid获取sections
+    Route::post('/community/category/getSectionsByZoneId','CommunityCategoryController@getSectionsByZoneId')->name('communitygetSectionsByZoneId');
+
 //  社区话题回复投票相关
     Route::post("/community/topic/reply/vote",'CommunityTopicReplyController@handleAjaxVote')->name('communityTopicReplyVote');
     Route::post("/community/topic/reply/cancelVote",'CommunityTopicReplyController@handleAjaxCancelVote')->name('communityTopicReplyCancelVote');
+//  新闻回复投票相关
+    Route::post("/news/reply/vote",'NewsReplyController@handleAjaxVote')->name('newsReplyVote');
+    Route::post("/news/reply/cancelVote",'NewsReplyController@handleAjaxCancelVote')->name('newsReplyCancelVote');
 //  社区话题投票相关
     Route::post("/community/topic/vote",'CommunityTopicController@handleAjaxVote')->name('communityTopicVote');
     Route::post("/community/topic/cancelVote",'CommunityTopicController@handleAjaxCancelVote')->name('communityTopicCancelVote');

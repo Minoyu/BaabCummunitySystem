@@ -12,6 +12,7 @@ class NewsReply extends Model
     use SoftDeletes,CanBeVoted;
     protected $table = 'news_replies';
     protected $guarded = [];
+    protected $vote = User::class;
 
     public function news(){
         return $this->belongsTo(News::class);

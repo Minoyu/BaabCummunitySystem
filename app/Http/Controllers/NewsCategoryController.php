@@ -54,7 +54,7 @@ class NewsCategoryController extends Controller
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['新闻分类' . $name . '创建成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['新闻分类' . $name . '暂存成功',]);
@@ -81,7 +81,7 @@ class NewsCategoryController extends Controller
     public function update(NewsCategory $newsCategory){
         $status = \request('status');
         //发布验证 暂存不验证
-        if($status=='public') {
+        if($status=='publish') {
             //验证
             $this->validate(\request(), [
                 'name' => 'required',
@@ -99,7 +99,7 @@ class NewsCategoryController extends Controller
 
         //渲染
         if ($res) {
-            if ($status == 'public') {
+            if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['新闻分类' . $name . '编辑成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['新闻分类' . $name . '暂存成功',]);

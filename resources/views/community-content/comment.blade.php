@@ -8,7 +8,7 @@
             <a mdui-tooltip="{content: '按赞数排序回复', position: 'top'}" onclick="jumpTo('?orderBy=thumb_up')" href="#" class="mdui-ripple @if($orderBy == 'thumb_up') mdui-tab-active @endif">赞数</a>
         </div>
     </div>
-    <div class="side-card-content">
+    <div class="side-card-content" id="replies">
         @include('community-content.comment-data')
         <div  id="TopicRepliesData"></div>
         <div id="TopicRepliesLoadingBtn" class="mdui-m-y-1" style="">

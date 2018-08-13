@@ -133,6 +133,19 @@ if ($$('#editorToolbar').length>0){
     switch ($$('#editorToolbar').attr('type')){
         case 'community-topic':
             editor.customConfig.uploadImgServer = '/community/topic/upload/img';
+            if ($$('body').width()<800){
+                editor.customConfig.menus = [
+                    'emoticon',  // 表情
+                    'head',  // 标题
+                    'fontSize',  // 字号
+                    'image', // 插入图片
+                    'bold',  // 粗体
+                    'italic',  // 斜体
+                    'justify',  // 对齐方式
+                    'quote', // 引用
+                    'undo'  // 撤销
+                ];
+            }
             break;
         case 'news':
             editor.customConfig.uploadImgServer = '/admin/news/upload/img';
@@ -154,6 +167,7 @@ if ($$('#editorToolbar').length>0){
         'X-Requested-With': 'XMLHttpRequest'
     };
     editor.customConfig.uploadFileName = 'img[]';
+    editor.customConfig.zIndex = 1;
     editor.create();
     // 初始化 textarea 的值
     textArea.val(editor.txt.html());
@@ -1093,6 +1107,44 @@ function ajaxGetTopicVoters(url,topicId) {
     },500);
 }
 
+//初始化新建话题页面选择section
+var selectSection = new mdui.Select('#selectSection',{position: 'bottom'});
+
+function handleSelGetSections(zoneId,classToAppend){
+    $$.ajax({
+        method: 'POST',
+        url: '/community/category/getSectionsByZoneId',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data:{
+            id:zoneId
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            var sectionsHtmlToAppend='<option value="null">请选择分区</option>';
+            $$.each(data.sections,function (i,value) {
+                sectionsHtmlToAppend+='<option value="'+value.id+'">'+value.name+'</option>'
+            });
+            $$('.'+classToAppend).empty();
+            $$('.'+classToAppend).append(sectionsHtmlToAppend);
+            selectSection.handleUpdate();
+        }
+    });
+
+}
+
+//表单提交按钮
+function formPublicSubmit(formid) {
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='publish'/>");
+    tmpStatusInput.appendTo(formid);
+    $$(formid).submit();
+}
+function formHiddenSubmit(formid) {
+    var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='hidden'/>");
+    tmpStatusInput.appendTo(formid);
+    $$(formid).submit();
+}
 
 // 过滤html标签
 function removeHTMLTag(str) {
