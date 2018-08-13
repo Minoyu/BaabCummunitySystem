@@ -20,4 +20,7 @@
             侧边栏
         </div>
     </div>
+    <a href="{{route('communityTopicCreate')}}" class="mdui-fab mdui-fab-fixed mdui-color-pink-accent">
+        <i class="mdui-icon material-icons">add</i>
+    </a>
 @endsection

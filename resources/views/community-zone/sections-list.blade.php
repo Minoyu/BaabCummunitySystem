@@ -9,7 +9,7 @@
                 <div class="community-sec-top-card-header-subtitle">
                     @if(isset($section->communityTopics[0]))
                         最近：<a href="{{route('showCommunityContent',$section->communityTopics[0]->id)}}">{{$section->communityTopics[0]->title}}</a>
-                        <br>{{$section->communityTopics[0]->created_at->diffForHumans()}}
+                        <br>{{\Illuminate\Support\Carbon::parse($section->communityTopics[0]->last_reply_at)->diffForHumans()}}
                     @else
                         此板块下暂无话题
                         <br>板块创建于{{$section->created_at->diffForHumans()}}

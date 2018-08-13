@@ -40,6 +40,10 @@
                             <option value="{{$section->id}}">{{$section->name}}</option>
                         @endif
                     @endforeach
+                @elseif(isset($selectedSections))
+                    @foreach($selectedSections as $section)
+                            <option value="{{$section->id}}">{{$section->name}}</option>
+                    @endforeach
                 @endif
             </select>
 

@@ -8,9 +8,15 @@
     <div class="mdui-row">
         <div class="mdui-col-md-9 mdui-col-xs-12" style="padding-top: 20px; ">
             <div class="mdui-card content-card community-zone-content">
+                <a href="{{route('communityTopicCreate',['zone_id'=>$zone->id])}}" class="mdui-btn create-topic-btn mdui-text-color-pink-accent ">
+                    <i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>
+                    创建话题
+                </a>
                 <img src="{{$zone->img_url}}" class="community-zone-top-img mdui-hoverable">
                 <div class="community-zone-top-txt-area">
-                    <div class="community-zone-top-name">{{$zone->name}}</div>
+                    <div class="community-zone-top-name">
+                        {{$zone->name}}
+                    </div>
                     <div class="community-zone-top-sub-area">
                         <div class="mdui-chip mdui-m-r-1">
                             <span class="mdui-chip-icon mdui-color-blue"><i class="mdui-icon material-icons">&#xe0bf;</i></span>
@@ -35,4 +41,7 @@
             侧边栏
         </div>
     </div>
+    <a href="{{route('communityTopicCreate',['zone_id'=>$zone->id])}}" class="mdui-fab mdui-fab-fixed mdui-color-pink-accent">
+        <i class="mdui-icon material-icons">add</i>
+    </a>
 @endsection

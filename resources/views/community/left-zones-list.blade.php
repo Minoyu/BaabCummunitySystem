@@ -1,8 +1,9 @@
-<h1 class="part-h mdui-m-b-4">{{__('community.zonesOfCommunity')}}
-    <button class="mdui-btn create-topic-btn mdui-text-color-pink-accent ">
+<h1 class="part-h mdui-m-b-4">
+    {{__('community.zonesOfCommunity')}}
+    <a href="{{route('communityTopicCreate')}}" class="mdui-btn mdui-text-color-pink-accent mdui-float-right">
         <i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>
         创建话题
-    </button>
+    </a>
 </h1>
 @foreach($zones as $zone)
     <a href="{{route('showCommunityZone',$zone->id)}}">

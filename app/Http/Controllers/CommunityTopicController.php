@@ -74,6 +74,10 @@ class CommunityTopicController extends Controller
             $section_id = $request->input('section_id');
             $selectedSections = CommunityZone::where('id',$zone_id)->first()->communitySections;
         }
+        if($request->input('zone_id')){
+            $zone_id = $request->input('zone_id');
+            $selectedSections = CommunityZone::where('id',$zone_id)->first()->communitySections;
+        }
         return view('community-create-topic',compact('zones','zone_id','section_id','selectedSections'));
     }
 

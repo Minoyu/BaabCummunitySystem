@@ -22,7 +22,7 @@ class CommunityController extends Controller
             ->where('status','publish')
             ->orderBy('order','desc')
             ->with(['communityTopics' => function ($query) {
-                $query->where('status','publish')->orderBy('order','desc')->first();
+                $query->where('status','publish')->orderBy('last_reply_at','desc')->first();
             }])
             ->get();
         return view('community-zone',compact('zone','sections'));

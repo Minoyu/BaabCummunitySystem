@@ -1825,11 +1825,10 @@ body {
 }
 /*新闻图片80%自适应*/
 .topic-content-primary-text img{
-    max-width: 80%;
+    max-width: 80% !important;
+    margin: 5px auto 5px auto;
     height: auto;
     display: block;
-    margin-right: auto;
-    margin-left: auto;
     box-shadow: 0 0 30px #ccc;
     -moz-box-shadow: 0 0 30px #ccc;
     -webkit-box-shadow: 0 0 30px #ccc;
@@ -1948,5 +1947,7 @@ body {
 }
 
 .create-topic-btn{
-    float: right;
+    position: absolute;
+    right:15px;
+    top: 10px;
 }
