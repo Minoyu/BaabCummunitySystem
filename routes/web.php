@@ -47,9 +47,6 @@ Route::post('/auth/register','AuthController@register')->name('userRegister');
 Route::get('/user/{user}','UserController@showPersonalCenter')->name('showPersonalCenter');
 Route::post("/user/getFollowings",'UserController@ajaxGetFollowings')->name('userGetFollowings');
 Route::post("/user/getFollowers",'UserController@ajaxGetFollowers')->name('userGetFollowers');
-Route::post("/user/follow",'UserController@handleAjaxFollow')->name('userFollowOther');
-Route::post("/user/unfollow",'UserController@handleAjaxUnfollow')->name('userUnfollowOther');
-
 
 Route::group(['middleware'=>'auth:web'],function (){
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');
@@ -82,6 +79,13 @@ Route::group(['middleware'=>'auth:web'],function (){
 
 //  修改用户信息
     Route::post('/user/{user}/edit/info','UserController@updateUserInfo')->name('editUserInfo');
+//  用户关注
+    Route::post("/user/follow",'UserController@handleAjaxFollow')->name('userFollowOther');
+    Route::post("/user/unfollow",'UserController@handleAjaxUnfollow')->name('userUnfollowOther');
+
+//  发现页面
+
+
 //  上传部分
     Route::post('/user/{user}/upload/avatar','UserController@uploadAvatar')->name('uploadUserAvatar');
     Route::post('/user/{user}/upload/cover','UserController@uploadCover')->name('uploadUserCover');

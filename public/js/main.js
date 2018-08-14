@@ -112,17 +112,21 @@ function loginToReset() {
     resetDialog.open();
 }
 /*检测如果含有登录参数则打开登录对话框并提示登录*/
+function handleNotLogged() {
+    openLoginDialog();
+    mdui.snackbar({
+        message:'You haven\'t logged in<br>你还没有登录本站',
+        timeout:3000,
+        position:'top'
+    });
+}
+
 setTimeout(function(){
     var notLogged=GetQueryString("notLogged");
     if(notLogged !==null && notLogged==='true')
     {
         if ($$('meta[name="isLogged"]').attr('content')!=='1'){
-            openLoginDialog();
-            mdui.snackbar({
-                message:'You haven\'t logged in<br>你还没有登录本站',
-                timeout:3000,
-                position:'top'
-            });
+            handleNotLogged();
         }
 
     }
@@ -725,6 +729,9 @@ function ajaxSubmitNewsCommentForm(url) {
                     timeout:0,
                     buttonText:'ok'
                 });
+            },
+            401: function (data) {
+                handleNotLogged();
             }
         }
 
@@ -879,6 +886,9 @@ function ajaxSubmitTopicCommentForm(url) {
                     timeout:0,
                     buttonText:'ok'
                 });
+            },
+            401: function (data) {
+                handleNotLogged();
             }
         }
 
@@ -1043,6 +1053,9 @@ function ajaxHandleTopicVote(voteUrl,cancelVoteUrl,topicId,obj,numClass) {
                         timeout:0,
                         buttonText:'ok'
                     });
+                },
+                401: function (data) {
+                    handleNotLogged();
                 }
             }
 
@@ -1081,6 +1094,9 @@ function ajaxHandleTopicVote(voteUrl,cancelVoteUrl,topicId,obj,numClass) {
                         timeout:0,
                         buttonText:'ok'
                     });
+                },
+                401: function (data) {
+                    handleNotLogged();
                 }
             }
 
@@ -1327,6 +1343,9 @@ function ajaxHandleFollowUser(followUrl,unfollowUrl,userId,obj,numClass) {
                         timeout:0,
                         buttonText:'ok'
                     });
+                },
+                401: function (data) {
+                    handleNotLogged();
                 }
             }
 
@@ -1367,6 +1386,9 @@ function ajaxHandleFollowUser(followUrl,unfollowUrl,userId,obj,numClass) {
                         timeout:0,
                         buttonText:'ok'
                     });
+                },
+                401: function (data) {
+                    handleNotLogged();
                 }
             }
 

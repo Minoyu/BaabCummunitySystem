@@ -39,8 +39,10 @@ class AuthController extends Controller
     }
 
     public function notLogin(){
-        return Redirect::to("/?notLogged=true");
+//        return Redirect::to("/?notLogged=true");
+        return redirect()->to(parse_url(url()->previous())['path'].'?notLogged=true');
     }
+
 
     /**检查邮箱重复
      * @param Request $request

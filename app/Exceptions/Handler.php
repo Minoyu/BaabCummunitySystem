@@ -57,6 +57,7 @@ class Handler extends ExceptionHandler
     {
         return $request->expectsJson()
             ? response()->json(['message' => $exception->getMessage()], 401)
+
 //            : redirect()->guest(route('notLogin'));
 //            : redirect()->to(redirect()->getUrlGenerator()->previous().'?notLogged=true');
 //          url解析
