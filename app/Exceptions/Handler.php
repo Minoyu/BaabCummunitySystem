@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Routing\Redirector;
 
 class Handler extends ExceptionHandler
 {
@@ -56,6 +57,9 @@ class Handler extends ExceptionHandler
     {
         return $request->expectsJson()
             ? response()->json(['message' => $exception->getMessage()], 401)
-            : redirect()->guest(route('notLogin'));
+//            : redirect()->guest(route('notLogin'));
+//            : redirect()->to(redirect()->getUrlGenerator()->previous().'?notLogged=true');
+//          url解析
+            : redirect()->to(parse_url(url()->previous())['path'].'?notLogged=true');
     }
 }

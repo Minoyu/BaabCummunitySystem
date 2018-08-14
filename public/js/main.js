@@ -39,6 +39,20 @@ function GetQueryString(name)
     if(r!=null)return  unescape(r[2]); return null;
 }
 
+function GetUrlRelativePath()
+{
+    var url = document.location.toString();
+    var arrUrl = url.split("//");
+
+    var start = arrUrl[1].indexOf("/");
+    var relUrl = arrUrl[1].substring(start);//stop省略，截取从start开始到结尾的所有字符
+
+    if(relUrl.indexOf("?") != -1){
+        relUrl = relUrl.split("?")[0];
+    }
+    return relUrl;
+}
+
 /************************
  * 顶部appbar right menu
  */
@@ -102,11 +116,15 @@ setTimeout(function(){
     var notLogged=GetQueryString("notLogged");
     if(notLogged !==null && notLogged==='true')
     {
-        openLoginDialog();
-        mdui.snackbar({
-            message:'You haven\'t logged in<br>你还没有登录本站',
-            position:'top'
-        });
+        if ($$('meta[name="isLogged"]').attr('content')!=='1'){
+            openLoginDialog();
+            mdui.snackbar({
+                message:'You haven\'t logged in<br>你还没有登录本站',
+                timeout:3000,
+                position:'top'
+            });
+        }
+
     }
 },600);
 
@@ -291,7 +309,7 @@ function loginSubmit() {
                 loginDialog.handleUpdate();
                 setTimeout(function(){
                     //使用  setTimeout（）方法设定定时5000毫秒
-                    window.location.reload();//页面刷新
+                    window.location.href=GetUrlRelativePath();//页面刷新
                 },4000);
             }else{
                 loginPasswordErrorField.text(data.msg);

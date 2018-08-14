@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="isLogged" content="{{ Auth::check() }}">
     <title>{{__('index.app_name')}} - @yield('title')</title>
 
     <!-- Styles -->
