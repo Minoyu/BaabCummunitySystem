@@ -310,7 +310,7 @@ function loginSubmit() {
                 setTimeout(function(){
                     //使用  setTimeout（）方法设定定时5000毫秒
                     window.location.href=GetUrlRelativePath();//页面刷新
-                },4000);
+                },3000);
             }else{
                 loginPasswordErrorField.text(data.msg);
                 passwordHasError=true;
@@ -1166,6 +1166,214 @@ function formHiddenSubmit(formid) {
     tmpStatusInput.appendTo(formid);
     $$(formid).submit();
 }
+
+var followDialog = new mdui.Dialog('#follow-dialog');
+var followDialogDom = $$('#follow-dialog');
+var userIsMe = $$('input[name="userIsMe"]').val();
+
+/**
+ * 处理显示正在关注的用户
+ * @param url
+ * @param userId
+ */
+function handleShowFollowingsDialog(url,userId) {
+    $$('#FollowDialogTitle').text('Following / 正在关注');
+    $$('#FollowDialogLoadingFailed').hide();
+    $$("#FollowDialogData").empty();
+    followDialog.open();
+    followDialogDom.on('opened.mdui.dialog',function () {
+        $$.ajax({
+            method: 'post',
+            url:url,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                id:userId
+            },
+            beforeSend: function(){
+                $$('#FollowDialogLoadingTip').show();
+                followDialog.handleUpdate();
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    if(data.html == ""){
+                        $$('#FollowDialogLoadingTip').hide();
+                        $$("#FollowDialogData").empty();
+                        followDialog.handleUpdate();
+                        if (userIsMe){
+                            $$('#FollowDialogLoadingFailedText').html('You can try to follow others<br/>尝试去关注别人吧');
+                        }else{
+                            $$('#FollowDialogLoadingFailedText').html('This user is not following anyone<br/>此用户没有关注任何人');
+                        }
+                        $$('#FollowDialogLoadingFailed').show();
+                        followDialog.handleUpdate();
+                        return;
+                    }
+                    $$('#FollowDialogLoadingTip').hide();
+                    $$('#FollowDialogLoadingFailed').hide();
+                    $$("#FollowDialogData").empty();
+                    followDialog.handleUpdate();
+                    $$("#FollowDialogData").append(data.html);
+                    followDialog.handleUpdate();
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+        });
+    });
+}
+/**
+ * 处理显示被关注的用户
+ * @param url
+ * @param userId
+ */
+function handleShowFollowersDialog(url,userId) {
+    $$('#FollowDialogTitle').text('Followers / 关注者');
+    $$('#FollowDialogLoadingFailed').hide();
+    $$("#FollowDialogData").empty();
+    followDialog.open();
+    followDialogDom.on('opened.mdui.dialog',function () {
+        $$.ajax({
+            method: 'post',
+            url:url,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                id:userId
+            },
+            beforeSend: function(){
+                $$('#FollowDialogLoadingTip').show();
+                followDialog.handleUpdate();
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    if(data.html == ""){
+                        $$('#FollowDialogLoadingTip').hide();
+                        $$("#FollowDialogData").empty();
+                        followDialog.handleUpdate();
+                        if (userIsMe){
+                            $$('#FollowDialogLoadingFailedText').html('No people following me now<br/>暂时无人关注我');
+                        }else{
+                            $$('#FollowDialogLoadingFailedText').html('No people following the user now<br/>暂时无人关注此用户');
+                        }
+                        $$('#FollowDialogLoadingFailed').show();
+                        followDialog.handleUpdate();
+                        return;
+                    }
+                    $$('#FollowDialogLoadingTip').hide();
+                    $$('#FollowDialogLoadingFailed').hide();
+                    $$("#FollowDialogData").empty();
+                    followDialog.handleUpdate();
+                    $$("#FollowDialogData").append(data.html);
+                    followDialog.handleUpdate();
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+        });
+    });
+}
+
+//Ajax话题投票
+function ajaxHandleFollowUser(followUrl,unfollowUrl,userId,obj,numClass) {
+    var num = $$('.'+numClass);
+    var text = obj.getElementsByTagName("span")[0];
+    var icon = obj.getElementsByTagName("i")[0];
+    if ($$(obj).hasClass('mdui-color-pink-accent')){
+        //已经投票过
+        $$.ajax({
+            method: 'POST',
+            url: unfollowUrl,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                id:userId
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    $$(obj).removeClass('mdui-color-pink-accent');
+                    $$(obj).addClass('mdui-text-color-pink-accent');
+                    $$(icon).html('&#xe87e;');
+                    $$(text).text($$('input[name="__follow"]').val());
+                    $$(icon).animateCss('jello');
+                    num.text(data.follower_count);
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    mdui.snackbar(data.errors.content,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+
+        });
+    }else{
+        //还未投票过
+        $$.ajax({
+            method: 'POST',
+            url: followUrl,
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                id:userId
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status === 1){
+                    $$(obj).addClass('mdui-color-pink-accent');
+                    $$(obj).removeClass('mdui-text-color-pink-accent');
+                    $$(icon).html('&#xe87d;');
+                    $$(text).text($$('input[name="__followed"]').val());
+                    $$(icon).animateCss('swing');
+                    num.text(data.follower_count)
+                }else{
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    mdui.snackbar(data.errors.content,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
+            }
+
+        });
+    }
+}
+
 
 // 过滤html标签
 function removeHTMLTag(str) {

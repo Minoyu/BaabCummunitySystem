@@ -12,13 +12,86 @@ use Intervention\Image\Facades\Image;
 class UserController extends Controller
 {
     //
+
+    public function ajaxGetFollowings(Request $request){
+        //验证
+        $this->validate($request, [
+            'id' => 'required|exists:users',
+        ]);
+        $users = User::find($request->id)->followings()->with('info')->get();
+
+        if ($users){
+            $status = 1;
+            $html = view('personal-center.followings-dialog-data', compact('users'))->render();
+            return json_encode(compact('status','html'));//ajax
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+            return json_encode(compact('status','msg'));//ajax
+        }
+    }
+    public function ajaxGetFollowers(Request $request){
+        //验证
+        $this->validate($request, [
+            'id' => 'required|exists:users',
+        ]);
+        $users = User::find($request->id)->followers()->with('info')->get();
+
+        if ($users){
+            $status = 1;
+            $html = view('personal-center.followers-dialog-data', compact('users'))->render();
+            return json_encode(compact('status','html'));//ajax
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+            return json_encode(compact('status','msg'));//ajax
+        }
+    }
+
+    public function handleAjaxFollow(Request $request){
+        //验证
+        $this->validate($request, [
+            'id' => 'required|exists:users',
+        ]);
+        $user = User::find($request->id);
+        if (Auth::user()->follow($user)){
+            $follower_count = $user->followers()->count();
+            $status = 1;
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+        }
+        return json_encode(compact('status','msg','follower_count'));//ajax
+    }
+
+    public function handleAjaxUnfollow(Request $request){
+        //验证
+        $this->validate($request, [
+            'id' => 'required|exists:users',
+        ]);
+        $user = User::find($request->id);
+        if (Auth::user()->unfollow($user)){
+            $follower_count = $user->followers()->count();
+            $status = 1;
+        }else{
+            $status = 0;
+            $msg = "Server internal error";
+        }
+        return json_encode(compact('status','msg','follower_count'));//ajax
+
+    }
+
+
     public function showPersonalCenter(User $user){
         if ($user->id ==Auth::id()) {
             $userIsMe = true;
         }else{
             $userIsMe = false;
         }
-        return view('personal-center',compact('user','userIsMe'));
+        $followersCount = $user->followers()->count();
+        $followingsCount = $user->followings()->count();
+
+        return view('personal-center',compact('user','userIsMe','followersCount','followingsCount'));
     }
 
     /**

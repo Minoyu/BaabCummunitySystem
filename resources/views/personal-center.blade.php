@@ -26,6 +26,12 @@
         @include('personal-center.edit-user-info')
     @endif
 
+    {{--查看关注人对话框--}}
+    @include('personal-center.follow-dialog')
     {{--此个人页的用户ID--}}
     <input class="mdui-hidden" name="userId" value="{{$user->id}}"/>
+    <input class="mdui-hidden" name="userIsMe" value="{{$userIsMe}}"/>
+    {{--Js所需翻译库--}}
+    <input class="mdui-hidden" name="__follow" value="关注"/>
+    <input class="mdui-hidden" name="__followed" value="已关注"/>
 @endsection

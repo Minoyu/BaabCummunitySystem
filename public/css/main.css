@@ -818,6 +818,18 @@ body {
     display: block;
     opacity: .6;
 }
+
+.follow-dialog .loading-tip-icon{
+    font-size: 35px;
+}
+.follow-dialog .loading-tip-text{
+    margin-top: 15px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    display: block;
+    opacity: .5;
+}
 .news-sec-cat-panel-mobile{
     border-radius: 8px;
 }
@@ -1950,4 +1962,19 @@ body {
     position: absolute;
     right:15px;
     top: 10px;
+}
+
+.follow-dialog .dialog-bg{
+    background: url("../imgs/follow_dialog_bg.jpg");
+    background-size: 100% 100%;
+}
+
+
+.user-list-item .mdui-list-item-avatar{
+    margin-right: 10px;
+}
+.user-list-item .mdui-btn{
+    position: absolute;
+    right:10px;
+    top:15px;
 }

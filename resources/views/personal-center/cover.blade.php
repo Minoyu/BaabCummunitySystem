@@ -36,10 +36,18 @@
         @if($userIsMe)
             <a onclick="openEditUserInfoDialog()" class="right-btn mdui-btn mdui-btn-raised">修改个人资料</a>
         @else
-            <a class="right-btn mdui-btn mdui-color-pink-400 mdui-btn-raised">
-                <i class="mdui-icon material-icons" style="margin-top: -4px;font-size: 20px;">add</i>
-                关注
-            </a>
+            @if($user->isFollowedBy(Auth::user()))
+                <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this,'pc-followerCount')" class="right-btn mdui-btn mdui-color-pink-accent mdui-btn-raised">
+                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87d;</i>
+                    <span>已关注</span>
+                </a>
+            @else
+                <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this,'pc-followerCount')" class="right-btn mdui-btn mdui-text-color-pink-accent mdui-btn-raised">
+                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87e;</i>
+                    <span>关注</span>
+                </a>
+            @endif
+
         @endif
     </div>
 </div>

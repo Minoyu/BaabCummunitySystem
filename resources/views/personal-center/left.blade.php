@@ -1,5 +1,5 @@
 
-<div class="mdui-panel mdui-panel-gapless mdui-hidden-sm-up mdui-m-b-1" mdui-panel>
+<div class="mdui-panel mdui-panel-gapless mdui-hidden-md-up mdui-m-b-1" mdui-panel>
     <div class="mdui-panel-item">
         <div class="mdui-panel-item-header">
             <div class="mdui-panel-item-title" style="width: auto">查看个人资料</div>
@@ -75,18 +75,18 @@
         </div>
     </div>
 </div>
-<div class="mdui-card mdui-hidden-sm-up">
+<div class="mdui-card mdui-hidden-md-up">
     <div class="right-focus-info">
-        <a class="mdui-btn right-focus-info-item">
+        <a onclick="handleShowFollowingsDialog('{{route('userGetFollowings')}}','{{$user->id}}')" class="mdui-btn right-focus-info-item">
             <div class="right-focus-info-item-inner">
-                <div class="right-focus-info-item-name">关注了</div>
-                <strong class="right-focus-info-item-value">51</strong>
+                <div class="right-focus-info-item-name">正在关注</div>
+                <strong class="right-focus-info-item-value">{{$followingsCount}}</strong>
             </div>
         </a>
-        <a class="mdui-btn right-focus-info-item">
+        <a onclick="handleShowFollowersDialog('{{route('userGetFollowers')}}','{{$user->id}}')" class="mdui-btn right-focus-info-item">
             <div class="right-focus-info-item-inner">
                 <div class="right-focus-info-item-name">关注者</div>
-                <strong class="right-focus-info-item-value">51</strong>
+                <strong class="right-focus-info-item-value pc-followerCount">{{$followersCount}}</strong>
             </div>
         </a>
     </div>
