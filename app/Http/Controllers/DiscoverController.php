@@ -9,7 +9,7 @@ class DiscoverController extends Controller
 {
     //
     public function showDiscover(){
-        $activities = Activity::all();
+        $activities = Activity::orderBy('created_at','desc')->get();
         return view('discover',compact('activities'));
     }
 }
