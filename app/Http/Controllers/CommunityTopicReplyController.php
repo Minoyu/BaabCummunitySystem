@@ -26,9 +26,11 @@ class CommunityTopicReplyController extends Controller
             $userId = Auth::id();
             $userName = Auth::user()->name;
             $replyContent = $reply->title;
+            $topicId = $reply->communityTopic->id;
+            $topicTitle = $reply->communityTopic->title;
             $event = 'communityTopicReply.voted';
             activity()->on($reply)
-                ->withProperties(compact('userId','userName','replyContent','event'))
+                ->withProperties(compact('userId','userName','topicId','topicTitle','replyContent','event'))
                 ->log('点赞了社区回复');
 
         }else{

@@ -44,7 +44,7 @@
             <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-2">3.话题内容</h3>
             <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
             <div class="editor-middle-bar">编辑区域</div>
-            <div id="editorText" contenteditable="true" class="editor-text-for-create-page mdui-hoverable" >{!! $topic->content !!}</div>
+            <div id="editorText" class="editor-text-for-create-page mdui-hoverable" >{!! $topic->content !!}</div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
             <div class="mdui-divider" style="margin-top: 50px;margin-bottom: 10px"></div>

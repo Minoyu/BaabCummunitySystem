@@ -659,9 +659,13 @@ if ($$('#NewsReplyData').length>0){
             }
     });
     function loadMoreNewsReply(page) {
+        var orderBy = GetQueryString('orderBy');
         $$.ajax({
             method: 'get',
-            url: '?page=' + page,
+            url: '?'+$$.param({
+                orderBy:orderBy,
+                page:page
+            }),
             beforeSend: function(){
                 $$('#NewsReplyLoadingTip').show();
             },
@@ -1394,6 +1398,42 @@ function ajaxHandleFollowUser(followUrl,unfollowUrl,userId,obj,numClass) {
 
         });
     }
+}
+
+//发现页面的ajax翻页
+if ($$('#ActivityListData').length>0){
+    var page = 1;
+    $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() +2 >= $(document).height()) {
+            page++;
+            loadMoreActivity(page);
+        }
+    });
+    function loadMoreActivity(page) {
+        var view = GetQueryString('view');
+        $$.ajax({
+            method: 'get',
+            url: '?'+$$.param({
+                view:view,
+                page:page
+            }),
+            beforeSend: function(){
+                $$('#ActivityListLoadingTip').show();
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.html == ""){
+                    $$('#ActivityListLoadingTip').empty();
+                    $$('#ActivityListLoadingFailed').show();
+                    return;
+                }
+                $$('#ActivityListLoadingTip').hide();
+                $$("#ActivityListData").append('<div class="animated fadeInUp">'+data.html+'</div>');
+            }
+        });
+
+    }
+
 }
 
 

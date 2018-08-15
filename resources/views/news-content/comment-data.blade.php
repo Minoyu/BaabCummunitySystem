@@ -1,4 +1,5 @@
 @foreach($replies as $reply)
+    <a name="reply-{{$reply->id}}" id="reply-{{$reply->id}}"></a>
     <div class="news-content-comment-list">
         <a href="#"><img src="{{$reply->user->info->avatar_url}}" alt="users" class="news-content-comment-users-img mdui-hoverable"></a>
         <a href="#" class="news-content-comment-username">{{$reply->user->name}}</a>

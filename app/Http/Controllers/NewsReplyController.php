@@ -26,9 +26,11 @@ class NewsReplyController extends Controller
             $userId = Auth::id();
             $userName = Auth::user()->name;
             $replyContent = $reply->title;
+            $newsId = $reply->news->id;
+            $newsTitle = $reply->news->title;
             $event = 'newsReply.voted';
             activity()->on($reply)
-                ->withProperties(compact('userId','userName','replyContent','event'))
+                ->withProperties(compact('userId','userName','newsId','newsTitle','replyContent','event'))
                 ->log('点赞了新闻回复');
 
         }else{

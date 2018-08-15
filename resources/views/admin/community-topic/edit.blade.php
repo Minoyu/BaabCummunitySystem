@@ -43,7 +43,7 @@
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.话题内容</h3>
             <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
             <div class="admin-editor-middle-bar">编辑区域</div>
-            <div id="editorText" contenteditable="true" class="admin-editor-text mdui-hoverable" >{!! $topic->content !!}</div>
+            <div id="editorText" class="admin-editor-text mdui-hoverable" >{!! $topic->content !!}</div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.优先级

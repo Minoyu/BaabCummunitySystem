@@ -12,7 +12,7 @@
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">回复内容</h3>
             <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="news-reply"></div>
             <div class="admin-editor-middle-bar">编辑区域</div>
-            <div contenteditable="true" id="editorText" class="admin-editor-text mdui-hoverable" ><p>在此编辑回复内容</p></div>
+            <div id="editorText" class="admin-editor-text mdui-hoverable" ><p>在此编辑回复内容</p></div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
             <div class="mdui-divider" style="margin-top: 50px"></div>

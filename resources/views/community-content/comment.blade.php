@@ -33,7 +33,7 @@
                 <div class="comment-edit-area">
                     <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="news-reply"></div>
                     <div class="editor-middle-bar">写点什么</div>
-                    <div contenteditable="true" id="editorText" class="editor-text mdui-hoverable" ></div>
+                    <div id="editorText" class="editor-text mdui-hoverable" ></div>
                     <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
                     <a onclick="ajaxSubmitTopicCommentForm('{{route('communityTopicReplyStore',$topic->id)}}')" class="mdui-btn mdui-color-pink-400 submit-btn"><i class="mdui-icon material-icons mdui-icon-left">send</i>发射</a>
                 </div>

@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Model\Activity\CommunityTopicObserver;
 use App\Model\Activity\CommunityTopicReplyObserver;
+use App\Model\Activity\NewsReplyObserver;
 use App\Model\CommunityTopic;
 use App\Model\CommunityTopicReply;
+use App\Model\NewsReply;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
         //
         CommunityTopic::observe(CommunityTopicObserver::class);
         CommunityTopicReply::observe(CommunityTopicReplyObserver::class);
+        NewsReply::observe(NewsReplyObserver::class);
     }
 
     /**
