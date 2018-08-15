@@ -12,6 +12,7 @@
         <a onclick="jumpTo('{{route('showIndex')}}')" href="#" class="mdui-ripple mdui-ripple-white" id="home-tab">{{ __('index.home')}}</a>
         <a onclick="jumpTo('{{route('showNews')}}')" href="#" class="mdui-ripple mdui-ripple-white" id="news-tab">{{ __('index.news')}}</a>
         <a onclick="jumpTo('{{route('showCommunity')}}')" href="#" class="mdui-ripple mdui-ripple-white" id="community-tab">{{ __('index.community')}}</a>
+        <a onclick="jumpTo('{{route('showDiscover')}}')" href="#" class="mdui-ripple mdui-ripple-white" id="discover-tab">{{ __('index.discover')}}</a>
         @if(Auth::check())
             <a onclick="jumpTo('{{route('showPersonalCenter',Auth::user()->id)}}')" href="#" class="mdui-ripple mdui-ripple-white" id="me-tab">{{ __('index.me')}}</a>
         @else

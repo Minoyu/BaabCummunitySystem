@@ -84,7 +84,7 @@ Route::group(['middleware'=>'auth:web'],function (){
     Route::post("/user/unfollow",'UserController@handleAjaxUnfollow')->name('userUnfollowOther');
 
 //  发现页面
-
+    Route::get("/discover",'DiscoverController@showDiscover')->name('showDiscover');
 
 //  上传部分
     Route::post('/user/{user}/upload/avatar','UserController@uploadAvatar')->name('uploadUserAvatar');

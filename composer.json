@@ -15,7 +15,8 @@
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "nesbot/carbon": "^1.32",
-        "overtrue/laravel-follow": "^1.1"
+        "overtrue/laravel-follow": "^1.1",
+        "spatie/laravel-activitylog": "^2.7"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.1",

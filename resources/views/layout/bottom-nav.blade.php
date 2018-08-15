@@ -8,7 +8,7 @@
         {{--<i class="mdui-icon material-icons">&#xe0bf;</i>--}}
         <label>{{__('index.community')}}</label>
     </a>
-    <a id="discover-bottom-nav" onclick="jumpTo()" class="mdui-ripple">
+    <a id="discover-bottom-nav" onclick="jumpTo('{{route('showDiscover')}}')" class="mdui-ripple">
         <i class="mdui-icon material-icons">explore</i>
         <label>{{__('index.discover')}}</label>
     </a>

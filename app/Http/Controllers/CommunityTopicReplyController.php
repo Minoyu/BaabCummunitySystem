@@ -21,6 +21,16 @@ class CommunityTopicReplyController extends Controller
             $thumb_up_count = $reply->countVoters();
             $reply->update(compact('thumb_up_count'));
             $status = 1;
+
+            //记录动态
+            $userId = Auth::id();
+            $userName = Auth::user()->name;
+            $replyContent = $reply->title;
+            $event = 'communityTopicReply.voted';
+            activity()->on($reply)
+                ->withProperties(compact('userId','userName','replyContent','event'))
+                ->log('点赞了社区回复');
+
         }else{
             $status = 0;
             $msg = "Server internal error";

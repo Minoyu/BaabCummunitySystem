@@ -42,6 +42,15 @@ class CommunityTopicController extends Controller
             $thumb_up_count = $topic->countVoters();
             $topic->update(compact('thumb_up_count'));
             $status = 1;
+
+            //记录动态
+            $userId = Auth::id();
+            $userName = Auth::user()->name;
+            $topicTitle = $topic->title;
+            $event = 'communityTopic.voted';
+            activity()->on($topic)
+                ->withProperties(compact('userId','userName','topicTitle','event'))
+                ->log('点赞了社区话题');
         }else{
             $status = 0;
             $msg = "Server internal error";
