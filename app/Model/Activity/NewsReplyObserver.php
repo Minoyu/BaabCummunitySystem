@@ -14,12 +14,15 @@ class NewsReplyObserver{
     public function created(NewsReply $reply){
         $userId = Auth::id();
         $userName = Auth::user()->name;
+        $userAvatar = Auth::user()->info->avatar_url;
         $replyContent = $reply->content;
+        $replyId = $reply->id;
         $newsId = $reply->news->id;
         $newsTitle = $reply->news->title;
+        $cover_img = $reply->news->cover_img;
         $event = 'newsReply.created';
         activity()->on($reply)
-            ->withProperties(compact('userId','userName','replyContent','newsId','newsTitle','event'))
+            ->withProperties(compact('userId','userName','userAvatar','replyId','replyContent','newsId','newsTitle','cover_img','event'))
             ->log('回复了社区话题');
     }
 }

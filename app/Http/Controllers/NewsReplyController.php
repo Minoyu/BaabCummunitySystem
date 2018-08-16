@@ -25,12 +25,15 @@ class NewsReplyController extends Controller
             //记录动态
             $userId = Auth::id();
             $userName = Auth::user()->name;
+            $userAvatar = Auth::user()->info->avatar_url;
             $replyContent = $reply->title;
+            $replyId = $reply->id;
             $newsId = $reply->news->id;
             $newsTitle = $reply->news->title;
+            $cover_img = $reply->news->cover_img;
             $event = 'newsReply.voted';
             activity()->on($reply)
-                ->withProperties(compact('userId','userName','newsId','newsTitle','replyContent','event'))
+                ->withProperties(compact('userId','userName','userAvatar','newsId','newsTitle','replyId','replyContent','event','cover_img'))
                 ->log('点赞了新闻回复');
 
         }else{

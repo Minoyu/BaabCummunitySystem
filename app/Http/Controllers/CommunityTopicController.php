@@ -46,10 +46,12 @@ class CommunityTopicController extends Controller
             //记录动态
             $userId = Auth::id();
             $userName = Auth::user()->name;
+            $userAvatar = Auth::user()->info->avatar_url;
             $topicTitle = $topic->title;
+            $topicId = $topic->id;
             $event = 'communityTopic.voted';
             activity()->on($topic)
-                ->withProperties(compact('userId','userName','topicTitle','event'))
+                ->withProperties(compact('userId','userName','userAvatar','topicId','topicTitle','event'))
                 ->log('点赞了社区话题');
         }else{
             $status = 0;

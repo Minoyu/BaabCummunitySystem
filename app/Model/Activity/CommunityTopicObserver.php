@@ -14,19 +14,15 @@ class CommunityTopicObserver{
     public function created(CommunityTopic $topic){
         $userId = Auth::id();
         $userName = Auth::user()->name;
+        $userAvatar = Auth::user()->info->avatar_url;
         $topicTitle = $topic->title;
+        $topicId = $topic->id;
         $topicStatus = $topic->status;
         if ($topicStatus =="publish"){
             $event = 'communityTopic.created';
             activity()->on($topic)
-                ->withProperties(compact('userId','userName','topicTitle','event'))
+                ->withProperties(compact('userId','userName','userAvatar','topicId','topicTitle','event'))
                 ->log('发表了社区话题');
-        }else{
-            $event = 'communityTopic.saved';
-            activity()->on($topic)
-                ->withProperties(compact('userId','userName','topicTitle','event'))
-                ->log('暂存了社区话题');
-
         }
     }
 }

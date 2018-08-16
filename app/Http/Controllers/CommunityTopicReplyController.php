@@ -25,12 +25,14 @@ class CommunityTopicReplyController extends Controller
             //记录动态
             $userId = Auth::id();
             $userName = Auth::user()->name;
+            $userAvatar = Auth::user()->info->avatar_url;
             $replyContent = $reply->title;
+            $replyId = $reply->id;
             $topicId = $reply->communityTopic->id;
             $topicTitle = $reply->communityTopic->title;
             $event = 'communityTopicReply.voted';
             activity()->on($reply)
-                ->withProperties(compact('userId','userName','topicId','topicTitle','replyContent','event'))
+                ->withProperties(compact('userId','userName','userAvatar','topicId','topicTitle','replyId','replyContent','event'))
                 ->log('点赞了社区回复');
 
         }else{

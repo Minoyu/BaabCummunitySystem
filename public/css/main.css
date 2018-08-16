@@ -2192,6 +2192,7 @@ body {
 /*动态列表p标签样式*/
 .activity-list-title{
     padding-left: 70px;
+    padding-bottom: 10px;
     font-size: 15px;
     line-height: 1.5em;
     padding-top: 15px;
@@ -2254,6 +2255,16 @@ body {
     opacity: .6;
     line-height: 1.5em;
 }
+/*动态列表img标签样式*/
+.activity-list-img{
+    width: 80%;
+    margin-top: 10px;
+    max-width: 350px;
+    max-height: 250px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 /*动态列表用户头像样式*/
 .activity-list-users-img{
     position: absolute;
@@ -2277,6 +2288,22 @@ body {
 }
 .activity-list-time .mdui-icon{
     font-size: 14px;
+}
+
+.activity-list-not-logged{
+    min-height: 300px;
+    text-align: center;
+}
+.activity-list-not-logged .tip-icon{
+    font-size: 50px;
+    opacity: 0.6;
+}
+.activity-list-not-logged .tip-text{
+    margin-top: 10px;
+    opacity: 0.6;
+}
+.activity-list-not-logged .tip-action{
+    margin-top: 10px;
 }
 
 

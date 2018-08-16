@@ -48,6 +48,9 @@ Route::get('/user/{user}','UserController@showPersonalCenter')->name('showPerson
 Route::post("/user/getFollowings",'UserController@ajaxGetFollowings')->name('userGetFollowings');
 Route::post("/user/getFollowers",'UserController@ajaxGetFollowers')->name('userGetFollowers');
 
+//  发现页面
+Route::get("/discover",'DiscoverController@showDiscover')->name('showDiscover');
+
 Route::group(['middleware'=>'auth:web'],function (){
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');
 
@@ -83,8 +86,6 @@ Route::group(['middleware'=>'auth:web'],function (){
     Route::post("/user/follow",'UserController@handleAjaxFollow')->name('userFollowOther');
     Route::post("/user/unfollow",'UserController@handleAjaxUnfollow')->name('userUnfollowOther');
 
-//  发现页面
-    Route::get("/discover",'DiscoverController@showDiscover')->name('showDiscover');
 
 //  上传部分
     Route::post('/user/{user}/upload/avatar','UserController@uploadAvatar')->name('uploadUserAvatar');

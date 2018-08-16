@@ -14,12 +14,14 @@ class CommunityTopicReplyObserver{
     public function created(CommunityTopicReply $reply){
         $userId = Auth::id();
         $userName = Auth::user()->name;
+        $userAvatar = Auth::user()->info->avatar_url;
         $replyContent = $reply->content;
+        $replyId = $reply->id;
         $topicId = $reply->communityTopic->id;
         $topicTitle = $reply->communityTopic->title;
         $event = 'communityTopicReply.created';
         activity()->on($reply)
-            ->withProperties(compact('userId','userName','replyContent','topicId','topicTitle','event'))
+            ->withProperties(compact('userId','userName','userAvatar','replyId','replyContent','topicId','topicTitle','event'))
             ->log('回复了社区话题');
     }
 }
