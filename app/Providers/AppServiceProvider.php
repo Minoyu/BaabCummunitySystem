@@ -8,6 +8,7 @@ use App\Model\Activity\NewsReplyObserver;
 use App\Model\CommunityTopic;
 use App\Model\CommunityTopicReply;
 use App\Model\NewsReply;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
         CommunityTopic::observe(CommunityTopicObserver::class);
         CommunityTopicReply::observe(CommunityTopicReplyObserver::class);
         NewsReply::observe(NewsReplyObserver::class);
+        Schema::defaultStringLength(191);
     }
 
     /**

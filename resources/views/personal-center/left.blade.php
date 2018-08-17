@@ -100,8 +100,9 @@
         </div>
     @else
         <div class="mdui-tab part-divider-tab" mdui-tab>
-            <a mdui-tooltip="{content: '查看我的动态', position: 'top'}" onclick="jumpTo('?view=activities')" href="#" class="mdui-ripple @if($view =='activities') mdui-tab-active  @endif">动态</a>
-            <a mdui-tooltip="{content: '查看我发表的社区话题', position: 'top'}" onclick="jumpTo('?view=topics')" href="#" class="mdui-ripple @if($view =='topics') mdui-tab-active  @endif">社区话题</a>
+            <a mdui-tooltip="{content: '查看此用户的动态', position: 'top'}" onclick="jumpTo('?view=activities')" href="#" class="mdui-ripple @if($view =='activities') mdui-tab-active  @endif">用户动态</a>
+            <a mdui-tooltip="{content: '查看此用户发表的社区话题', position: 'top'}" onclick="jumpTo('?view=topics')" href="#" class="mdui-ripple @if($view =='topics') mdui-tab-active  @endif">社区话题</a>
+            <a mdui-tooltip="{content: '查看此用户最近发表的评论', position: 'top'}" onclick="jumpTo('?view=replies')" href="#" class="mdui-ripple @if($view =='replies') mdui-tab-active  @endif">最近的评论</a>
         </div>
     @endif
     @switch($view)

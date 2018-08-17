@@ -1,6 +1,6 @@
 <div class="mdui-card mdui-m-t-2 community-topic-thumb-up-card">
     <button onclick="ajaxHandleTopicVote('{{route('communityTopicVote')}}','{{route('communityTopicCancelVote')}}','{{$topic->id}}',this,'topic-thumb-up-num')"
-            class="mdui-btn mdui-btn-icon @if(Auth::user()->hasVoted($topic)) mdui-color-pink-accent @else mdui-text-color-pink-accent @endif mdui-ripple mdui-center thumb-up-btn">
+            class="mdui-btn mdui-btn-icon @if(Auth::check() && Auth::user()->hasVoted($topic)) mdui-color-pink-accent @else mdui-text-color-pink-accent @endif mdui-ripple mdui-center thumb-up-btn">
 
         <i class="mdui-icon material-icons">thumb_up</i>
     </button>
