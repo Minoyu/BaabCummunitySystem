@@ -1435,6 +1435,41 @@ if ($$('#ActivityListData').length>0){
     }
 
 }
+//个人页面的ajax翻页
+if ($$('#PersonalCenterListData').length>0){
+    var page = 1;
+    $(window).scroll(function() {
+        if ($(window).scrollTop() + $(window).height() +2 >= $(document).height()) {
+            page++;
+            loadMorePCList(page);
+        }
+    });
+    function loadMorePCList(page) {
+        var view = GetQueryString('view');
+        $$.ajax({
+            method: 'get',
+            url: '?'+$$.param({
+                view:view,
+                page:page
+            }),
+            beforeSend: function(){
+                $$('#PersonalCenterListLoadingTip').show();
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if(data.html == ""){
+                    $$('#PersonalCenterListLoadingTip').empty();
+                    $$('#PersonalCenterListLoadingFailed').show();
+                    return;
+                }
+                $$('#PersonalCenterListLoadingTip').hide();
+                $$("#PersonalCenterListData").append('<div class="animated fadeInUp">'+data.html+'</div>');
+            }
+        });
+
+    }
+
+}
 
 
 // 过滤html标签

@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\CommunityTopic;
 use App\Model\User;
 use App\Model\UserInfo;
+use \Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Spatie\Activitylog\Models\Activity;
 
 class UserController extends Controller
 {
@@ -82,7 +87,9 @@ class UserController extends Controller
     }
 
 
-    public function showPersonalCenter(User $user){
+    public function showPersonalCenter(User $user,Request $request){
+        $user->load('info');
+        $view = $request->view;
         if ($user->id ==Auth::id()) {
             $userIsMe = true;
         }else{
@@ -90,8 +97,78 @@ class UserController extends Controller
         }
         $followersCount = $user->followers()->count();
         $followingsCount = $user->followings()->count();
+        switch ($view) {
+            case 'topics':
+                if ($userIsMe){
+                    $topics = $user
+                        ->communityTopics()
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(15);
+                }else{
+                    $topics = $user
+                        ->communityTopics()
+                        ->where('status','publish')
+                        ->orderBy('created_at', 'desc')
+                        ->paginate(15);
+                }
+                if ($request->ajax()) {
+                    $html = view('personal-center.left-topic-data',compact('topics'))->render();
+                    return json_encode(compact('html'));
+                }
+                break;
+            case 'replies':
+                $newsReplies = $user
+                    ->newsReplies()
+                    ->with('news')
+                    ->get();
+                $CommunityReplies = $user
+                    ->communityTopicReplies()
+                    ->with('communityTopic')
+                    ->get();
+                $replies = $newsReplies
+                    ->concat($CommunityReplies)
+                    ->sortByDesc('created_at');
+                //分页
 
-        return view('personal-center',compact('user','userIsMe','followersCount','followingsCount'));
+                $page = 1;
+                if( !empty($request->page) ) {
+                    $page = $request->page;
+                }
+                $perPage = 15;
+                $offset = (($page - 1) * $perPage);
+
+                $replies = new LengthAwarePaginator(
+                    $replies->slice($offset,$perPage, true)->all(),
+                    $replies->count(),
+                    $page);
+
+                if ($request->ajax()) {
+                    $html = view('personal-center.left-reply-data',compact('replies'))->render();
+                    return json_encode(compact('html'));
+                }
+                break;
+            default:
+                //我的动态
+                $activities = Activity::where('causer_id', $user->id)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(15);
+                if ($request->ajax()) {
+                    $html = view('personal-center.left-activity-data',compact('activities'))->render();
+                    return json_encode(compact('html'));
+                }
+                break;
+        }
+
+        return view('personal-center',compact(
+            'user',
+            'userIsMe',
+            'followersCount',
+            'followingsCount',
+            'view',
+            'activities',
+            'topics',
+            'replies'
+        ));
     }
 
     /**

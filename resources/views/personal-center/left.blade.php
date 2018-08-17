@@ -92,12 +92,44 @@
     </div>
 </div>
 <div class="mdui-card">
-    <div class="mdui-tab" mdui-tab>
-        <a href="#example1-tab1" class="mdui-ripple">动态</a>
-        <a href="#example1-tab2" class="mdui-ripple">帖子</a>
-        <a href="#example1-tab3" class="mdui-ripple">回复</a>
+    @if($userIsMe)
+        <div class="mdui-tab part-divider-tab" mdui-tab>
+            <a mdui-tooltip="{content: '查看我的动态', position: 'top'}" onclick="jumpTo('?view=activities')" href="#" class="mdui-ripple @if($view =='activities') mdui-tab-active  @endif">我的动态</a>
+            <a mdui-tooltip="{content: '查看我发表的社区话题', position: 'top'}" onclick="jumpTo('?view=topics')" href="#" class="mdui-ripple @if($view =='topics') mdui-tab-active  @endif">社区话题</a>
+            <a mdui-tooltip="{content: '查看我最近发表的评论', position: 'top'}" onclick="jumpTo('?view=replies')" href="#" class="mdui-ripple @if($view =='replies') mdui-tab-active  @endif">最近的评论</a>
+        </div>
+    @else
+        <div class="mdui-tab part-divider-tab" mdui-tab>
+            <a mdui-tooltip="{content: '查看我的动态', position: 'top'}" onclick="jumpTo('?view=activities')" href="#" class="mdui-ripple @if($view =='activities') mdui-tab-active  @endif">动态</a>
+            <a mdui-tooltip="{content: '查看我发表的社区话题', position: 'top'}" onclick="jumpTo('?view=topics')" href="#" class="mdui-ripple @if($view =='topics') mdui-tab-active  @endif">社区话题</a>
+        </div>
+    @endif
+    @switch($view)
+        @case('topics')
+            <div class="community-topic-list">
+                @include('personal-center.left-topic-data')
+                <div  id="PersonalCenterListData"></div>
+            </div>
+        @break
+        @case('replies')
+            <div class="community-topic-list">
+                @include('personal-center.left-reply-data')
+                <div  id="PersonalCenterListData"></div>
+            </div>
+        @break
+        @default
+            @include('personal-center.left-activity-data')
+            <div  id="PersonalCenterListData"></div>
+    @endswitch
+
+    <div id="PersonalCenterListLoadingTip" class="mdui-m-y-2" style="display:none">
+        <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>
+        <span class="loading-tip-text">正在加载更多</span>
     </div>
-    <div id="example1-tab1" class="mdui-p-a-2">web content</div>
-    <div id="example1-tab2" class="mdui-p-a-2">shopping content</div>
-    <div id="example1-tab3" class="mdui-p-a-2">images content</div>
+    <div id="PersonalCenterListLoadingFailed" class="animated fadeIn faster" style="display:none">
+        <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600">mood_bad</i>
+        <span class="loading-tip-text">没有更多了</span>
+    </div>
+
+
 </div>

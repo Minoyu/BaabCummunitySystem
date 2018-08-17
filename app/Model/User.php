@@ -49,4 +49,16 @@ class User extends Authenticatable
     public function activities(){
         return $this->hasMany('Spatie\Activitylog\Models\Activity','causer_id');
     }
+
+    public function communityTopics(){
+        return $this->hasMany(CommunityTopic::class,'user_id');
+    }
+
+    public function newsReplies(){
+        return $this->hasMany(NewsReply::class,'user_id');
+    }
+    public function communityTopicReplies(){
+        return $this->hasMany(CommunityTopicReply::class,'user_id');
+    }
+
 }
