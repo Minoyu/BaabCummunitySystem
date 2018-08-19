@@ -185,7 +185,9 @@ return [
         //Follow服务
         Overtrue\LaravelFollow\FollowServiceProvider::class,
         //Vote服务
-        Jcc\LaravelVote\VoteServiceProvider::class
+        Jcc\LaravelVote\VoteServiceProvider::class,
+        //搜索服务
+        TomLingham\Searchy\SearchyServiceProvider::class
 
     ],
 
@@ -236,6 +238,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Searchy' => TomLingham\Searchy\Facades\Searchy::class,
     ],
 
 ];

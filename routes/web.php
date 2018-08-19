@@ -51,6 +51,9 @@ Route::post("/user/getFollowers",'UserController@ajaxGetFollowers')->name('userG
 //  发现页面
 Route::get("/discover",'DiscoverController@showDiscover')->name('showDiscover');
 
+//搜索部分
+Route::post('/search/tips','SearchController@discoverTips')->name('getSearchTips');
+
 Route::group(['middleware'=>'auth:web'],function (){
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');
 

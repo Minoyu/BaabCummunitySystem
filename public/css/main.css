@@ -2182,6 +2182,11 @@ body {
     opacity: 1;
 }
 
+#searchTips{
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
 /*动态列表*/
 .activity-list {
     min-height: 75px;
