@@ -1571,119 +1571,9 @@ function getSearchInputTips(keywords,preType){
         },
         success: function (data) {
             //JSON字符串转JSON
-            var data = $.parseJSON(data);
+            data = $.parseJSON(data);
             var searchTipsContent = $('#'+preType+'TipsContent');
             searchTipsContent.empty();
-            var contentToAdd='';
-            var contentCount=0;
-            // if(data.designs.length>0){
-            //     //方案有效
-            //     var designHeader='' +
-            //         '<li class="mdui-menu-item search-tips search-tips-type">\n' +
-            //         '     <a class="mdui-ripple">\n' +
-            //         '          <i class=" mdui-icon material-icons">assignment</i> 方案\n' +
-            //         '     </a>\n' +
-            //         '</li>' +
-            //         '<li class="mdui-divider"></li>';
-            //     var designHtml='';
-            //     $$.each(data.designs,function (i,item) {
-            //         designHtml += '<li class="mdui-menu-item search-tips search-tips-item">\n' +
-            //             '               <a href="javascript:;" class="mdui-ripple">'+item.title+'</a>\n' +
-            //             '          </li>';
-            //     });
-            //     contentCount++;
-            //     contentToAdd +=designHeader+designHtml;
-            // }
-            //
-            // if(data.categories.length>0){
-            //     //分类有效
-            //     var categoryHeader='' +
-            //         '<li class="mdui-menu-item search-tips search-tips-type">\n' +
-            //         '     <a class="mdui-ripple">\n' +
-            //         '          <i class=" mdui-icon material-icons">view_list</i> 分类\n' +
-            //         '     </a>\n' +
-            //         '</li>' +
-            //         '<li class="mdui-divider"></li>';
-            //     var categoryHtml='';
-            //     $$.each(data.categories,function (i,item) {
-            //         categoryHtml += '<li class="mdui-menu-item search-tips search-tips-item">\n' +
-            //             '               <a href="javascript:;" class="mdui-ripple">'+item.title+'</a>\n' +
-            //             '          </li>';
-            //     });
-            //     contentCount++;
-            //     contentToAdd +=categoryHeader+categoryHtml;
-            // }
-            //
-            // if(data.applications.length>0){
-            //     //应用有效
-            //     var applicationHeader='' +
-            //         '<li class="mdui-menu-item search-tips search-tips-type">\n' +
-            //         '     <a class="mdui-ripple">\n' +
-            //         '          <i class=" mdui-icon material-icons">bubble_chart</i> 应用产品\n' +
-            //         '     </a>\n' +
-            //         '</li>' +
-            //         '<li class="mdui-divider"></li>';
-            //     var applicationHtml='';
-            //     $$.each(data.categories,function (i,item) {
-            //         applicationHtml += '<li class="mdui-menu-item search-tips search-tips-item">\n' +
-            //             '               <a href="javascript:;" class="mdui-ripple">'+item.title+'</a>\n' +
-            //             '          </li>';
-            //     });
-            //     contentCount++;
-            //     contentToAdd +=applicationHeader+applicationHtml;
-            // }
-            // if(data.companies.length>0){
-            //     //厂商有效
-            //     var companyHeader='' +
-            //         '<li class="mdui-menu-item search-tips search-tips-type">\n' +
-            //         '     <a class="mdui-ripple">\n' +
-            //         '          <i class=" mdui-icon material-icons">business</i> 厂商\n' +
-            //         '     </a>\n' +
-            //         '</li>' +
-            //         '<li class="mdui-divider"></li>';
-            //     var companyHtml='';
-            //     $$.each(data.categories,function (i,item) {
-            //         companyHtml += '<li class="mdui-menu-item search-tips search-tips-item">\n' +
-            //             '               <a href="javascript:;" class="mdui-ripple">'+item.title+'</a>\n' +
-            //             '          </li>';
-            //     });
-            //     contentCount++;
-            //     contentToAdd +=companyHeader+companyHtml;
-            // }
-            // if (contentCount===0){
-            //     contentToAdd = '' +
-            //         '<li class="mdui-menu-item search-tips search-tips-null">\n' +
-            //         '    <a class="mdui-ripple mdui-text-color-grey-800">\n' +
-            //         '         <i class="mdui-icon material-icons">feedback</i>  暂无相关搜索推荐 您可以回车尝试详细搜索\n' +
-            //         '    </a>\n' +
-            //         '</li>' +
-            //         '<li class="mdui-divider"></li>' +
-            //         '<li class="mdui-menu-item search-tips search-tips-null">\n' +
-            //         '                                <a class="mdui-ripple mdui-text-color-grey">\n' +
-            //         '                                &nbsp;    : ) 目前 您可以尝试输入您所想要查找的\n' +
-            //         '                                </a>\n' +
-            //         '                            </li>\n' +
-            //         '                            <li class="mdui-menu-item search-tips search-tips-null" style="margin-left: 20px">\n' +
-            //         '                                <a class="mdui-ripple mdui-text-color-grey">\n' +
-            //         '                                    <i class="mdui-icon material-icons">assignment</i> 方案\n' +
-            //         '                                </a>\n' +
-            //         '                            </li>\n' +
-            //         '                            <li class="mdui-menu-item search-tips search-tips-null" style="margin-left: 20px">\n' +
-            //         '                                <a class="mdui-ripple mdui-text-color-grey">\n' +
-            //         '                                    <i class="mdui-icon material-icons">view_list</i> 应用领域及方案分类\n' +
-            //         '                                </a>\n' +
-            //         '                            </li>\n' +
-            //         '                            <li class="mdui-menu-item search-tips search-tips-null" style="margin-left: 20px">\n' +
-            //         '                                <a class="mdui-ripple mdui-text-color-grey">\n' +
-            //         '                                    <i class="mdui-icon material-icons">bubble_chart</i> 应用产品\n' +
-            //         '                                </a>\n' +
-            //         '                            </li>\n' +
-            //         '                            <li class="mdui-menu-item search-tips search-tips-null" style="margin-left: 20px">\n' +
-            //         '                                <a class="mdui-ripple mdui-text-color-grey">\n' +
-            //         '                                    <i class="mdui-icon material-icons">business</i> 厂商\n' +
-            //         '                                </a>\n' +
-            //         '                            </li>';
-            // }
             searchTipsContent.append(data.html);
         },
 
@@ -1691,6 +1581,41 @@ function getSearchInputTips(keywords,preType){
             $('.'+preType+'TipsAjaxProgress').empty();
         }
     });
+}
+
+/**
+ *bar搜索提示框
+ */
+var barSearchTipsMenu = new mdui.Menu('#barSearchLabel', '#barSearchTips',{position:'bottom',fixed:true});
+var barSearchInput = $('#barSearch');
+
+barSearchInput.focus(function(event){
+    debounce(function () {
+        $('#barSearchTips').width(barSearchInput.width()+20);
+        barSearchTipsMenu.open();
+    },500);
+});
+
+barSearchInput.bind("input propertychange change",function(event){
+    $('#barSearchTips').width(barSearchInput.width()+20);
+    barSearchTipsMenu.open();
+    debounce(function () {
+        var keywords = barSearchInput.val();
+        getSearchInputTips(keywords,'barSearch');
+    },800);
+});
+
+function hideBarTitle(){
+    $$('#barTitle').hide();
+    $$('#barSubTitle').hide();
+    $$('#barMenu').hide();
+    $$.showOverlay(900);
+}
+function showBarTitle(){
+    $$('#barTitle').show();
+    $$('#barMenu').show();
+    $$('#barSubTitle').show();
+    $$.hideOverlay(900);
 }
 
 

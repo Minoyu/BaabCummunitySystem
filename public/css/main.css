@@ -2027,6 +2027,19 @@ body {
     height: 36px;
     line-height: 32px;
 }
+.bar-search-tips > a{
+    height: 32px;
+    line-height: 30px;
+}
+.bar-search-tips-content .mdui-icon{
+    position: relative;
+}
+.bar-search-tips-content .search-tips-item{
+    padding-left: 10px;
+}
+.bar-search-tips-content .search-tips-null{
+    padding-left: 10px;
+}
 
 /*搜索部分*/
 .search-input {
