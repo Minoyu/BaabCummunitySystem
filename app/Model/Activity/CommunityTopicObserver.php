@@ -4,6 +4,7 @@ namespace App\Model\Activity;
 
 use App\Model\CommunityTopic;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 class CommunityTopicObserver{
 
@@ -24,5 +25,15 @@ class CommunityTopicObserver{
                 ->withProperties(compact('userId','userName','userAvatar','topicId','topicTitle','event'))
                 ->log('发表了社区话题');
         }
+    }
+
+    public function deleted(CommunityTopic $topic){
+        Activity::where([
+            ['subject_id',$topic->id],
+            ['subject_type','App\Model\CommunityTopic'],
+            ['causer_id',$topic->user_id],
+            ['description', '发表了社区话题'],
+        ])
+            ->delete();
     }
 }

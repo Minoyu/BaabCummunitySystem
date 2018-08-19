@@ -82,6 +82,13 @@ Route::group(['middleware'=>'auth:web'],function (){
 
 //  修改用户信息
     Route::post('/user/{user}/edit/info','UserController@updateUserInfo')->name('editUserInfo');
+    Route::post('/user/{user}/edit/info/motto','UserController@helpUpdateUserMotto')->name('helpEditUserMotto');
+    Route::post('/user/{user}/edit/info/livingCity','UserController@helpUpdateUserLivingCity')->name('helpEditUserLivingCity');
+    Route::post('/user/{user}/edit/info/nation','UserController@helpUpdateUserNation')->name('helpEditUserNation');
+    Route::post('/user/{user}/edit/info/engaged','UserController@helpUpdateUserEngaged')->name('helpEditUserEngaged');
+    Route::post('/user/{user}/edit/info/wechat','UserController@helpUpdateUserWechat')->name('helpEditUserWechat');
+    Route::post('/user/{user}/edit/info/closeHelp','UserController@helpUpdateClose')->name('closeHelpEditUserInfo');
+//
 //  用户关注
     Route::post("/user/follow",'UserController@handleAjaxFollow')->name('userFollowOther');
     Route::post("/user/unfollow",'UserController@handleAjaxUnfollow')->name('userUnfollowOther');

@@ -337,13 +337,28 @@ body {
 .side-card-header-text{
     overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
     font-weight: 600;
+    color: #2b2b2b;
+}
+.side-card-header-text small{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 90%;
+    font-weight: normal;
     color: #646464;
 }
 .side-card-content{
     color: #2e2e2e;
     padding: 12px 0;
+}
+.side-card-content-with-p-x{
+    color: #2e2e2e;
+    padding: 12px 20px;
+}
+.side-card-action{
+    text-align: right;
+    padding: 0 20px 12px;
 }
 .side-card-user-avatar{
     display: block;
@@ -2245,6 +2260,26 @@ body {
 .activity-list-title-orange-a .icon-mini{
     font-size: 18px;
     color: #FF5722;
+}
+.activity-list-title-indigo-a .user-name{
+    color: #3F51B5;
+}
+.activity-list-title-indigo-a .user-name:hover{
+    color: rgba(63, 81, 181, 0.47);
+}
+.activity-list-title-indigo-a .icon-mini{
+    font-size: 18px;
+    color: #3F51B5;
+}
+.activity-list-title-purple-a .user-name{
+    color: #9C27B0;
+}
+.activity-list-title-purple-a .user-name:hover{
+    color: rgba(156, 39, 176, 0.64);
+}
+.activity-list-title-purple-a .icon-mini{
+    font-size: 18px;
+    color: #9C27B0;
 }
 
 /*动态列表p标签样式*/

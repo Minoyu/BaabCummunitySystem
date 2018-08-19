@@ -1471,6 +1471,49 @@ if ($$('#PersonalCenterListData').length>0){
 
 }
 
+function handleCloseHelpUpdateInfo(url) {
+    mdui.dialog({
+        title: $$('input[name="__closeHelpEditTitle"]').val(),
+        content: $$('input[name="__closeHelpEditContent"]').val(),
+        buttons: [
+            {
+                text: 'cancel'
+            },
+            {
+                text: 'ok',
+                onClick: function(inst){
+                    $$.ajax({
+                        method: 'POST',
+                        url: url,
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function (data) {
+                            data=JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
+                                });
+                            }
+                        }
+                    });
+
+                }
+            }
+        ]
+    });
+}
 
 // 过滤html标签
 function removeHTMLTag(str) {

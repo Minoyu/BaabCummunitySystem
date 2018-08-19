@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Model\CommunityTopic;
+use App\Model\CommunityTopicReply;
+use App\Model\NewsReply;
 use App\Model\User;
 use App\Model\UserInfo;
 use \Illuminate\Pagination\LengthAwarePaginator;
@@ -116,6 +118,34 @@ class UserController extends Controller
                     return json_encode(compact('html'));
                 }
                 break;
+            case 'voted':
+                $votedTopics = $user
+                    ->votedItems(CommunityTopic::class)
+                    ->get();
+                $votedTopicReplies = $user
+                    ->votedItems(CommunityTopicReply::class)
+                    ->get();
+                $votedNewsReply = $user
+                    ->votedItems(NewsReply::class)
+                    ->get();
+                $page = 1;
+                if( !empty($request->page) ) {
+                    $page = $request->page;
+                }
+                $perPage = 15;
+                $votes = $votedTopics
+                ->concat($votedNewsReply)
+                ->concat($votedTopicReplies)
+                ->sortByDesc('created_at')
+                ->forPage($page,$perPage);
+
+                if ($request->ajax()) {
+                    $html = view('personal-center.left-voted-data',compact('votes','user'))->render();
+                    return json_encode(compact('html'));
+                }
+
+                break;
+
             case 'replies':
                 $newsReplies = $user
                     ->newsReplies()
@@ -143,7 +173,7 @@ class UserController extends Controller
                     $page);
 
                 if ($request->ajax()) {
-                    $html = view('personal-center.left-reply-data',compact('replies'))->render();
+                    $html = view('personal-center.left-reply-data',compact('replies','user'))->render();
                     return json_encode(compact('html'));
                 }
                 break;
@@ -153,7 +183,7 @@ class UserController extends Controller
                     ->orderBy('created_at', 'desc')
                     ->paginate(15);
                 if ($request->ajax()) {
-                    $html = view('personal-center.left-activity-data',compact('activities'))->render();
+                    $html = view('personal-center.left-activity-data',compact('activities','user'))->render();
                     return json_encode(compact('html'));
                 }
                 break;
@@ -167,7 +197,8 @@ class UserController extends Controller
             'view',
             'activities',
             'topics',
-            'replies'
+            'replies',
+            'votes'
         ));
     }
 
@@ -177,9 +208,10 @@ class UserController extends Controller
      * @param Request $request
      * @return string
      */
-    public function updateUserInfo(User $user,Request $request){
+    public function updateUserInfo(User $user,Request $request)
+    {
         //用户验证权限
-        $this->authorize('updateUserInfo',$user);
+        $this->authorize('updateUserInfo', $user);
         //验证
         $this->validate($request, [
             'name' => 'required',
@@ -219,14 +251,148 @@ class UserController extends Controller
         //渲染
         if ($userRes && $userInfoRes) {
             $status = 1;
-            $msg = 'Create account successful';
+            $msg = 'Update user info successful';
         } else {
             $status = 0;
-            $msg = 'Create account failed';
+            $msg = 'Update user info failed';
         }
         return json_encode(compact('status', 'msg'));
+    }
+
+    /**
+     * 提示更新个人用户信息
+     * @param User $user
+     * @param Request $request
+     * @return string
+     */
+
+    public function helpUpdateUserWechat(User $user,Request $request){
+        //用户验证权限
+        $this->authorize('updateUserInfo',$user);
+
+        //逻辑
+        $wechat = $request->wechat;
+        $wechat_open = $request->wechat_open? 'true':'false';
+
+        $userInfoRes = $user->info->update(compact(
+            'wechat',
+            'wechat_open'
+        ));
+
+        //渲染
+        if ($userInfoRes) {
+            return \redirect()->back()->with('tips', ['微信更新成功',]);
+        } else {
+            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+        }
 
     }
+    public function helpUpdateUserLivingCity(User $user,Request $request){
+        //用户验证权限
+        $this->authorize('updateUserInfo',$user);
+
+        //逻辑
+        $living_city = $request->living_city;
+        $living_city_open = $request->living_city_open? 'true':'false';
+
+        $userInfoRes = $user->info->update(compact(
+            'living_city',
+            'living_city_open'
+        ));
+
+        //渲染
+        if ($userInfoRes) {
+            return \redirect()->back()->with('tips', ['现居城市更新成功',]);
+        } else {
+            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+        }
+
+    }
+    public function helpUpdateUserNation(User $user,Request $request){
+        //用户验证权限
+        $this->authorize('updateUserInfo',$user);
+
+        //逻辑
+        $nation = $request->nation;
+        $nation_open = $request->nation_open? 'true':'false';
+
+        $userInfoRes = $user->info->update(compact(
+            'nation',
+            'nation_open'
+        ));
+
+        //渲染
+        if ($userInfoRes) {
+            return \redirect()->back()->with('tips', ['国家更新成功',]);
+        } else {
+            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+        }
+
+    }
+    public function helpUpdateUserEngaged(User $user,Request $request){
+        //用户验证权限
+        $this->authorize('updateUserInfo',$user);
+
+        //逻辑
+        $engaged_in = $request->engaged_in;
+        $engaged_in_open = $request->engaged_in_open? 'true':'false';
+
+        $userInfoRes = $user->info->update(compact(
+            'engaged_in',
+            'engaged_in_open'
+        ));
+
+        //渲染
+        if ($userInfoRes) {
+            return \redirect()->back()->with('tips', ['职业/从事行业更新成功',]);
+        } else {
+            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+        }
+
+    }
+
+    public function helpUpdateUserMotto(User $user,Request $request){
+        //用户验证权限
+        $this->authorize('updateUserInfo',$user);
+
+        //逻辑
+        $motto = $request->motto;
+
+        $userInfoRes = $user->info->update(compact(
+            'motto'
+        ));
+
+        //渲染
+        if ($userInfoRes) {
+            return \redirect()->back()->with('tips', ['一句话介绍更新成功',]);
+        } else {
+            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+        }
+
+    }
+
+    public function helpUpdateClose(User $user){
+        //用户验证权限
+        $this->authorize('updateUserInfo',$user);
+
+        //逻辑
+        $help_tip_open = false;
+
+        $userInfoRes = $user->info->update(compact(
+            'help_tip_open'
+        ));
+
+        //渲染
+        if($userInfoRes){
+            $status = 1;
+            $msg = "引导已关闭";
+        }else{
+            $status = 0;
+            $msg = "更新失败,服务器内部错误,请联系管理员";
+        }
+    return json_encode(compact('status','msg'));//ajax
+
+}
 
     /**
      * 处理用户上传的头像

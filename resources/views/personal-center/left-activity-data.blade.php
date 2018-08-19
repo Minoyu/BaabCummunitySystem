@@ -67,7 +67,7 @@
                 <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}">
                     <img src="{{$activity->properties['userAvatar']}}" alt="users" class="activity-list-users-img mdui-hoverable">
                 </a>
-                <div class="activity-list-title activity-list-title-pink-a">
+                <div class="activity-list-title activity-list-title-indigo-a">
                     <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
                     点赞了社区话题
                     <a href="{{route('showCommunityContent',$activity->properties['topicId'])}}#reply-{{$activity->properties['replyId']}}" class="subject-title">{{$activity->properties['topicTitle']}}</a>
@@ -84,7 +84,7 @@
                 <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}">
                     <img src="{{$activity->properties['userAvatar']}}" alt="users" class="activity-list-users-img mdui-hoverable">
                 </a>
-                <div class="activity-list-title activity-list-title-pink-a">
+                <div class="activity-list-title activity-list-title-purple-a">
                     <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
                     点赞了新闻
                     <a href="{{route('showNewsContent',$activity->properties['newsId'])}}#reply-{{$activity->properties['replyId']}}" class="subject-title">{{$activity->properties['newsTitle']}}</a>

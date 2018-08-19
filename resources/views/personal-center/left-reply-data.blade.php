@@ -7,7 +7,7 @@
             <div class="activity-list-title activity-list-title-blue-a">
                 <i class="mdui-icon material-icons icon-mini">&#xe15e;</i>
                 回复了社区话题
-                {{--<a href="{{route('showCommunityContent',$reply->communityTopic->id)}}#reply-{{$reply->id}}" class="subject-title">{{$reply->communityTopic->title}}</a>--}}
+                <a href="{{route('showCommunityContent',$reply->communityTopic->id)}}#reply-{{$reply->id}}" class="subject-title">{{$reply->communityTopic->title}}</a>
                 <div class="activity-list-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$reply->created_at->diffForHumans()}}</div>
             </div>
             <div class="activity-list-p">

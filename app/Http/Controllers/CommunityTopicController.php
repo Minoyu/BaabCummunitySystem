@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Spatie\Activitylog\Models\Activity;
 
 class CommunityTopicController extends Controller
 {
@@ -67,6 +68,15 @@ class CommunityTopicController extends Controller
         ]);
         $topic = CommunityTopic::find($request->id);
         if (Auth::user()->cancelVote($topic)){
+
+            //删除动态
+            Activity::where([
+                ['subject_id', $topic->id],
+                ['subject_type', 'App\Model\CommunityTopic'],
+                ['causer_id', Auth::id()],
+                ['description', '点赞了社区话题'],
+            ])->delete();
+
             $thumb_up_count = $topic->countVoters();
             $topic->update(compact('thumb_up_count'));
             $status = 1;

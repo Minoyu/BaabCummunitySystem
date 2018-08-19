@@ -30,6 +30,7 @@ class CreateUsersInfoTable extends Migration
             $table->string('living_city_open')->default('false')->comment('open:{"true":"开放","false":"隐藏"}');
             $table->string('engaged_in')->nullable()->comment('职业/从事行业');
             $table->string('engaged_in_open')->default('false')->comment('open:{"true":"开放","false":"隐藏"}');
+            $table->boolean('help_tip_open')->default(true);
             $table->timestamps();
         });
     }

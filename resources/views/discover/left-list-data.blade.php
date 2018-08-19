@@ -66,12 +66,26 @@
                 </div>
             </div>
             @break
+        @case('user.created')
+            <div class="activity-list">
+                <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}">
+                    <img src="{{\App\Model\User::findOrFail($activity->properties['userId'])->info->avatar_url}}" alt="users" class="activity-list-users-img mdui-hoverable">
+                </a>
+                <div class="activity-list-title activity-list-title-pink-a">
+                    <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
+                    欢迎！
+                    <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}" class="user-name">{{$activity->properties['userName']}}</a>
+                    加入了社区
+                    <div class="activity-list-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$activity->created_at->diffForHumans()}}</div>
+                </div>
+            </div>
+            @break
         @case('communityTopicReply.voted')
             <div class="activity-list">
                 <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}">
                     <img src="{{$activity->properties['userAvatar']}}" alt="users" class="activity-list-users-img mdui-hoverable">
                 </a>
-                <div class="activity-list-title activity-list-title-pink-a">
+                <div class="activity-list-title activity-list-title-indigo-a">
                     <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
                     <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}" class="user-name">{{$activity->properties['userName']}}</a>
                     点赞了社区话题
@@ -89,7 +103,7 @@
                 <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}">
                     <img src="{{$activity->properties['userAvatar']}}" alt="users" class="activity-list-users-img mdui-hoverable">
                 </a>
-                <div class="activity-list-title activity-list-title-pink-a">
+                <div class="activity-list-title activity-list-title-purple-a">
                     <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
                     <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}" class="user-name">{{$activity->properties['userName']}}</a>
                     点赞了新闻

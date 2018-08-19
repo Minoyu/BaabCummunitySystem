@@ -75,6 +75,10 @@
         </div>
     </div>
 </div>
+@include('admin.layout.msg')
+@if($userIsMe && $user->info->help_tip_open)
+    @include('personal-center.help-update-info')
+@endif
 <div class="mdui-card mdui-hidden-md-up">
     <div class="right-focus-info">
         <a onclick="handleShowFollowingsDialog('{{route('userGetFollowings')}}','{{$user->id}}')" class="mdui-btn right-focus-info-item">
@@ -96,13 +100,16 @@
         <div class="mdui-tab part-divider-tab" mdui-tab>
             <a mdui-tooltip="{content: '查看我的动态', position: 'top'}" onclick="jumpTo('?view=activities')" href="#" class="mdui-ripple @if($view =='activities') mdui-tab-active  @endif">我的动态</a>
             <a mdui-tooltip="{content: '查看我发表的社区话题', position: 'top'}" onclick="jumpTo('?view=topics')" href="#" class="mdui-ripple @if($view =='topics') mdui-tab-active  @endif">社区话题</a>
-            <a mdui-tooltip="{content: '查看我最近发表的评论', position: 'top'}" onclick="jumpTo('?view=replies')" href="#" class="mdui-ripple @if($view =='replies') mdui-tab-active  @endif">最近的评论</a>
+            <a mdui-tooltip="{content: '查看我最近发表的评论', position: 'top'}" onclick="jumpTo('?view=replies')" href="#" class="mdui-ripple @if($view =='replies') mdui-tab-active  @endif">最近评论</a>
+            <a mdui-tooltip="{content: '查看我赞同的内容', position: 'top'}" onclick="jumpTo('?view=voted')" href="#" class="mdui-ripple @if($view =='voted') mdui-tab-active  @endif">赞同内容</a>
+
         </div>
     @else
         <div class="mdui-tab part-divider-tab" mdui-tab>
             <a mdui-tooltip="{content: '查看此用户的动态', position: 'top'}" onclick="jumpTo('?view=activities')" href="#" class="mdui-ripple @if($view =='activities') mdui-tab-active  @endif">用户动态</a>
             <a mdui-tooltip="{content: '查看此用户发表的社区话题', position: 'top'}" onclick="jumpTo('?view=topics')" href="#" class="mdui-ripple @if($view =='topics') mdui-tab-active  @endif">社区话题</a>
-            <a mdui-tooltip="{content: '查看此用户最近发表的评论', position: 'top'}" onclick="jumpTo('?view=replies')" href="#" class="mdui-ripple @if($view =='replies') mdui-tab-active  @endif">最近的评论</a>
+            <a mdui-tooltip="{content: '查看此用户最近发表的评论', position: 'top'}" onclick="jumpTo('?view=replies')" href="#" class="mdui-ripple @if($view =='replies') mdui-tab-active  @endif">最近评论</a>
+            <a mdui-tooltip="{content: '查看此用户赞同的内容', position: 'top'}" onclick="jumpTo('?view=voted')" href="#" class="mdui-ripple @if($view =='voted') mdui-tab-active  @endif">赞同内容</a>
         </div>
     @endif
     @switch($view)
@@ -116,6 +123,12 @@
             <div class="community-topic-list">
                 @include('personal-center.left-reply-data')
                 <div  id="PersonalCenterListData"></div>
+            </div>
+        @break
+        @case('voted')
+            <div class="community-topic-list">
+                @include('personal-center.left-voted-data')
+                <div id="PersonalCenterListData"></div>
             </div>
         @break
         @default

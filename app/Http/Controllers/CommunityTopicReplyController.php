@@ -7,6 +7,7 @@ use App\Model\CommunityTopicReply;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Activitylog\Models\Activity;
 
 class CommunityTopicReplyController extends Controller
 {
@@ -26,7 +27,7 @@ class CommunityTopicReplyController extends Controller
             $userId = Auth::id();
             $userName = Auth::user()->name;
             $userAvatar = Auth::user()->info->avatar_url;
-            $replyContent = $reply->title;
+            $replyContent = $reply->content;
             $replyId = $reply->id;
             $topicId = $reply->communityTopic->id;
             $topicTitle = $reply->communityTopic->title;
@@ -49,6 +50,15 @@ class CommunityTopicReplyController extends Controller
         ]);
         $reply = CommunityTopicReply::find($request->replyId);
         if (Auth::user()->cancelVote($reply)){
+
+            //删除动态
+            Activity::where([
+                ['subject_id', $reply->id],
+                ['subject_type', 'App\Model\CommunityTopicReply'],
+                ['causer_id', Auth::id()],
+                ['description', '点赞了社区回复'],
+            ])->delete();
+
             $thumb_up_count = $reply->countVoters();
             $reply->update(compact('thumb_up_count'));
             $status = 1;
