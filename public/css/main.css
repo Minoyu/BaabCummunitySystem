@@ -2417,8 +2417,8 @@ body {
     position: relative;
     padding: 0 20px 0;
     min-height: 70px;
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     transition: background-color .3s cubic-bezier(.4,0,.2,1);
 }
 .user-search-res-item:hover{

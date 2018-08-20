@@ -9,4 +9,12 @@
         <a mdui-tooltip="{content: '新闻搜索结果', position: 'top'}" onclick="searchJumpTo('news')" href="#" class="mdui-ripple @if($type =='news') mdui-tab-active  @endif">新闻</a>
     </div>
 </div>
-@include('discover-search-res.left-list-data')
+@if($type == 'user')
+    @include('discover-search-res.left-list-user')
+@elseif($type == 'topic')
+    @include('discover-search-res.left-list-topic')
+@elseif($type == 'news')
+    @include('discover-search-res.left-list-news')
+@else
+    @include('discover-search-res.left-list-data')
+@endif

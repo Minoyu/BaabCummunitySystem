@@ -42,8 +42,93 @@ class SearchController extends Controller
     public function showSearchRes(Request $request){
         $keywords = urldecode($request->keywords);
         $type = $request->type;
+        $page = 1;
+        if(!empty($request->page)){
+            $page = $request->page;
+        }
 
         switch ($type){
+            case 'user':
+                $users = Searchy::users('name','email')
+                    ->query($keywords)
+                    ->getQuery()
+                    ->get();
+
+                //遍历生成用户集合
+                $user_collection = collect([]);
+                foreach ($users as $user){
+                    $user = User::where('id',$user->id)->with('info')->first();
+                    $followingsCount = $user->followings()->count();
+                    $followersCount = $user->followers()->count();
+
+                    $user_collection->push(compact('user','followingsCount','followersCount'));
+                }
+                $user_collection = $user_collection->forPage($page,10);
+
+                $data = compact(
+                    'type',
+                    'keywords',
+                    'user_collection'
+                );
+
+                //如果是Ajax请求
+                if ($request->ajax()){
+                    $view = view('discover-search-res.left-list-user-data', compact('user_collection'))->render();
+                    return response()->json(['html' => $view]);
+                }
+
+                return view('discover-search-res',$data);
+                break;
+
+            case 'topic':
+                //社区话题部分的处理
+
+                $community_topics = Searchy::community_topics('title')->query($keywords)->getQuery()->get();
+                $topic_ids = [];
+                foreach ($community_topics as $topic){
+                    array_push($topic_ids,$topic->id);
+                }
+                $community_topics = CommunityTopic::whereIn('id',$topic_ids)
+                    ->with('user.info')
+                    ->paginate(10);
+
+                $data = compact(
+                    'type',
+                    'keywords',
+                    'community_topics'
+                );
+
+                //如果是Ajax请求
+                if ($request->ajax()){
+                    $view = view('discover-search-res.left-list-topic-data', compact('community_topics'))->render();
+                    return response()->json(['html' => $view]);
+                }
+                return view('discover-search-res',$data);
+                break;
+
+            case 'news':
+                //新闻部分的处理
+                $newses = Searchy::news('title')->query($keywords)->getQuery()->get();
+                $news_ids = [];
+                foreach ($newses as $news){
+                    array_push($news_ids,$news->id);
+                }
+                $newses = News::whereIn('id',$news_ids)
+                    ->with('newsCategory')
+                    ->paginate(10);
+
+                $data = compact(
+                    'type',
+                    'keywords',
+                    'newses'
+                );
+                //如果是Ajax请求
+                if ($request->ajax()){
+                    $view = view('discover-search-res.left-list-news-data', compact('newses'))->render();
+                    return response()->json(['html' => $view]);
+                }
+                return view('discover-search-res',$data);
+                break;
             default:
                 //社区话题部分的处理
 

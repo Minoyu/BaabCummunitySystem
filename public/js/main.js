@@ -1682,6 +1682,80 @@ function ajaxLoadSearchCommunityTopics(){
         }
     });
 }
+//搜索-用户列表的ajax加载
+var page = 1;
+function ajaxLoadSearchUsers(){
+    page++;
+    var type = GetQueryString('type');
+    var keywords = GetQueryString('keywords');
+    $$.ajax({
+        method: 'get',
+        url: '?'+$$.param({
+            type:type,
+            keywords:keywords,
+            page:page
+        }),
+        beforeSend: function(){
+            $$('#UsersLoadingBtn').hide();
+            $$('#UsersLoadingTip').show();
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            if(data.html == ""){
+                $$('#UsersLoadingTip').empty();
+                $$('#UsersLoadingFailed').show();
+                return;
+            }
+            $$('#UsersLoadingTip').hide();
+            $$("#UsersData").append('' +
+                '<div class="animated fadeInUp mdui-m-t-3">' +
+                '<div class="mdui-divider-inset news-page-divider">' +
+                '       <span class="page-num">'+page+'</span>' +
+                '       <span class="page-text">Page</span>' +
+                '    </div>' +
+                ''+data.html+'' +
+                '</div>');
+            $$('#UsersLoadingBtn').show();
+        }
+    });
+}
+//搜索-新闻列表的ajax加载
+var page = 1;
+function ajaxLoadSearchNews(){
+    page++;
+    var type = GetQueryString('type');
+    var keywords = GetQueryString('keywords');
+    $$.ajax({
+        method: 'get',
+        url: '?'+$$.param({
+            type:type,
+            keywords:keywords,
+            page:page
+        }),
+        beforeSend: function(){
+            $$('#NewsLoadingBtn').hide();
+            $$('#NewsLoadingTip').show();
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            if(data.html == ""){
+                $$('#NewsLoadingTip').empty();
+                $$('#NewsLoadingFailed').show();
+                return;
+            }
+            $$('#NewsLoadingTip').hide();
+            $$("#NewsData").append('' +
+                '<div class="animated fadeInUp mdui-m-t-3">' +
+                '<div class="mdui-divider-inset news-page-divider">' +
+                '       <span class="page-num">'+page+'</span>' +
+                '       <span class="page-text">Page</span>' +
+                '    </div>' +
+                ''+data.html+'' +
+                '</div>');
+            $$('#NewsLoadingBtn').show();
+        }
+    });
+}
 
 
 // 过滤html标签
