@@ -53,6 +53,7 @@ Route::get("/discover",'DiscoverController@showDiscover')->name('showDiscover');
 
 //搜索部分
 Route::post('/search/tips','SearchController@discoverTips')->name('getSearchTips');
+Route::get('/search','SearchController@showSearchRes')->name('showSearchRes');
 
 Route::group(['middleware'=>'auth:web'],function (){
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');

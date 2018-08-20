@@ -231,6 +231,16 @@ function jumpTo(url){
     },300);
 
 }
+//页面跳转保留参数函数 tab使用
+function searchJumpTo(type){
+    var keywords = GetQueryString('keywords');
+    setTimeout(function () {
+        location.href= '?'+$$.param({
+            keywords:keywords,
+            type:type
+        });
+    },300);
+}
 
 //页面顶部tab及底部nav的激活
 var tabVal = $$('#tabActiveVal').text();
@@ -1610,12 +1620,67 @@ function hideBarTitle(){
     $$('#barSubTitle').hide();
     $$('#barMenu').hide();
     $$.showOverlay(900);
+    setTimeout(function () {
+        $$('#barSearchBtn').attr('type','submit');
+    },300);
 }
 function showBarTitle(){
     $$('#barTitle').show();
     $$('#barMenu').show();
     $$('#barSubTitle').show();
     $$.hideOverlay(900);
+    setTimeout(function () {
+        $$('#barSearchBtn').attr('type','button');
+    },300);
+
+}
+
+//搜索框的提交
+$("#discoverSearchForm").submit(function(e){
+    var searchInput =$('#search');
+    searchInput.val(encodeURI(searchInput.val()));
+});
+$("#barSearchForm").submit(function(e){
+    var searchInput =$('#barSearch');
+    searchInput.val(encodeURI(searchInput.val()));
+});
+
+//搜索-社区列表的ajax加载
+var page = 1;
+function ajaxLoadSearchCommunityTopics(){
+    page++;
+    var type = GetQueryString('type');
+    var keywords = GetQueryString('keywords');
+    $$.ajax({
+        method: 'get',
+        url: '?'+$$.param({
+            type:type,
+            keywords:keywords,
+            page:page
+        }),
+        beforeSend: function(){
+            $$('#CommunityTopicsLoadingBtn').hide();
+            $$('#CommunityTopicsLoadingTip').show();
+        },
+        success: function (data) {
+            data=JSON.parse(data);
+            if(data.html == ""){
+                $$('#CommunityTopicsLoadingTip').empty();
+                $$('#CommunityTopicsLoadingFailed').show();
+                return;
+            }
+            $$('#CommunityTopicsLoadingTip').hide();
+            $$("#CommunityTopicsData").append('' +
+                '<div class="animated fadeInUp mdui-m-t-3">' +
+                '<div class="mdui-divider-inset news-page-divider">' +
+                '       <span class="page-num">'+page+'</span>' +
+                '       <span class="page-text">Page</span>' +
+                '    </div>' +
+                ''+data.html+'' +
+                '</div>');
+            $$('#CommunityTopicsLoadingBtn').show();
+        }
+    });
 }
 
 

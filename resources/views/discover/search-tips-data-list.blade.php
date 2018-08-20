@@ -10,7 +10,7 @@
         <li class="mdui-divider"></li>
         @foreach($community_zones as $community_zone)
             <li class="mdui-menu-item search-tips search-tips-item">
-                <a href="" class="mdui-ripple">
+                <a href="{{route('showCommunityZone',$community_zone->id)}}" class="mdui-ripple">
                     <span class="layui-badge">分区</span>
                     {{$community_zone->name}}
                 </a>
@@ -18,7 +18,7 @@
         @endforeach
         @foreach($community_sections as $community_section)
             <li class="mdui-menu-item search-tips search-tips-item">
-                <a href="" class="mdui-ripple">
+                <a href="{{route('showCommunitySection',$community_section->id)}}" class="mdui-ripple">
                     <span class="layui-badge layui-bg-green">板块</span>
                     {{$community_section->name}}
                 </a>
@@ -35,7 +35,7 @@
         <li class="mdui-divider"></li>
         @foreach($news_categories as $news_category)
             <li class="mdui-menu-item search-tips search-tips-item">
-                <a href="" class="mdui-ripple">{{$news_category->name}}</a>
+                <a href="{{route('showNewsSec',$news_category->id)}}" class="mdui-ripple">{{$news_category->name}}</a>
             </li>
         @endforeach
     @endif
@@ -43,13 +43,13 @@
         @php($isAllEmpty = false)
         <li class="mdui-menu-item search-tips search-tips-type">
                  <a class="mdui-ripple">
-                     <i class="mdui-icon material-icons">view_list</i> 新闻板块
+                     <i class="mdui-icon material-icons">account_circle</i> 用户
                  </a>
             </li>
         <li class="mdui-divider"></li>
         @foreach($users as $user)
             <li class="mdui-menu-item search-tips search-tips-item">
-                <a href="" class="mdui-ripple">{{$user->name}}</a>
+                <a href="{{route('showPersonalCenter',$user->id)}}" class="mdui-ripple">{{$user->name}}</a>
             </li>
         @endforeach
     @endif
@@ -63,7 +63,7 @@
         <li class="mdui-divider"></li>
         @foreach($newses as $news)
             <li class="mdui-menu-item search-tips search-tips-item">
-                <a href="" class="mdui-ripple">{{$news->title}}</a>
+                <a href="{{route('showNewsContent',$news->id)}}" class="mdui-ripple">{{$news->title}}</a>
             </li>
         @endforeach
     @endif
@@ -77,7 +77,7 @@
         <li class="mdui-divider"></li>
         @foreach($community_topics as $community_topic)
             <li class="mdui-menu-item search-tips search-tips-item">
-                <a href="" class="mdui-ripple">{{$community_topic->title}}</a>
+                <a href="{{route('showCommunityContent',$community_topic->id)}}" class="mdui-ripple">{{$community_topic->title}}</a>
             </li>
         @endforeach
     @endif

@@ -5,15 +5,16 @@
         <a id="barSubTitle" href="@yield('subtitleUrl')" class="mdui-typo-subheading mdui-hidden-xs">@yield('title')</a>
         <div class="mdui-toolbar-spacer "></div>
         <div class="mdui-textfield mdui-textfield-expandable mdui-float-right mdui-color-theme-600" style="max-width:400px">
-            <button onclick="hideBarTitle()"  class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></button>
-            <label id="barSearchLabel">
-                <input id="barSearch" class="mdui-textfield-input" style="color:white;border-bottom-color: white" type="text" placeholder="Search"/>
-            </label>
-            <button onclick="showBarTitle()" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
-            {{--应用栏搜索提示框--}}
-            <ul class="mdui-menu mdui-menu-cascade" style="margin-top: 10px;margin-left: 37px" id="barSearchTips">
-                <div class="mdui-progress barSearchTipsAjaxProgress" style="margin-top: -16px;margin-bottom: 10px"></div>
-                <div id="barSearchTipsContent" class="bar-search-tips-content">
+            <form id="barSearchForm" action="{{route('showSearchRes')}}" method="get">
+                <button id="barSearchBtn" type="button" onclick="hideBarTitle()"  class="mdui-textfield-icon mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></button>
+                <label id="barSearchLabel">
+                    <input id="barSearch" name="keywords" autocomplete="off" class="mdui-textfield-input" style="color:white;border-bottom-color: white" type="text" placeholder="Search"/>
+                </label>
+                <button type="button" onclick="showBarTitle()" class="mdui-textfield-close mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">close</i></button>
+                {{--应用栏搜索提示框--}}
+                <ul class="mdui-menu mdui-menu-cascade" style="margin-top: 10px;margin-left: 37px" id="barSearchTips">
+                    <div class="mdui-progress barSearchTipsAjaxProgress" style="margin-top: -16px;margin-bottom: 10px"></div>
+                    <div id="barSearchTipsContent" class="bar-search-tips-content">
                         <li class="mdui-menu-item bar-search-tips search-tips-null">
                             <a class="mdui-ripple mdui-text-color-grey-700">
                                 : ) 目前 您可以尝试输入您所想要查找的
@@ -39,8 +40,10 @@
                                 <i class="mdui-icon material-icons">view_list</i> 新闻版块、社区分区及板块
                             </a>
                         </li>
-                </div>
-            </ul>
+                    </div>
+                </ul>
+
+            </form>
         </div>
         <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></button>
         @include('layout.appbar-right-menu')

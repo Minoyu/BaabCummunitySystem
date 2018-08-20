@@ -31,6 +31,11 @@ body {
         top: 20%;
     }
 }
+@media (min-width: 600px){
+    .mdui-drawer{
+        z-index: 800;
+    }
+}
 
 
 /*应用栏右方下拉菜单*/
@@ -762,7 +767,7 @@ body {
 /*新闻页列表块*/
 .news-list-item{
     position: relative;
-    min-height: 80px;
+    min-height: 95px;
     padding: 10px;
     transition: background-color .3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -2357,6 +2362,104 @@ body {
 }
 .activity-list-not-logged .tip-action{
     margin-top: 10px;
+}
+
+.search-card-header{
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 50px;
+    padding: 0 20px;
+    border-bottom: 1px solid #f6f6f6;
+    box-sizing: border-box;
+}
+.search-card-content{
+    padding: 0 0 10px;
+}
+
+.community-cat-search-res-item{
+    position: relative;
+    padding: 0 20px 0;
+    min-height: 70px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    transition: background-color .3s cubic-bezier(.4,0,.2,1);
+}
+.community-cat-search-res-item:hover{
+    background-color: #f3f3f3;
+}
+.community-cat-search-res-item img{
+    position: absolute;
+    top: 5px;
+    height: 60px;
+    width: 60px;
+    border-radius: 4px;
+}
+.community-cat-search-res-item .cat-title{
+    margin-left: 68px;
+    padding-top: 2px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.community-cat-search-res-item .cat-subtitle{
+    color: #8590a6;
+    font-size: 14px;
+    margin-left: 68px;
+    margin-top: 8px;
+}
+.user-search-res-item{
+    position: relative;
+    padding: 0 20px 0;
+    min-height: 70px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    transition: background-color .3s cubic-bezier(.4,0,.2,1);
+}
+.user-search-res-item:hover{
+    background-color: #f3f3f3;
+}
+.user-search-res-item img{
+    position: absolute;
+    top: 5px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+.user-search-res-item .user-name{
+    margin-left: 68px;
+    padding-top: 13px;
+    font-size: 16px;
+    font-weight: 600;
+}
+.user-search-res-item .user-info{
+    color: #8590a6;
+    font-size: 14px;
+    margin-left: 68px;
+    margin-top: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.user-search-res-item .mdui-btn{
+    float: right;
+    z-index: 2;
+    right: 0;
+}
+.search-card-view-more{
+
+    padding-bottom: 10px;
+}
+.search-card-view-more a{
+    color: #175199;
+}
+.search-card-view-more a:hover{
+    color: rgba(23, 81, 153, 0.56);
 }
 
 
