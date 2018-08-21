@@ -1206,7 +1206,6 @@ function formHiddenSubmit(formid) {
 var followDialog = new mdui.Dialog('#follow-dialog');
 var followDialogDom = $$('#follow-dialog');
 var userIsMe = $$('input[name="userIsMe"]').val();
-
 /**
  * 处理显示正在关注的用户
  * @param url
@@ -1215,7 +1214,6 @@ var userIsMe = $$('input[name="userIsMe"]').val();
 function handleShowFollowingsDialog(url,userId) {
     $$('#FollowDialogTitle').text('Following / 正在关注');
     $$('#FollowDialogLoadingFailed').hide();
-    $$("#FollowDialogData").empty();
     followDialog.open();
     followDialogDom.on('opened.mdui.dialog',function () {
         $$.ajax({
@@ -1236,8 +1234,6 @@ function handleShowFollowingsDialog(url,userId) {
                 if (data.status === 1){
                     if(data.html == ""){
                         $$('#FollowDialogLoadingTip').hide();
-                        $$("#FollowDialogData").empty();
-                        followDialog.handleUpdate();
                         if (userIsMe){
                             $$('#FollowDialogLoadingFailedText').html('You can try to follow others<br/>尝试去关注别人吧');
                         }else{
@@ -1270,9 +1266,9 @@ function handleShowFollowingsDialog(url,userId) {
  * @param userId
  */
 function handleShowFollowersDialog(url,userId) {
+
     $$('#FollowDialogTitle').text('Followers / 关注者');
     $$('#FollowDialogLoadingFailed').hide();
-    $$("#FollowDialogData").empty();
     followDialog.open();
     followDialogDom.on('opened.mdui.dialog',function () {
         $$.ajax({
@@ -1293,8 +1289,6 @@ function handleShowFollowersDialog(url,userId) {
                 if (data.status === 1){
                     if(data.html == ""){
                         $$('#FollowDialogLoadingTip').hide();
-                        $$("#FollowDialogData").empty();
-                        followDialog.handleUpdate();
                         if (userIsMe){
                             $$('#FollowDialogLoadingFailedText').html('No people following me now<br/>暂时无人关注我');
                         }else{
@@ -1321,6 +1315,12 @@ function handleShowFollowersDialog(url,userId) {
         });
     });
 }
+
+followDialogDom.on('close.mdui.dialog', function () {
+    $$("#FollowDialogData").empty();
+    followDialog.handleUpdate();
+    followDialog.destroy();
+});
 
 //Ajax话题投票
 function ajaxHandleFollowUser(followUrl,unfollowUrl,userId,obj,numClass) {

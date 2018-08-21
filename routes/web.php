@@ -197,5 +197,12 @@ Route::group(['prefix'=>'admin'],function () {
     //zone封面图片上传
     Route::post('/community/category/zones/upload/img','CommunityCategoryController@uploadZoneImg')->name('uploadZoneImg');
 
+    //用户及权限管理模块
+    Route::get("/user",'Admin\AdminUserController@showUsersList')->name('adminShowUsersList');
+    Route::get("/user/{user}/edit",'Admin\AdminUserController@showUserEdit')->name('adminShowUserEdit');
+    Route::post("/user/{user}/update",'Admin\AdminUserController@userEditUpdate')->name('adminUserEditUpdate');
+    Route::post("/user/delete",'Admin\AdminUserController@softDelete')->name('adminUserDelete');
+    Route::post("/user/deletes",'Admin\AdminUserController@softDeletes')->name('adminUserDeletes');
+
 
 });

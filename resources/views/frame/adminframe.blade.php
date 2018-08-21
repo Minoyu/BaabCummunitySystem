@@ -33,6 +33,7 @@
     {{--激活导航栏值--}}
     <div id="adminDrawerActiveVal" class="mdui-hidden">@yield('adminDrawerActiveVal')</div>
     <!-- Js -->
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
     <script src="/layui/layui.js"></script>
     <script src="/js/mdui.min.js"></script>
     <script src="/js/wangEditor.min.js"></script>

@@ -82,20 +82,22 @@
                 </div>
             </div>
         </div>
-        @if(Auth::check() && $topic->user->isFollowedBy(Auth::user()))
-            <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$topic->user->id}}',this)" class="mdui-btn mdui-color-pink-accent mdui-btn-raised mdui-center side-card-user-btn">
-                <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87d;</i>
-                <span>已关注</span>
-            </a>
-        @else
-            <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$topic->user->id}}',this)" class="mdui-btn mdui-text-color-pink-accent mdui-btn-raised mdui-center side-card-user-btn">
-                <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87e;</i>
-                <span>关注</span>
-            </a>
+        @if(Auth::id() != $topic->user->id)
+            @if(Auth::check() && $topic->user->isFollowedBy(Auth::user()))
+                <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$topic->user->id}}',this)" class="mdui-btn mdui-color-pink-accent mdui-btn-raised mdui-center side-card-user-btn">
+                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87d;</i>
+                    <span>已关注</span>
+                </a>
+            @else
+                <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$topic->user->id}}',this)" class="mdui-btn mdui-text-color-pink-accent mdui-btn-raised mdui-center side-card-user-btn">
+                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87e;</i>
+                    <span>关注</span>
+                </a>
+            @endif
         @endif
         <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn">
-            <i class="mdui-icon material-icons">&#xe0be;</i>
-            发私信
+            <i class="mdui-icon material-icons">account_circle</i>
+            个人页面
         </button>
         </div>
     </div>

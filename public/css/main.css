@@ -31,7 +31,7 @@ body {
         top: 20%;
     }
 }
-@media (min-width: 600px){
+@media (min-width: 1024px){
     .mdui-drawer{
         z-index: 800;
     }
