@@ -45,7 +45,12 @@ function GetUrlRelativePath()
     var arrUrl = url.split("//");
 
     var start = arrUrl[1].indexOf("/");
-    var relUrl = arrUrl[1].substring(start);//stop省略，截取从start开始到结尾的所有字符
+    var end = arrUrl[1].indexOf("#");
+    if (end>0){
+        var relUrl = arrUrl[1].substring(start,end);//stop省略，截取从start开始到结尾的所有字符
+    }else{
+        var relUrl = arrUrl[1].substring(start);//stop省略，截取从start开始到结尾的所有字符
+    }
 
     if(relUrl.indexOf("?") != -1){
         relUrl = relUrl.split("?")[0];
@@ -322,8 +327,9 @@ function loginSubmit() {
                 $$('#loginSuccessful').removeClass('mdui-hidden');
                 loginDialog.handleUpdate();
                 setTimeout(function(){
-                    //使用  setTimeout（）方法设定定时5000毫秒
-                    window.location.href=GetUrlRelativePath();//页面刷新
+                    //使用  setTimeout（）方法设定定时3000毫秒
+                    location.href = GetUrlRelativePath();
+                    //页面刷新
                 },3000);
             }else{
                 loginPasswordErrorField.text(data.msg);

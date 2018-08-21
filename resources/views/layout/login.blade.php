@@ -41,7 +41,7 @@
             <h3 class="mdui-center">{{__('auth.LoginSuccess')}} , <span class="username"></span></h3>
             <div class="btns">
                 <a class="mdui-btn mdui-btn-dense mdui-btn-raised mdui-ripple personalCenterUrl">{{__('index.personalCenter')}}</a>
-                <button onclick="window.location.href=GetUrlRelativePath()" class="mdui-btn mdui-btn-dense mdui-btn-raised mdui-ripple mdui-color-pink-400 mdui-m-l-2">{{__('index.back')}}</button>
+                <button type="button" onclick="window.location.href=GetUrlRelativePath()" class="mdui-btn mdui-btn-dense mdui-btn-raised mdui-ripple mdui-color-pink-400 mdui-m-l-2">{{__('index.back')}}</button>
             </div>
         </div>
     </div>
