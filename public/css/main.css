@@ -241,10 +241,11 @@ body {
     border-bottom: 2px solid rgba(0, 0, 0, 0.65);
     font-size: 22px;
     font-weight: bold;
-    margin: 20px 0 10px 0;
+    margin: 8px 0 10px 0;
     padding: 10px 20px 9px 10px;
     line-height: 18px;
     background-color: #fff;
+    color: #3f3f3f;
 }
 /*板块标题蓝*/
 .part-title-blue{
@@ -542,7 +543,7 @@ body {
 }
 /*首页列表样式*/
 .index-list>.mdui-list-item{
-    padding-left: 0;
+    padding-left: 10px;
 }
 
 /*首页社区一级分类样式*/

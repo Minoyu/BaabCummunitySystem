@@ -1142,3 +1142,158 @@ function deleteUsers() {
     });
 }
 
+function handlePermissionRemoveRole(permissionName,permissionId,roleName,roleId) {
+    mdui.dialog({
+        title: '移除此权限下的角色',
+        content: '您确定要为'+roleName+'角色移除'+permissionName+'权限吗？' +
+        '<br><span class="mdui-text-color-red">警告：移除后该角色下的用户将失去此权限，请谨慎对权限及角色进行操作</span>',
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/permission/remove/role',
+                        data: {
+                            permissionId:permissionId,
+                            roleId:roleId
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data=JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'OK',
+                                    buttonColor:'pink',
+                                    onButtonClick: function(){
+                                        window.location.reload();//页面刷新
+                                    }
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+
+}
+
+/**
+ * 删除新闻轮播图
+ * @param id
+ * @param name
+ */
+function deleteIndexCarousel(id,name) {
+    mdui.dialog({
+        title: '删除首页轮播图',
+        content: '您确定要删除此首页轮播图吗<br/>'+name,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/index-carousel/delete',
+                        data: {
+                            id:id
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
+/**
+ * 处理首页轮播图上传
+ * @param obj
+ * @param className
+ */
+function handleIndexCarouselUpdate(obj,className) {
+    var coverImg = $$('.'+className);
+    var coverInput = $$('input[name="cover_img"]');
+    var cover = obj.files[0];
+    var id = $$('input[name="userId"]').val();
+
+    var form = new FormData();
+    form.append('cover',cover);
+    $$.ajax({
+        method: 'POST',
+        url: '/admin/index-carousel/upload',
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        data: form,
+        contentType: false, //禁止设置请求类型
+        processData: false, //禁止jquery对DAta数据的处理,默认会处理
+        //禁止的原因是,FormData已经帮我们做了处理
+        success: function (data) {
+            data=JSON.parse(data);
+            if (data.status===1){
+                coverImg.attr('src',data.src);
+                coverInput.val(data.src);
+                mdui.snackbar({
+                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
+                    position:'top'
+                });
+            }
+        }
+    });
+
+}
+

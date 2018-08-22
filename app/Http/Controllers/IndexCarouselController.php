@@ -2,22 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\NewsCarousel;
+use App\Model\IndexCarousel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 
-class NewsCarouselController extends Controller
+class IndexCarouselController extends Controller
 {
+    //
     //
     /**
      * 展示后台列表页
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function adminListShow(){
-        $newsCarousels = NewsCarousel::orderBy('order','DESC')->paginate(6);
-        return view('admin.news-carousel.list',compact('newsCarousels'));
+        $indexCarousels = IndexCarousel::orderBy('order','DESC')->paginate(6);
+        return view('admin.index-carousel.list',compact('indexCarousels'));
     }
 
     /**
@@ -25,7 +26,7 @@ class NewsCarouselController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function adminCreateShow(){
-        return view('admin.news-carousel.create');
+        return view('admin.index-carousel.create');
     }
 
     /**
@@ -39,6 +40,7 @@ class NewsCarouselController extends Controller
             'title' => 'required|min:2',
             'subtitle' => 'required|min:2',
             'url' => 'required|url',
+            'position' => 'required',
             'cover_img' => 'required',
             'order' => 'required',
         ]);
@@ -46,11 +48,12 @@ class NewsCarouselController extends Controller
         $title = \request('title');
         $subtitle = \request('subtitle');
         $url = \request('url');
+        $position = \request('position');
         $cover_img = \request('cover_img');
         $order = \request('order');
-        $data = compact('title','subtitle','url','cover_img','order','status');
+        $data = compact('title','subtitle','url','position','cover_img','order','status');
 
-        $res=NewsCarousel::create($data);
+        $res=IndexCarousel::create($data);
 
         //渲染
         if ($res) {
@@ -66,25 +69,26 @@ class NewsCarouselController extends Controller
 
     /**
      * 展示后台编辑页
-     * @param NewsCarousel $newsCarousel
+     * @param IndexCarousel $indexCarousel
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function adminEditShow(NewsCarousel $newsCarousel){
-        return view('admin.news-carousel.edit',compact('newsCarousel'));
+    public function adminEditShow(IndexCarousel $indexCarousel){
+        return view('admin.index-carousel.edit',compact('indexCarousel'));
     }
 
     /**
      * 编辑逻辑
-     * @param NewsCarousel $newsCarousel
+     * @param IndexCarousel $indexCarousel
      * @return $this|\Illuminate\Http\RedirectResponse
      */
-    public function update(NewsCarousel $newsCarousel){
+    public function update(IndexCarousel $indexCarousel){
         $status = \request('status');
         //验证
         $this->validate(\request(), [
             'title' => 'required|min:2',
             'subtitle' => 'required|min:2',
             'url' => 'required|url',
+            'position' => 'required',
             'cover_img' => 'required',
             'order' => 'required',
         ]);
@@ -92,11 +96,12 @@ class NewsCarouselController extends Controller
         $title = \request('title');
         $subtitle = \request('subtitle');
         $url = \request('url');
+        $position = \request('position');
         $cover_img = \request('cover_img');
         $order = \request('order');
-        $data = compact('title','subtitle','url','cover_img','order','status');
+        $data = compact('title','subtitle','url','position','cover_img','order','status');
 
-        $res=$newsCarousel->update($data);
+        $res=$indexCarousel->update($data);
 
         //渲染
         if ($res) {
@@ -115,11 +120,11 @@ class NewsCarouselController extends Controller
      * @return int 1 success 0 failed
      */
     public function softDelete(Request $request){
-        $newsCarousel = NewsCarousel::where('id',$request->id)->first();
-        $newsCarousel->delete();
-        if($newsCarousel->trashed()){
+        $indexCarousel = IndexCarousel::where('id',$request->id)->first();
+        $indexCarousel->delete();
+        if($indexCarousel->trashed()){
             $status = 1;
-            $msg = "The news carousel has been deleted";
+            $msg = "The Index Carousel has been deleted";
         }else{
             $status = 0;
             $msg = "Server internal error";
@@ -129,12 +134,12 @@ class NewsCarouselController extends Controller
 
     }
 
-    public function turnUpOrder(NewsCarousel $newsCarousel){
-        $newsCarousel->increment('order');
+    public function turnUpOrder(IndexCarousel $indexCarousel){
+        $indexCarousel->increment('order');
         return \redirect()->back()->with('tips', ['优先级已自增1']);
     }
-    public function turnDownOrder(NewsCarousel $newsCarousel){
-        $newsCarousel->decrement('order');
+    public function turnDownOrder(IndexCarousel $indexCarousel){
+        $indexCarousel->decrement('order');
         return \redirect()->back()->with('tips', ['优先级已自减1']);
     }
 
@@ -170,13 +175,14 @@ class NewsCarouselController extends Controller
                 }
                 // 使用我们新建的uploads本地存储空间（目录）
                 // 这里的userCover是配置文件的名称
-                $bool = Storage::disk('newsCarousel')->put($filename, file_get_contents($realPath));
-                $cover_url = "/uploads/news/carousel/" . $filename;
+                $bool = Storage::disk('indexCarousel')->put($filename, file_get_contents($realPath));
+                $cover_url = "/uploads/index/carousel/" . $filename;
                 if ($bool) {
                     return json_encode(["status" => 1, "src" => $cover_url]);//ajax
                 }
             }
         }
     }
+
 
 }

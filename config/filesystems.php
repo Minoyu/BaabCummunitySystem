@@ -73,6 +73,11 @@ return [
             'driver' => 'local',
             'root' => public_path('uploads/news/carousel'),
         ],
+        // 新建一个本地端newsImg空间（目录） 用于存储首页轮播图上传的图片
+        'indexCarousel' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/index/carousel'),
+        ],
         // 新建一个本地端newsReplyImg空间（目录） 用于存储新闻回复上传的图片
         'newsReplyImg' => [
             'driver' => 'local',

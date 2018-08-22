@@ -1,29 +1,51 @@
 <h2 class="part-title-blue">
-    {{__('index.regional')}}
-    <a href="#" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple">{{__('index.more')}}
+    <i class="mdui-icon material-icons">&#xe0b7;</i>
+    {{__('community.topics')}}
+    <a href="{{route('showCommunity')}}" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple">{{__('index.more')}}
         <i class="mdui-icon material-icons mdui-icon-right">chevron_right</i>
     </a>
 </h2>
 <div id="regional-tab" class="mdui-tab part-divider-tab">
-    <a href="#regional-div1" class="mdui-ripple">jiangsu</a>
-    <a href="#regional-div2" class="mdui-ripple">shanghai</a>
-    <a href="#regional-div3" class="mdui-ripple">beijing</a>
+    @foreach($communitySections as $communitySection)
+        <a href="#topic-{{$communitySection->id}}" class="mdui-ripple">{{$communitySection->name}}</a>
+    @endforeach
 </div>
-<div id="regional-div1">
-    <div class="mdui-row">
-        <div class="mdui-col-xs-4 mdui-col-sm-3 mdui-col-md-4 mdui-col-lg-3">
-            <img class="mdui-img-fluid info-first-img" src="http://via.placeholder.com/300x200"/>
-        </div>
-        <div class="mdui-col-xs-8 mdui-col-sm-9 mdui-col-md-8 mdui-col-lg-9 ">
-            <a href="" class="index-info-img-h">hahhahahahahhahahahahahahhaha</a>
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        @foreach($indexCarousels as $indexCarousel)
+            @if($indexCarousel->position == 'topic_top')
+                <div class="swiper-slide">
+                    <div class="mdui-card">
+                        <div class="mdui-card-media">
+                            <img class="mdui-img-fluid" src="{{$indexCarousel->cover_img}}"/>
+                            <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+                                <div class="topnews-img-primary">
+                                    <div class="mdui-card-primary-title">{{$indexCarousel->title}}</div>
+                                    <div class="mdui-card-primary-subtitle">{{$indexCarousel->subtitle}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+    <div class="swiper-scrollbar"></div>
+</div>
+@foreach($communitySections as $communitySection)
+    <div id="topic-{{$communitySection->id}}">
+        {{--<div class="mdui-row">--}}
+        {{--<div class="mdui-col-xs-4 mdui-col-sm-3 mdui-col-md-4 mdui-col-lg-3">--}}
+        {{--<img class="mdui-img-fluid info-first-img" src="http://via.placeholder.com/300x200"/>--}}
+        {{--</div>--}}
+        {{--<div class="mdui-col-xs-8 mdui-col-sm-9 mdui-col-md-8 mdui-col-lg-9 ">--}}
+        {{--<a href="" class="index-info-img-h">hahhahahahahhahahahahahahhaha</a>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        <div class="mdui-list index-list">
+            @foreach($communitySection->communityTopics as $topic)
+                <a href="{{route('showCommunityContent',$topic->id)}}" class="mdui-list-item mdui-ripple index-info-h">{{$topic->title}}</a>
+            @endforeach
         </div>
     </div>
-    <div class="mdui-list index-list">
-        <a href="#" class="mdui-list-item mdui-ripple index-info-h">测试新闻测试新闻</a>
-        <a href="#" class="mdui-list-item mdui-ripple index-info-h">Test news test news</a>
-        <a href="#" class="mdui-list-item mdui-ripple index-info-h">Test news test news</a>
-    </div>
-
-</div>
-<div id="regional-div2">板块2</div>
-<div id="regional-div3">板块3</div>
+@endforeach

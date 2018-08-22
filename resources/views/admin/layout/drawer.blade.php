@@ -130,6 +130,9 @@
                 <a href="{{route('adminShowUsersList')}}">
                     <li class="mdui-list-item mdui-ripple">用户列表</li>
                 </a>
+                <a href="{{route('adminShowPermissionsList')}}">
+                    <li class="mdui-list-item mdui-ripple">权限列表</li>
+                </a>
                 <a href="{{route('adminCommunityTopicList')}}">
                     <li class="mdui-list-item mdui-ripple">检索话题回复-按话题</li>
                 </a>
@@ -139,6 +142,20 @@
             </ul>
         </li>
 
+        <div class="mdui-divider"></div>
+
+        <li class="mdui-collapse-item" id="drawer-indexItem">
+            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
+                <div class="mdui-list-item-content">首页设置</div>
+                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+            </div>
+            <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a href="{{route('adminIndexCarouselsList')}}">
+                    <li class="mdui-list-item mdui-ripple">首页轮播图</li>
+                </a>
+            </ul>
+        </li>
         <div class="mdui-divider"></div>
 
         <a href="{{route('switchLang')}}">

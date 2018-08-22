@@ -35,7 +35,7 @@
             <label for="newsCoverUploadInput">
                 <img src="{{$newsCarousel->cover_img}}" class="avatar mdui-hoverable newsCarousel" style="width: 400px; height: 200px">
             </label>
-            <input class="mdui-hidden" id="newsCoverUploadInput" type="file" onchange="handleNewsCoverUpdate(this,'newsCarousel')" accept="image/jpeg,image/png">
+            <input class="mdui-hidden" id="newsCoverUploadInput" type="file" onchange="handleNewsCarouselUpdate(this,'newsCarousel')" accept="image/jpeg,image/png">
             <input class="mdui-hidden" type="text" name="cover_img" value="{{$newsCarousel->cover_img}}" required>
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">5.优先级

@@ -78,6 +78,16 @@ layui.use('carousel', function(){
     });
 });
 
+var indexSwiper = new Swiper ('.swiper-container', {
+    direction: 'horizontal',
+    loop: true,
+
+    // 如果需要滚动条
+    scrollbar: {
+        el: '.swiper-scrollbar'
+    }
+});
+
 /************************
  * 新闻轮播图
  */

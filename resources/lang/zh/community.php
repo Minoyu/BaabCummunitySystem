@@ -8,6 +8,7 @@
 return [
     //Community
     'moderator'=>'版主',
-    'zones'=>'Zones',
+    'zones'=>'分区',
+    'topics'=>'话题',
     'zonesOfCommunity'=>'社区分区',
 ];

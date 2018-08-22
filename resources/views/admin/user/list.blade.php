@@ -40,7 +40,7 @@
                     <td>{{$user_item['repliesCount']}}</td>
                     <td>{{$user_item['followingsCount']}}</td>
                     <td>
-                        <a href="{{route('adminShowUserEdit',$user_item['user']->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
+                        <a target="_blank" href="{{route('adminShowUserEdit',$user_item['user']->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
                         </a>
                         <button onclick="deleteUser('{{$user_item['user']->id}}','{{$user_item['user']->name}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">

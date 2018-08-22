@@ -1,90 +1,32 @@
 <h2 class="part-title-red">
+    <i class="mdui-icon material-icons">&#xe6dd;</i>
     {{__('index.community')}}
-    <a href="#" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple">{{__('index.more')}}
+    <a href="{{route('showCommunity')}}" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple">{{__('index.more')}}
         <i class="mdui-icon material-icons mdui-icon-right">chevron_right</i>
     </a>
 </h2>
-
-<h3 class="index-community-top-level-title">
-    分类示例1
-</h3>
-<div class="mdui-row-md-3 mdui-row-sm-2 mdui-row-xs-1 ">
-
-    <div class="mdui-col">
-        <div class="index-community-card mdui-hoverable">
-            <div class="index-community-card-header">
-                <img class="index-community-card-header-avatar" src="http://via.placeholder.com/200x200"/>
-                <div class="index-community-card-header-title">测试板块</div>
-                <div class="index-community-card-header-count">{{__('index.postsCount')}}：1234</div>
-                <div class="index-community-card-header-subtitle">测试介绍</div>
+@foreach($communityZones as $zone)
+    <h2 class="part-title-with-bg mdui-m-t-3 mdui-text-center">
+        {{$zone->name}}
+        <a href="{{route('showCommunityZone',$zone->id)}}" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple">{{__('index.more')}}
+            <i class="mdui-icon material-icons mdui-icon-right">chevron_right</i>
+        </a>
+    </h2>
+    <div class="mdui-row-md-3 mdui-row-sm-2 mdui-row-xs-1 ">
+        @foreach($zone->communitySections as $communitySection)
+            <div class="mdui-col">
+                <a href="{{route('showCommunitySection',$communitySection->id)}}">
+                    <div class="index-community-card mdui-hoverable">
+                        <div class="index-community-card-header">
+                            <img class="index-community-card-header-avatar" src="{{$communitySection->img_url}}"/>
+                            <div class="index-community-card-header-title">{{$communitySection->name}}</div>
+                            <div class="index-community-card-header-count">{{__('index.postsCount')}}：{{$communitySection->topic_count}}</div>
+                            <div class="index-community-card-header-subtitle">{{$communitySection->description}}</div>
+                        </div>
+                    </div>
+                </a>
             </div>
-        </div>
-    </div>
-    <div class="mdui-col">
-        <div class="index-community-card mdui-hoverable">
-            <div class="index-community-card-header">
-                <img class="index-community-card-header-avatar" src="http://via.placeholder.com/200x200"/>
-                <div class="index-community-card-header-title">测试板块</div>
-                <div class="index-community-card-header-count">{{__('index.postsCount')}}：1234</div>
-                <div class="index-community-card-header-subtitle">测试介绍</div>
-            </div>
-        </div>
-    </div>
-    <div class="mdui-col">
-        <div class="index-community-card mdui-hoverable">
-            <div class="index-community-card-header">
-                <img class="index-community-card-header-avatar" src="http://via.placeholder.com/200x200"/>
-                <div class="index-community-card-header-title">测试板块</div>
-                <div class="index-community-card-header-count">{{__('index.postsCount')}}：1234</div>
-                <div class="index-community-card-header-subtitle">测试介绍</div>
-            </div>
-        </div>
-    </div>
-    <div class="mdui-col">
-        <div class="index-community-card mdui-hoverable">
-            <div class="index-community-card-header">
-                <img class="index-community-card-header-avatar" src="http://via.placeholder.com/200x200"/>
-                <div class="index-community-card-header-title">测试板块</div>
-                <div class="index-community-card-header-count">{{__('index.postsCount')}}：1234</div>
-                <div class="index-community-card-header-subtitle">测试介绍</div>
-            </div>
-        </div>
-    </div>
-    <div class="mdui-col">
-        <div class="index-community-card mdui-hoverable">
-            <div class="index-community-card-header">
-                <img class="index-community-card-header-avatar" src="http://via.placeholder.com/200x200"/>
-                <div class="index-community-card-header-title">测试板块</div>
-                <div class="index-community-card-header-count">{{__('index.postsCount')}}：1234</div>
-                <div class="index-community-card-header-subtitle">测试介绍</div>
-            </div>
-        </div>
+        @endforeach
     </div>
 
-</div>
-<h3 class="index-community-top-level-title">
-    分类示例2
-</h3>
-<div class="mdui-row-md-3 mdui-row-sm-2 mdui-row-xs-1 ">
-
-    <div class="mdui-col">
-        <div class="index-community-card mdui-hoverable">
-            <div class="index-community-card-header">
-                <img class="index-community-card-header-avatar" src="http://via.placeholder.com/200x200"/>
-                <div class="index-community-card-header-title">测试板块</div>
-                <div class="index-community-card-header-count">{{__('index.postsCount')}}：1234</div>
-                <div class="index-community-card-header-subtitle">测试介绍</div>
-            </div>
-        </div>
-    </div>
-    <div class="mdui-col">
-        <div class="index-community-card mdui-hoverable">
-            <div class="index-community-card-header">
-                <img class="index-community-card-header-avatar" src="http://via.placeholder.com/200x200"/>
-                <div class="index-community-card-header-title">测试板块</div>
-                <div class="index-community-card-header-count">{{__('index.postsCount')}}：1234</div>
-                <div class="index-community-card-header-subtitle">测试介绍</div>
-            </div>
-        </div>
-    </div>
-</div>
+@endforeach

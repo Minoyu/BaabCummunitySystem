@@ -38,7 +38,6 @@ class SeedRolesAndPermissionsData extends Migration
 
         // 创建普通用户角色，并赋予权限
         $normalUser = Role::create(['name' => 'NormalUser']);
-        $normalUser->givePermissionTo('manage_contents');
         $normalUser->givePermissionTo('do_action');
 
         // 创建禁言用户角色，并赋予权限

@@ -153,7 +153,7 @@ Route::group(['prefix'=>'admin'],function () {
     //新闻封面图片上传
     Route::post('/news/upload/cover','NewsController@uploadCover')->name('uploadNewsCover');
     //新闻轮播图上传
-    Route::post('/news-carousel/upload','NewsCarouselController@uploadCover')->name('uploadNewsCover');
+    Route::post('/news-carousel/upload','NewsCarouselController@uploadCover')->name('uploadNewsCarousel');
 
     //社区一二级分类管理模块
     Route::get("/community/category/zones-and-sections",'CommunityCategoryController@showZonesAndSections')->name('adminCommunityZonesAndSectionsShow');
@@ -204,5 +204,22 @@ Route::group(['prefix'=>'admin'],function () {
     Route::post("/user/delete",'Admin\AdminUserController@softDelete')->name('adminUserDelete');
     Route::post("/user/deletes",'Admin\AdminUserController@softDeletes')->name('adminUserDeletes');
 
+    //角色管理模块
+
+    //权限管理模块
+    Route::get("/permission",'Admin\AdminPermissionController@showPermissionList')->name('adminShowPermissionsList');
+    Route::post("/permission/remove/role",'Admin\AdminPermissionController@removeRole')->name('adminPermissionRemoveRole');
+
+    //首页轮播图管理模块
+    Route::get("/index-carousel",'IndexCarouselController@adminListShow')->name('adminIndexCarouselsList');
+    Route::get("/index-carousel/create",'IndexCarouselController@adminCreateShow')->name('adminIndexCarouselCreate');
+    Route::post("/index-carousel/store",'IndexCarouselController@store')->name('adminIndexCarouselStore');
+    Route::get("/index-carousel/{indexCarousel}/edit",'IndexCarouselController@adminEditShow')->name('adminIndexCarouselEdit');
+    Route::post("/index-carousel/{indexCarousel}/update",'IndexCarouselController@update')->name('adminIndexCarouselUpdate');
+    Route::post("/index-carousel/delete",'IndexCarouselController@softDelete')->name('indexCarouselSoftDelete');
+    Route::get("/index-carousel/{indexCarousel}/up/order",'IndexCarouselController@turnUpOrder')->name('indexCarouselTurnUpNewsOrder');
+    Route::get("/index-carousel/{indexCarousel}/down/order",'IndexCarouselController@turnDownOrder')->name('indexCarouselTurnDownNewsOrder');
+
+    Route::post('/index-carousel/upload','IndexCarouselController@uploadCover')->name('uploadIndexCarousel');
 
 });

@@ -9,5 +9,6 @@ return [
     //Community
     'moderator'=>'Moderator',
     'zones'=>'Zones',
+    'topics'=>'Topics',
     'zonesOfCommunity'=>'Zones of community',
 ];
