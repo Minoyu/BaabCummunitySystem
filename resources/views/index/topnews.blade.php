@@ -10,7 +10,7 @@
         {{--左侧头条--}}
         <div class="mdui-row">
             <div class="mdui-col-xs-4">
-                <div class="swiper-container">
+                <div class="swiper-container index-swiper-container">
                     <div class="swiper-wrapper">
                         @foreach($indexCarousels as $indexCarousel)
                             @if($indexCarousel->position == 'headline_left')
@@ -58,7 +58,7 @@
         {{--右侧头条--}}
         <div class="mdui-row">
             <div class="mdui-col-xs-4">
-                <div class="swiper-container">
+                <div class="swiper-container index-swiper-container">
                     <div class="swiper-wrapper">
                         @foreach($indexCarousels as $indexCarousel)
                             @if($indexCarousel->position == 'headline_right')

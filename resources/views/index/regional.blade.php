@@ -10,7 +10,7 @@
         <a href="#topic-{{$communitySection->id}}" class="mdui-ripple">{{$communitySection->name}}</a>
     @endforeach
 </div>
-<div class="swiper-container">
+<div class="swiper-container index-swiper-container">
     <div class="swiper-wrapper">
         @foreach($indexCarousels as $indexCarousel)
             @if($indexCarousel->position == 'topic_top')

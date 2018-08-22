@@ -1,9 +1,9 @@
-<div class="layui-carousel" id="index-carousel">
-    <div carousel-item>
+<div class="swiper-container bannar-container">
+    <div class="swiper-wrapper">
         @foreach($indexCarousels as $indexCarousel)
             @if($indexCarousel->position == 'bannar')
-                <a href="{{$indexCarousel->url}}" target="_blank">
-                    <div>
+                <div class="swiper-slide">
+                    <a href="{{$indexCarousel->url}}" target="_blank">
                         <div class="mdui-card" style="height: 100%">
                             <div class="mdui-card-media">
                                 <img class="mdui-img-fluid index-carousel-img" src="{{$indexCarousel->cover_img}}"/>
@@ -15,9 +15,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             @endif
         @endforeach
     </div>
+    <!-- 如果需要分页器 -->
+    <div class="swiper-pagination bannar-pagination"></div>
+
+    <div class="swiper-scrollbar bannar-scrollbar"></div>
+
 </div>

@@ -2106,6 +2106,11 @@ body {
     width: 100%;
 }
 
+/*顶部bar搜索ml*/
+.mdui-textfield-expandable .mdui-textfield-input {
+    margin-left: 42px;
+}
+
 .graphic {
     position: absolute;
     top: 0;

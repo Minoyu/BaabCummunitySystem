@@ -67,25 +67,33 @@ var appbarRightMenu = new mdui.Menu('#appbar-right-menu-btn','#appbar-right-menu
 /************************
  * 首页轮播图
  */
-layui.use('carousel', function(){
-    var indexCarousel = layui.carousel;
-    //建造实例
-    indexCarousel.render({
-        elem: '#index-carousel',
-        width: '100%', //设置容器宽度
-        height: '100%', //设置容器宽度
-        arrow: 'hover' //始终显示箭头
-    });
-});
 
-var indexSwiper = new Swiper ('.swiper-container', {
+var indexSwiper = new Swiper ('.index-swiper-container', {
     direction: 'horizontal',
     loop: true,
     autoplay:true,
     // 如果需要滚动条
     scrollbar: {
-        el: '.swiper-scrollbar'
+        el: '.swiper-scrollbar',
+        hide: true
     }
+});
+
+var bannarSwiper = new Swiper ('.bannar-container', {
+    direction: 'horizontal',
+    loop: true,
+    autoplay:true,
+
+    // 如果需要分页器
+    pagination: {
+        el: '.bannar-pagination'
+    },
+
+    scrollbar: {
+        el: '.swiper-scrollbar',
+        hide: true
+    }
+
 });
 
 /************************
@@ -1616,6 +1624,7 @@ var barSearchTipsMenu = new mdui.Menu('#barSearchLabel', '#barSearchTips',{posit
 var barSearchInput = $('#barSearch');
 
 barSearchInput.focus(function(event){
+    hideBarTitle();
     debounce(function () {
         $('#barSearchTips').width(barSearchInput.width()+20);
         barSearchTipsMenu.open();
@@ -1650,6 +1659,11 @@ function showBarTitle(){
     },300);
 
 }
+
+barSearchInput.focusout(function(event){
+    $$.hideOverlay(900);
+});
+
 
 //搜索框的提交
 $("#discoverSearchForm").submit(function(e){

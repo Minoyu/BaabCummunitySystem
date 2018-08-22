@@ -180,6 +180,11 @@ class UserController extends Controller
             default:
                 //我的动态
                 $activities = Activity::where('causer_id', $user->id)
+                    ->orWhere([
+                        ['subject_id',$user->id],
+                        ['subject_type','App\Model\User'],
+                        ['description','用户加入社区']
+                    ])
                     ->orderBy('created_at', 'desc')
                     ->paginate(15);
                 if ($request->ajax()) {

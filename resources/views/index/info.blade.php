@@ -10,7 +10,7 @@
         <a href="#info-{{$newsCategory->id}}" class="mdui-ripple">{{$newsCategory->name}}</a>
     @endforeach
 </div>
-<div class="swiper-container">
+<div class="swiper-container index-swiper-container">
     <div class="swiper-wrapper">
         @foreach($indexCarousels as $indexCarousel)
             @if($indexCarousel->position == 'info_top')
