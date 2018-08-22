@@ -106,7 +106,7 @@ body {
     border-radius: 50%;
     position: absolute;
     left:15px;
-    bottom:70px;
+    bottom:80px;
     text-shadow: black 0.1em 0.1em 0.2em
 }
 .drawer-top-title{
@@ -116,6 +116,12 @@ body {
     font-size: 17px;
     font-weight: 800;
     text-shadow: black 0.1em 0.1em 0.2em
+}
+.drawer-top-title button{
+    min-width: 0;
+    padding: 0 10px;
+    height: 26px;
+    line-height: 26px;
 }
 
 .drawer-top-subtitle{
@@ -261,7 +267,7 @@ body {
 /*板块标题按钮*/
 .part-title-more-btn{
     float: right !important;
-    margin: -10px 0;
+    margin: -5px 0;
 }
 .part-title-blue>.part-title-more-btn{
     color: #3c89d2;

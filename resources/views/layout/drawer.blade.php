@@ -10,7 +10,11 @@
             @else
                 <img class="mdui-img-fluid drawer-top-img" src="/imgs/drawer_top.png"/>
                 <a onclick="openLoginDialog()"><img class="drawer-top-profile mdui-hoverable" src="/imgs/user_profile.png" /></a>
-                <span class="drawer-top-title mdui-text-color-white username">{{__('index.top-title')}} <a onclick="openLoginDialog()">{{__('index.login')}}</a> {{__('index.or')}} <a onclick="openRegisterDialog()">{{__('index.register')}}</a></span>
+                <span class="drawer-top-title mdui-text-color-white username">
+                    <button onclick="openLoginDialog()" class="mdui-btn mdui-btn-dense mdui-color-blue-100 mdui-ripple">{{__('index.login')}}</button>
+                    {{__('index.or')}}
+                    <button onclick="openRegisterDialog()" class="mdui-btn mdui-btn-dense mdui-color-blue-grey mdui-ripple">{{__('index.register')}}</button>
+                </span>
                 <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
             @endif
             <button class="mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple" mdui-drawer-close>
@@ -25,15 +29,35 @@
             </li>
         </a>
 
-        <a href="#">
+        <a href="{{route('showCommunity')}}">
             <li class="mdui-list-item mdui-ripple">
                 <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-pink">&#xe6dd;</i>
                 <div class="mdui-list-item-content">{{__('index.community')}}</div>
             </li>
         </a>
 
-        <div class="mdui-divider"></div>
+        <a href="{{route('showDiscover')}}">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-purple">explore</i>
+                <div class="mdui-list-item-content">{{__('index.discover')}}</div>
+            </li>
+        </a>
 
+        <div class="mdui-divider"></div>
+        @if(Auth::check())
+            <a href="{{route('showPersonalCenter',Auth::user()->id)}}">
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">beach_access</i>
+                    <div class="mdui-list-item-content">{{__('index.personalCenter')}}</div>
+                </li>
+            </a>
+            <a href="{{route('userLogout')}}" class="mdui-hidden-md-up">
+                <li class="mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue-grey">exit_to_app</i>
+                    <div class="mdui-list-item-content">{{__('auth.logout')}}</div>
+                </li>
+            </a>
+        @endif
         <a href="{{route('switchLang')}}">
             <li class="mdui-list-item mdui-ripple">
                 <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-cyan">translate</i>

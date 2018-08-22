@@ -15,17 +15,19 @@
         @foreach($indexCarousels as $indexCarousel)
             @if($indexCarousel->position == 'info_top')
                 <div class="swiper-slide">
-                    <div class="mdui-card">
-                        <div class="mdui-card-media">
-                            <img class="mdui-img-fluid" src="{{$indexCarousel->cover_img}}"/>
-                            <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
-                                <div class="topnews-img-primary">
-                                    <div class="mdui-card-primary-title">{{$indexCarousel->title}}</div>
-                                    <div class="mdui-card-primary-subtitle">{{$indexCarousel->subtitle}}</div>
+                    <a href="{{$indexCarousel->url}}">
+                        <div class="mdui-card">
+                            <div class="mdui-card-media">
+                                <img class="mdui-img-fluid" src="{{$indexCarousel->cover_img}}"/>
+                                <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
+                                    <div class="topnews-img-primary">
+                                        <div class="mdui-card-primary-title">{{$indexCarousel->title}}</div>
+                                        <div class="mdui-card-primary-subtitle">{{$indexCarousel->subtitle}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
             @endif
         @endforeach

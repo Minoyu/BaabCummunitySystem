@@ -72,7 +72,7 @@
                     <img src="{{\App\Model\User::findOrFail($activity->properties['userId'])->info->avatar_url}}" alt="users" class="activity-list-users-img mdui-hoverable">
                 </a>
                 <div class="activity-list-title activity-list-title-pink-a">
-                    <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
+                    <i class="mdui-icon material-icons icon-mini">&#xe815;</i>
                     欢迎！
                     <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}" class="user-name">{{$activity->properties['userName']}}</a>
                     加入了社区

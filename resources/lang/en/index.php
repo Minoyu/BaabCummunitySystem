@@ -33,7 +33,7 @@ return [
     'whatsHot'=>'Whats Hot',
     'whatsNew'=>'Whats New',
     //Top News
-    'topNews'=>'The Headlines',
+    'topNews'=>'Headlines',
     //Information
     'info'=>'Information',
     //Regional
