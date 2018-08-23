@@ -120,30 +120,6 @@
 
         <div class="mdui-divider"></div>
 
-        <li class="mdui-collapse-item" id="drawer-userItem">
-            <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
-                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">account_circle</i>
-                <div class="mdui-list-item-content">用户及权限管理</div>
-                <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
-            </div>
-            <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
-                <a href="{{route('adminShowUsersList')}}">
-                    <li class="mdui-list-item mdui-ripple">用户列表</li>
-                </a>
-                <a href="{{route('adminShowPermissionsList')}}">
-                    <li class="mdui-list-item mdui-ripple">权限列表</li>
-                </a>
-                <a href="{{route('adminCommunityTopicList')}}">
-                    <li class="mdui-list-item mdui-ripple">检索话题回复-按话题</li>
-                </a>
-                <a href="{{route('adminCommunityTopicReplyAllList')}}">
-                    <li class="mdui-list-item mdui-ripple">全站话题回复列表</li>
-                </a>
-            </ul>
-        </li>
-
-        <div class="mdui-divider"></div>
-
         <li class="mdui-collapse-item" id="drawer-indexItem">
             <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
                 <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue">home</i>
@@ -156,8 +132,39 @@
                 </a>
             </ul>
         </li>
+
+
+        @role('Founder')
+            <div class="mdui-divider"></div>
+
+            <li class="mdui-collapse-item" id="drawer-userItem">
+                <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
+                    <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-brown">account_circle</i>
+                    <div class="mdui-list-item-content">用户及权限管理</div>
+                    <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+                </div>
+                <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                    <a href="{{route('adminShowUsersList')}}">
+                        <li class="mdui-list-item mdui-ripple">用户列表</li>
+                    </a>
+                    <a href="{{route('adminShowRolesList')}}">
+                        <li class="mdui-list-item mdui-ripple">角色列表</li>
+                    </a>
+                    <a href="{{route('adminShowPermissionsList')}}">
+                        <li class="mdui-list-item mdui-ripple">权限列表</li>
+                    </a>
+                </ul>
+            </li>
+        @endrole
+
         <div class="mdui-divider"></div>
 
+        <a target="_blank" href="{{route('showIndex')}}">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-blue-grey">exit_to_app</i>
+                <div class="mdui-list-item-content">回到前台</div>
+            </li>
+        </a>
         <a href="{{route('switchLang')}}">
             <li class="mdui-list-item mdui-ripple">
                 <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-cyan">translate</i>

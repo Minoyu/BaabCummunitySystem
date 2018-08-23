@@ -9,6 +9,14 @@ use Spatie\Activitylog\Models\Activity;
 class CommunityTopicObserver{
 
     /**
+     * xss防护
+     * @param CommunityTopic $topic
+     */
+    public function saving(CommunityTopic $topic){
+        $topic->content = clean($topic->content, 'topic_content');
+    }
+
+    /**
      * 监听话题创建事件
      * @param CommunityTopic $topic
      */

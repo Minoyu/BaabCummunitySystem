@@ -1,3 +1,5 @@
+
+
 //表单提交按钮
 function formPublicSubmit(formid) {
     var tmpStatusInput = $$("<input class='mdui-hidden' type='text' name='status' value='publish'/>");
@@ -1202,6 +1204,174 @@ function handlePermissionRemoveRole(permissionName,permissionId,roleName,roleId)
 
 }
 
+function handleRoleRemovePermission(permissionName,permissionId,roleName,roleId) {
+    mdui.dialog({
+        title: '移除此角色下的权限',
+        content: '您确定要为'+roleName+'角色移除'+permissionName+'权限吗？' +
+        '<br><span class="mdui-text-color-red">警告：移除后该角色下的用户将失去此权限，请谨慎对权限及角色进行操作</span>',
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/role/remove/permission',
+                        data: {
+                            permissionId:permissionId,
+                            roleId:roleId
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data=JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'OK',
+                                    buttonColor:'pink',
+                                    onButtonClick: function(){
+                                        window.location.reload();//页面刷新
+                                    }
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+
+}
+
+/**
+ * 删除权限
+ */
+function deletePermission(Id,Content) {
+    mdui.dialog({
+        title: '删除权限',
+        content: '您确定要删除此权限吗<br/>'+Content+'<br><span class="mdui-text-color-red">警告：请谨慎进行权限操作</span>',
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/permission/delete',
+                        data: {
+                            id:Id
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
+/**
+ * 删除角色
+ */
+function deleteRole(Id,Content) {
+    mdui.dialog({
+        title: '删除角色',
+        content: '您确定要删除此角色吗<br/>'+Content+'<br><span class="mdui-text-color-red">警告：请谨慎进行角色操作</span>',
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/role/delete',
+                        data: {
+                            id:Id
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
 /**
  * 删除新闻轮播图
  * @param id
@@ -1297,3 +1467,71 @@ function handleIndexCarouselUpdate(obj,className) {
 
 }
 
+var changeRolesDialog = new mdui.Dialog('#changeRolesDialog');
+
+function handleChangeUserRoles(userName,userId) {
+    $$('#changeRolesUserName').text(userName);
+    $$('#changeRolesUserId').val(userId);
+    changeRolesDialog.open();
+}
+
+var changeRolesDialogDom = document.getElementById('changeRolesDialog');
+
+changeRolesDialogDom.addEventListener('confirm.mdui.dialog',function () {
+    var role_ids=[];
+    $$('input[name="role_id[]"]:checked').each(function(){
+        role_ids.push($$(this).val());//向数组中添加元素
+    });
+    var userId =  $$('#changeRolesUserId').val();
+
+    $$.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: '/admin/user/changeRoles',
+        data: {
+            userId:userId,
+            role_ids:role_ids
+        },
+        statusCode: {
+            500: function (xhr, textStatus) {
+                mdui.alert('Server internal error<br/>服务器内部错误');
+            }
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            if (data.status ===1) {
+                mdui.snackbar({
+                    message:data.msg,
+                    position:'top'
+                });
+                setTimeout(function(){
+                    //使用  setTimeout（）方法设定定时5000毫秒
+                    window.location.reload();//页面刷新
+                },2000);
+            } else {
+                mdui.snackbar(data.msg,{
+                    position:'top',
+                    timeout:0,
+                    buttonText:'ok'
+                });
+            }
+
+        }
+    });
+
+});
+
+
+//layui加载form样式
+layui.use('form', function(){
+    var form = layui.form;
+
+    changeRolesDialogDom.addEventListener('closed.mdui.dialog',function () {
+        $$("input[type=checkbox]").each(function(){ //循环checkbox选择或取消
+            $$(this).prop("checked",false);
+        });
+        form.render();
+    });
+});

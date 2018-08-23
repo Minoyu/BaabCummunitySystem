@@ -74,6 +74,13 @@ class AuthController extends Controller
         $password = bcrypt($request->password);
         $userRes = User::create(compact('name','email','password'));
         $userInfoRes = UserInfo::create(['user_id'=>$userRes->id]);
+
+        if ($userRes->id==1){
+            $userRes->assignRole('Founder');
+        }else{
+            $userRes->assignRole('NormalUser');
+        }
+
         //渲染
         if ($userRes&&$userInfoRes){
             $status = 1;

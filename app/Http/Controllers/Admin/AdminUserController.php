@@ -5,12 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Permission\Models\Role;
 
 class AdminUserController extends Controller
 {
     //
     public function showUsersList(Request $request){
-        $users = User::with('info')->paginate(15);
+        $roles = Role::all();
+        $users = User::with(['info','roles'])->paginate(15);
         //遍历生成用户集合
         $user_collection = collect([]);
         foreach ($users as $user){
@@ -26,7 +28,7 @@ class AdminUserController extends Controller
             ));
         }
 
-        return view('admin.user.list',compact('users','user_collection'));
+        return view('admin.user.list',compact('users','user_collection','roles'));
     }
 
     public function showUserEdit(User $user){
@@ -126,6 +128,19 @@ class AdminUserController extends Controller
             $status = 0;
             $msg = $failedCount."Server internal error";
         }
+        return json_encode(compact('status','msg'));//ajax
+    }
+
+    public function changeRoles(Request $request){
+        $this->validate($request,[
+            'userId'=>'required'
+        ]);
+
+        $user =User::findOrFail($request->userId);
+        $user->syncRoles($request->role_ids);
+
+        $status = 1;
+        $msg = "The roles has been updated";
         return json_encode(compact('status','msg'));//ajax
     }
 

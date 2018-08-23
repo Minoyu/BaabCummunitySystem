@@ -39,6 +39,11 @@
     {{--激活导航栏值--}}
     <div id="tabActiveVal" class="mdui-hidden">@yield('tabActiveVal')</div>
     <div id="bottomNavActiveVal" class="mdui-hidden">@yield('bottomNavActiveVal')</div>
+
+    @if (app()->isLocal())
+        @include('sudosu::user-selector')
+    @endif
+
     <!-- Js -->
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
     <script src="/layui/layui.js"></script>

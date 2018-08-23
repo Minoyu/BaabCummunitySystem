@@ -28,6 +28,20 @@
             </a>
         </li>
     @endif
+    @role('Founder')
+        <li class="mdui-menu-item">
+            <a href="{{route('showAdmin')}}" class="mdui-ripple">
+                <i class="mdui-menu-item-icon mdui-icon material-icons">settings</i>管理后台 <span class="layui-badge">站长</span>
+            </a>
+        </li>
+    @endrole
+    @role('Maintainer')
+        <li class="mdui-menu-item">
+            <a href="{{route('showAdmin')}}" class="mdui-ripple">
+                <i class="mdui-menu-item-icon mdui-icon material-icons">settings</i>管理后台 <span class="layui-badge">管理员</span>
+            </a>
+        </li>
+    @endrole
     <li class="mdui-menu-item">
         <a href="{{route('switchLang')}}" class="mdui-ripple">
             <i class="mdui-menu-item-icon mdui-icon material-icons">translate</i>{{__('index.switchLang')}}

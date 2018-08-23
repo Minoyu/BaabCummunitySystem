@@ -103,8 +103,11 @@ Route::group(['middleware'=>'auth:web'],function (){
     Route::post('/user/{user}/upload/cover','UserController@uploadCover')->name('uploadUserCover');
 });
 
+
 //TODO 后台测试路由
-Route::group(['prefix'=>'admin'],function () {
+Route::group(['prefix'=>'admin','middleware' => ['role:Founder|Maintainer']],function () {
+    Route::get("/",'NewsController@adminListShow')->name('showAdmin');
+
     //新闻分类管理模块
     Route::get("/news-category",'NewsCategoryController@adminListShow')->name('adminNewsCategoriesList');
     Route::get("/news-category/create",'NewsCategoryController@adminCreateShow')->name('adminNewsCategoriesCreate');
@@ -197,18 +200,35 @@ Route::group(['prefix'=>'admin'],function () {
     //zone封面图片上传
     Route::post('/community/category/zones/upload/img','CommunityCategoryController@uploadZoneImg')->name('uploadZoneImg');
 
-    //用户及权限管理模块
-    Route::get("/user",'Admin\AdminUserController@showUsersList')->name('adminShowUsersList');
-    Route::get("/user/{user}/edit",'Admin\AdminUserController@showUserEdit')->name('adminShowUserEdit');
-    Route::post("/user/{user}/update",'Admin\AdminUserController@userEditUpdate')->name('adminUserEditUpdate');
-    Route::post("/user/delete",'Admin\AdminUserController@softDelete')->name('adminUserDelete');
-    Route::post("/user/deletes",'Admin\AdminUserController@softDeletes')->name('adminUserDeletes');
+    Route::group(['middleware' => ['role:Founder']],function (){
+        //用户及权限管理模块
+        Route::get("/user",'Admin\AdminUserController@showUsersList')->name('adminShowUsersList');
+        Route::get("/user/{user}/edit",'Admin\AdminUserController@showUserEdit')->name('adminShowUserEdit');
+        Route::post("/user/{user}/update",'Admin\AdminUserController@userEditUpdate')->name('adminUserEditUpdate');
+        Route::post("/user/delete",'Admin\AdminUserController@softDelete')->name('adminUserDelete');
+        Route::post("/user/deletes",'Admin\AdminUserController@softDeletes')->name('adminUserDeletes');
+        Route::post("/user/changeRoles",'Admin\AdminUserController@changeRoles')->name('adminUserChangeRoles');
 
-    //角色管理模块
+        //角色管理模块
+        Route::get("/role",'Admin\AdminRolesController@showRoleList')->name('adminShowRolesList');
+        Route::get("/role/create",'Admin\AdminRolesController@showCreatRole')->name('adminShowCreateRole');
+        Route::post("/role/remove/permission",'Admin\AdminRolesController@removePermission')->name('adminRoleRemoveRole');
+        Route::post("/role/store",'Admin\AdminRolesController@store')->name('adminRoleStore');
+        Route::get("/role/{role}/edit",'Admin\AdminRolesController@showEditRole')->name('adminShowRoleEdit');
+        Route::post("/role/{role}/update",'Admin\AdminRolesController@update')->name('adminRoleUpdate');
+        Route::post("/role/delete",'Admin\AdminRolesController@delete')->name('adminRoleDelete');
 
-    //权限管理模块
-    Route::get("/permission",'Admin\AdminPermissionController@showPermissionList')->name('adminShowPermissionsList');
-    Route::post("/permission/remove/role",'Admin\AdminPermissionController@removeRole')->name('adminPermissionRemoveRole');
+
+        //权限管理模块
+        Route::get("/permission",'Admin\AdminPermissionController@showPermissionList')->name('adminShowPermissionsList');
+        Route::get("/permission/create",'Admin\AdminPermissionController@showCreatPermission')->name('adminShowCreatePermission');
+        Route::post("/permission/remove/role",'Admin\AdminPermissionController@removeRole')->name('adminPermissionRemoveRole');
+        Route::post("/permission/store",'Admin\AdminPermissionController@store')->name('adminPermissionStore');
+        Route::get("/permission/{permission}/edit",'Admin\AdminPermissionController@showEditPermission')->name('adminShowPermissionEdit');
+        Route::post("/permission/{permission}/update",'Admin\AdminPermissionController@update')->name('adminPermissionUpdate');
+        Route::post("/permission/delete",'Admin\AdminPermissionController@delete')->name('adminPermissionDelete');
+    });
+
 
     //首页轮播图管理模块
     Route::get("/index-carousel",'IndexCarouselController@adminListShow')->name('adminIndexCarouselsList');

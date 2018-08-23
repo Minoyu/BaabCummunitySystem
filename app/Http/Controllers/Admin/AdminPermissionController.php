@@ -29,6 +29,49 @@ class AdminPermissionController extends Controller
     }
 
     public function showCreatPermission(){
-        return view('admin.permission.create');
+        $roles = Role::all();
+        return view('admin.permission.create',compact('roles'));
+    }
+
+    public function store(Request $request){
+        $this->validate($request,[
+           'name'=>'required'
+        ]);
+
+        $permission = Permission::create(['name' => $request->name]);
+        if (!empty($request->role_id)){
+            foreach ($request->role_id as $role_id){
+                $role = Role::findOrFail($role_id);
+                $permission ->assignRole($role);
+            }
+        }
+        return \redirect()->back()->with('tips', ['权限创建成功',]);
+
+    }
+
+    public function showEditPermission(Permission $permission){
+        $roles = Role::all();
+        return view('admin.permission.edit',compact('roles','permission'));
+    }
+
+    public function update(Permission $permission,Request $request){
+        $this->validate($request,[
+           'name'=>'required'
+        ]);
+
+        $permission->update(['name' => $request->name]);
+        if (!empty($request->role_id)){
+            $permission ->syncRoles($request->role_id);
+        }
+        return \redirect()->back()->with('tips', ['权限编辑成功',]);
+
+    }
+
+    public function delete(Request $request){
+        Permission::findOrFail($request->id)->delete();
+
+        $status = 1;
+        $msg = "The permission has been deleted";
+        return json_encode(compact('status','msg'));//ajax
     }
 }

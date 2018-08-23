@@ -9,6 +9,14 @@ use Spatie\Activitylog\Models\Activity;
 class NewsReplyObserver{
 
     /**
+     * xss防护
+     * @param NewsReply $reply
+     */
+    public function saving(NewsReply $reply){
+        $reply->content = clean($reply->content, 'topic_content');
+    }
+
+    /**
      * 监听新闻评论创建事件
      * @param NewsReply $reply
      */

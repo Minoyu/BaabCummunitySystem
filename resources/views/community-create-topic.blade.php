@@ -18,7 +18,7 @@
                 <input class="mdui-textfield-input" name="title"/>
             </div>
 
-            <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-2">2.所属分区及板块</h3>
+            <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-4">2.所属分区及板块</h3>
             <select name="zone_id" required class="mdui-select" mdui-select="{position: 'bottom'}" onchange="handleSelGetSections(this.value,'sections-to-select')">
                 <option value="null">请选择分区</option>
                 @foreach($zones as $zone)
@@ -47,7 +47,7 @@
                 @endif
             </select>
 
-            <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-2">3.话题内容</h3>
+            <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-4">3.话题内容</h3>
             <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
             <div class="editor-middle-bar">编辑区域</div>
             <div id="editorText" class="editor-text-for-create-page mdui-hoverable" ></div>

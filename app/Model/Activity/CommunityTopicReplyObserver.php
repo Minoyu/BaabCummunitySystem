@@ -10,6 +10,14 @@ class CommunityTopicReplyObserver
 {
 
     /**
+     * xss防护
+     * @param CommunityTopicReply $reply
+     */
+    public function saving(CommunityTopicReply $reply){
+        $reply->content = clean($reply->content, 'topic_content');
+    }
+
+    /**
      * 监听话题回复创建事件
      * @param CommunityTopicReply $reply
      */
