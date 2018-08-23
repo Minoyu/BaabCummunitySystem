@@ -95,7 +95,7 @@
                 </a>
             @endif
         @endif
-        <button class="mdui-btn mdui-btn-raised mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn">
+        <button href="{{route('showPersonalCenter',$topic->user->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn">
             <i class="mdui-icon material-icons">account_circle</i>
             个人页面
         </button>

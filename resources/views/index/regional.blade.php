@@ -5,11 +5,6 @@
         <i class="mdui-icon material-icons mdui-icon-right">chevron_right</i>
     </a>
 </h2>
-<div id="regional-tab" class="mdui-tab part-divider-tab">
-    @foreach($communitySections as $communitySection)
-        <a href="#topic-{{$communitySection->id}}" class="mdui-ripple">{{$communitySection->name}}</a>
-    @endforeach
-</div>
 <div class="swiper-container index-swiper-container">
     <div class="swiper-wrapper">
         @foreach($indexCarousels as $indexCarousel)
@@ -33,6 +28,11 @@
         @endforeach
     </div>
     <div class="swiper-scrollbar"></div>
+</div>
+<div id="regional-tab" class="mdui-tab part-divider-tab">
+    @foreach($communitySections as $communitySection)
+        <a href="#topic-{{$communitySection->id}}" class="mdui-ripple">{{$communitySection->name}}</a>
+    @endforeach
 </div>
 @foreach($communitySections as $communitySection)
     <div id="topic-{{$communitySection->id}}">

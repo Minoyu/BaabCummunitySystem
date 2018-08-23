@@ -1,5 +1,5 @@
 <h1 class="part-title-with-bg">Topics</h1>
-<div class="mdui-tab part-divider-tab mdui-tab-scrollable" mdui-tab>
+<div class="mdui-tab part-divider-tab" mdui-tab>
     <a mdui-tooltip="{content: '按最后回复排序', position: 'top'}" onclick="jumpTo('?orderBy=default')" href="#" class="mdui-ripple">活跃</a>
     <a mdui-tooltip="{content: '只显示精华话题', position: 'top'}" onclick="jumpTo('?orderBy=excellent')" href="#" class="mdui-ripple @if($orderBy == 'excellent') mdui-tab-active @endif">精华</a>
     <a mdui-tooltip="{content: '按点赞数排序', position: 'top'}" onclick="jumpTo('?orderBy=thumb_up')" href="#" class="mdui-ripple @if($orderBy == 'thumb_up') mdui-tab-active @endif">赞数</a>

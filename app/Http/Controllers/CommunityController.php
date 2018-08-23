@@ -56,7 +56,7 @@ class CommunityController extends Controller
                     break;
                 case 'no_reply':
                     $topics = $section->communityTopics()
-                        ->where('last_reply_at',null)
+                        ->whereColumn('last_reply_at','created_at')
                         ->where('status','publish')
                         ->orderBy('order','desc')
                         ->with('user.info')

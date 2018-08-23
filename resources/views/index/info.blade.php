@@ -5,11 +5,6 @@
         <i class="mdui-icon material-icons mdui-icon-right">chevron_right</i>
     </a>
 </h2>
-<div id="info-tab" class="mdui-tab part-divider-tab">
-    @foreach($newsCategories as$newsCategory)
-        <a href="#info-{{$newsCategory->id}}" class="mdui-ripple">{{$newsCategory->name}}</a>
-    @endforeach
-</div>
 <div class="swiper-container index-swiper-container">
     <div class="swiper-wrapper">
         @foreach($indexCarousels as $indexCarousel)
@@ -33,6 +28,11 @@
         @endforeach
     </div>
     <div class="swiper-scrollbar"></div>
+</div>
+<div id="info-tab" class="mdui-tab part-divider-tab">
+    @foreach($newsCategories as$newsCategory)
+        <a href="#info-{{$newsCategory->id}}" class="mdui-ripple">{{$newsCategory->name}}</a>
+    @endforeach
 </div>
 @foreach($newsCategories as$newsCategory)
     <div id="info-{{$newsCategory->id}}">
