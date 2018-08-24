@@ -104,7 +104,6 @@ Route::group(['middleware'=>'auth:web'],function (){
 });
 
 
-//TODO 后台测试路由
 Route::group(['prefix'=>'admin','middleware' => ['role:Founder|Maintainer']],function () {
     Route::get("/",'NewsController@adminListShow')->name('showAdmin');
 
@@ -186,6 +185,7 @@ Route::group(['prefix'=>'admin','middleware' => ['role:Founder|Maintainer']],fun
     Route::post("/community/topic/deletes",'CommunityTopicController@softDeletes')->name('communityTopicSoftDeletes');
     Route::get("/community/topic/{topic}/up/order",'CommunityTopicController@turnUpOrder')->name('communityTopicTurnUpOrder');
     Route::get("/community/topic/{topic}/down/order",'CommunityTopicController@turnDownOrder')->name('communityTopicTurnDownOrder');
+    Route::get("/community/topic/{topic}/toggle/excellent",'CommunityTopicController@toggleExcellent')->name('communityTopicToggleExcellent');
 
     //社区话题回复管理模块
     Route::get("/community/topic/reply/all",'CommunityTopicReplyController@adminListShowAll')->name('adminCommunityTopicReplyAllList');

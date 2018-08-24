@@ -10,17 +10,6 @@ class CommunityTopicPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view the communityTopic.
-     *
-     * @param  \App\Model\User  $user
-     * @param  \App\Model\CommunityTopic  $communityTopic
-     * @return mixed
-     */
-    public function view(User $user, CommunityTopic $communityTopic)
-    {
-        //
-    }
 
     /**
      * Determine whether the user can create communityTopics.
@@ -31,6 +20,8 @@ class CommunityTopicPolicy
     public function create(User $user)
     {
         //
+        return $user->hasPermissionTo('do_action');
+
     }
 
     /**
@@ -43,6 +34,11 @@ class CommunityTopicPolicy
     public function update(User $user, CommunityTopic $communityTopic)
     {
         //
+        if ($user->id === $communityTopic->user->id ||$user->hasPermissionTo('manage_contents')){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -55,5 +51,30 @@ class CommunityTopicPolicy
     public function delete(User $user, CommunityTopic $communityTopic)
     {
         //
+        if ($user->id === $communityTopic->user->id ||$user->hasPermissionTo('manage_contents')){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+    /**
+     * 判断是否有管理权限
+     * @param User $user
+     * @param CommunityTopic $communityTopic
+     * @return bool
+     */
+    public function manage(User $user, CommunityTopic $communityTopic){
+        return $user->hasPermissionTo('manage_contents');
+    }
+
+    /**
+     * 判断是否有权限上传图片
+     * @param User $user
+     * @return bool
+     */
+    public function uploadImgs(User $user){
+        return $user->hasPermissionTo('do_action');
     }
 }

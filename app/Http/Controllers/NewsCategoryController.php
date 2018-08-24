@@ -31,6 +31,8 @@ class NewsCategoryController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(){
+        $this->authorize('create',NewsCategory::class);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -79,6 +81,8 @@ class NewsCategoryController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(NewsCategory $newsCategory){
+        $this->authorize('update',$newsCategory);
+
         $status = \request('status');
         //发布验证 暂存不验证
         if($status=='publish') {
@@ -116,6 +120,8 @@ class NewsCategoryController extends Controller
      */
     public function softDelete(Request $request){
     $newsCategory = NewsCategory::where('id',$request->id)->first();
+    $this->authorize('delete',$newsCategory);
+
     if ($newsCategory->news_count==0){
         $newsCategory->delete();
         if($newsCategory->trashed()){
@@ -143,6 +149,8 @@ class NewsCategoryController extends Controller
         $failedCount=0;
         for($i=0;$i<count($request->ids);$i++){
             $newsCategory = NewsCategory::where('id',$request->ids[$i])->first();
+            $this->authorize('delete',$newsCategory);
+
             if ($newsCategory->news_count==0){
                 $newsCategory->delete();
             }else{

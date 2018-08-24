@@ -15,6 +15,12 @@ use Spatie\Activitylog\Models\Activity;
 class CommunityTopicController extends Controller
 {
     //
+
+    /**
+     * ajax获得投票者
+     * @param Request $request
+     * @return string
+     */
     public function ajaxGetVoters(Request $request){
         //验证
         $this->validate($request, [
@@ -33,6 +39,11 @@ class CommunityTopicController extends Controller
         }
     }
 
+    /**
+     * 投票逻辑
+     * @param Request $request
+     * @return string
+     */
     public function handleAjaxVote(Request $request){
         //验证
         $this->validate($request, [
@@ -61,6 +72,11 @@ class CommunityTopicController extends Controller
         return json_encode(compact('status','msg','thumb_up_count'));//ajax
     }
 
+    /**
+     * 取消投票逻辑
+     * @param Request $request
+     * @return string
+     */
     public function handleAjaxCancelVote(Request $request){
         //验证
         $this->validate($request, [
@@ -88,7 +104,14 @@ class CommunityTopicController extends Controller
 
     }
 
+    /**
+     * 显示前台创建话题页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function create(Request $request){
+        $this->authorize('create',CommunityTopic::class);
+
         $zones = CommunityZone::all();
         if($request->input('zone_id')&&$request->input('section_id')){
             $zone_id = $request->input('zone_id');
@@ -102,18 +125,35 @@ class CommunityTopicController extends Controller
         return view('community-create-topic',compact('zones','zone_id','section_id','selectedSections'));
     }
 
+    /**
+     * 显示前台话题编辑页面
+     * @param CommunityTopic $topic
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function edit(CommunityTopic $topic,Request $request){
+        $this->authorize('update',$topic);
+
         $zones = CommunityZone::all();
         $selectedSections = CommunityZone::where('id',$topic->zone_id)->first()->communitySections;
 
         return view('community-edit-topic',compact('topic','zones','selectedSections'));
     }
 
+    /**
+     * 后台通过分类展示话题页面
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminListShowByCategory(){
         $zones = CommunityZone::with('communitySections')->get();
         return view('admin.community-topic.show-by-category',compact('zones'));
     }
 
+    /**
+     * 后台展示话题列表页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminListShow(Request $request){
         $selectedSection = false;
         if ($request->input('section_id')){
@@ -133,6 +173,11 @@ class CommunityTopicController extends Controller
         return view('admin.community-topic.list',compact('topics','section','selectedSection'));
     }
 
+    /**
+     * 后台显示创建话题页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminCreateShow(Request $request){
         $zones = CommunityZone::all();
         if($request->input('zone_id')&&$request->input('section_id')){
@@ -143,7 +188,13 @@ class CommunityTopicController extends Controller
         return view('admin.community-topic.create',compact('zones','zone_id','section_id','selectedSections'));
     }
 
+    /**
+     * 后台话题创建逻辑
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function store(){
+        $this->authorize('create',CommunityTopic::class);
+
         $status = \request('status');
         //发布验证 暂存不验证
 //        if($status=='publish') {
@@ -181,7 +232,13 @@ class CommunityTopicController extends Controller
         }
     }
 
+    /**
+     * 前台话题创建逻辑
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function storeMini(){
+        $this->authorize('create',CommunityTopic::class);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -215,6 +272,11 @@ class CommunityTopicController extends Controller
         }
     }
 
+    /**
+     * 后台编辑显示
+     * @param CommunityTopic $topic
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminEditShow(CommunityTopic $topic){
         $zones = CommunityZone::all();
         $selectedSections = CommunityZone::where('id',$topic->zone_id)->first()->communitySections;
@@ -222,7 +284,14 @@ class CommunityTopicController extends Controller
         return view('admin.community-topic.edit',compact('topic','zones','selectedSections'));
     }
 
+    /**
+     * 后台更新逻辑
+     * @param CommunityTopic $topic
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function update(CommunityTopic $topic){
+        $this->authorize('update',$topic);
+
         //获取旧分类id
         $old_zone_id = $topic->zone_id;
         $old_section_id = $topic->section_id;
@@ -266,7 +335,14 @@ class CommunityTopicController extends Controller
         }
     }
 
+    /**
+     * 前台更新逻辑
+     * @param CommunityTopic $topic
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function updateMini(CommunityTopic $topic){
+        $this->authorize('update',$topic);
+
         //获取旧分类id
         $old_zone_id = $topic->zone_id;
         $old_section_id = $topic->section_id;
@@ -316,6 +392,8 @@ class CommunityTopicController extends Controller
      */
     public function softDelete(Request $request){
         $topic = CommunityTopic::where('id',$request->id)->first();
+        $this->authorize('delete',$topic);
+
         $topic->delete();
         if($topic->trashed()){
             $topic->communityZone()->decrement('topic_count');
@@ -330,11 +408,17 @@ class CommunityTopicController extends Controller
 
     }
 
-
+    /**
+     * 话题批量删除行为
+     * @param Request $request
+     * @return string
+     */
     public function softDeletes(Request $request){
         $failedCount=0;
         for($i=0;$i<count($request->ids);$i++){
             $topic = CommunityTopic::where('id',$request->ids[$i])->first();
+            $this->authorize('delete',$topic);
+
             $topic->delete();
             if(!$topic->trashed()){
                 $failedCount++;
@@ -353,13 +437,44 @@ class CommunityTopicController extends Controller
         return json_encode(compact('status','msg'));//ajax
     }
 
+    /**
+     * 提高排序
+     * @param CommunityTopic $topic
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function turnUpOrder(CommunityTopic $topic){
+        $this->authorize('manage',$topic);
+
         $topic->increment('order');
         return \redirect()->back()->with('tips', ['优先级已自增1']);
     }
+
+    /**
+     * 降低排序
+     * @param CommunityTopic $topic
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function turnDownOrder(CommunityTopic $topic){
+        $this->authorize('manage',$topic);
+
         $topic->decrement('order');
         return \redirect()->back()->with('tips', ['优先级已自减1']);
+    }
+
+    /**
+     * 切换是否精华
+     * @param CommunityTopic $topic
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function toggleExcellent(CommunityTopic $topic){
+        $this->authorize('manage',$topic);
+        if (!$topic->is_excellent){
+            $topic->update(['is_excellent'=> true]);
+            return \redirect()->back()->with('tips', ['已成功设为精华']);
+        }else{
+            $topic->update(['is_excellent'=> false]);
+            return \redirect()->back()->with('tips', ['已成功取消精华']);
+        }
     }
 
 
@@ -370,6 +485,8 @@ class CommunityTopicController extends Controller
      */
     public function uploadImg(Request $request)
     {
+        $this->authorize('uploadImgs',CommunityTopic::class);
+
         $user = Auth::user();
         $data = [];
         $failCount=0;

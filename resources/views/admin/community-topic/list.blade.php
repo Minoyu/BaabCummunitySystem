@@ -33,7 +33,14 @@
             <tbody>
             @foreach($topics as $topic)
                 <tr class="mdui-table-row" id="{{$topic->id}}" name="{{str_limit($topic->title, $limit = 30, $end = '...')}}">
-                    <td>@if($topic->status=='hidden')<span class="mdui-text-color-pink">[<i class="mdui-icon material-icons">local_cafe</i>暂存] </span>@endif {{str_limit($topic->title, $limit = 40, $end = '...')}}</td>
+                    <td>@if($topic->status=='hidden')
+                            <span class="layui-badge">暂存</span>
+                        @endif
+                        @if($topic->is_excellent)
+                            <span class="layui-badge layui-bg-blue">精华</span>
+                        @endif
+                        <a target="_blank" href="{{route('showCommunityContent',$topic->id)}}">{{str_limit($topic->title, $limit = 40, $end = '...')}}</a>
+                    </td>
                     <td>{{$topic->id}}</td>
                     <td>{{$topic->communitySection->name}}</td>
                     <td>{{$topic->user->name}}</td>
@@ -45,7 +52,7 @@
                     </td>
                     <td>{{$topic->order}}</td>
                     <td>
-                        <a href="#" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
+                        <a target="_blank" href="{{route('showCommunityContent',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
                             <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>查看
                         </a>
                         <a href="{{route('adminCommunityTopicEdit',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
@@ -66,11 +73,20 @@
                             }
                         @endphp
                         <a @if($canTurnUpOrder) href="{{route('communityTopicTurnUpOrder',$topic->id)}}" @endif class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-deep-orange" @if(!$canTurnUpOrder) disabled @endif>
-                            <i class="mdui-icon material-icons mdui-icon-left">arrow_upward</i>提高优先级
+                            <i class="mdui-icon material-icons mdui-icon-left">arrow_upward</i>上升
                         </a>
                         <a @if($canTurnDownOrder) href="{{route('communityTopicTurnDownOrder',$topic->id)}}" @endif class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-blue" @if(!$canTurnDownOrder) disabled @endif>
-                            <i class="mdui-icon material-icons mdui-icon-left">arrow_downward</i>降低优先级
+                            <i class="mdui-icon material-icons mdui-icon-left">arrow_downward</i>下降
                         </a>
+                        @if(!$topic->is_excellent)
+                            <a href="{{route('communityTopicToggleExcellent',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-blue mdui-text-color-white">
+                                <i class="mdui-icon material-icons mdui-icon-left">thumb_up</i>设为精华
+                            </a>
+                        @else
+                            <a href="{{route('communityTopicToggleExcellent',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-blue">
+                                <i class="mdui-icon material-icons mdui-icon-left">thumb_down</i>取消精华
+                            </a>
+                        @endif
                     </td>
                 </tr>
             @endforeach

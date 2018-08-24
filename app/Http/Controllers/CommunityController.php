@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 class CommunityController extends Controller
 {
     //
+
+    /**
+     * 显示社区首页
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showCommunity(){
         $zones = CommunityZone::with('communitySections')
             ->where('status','publish')
@@ -17,6 +22,12 @@ class CommunityController extends Controller
             ->get();
         return view('community',compact('zones'));
     }
+
+    /**
+     * 显示社区分区页 二级
+     * @param CommunityZone $zone
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showCommunityZone(CommunityZone $zone){
         $sections = $zone ->communitySections()
             ->where('status','publish')
@@ -27,6 +38,13 @@ class CommunityController extends Controller
             ->get();
         return view('community-zone',compact('zone','sections'));
     }
+
+    /**
+     * 显示社区板块页 三级
+     * @param CommunitySection $section
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function showCommunitySection(CommunitySection $section,Request $request){
         $orderBy = $request->input('orderBy');
             switch ($orderBy){
@@ -77,6 +95,12 @@ class CommunityController extends Controller
         return view('community-section',compact('section','topics','orderBy'));
     }
 
+    /**
+     * 显示社区内容页面
+     * @param CommunityTopic $topic
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function showCommunityContent(CommunityTopic $topic,Request $request){
         $orderBy = $request->input('orderBy');
         switch ($orderBy){

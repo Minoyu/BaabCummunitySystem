@@ -11,14 +11,6 @@ use TomLingham\Searchy\Facades\Searchy;
 class SearchController extends Controller
 {
     //
-    function indexAll(Request $request){
-        $designs = Searchy::designs('title','slug', 'description','detail')->query($request['keywords'])->get();
-        $categories = Searchy::categories('title','slug', 'description')->query($request['keywords'])->get();
-        $applications = Searchy::applications('title','slug', 'description')->query($request['keywords'])->get();
-        $companies = Searchy::companies('title','slug', 'description')->query($request['keywords'])->get();
-
-        return json_encode($designs);
-    }
 
     function discoverTips(Request $request){
         $newses = Searchy::news('title')->query($request['keywords'])->getQuery()->limit(5)->get();

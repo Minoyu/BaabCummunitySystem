@@ -15,6 +15,11 @@ class NewsController extends Controller
 {
     //
 
+    /**
+     * 显示新闻首页
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function showNews(Request $request){
         $newses = News::where('status','publish')
             ->orderBy('order','desc')
@@ -35,6 +40,12 @@ class NewsController extends Controller
         }
     }
 
+    /**
+     * 显示新闻二级页
+     * @param NewsCategory $cat
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function showNewsSec(NewsCategory $cat,Request $request)
     {
         $newses = $cat->news()
@@ -53,6 +64,12 @@ class NewsController extends Controller
     }
 
 
+    /**
+     * 显示新闻内容
+     * @param News $news
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function showNewsContent(News $news,Request $request){
         $news->increment('view_count');
         $cat = $news->newsCategory;
@@ -82,15 +99,31 @@ class NewsController extends Controller
         }
 
 
+    /**
+     * 后台新闻列表页
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminListShow(){
         $newses=News::with('user')->orderBy('order','desc')->paginate(10);
         return view('admin.news.list',compact('newses'));
     }
+
+    /**
+     * 后台创建
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminCreateShow(){
         $newsCategories = NewsCategory::all();
         return view('admin.news.create',compact('newsCategories'));
     }
+
+    /**
+     * 后台存储
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function store(){
+        $this->authorize('create',News::class);
+
         $status = \request('status');
         //发布验证 暂存不验证
 //        if($status=='publish') {
@@ -125,11 +158,23 @@ class NewsController extends Controller
             return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
         }
     }
+
+    /**
+     * @param News $news
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminEditShow(News $news){
         $newsCategories = NewsCategory::all();
         return view('admin.news.edit',compact('news','newsCategories'));
     }
+
+    /**
+     * @param News $news
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function update(News $news){
+        $this->authorize('update',$news);
+
         $status = \request('status');
         //发布验证 暂存不验证
 //        if($status=='publish') {
@@ -171,6 +216,8 @@ class NewsController extends Controller
      */
     public function softDelete(Request $request){
         $news = News::where('id',$request->id)->first();
+
+        $this->authorize('delete',$news);
         $news->delete();
         if($news->trashed()){
             $status = 1;
@@ -183,11 +230,15 @@ class NewsController extends Controller
 
     }
 
-
+    /**
+     * @param Request $request
+     * @return string
+     */
     public function softDeletes(Request $request){
         $failedCount=0;
         for($i=0;$i<count($request->ids);$i++){
             $news = News::where('id',$request->ids[$i])->first();
+            $this->authorize('delete',$news);
             $news->delete();
             if(!$news->trashed()){
                 $failedCount++;
@@ -203,11 +254,24 @@ class NewsController extends Controller
         return json_encode(compact('status','msg'));//ajax
     }
 
+    /**
+     * @param News $news
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function turnUpOrder(News $news){
+        $this->authorize('manage',$news);
+
         $news->increment('order');
         return \redirect()->back()->with('tips', ['优先级已自增1']);
     }
+
+    /**
+     * @param News $news
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function turnDownOrder(News $news){
+        $this->authorize('manage',$news);
+
         $news->decrement('order');
         return \redirect()->back()->with('tips', ['优先级已自减1']);
     }
@@ -218,8 +282,9 @@ class NewsController extends Controller
      * @param Request $request
      * @return string
      */
-    public function uploadImg(Request $request)
-    {
+    public function uploadImg(Request $request){
+        $this->authorize('uploadImgs',News::class);
+
         $user = Auth::user();
         $data = [];
         $failCount=0;
@@ -272,8 +337,9 @@ class NewsController extends Controller
      * @param Request $request
      * @return string
      */
-    public function uploadReplyImg(Request $request)
-    {
+    public function uploadReplyImg(Request $request){
+        $this->authorize('uploadReplyImgs',News::class);
+
         $user = Auth::user();
         $data = [];
         $failCount=0;
@@ -327,8 +393,9 @@ class NewsController extends Controller
      * @param Request $request
      * @return string
      */
-    public function uploadCover(Request $request)
-    {
+    public function uploadCover(Request $request){
+        $this->authorize('uploadImgs',News::class);
+
         $user = Auth::user();
         if ($request->isMethod('post')) {
             $this->validate($request,[

@@ -28,4 +28,20 @@ class UserInfoPolicy
             return false;
         }
     }
+
+    /**
+     * 是否可以上传头像
+     * @param User $user
+     * @param UserInfo $userInfo
+     * @return bool
+     */
+    public function uploadImgs(User $user, UserInfo $userInfo)
+    {
+        //
+        if ($user->id === $userInfo->user->id ||$user->hasPermissionTo('manage_users')){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

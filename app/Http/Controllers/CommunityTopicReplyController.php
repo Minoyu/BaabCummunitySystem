@@ -12,6 +12,12 @@ use Spatie\Activitylog\Models\Activity;
 class CommunityTopicReplyController extends Controller
 {
     //
+
+    /**
+     * 处理赞逻辑
+     * @param Request $request
+     * @return string
+     */
     public function handleAjaxVote(Request $request){
         //验证
         $this->validate($request, [
@@ -43,6 +49,11 @@ class CommunityTopicReplyController extends Controller
         return json_encode(compact('status','msg','thumb_up_count'));//ajax
     }
 
+    /**
+     * 处理取消赞逻辑
+     * @param Request $request
+     * @return string
+     */
     public function handleAjaxCancelVote(Request $request){
         //验证
         $this->validate($request, [
@@ -70,19 +81,43 @@ class CommunityTopicReplyController extends Controller
 
     }
 
+    /**
+     * 后台显示全站回复列表
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminListShowAll(){
         $replies=CommunityTopicReply::with(['user','communityTopic'])->paginate(15);
         return view('admin.community-topic-reply.all-list',compact('replies'));
     }
 
+    /**
+     * 后台显示话题下的回复列表
+     * @param CommunityTopic $topic
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminListShow(CommunityTopic $topic){
         $replies=$topic->replies()->paginate(15);
         return view('admin.community-topic-reply.list',compact('topic','replies'));
     }
+
+    /**
+     * 后台显示创建回复页面
+     * @param CommunityTopic $topic
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminCreateShow(CommunityTopic $topic){
         return view('admin.community-topic-reply.create',compact('topic'));
     }
+
+    /**
+     * 回复创建逻辑
+     * @param CommunityTopic $topic
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|string
+     */
     public function store(CommunityTopic $topic,Request $request){
+        $this->authorize('create',CommunityTopicReply::class);
+
         //验证
         $this->validate(\request(), [
             'content' => 'required|min:2',
@@ -122,11 +157,24 @@ class CommunityTopicReplyController extends Controller
         }
     }
 
+    /**
+     * 显示后台编辑页面
+     * @param CommunityTopic $topic
+     * @param CommunityTopicReply $reply
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminEditShow(CommunityTopic $topic,CommunityTopicReply $reply){
         return view('admin.community-topic-reply.edit',compact('topic','reply'));
     }
 
+    /**
+     * 回复更新逻辑
+     * @param CommunityTopic $topic
+     * @param CommunityTopicReply $reply
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function update(CommunityTopic $topic,CommunityTopicReply $reply){
+        $this->authorize('update',$reply);
         //验证
         $this->validate(\request(), [
             'content' => 'required|min:2',
@@ -152,6 +200,8 @@ class CommunityTopicReplyController extends Controller
      */
     public function softDelete(Request $request){
         $reply = CommunityTopicReply::where('id',$request->id)->first();
+        $this->authorize('delete',$reply);
+
         $reply->delete();
         if($reply->trashed()){
             $reply->communityTopic()->decrement('reply_count');
@@ -165,11 +215,17 @@ class CommunityTopicReplyController extends Controller
 
     }
 
-
+    /**
+     * 批量删除行为
+     * @param Request $request
+     * @return string
+     */
     public function softDeletes(Request $request){
         $failedCount=0;
         for($i=0;$i<count($request->ids);$i++){
             $reply = CommunityTopicReply::where('id',$request->ids[$i])->first();
+            $this->authorize('delete',$reply);
+
             $reply->delete();
             if(!$reply->trashed()){
                 $failedCount++;

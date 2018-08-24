@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Session;
 class IndexController extends Controller
 {
     //
+    /**
+     * 首页显示逻辑
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showIndex(){
         $indexCarousels = IndexCarousel::where('status','publish')
             ->orderBy('order','desc')
@@ -66,7 +70,10 @@ class IndexController extends Controller
         ));
     }
 
-
+    /**
+     * 切换语言
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function switchLang(){
         if (App::isLocale('en')) {
             Session::put('language', 'zh');

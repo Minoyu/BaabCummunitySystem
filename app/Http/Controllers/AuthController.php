@@ -38,6 +38,10 @@ class AuthController extends Controller
         }
     }
 
+    /**
+     * 未登录后的跳转
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function notLogin(){
 //        return Redirect::to("/?notLogged=true");
         return redirect()->to(parse_url(url()->previous())['path'].'?notLogged=true');
@@ -94,6 +98,7 @@ class AuthController extends Controller
 
     /**
      * 登出
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function logout(){
         Auth::logout();

@@ -33,6 +33,7 @@ class CommunityZonePolicy
     public function update(User $user, CommunityZone $communityZone)
     {
         //
+        return $user->hasPermissionTo('manage_contents');
     }
 
     /**
@@ -45,5 +46,16 @@ class CommunityZonePolicy
     public function delete(User $user, CommunityZone $communityZone)
     {
         //
+        return $user->hasPermissionTo('manage_contents');
+    }
+
+    /**
+     * 是否有权限上传封面
+     * @param User $user
+     * @return bool
+     */
+    public function uploadCover(User $user){
+        //
+        return $user->hasPermissionTo('manage_contents');
     }
 }

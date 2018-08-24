@@ -39,7 +39,7 @@ class AdminUserController extends Controller
 
     public function userEditUpdate(User $user,Request $request){
         //用户验证权限
-//        $this->authorize('updateUserInfo', $user);
+        $this->authorize('manage', User::class);
         //验证
         $this->validate($request, [
             'name' => 'required',
@@ -99,6 +99,8 @@ class AdminUserController extends Controller
      */
     public function softDelete(Request $request){
         $user = User::where('id',$request->id)->first();
+        $this->authorize('delete', $user);
+
         $user->delete();
         if($user->trashed()){
             $status = 1;
@@ -116,6 +118,8 @@ class AdminUserController extends Controller
         $failedCount=0;
         for($i=0;$i<count($request->ids);$i++){
             $user = User::where('id',$request->ids[$i])->first();
+            $this->authorize('delete', $user);
+
             $user->delete();
             if(!$user->trashed()){
                 $failedCount++;
@@ -131,7 +135,10 @@ class AdminUserController extends Controller
         return json_encode(compact('status','msg'));//ajax
     }
 
+
     public function changeRoles(Request $request){
+        $this->authorize('manage', User::class);
+
         $this->validate($request,[
             'userId'=>'required'
         ]);

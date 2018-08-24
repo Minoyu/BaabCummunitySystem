@@ -39,4 +39,12 @@ class UserPolicy
         //
         return $user->hasPermissionTo('manage_users');
     }
+
+    public function manage(User $user)
+    {
+        //
+        return $user->hasPermissionTo('manage_users');
+    }
+
+
 }

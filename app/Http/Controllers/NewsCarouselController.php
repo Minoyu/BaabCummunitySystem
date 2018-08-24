@@ -33,6 +33,8 @@ class NewsCarouselController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(){
+        $this->authorize('create',NewsCarousel::class);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -79,6 +81,8 @@ class NewsCarouselController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(NewsCarousel $newsCarousel){
+        $this->authorize('update',$newsCarousel);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -116,6 +120,8 @@ class NewsCarouselController extends Controller
      */
     public function softDelete(Request $request){
         $newsCarousel = NewsCarousel::where('id',$request->id)->first();
+        $this->authorize('delete',$newsCarousel);
+
         $newsCarousel->delete();
         if($newsCarousel->trashed()){
             $status = 1;
@@ -130,10 +136,14 @@ class NewsCarouselController extends Controller
     }
 
     public function turnUpOrder(NewsCarousel $newsCarousel){
+        $this->authorize('manage',$newsCarousel);
+
         $newsCarousel->increment('order');
         return \redirect()->back()->with('tips', ['优先级已自增1']);
     }
     public function turnDownOrder(NewsCarousel $newsCarousel){
+        $this->authorize('manage',$newsCarousel);
+
         $newsCarousel->decrement('order');
         return \redirect()->back()->with('tips', ['优先级已自减1']);
     }
@@ -143,8 +153,9 @@ class NewsCarouselController extends Controller
      * @param Request $request
      * @return string
      */
-    public function uploadCover(Request $request)
-    {
+    public function uploadCover(Request $request){
+        $this->authorize('uploadImgs',NewsCarousel::class);
+
         $user = Auth::user();
         if ($request->isMethod('post')) {
             $this->validate($request,[

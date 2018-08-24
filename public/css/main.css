@@ -1249,10 +1249,8 @@ body {
     font-size: 15px;
     opacity: .8;
     display: -webkit-box;
-    overflow: hidden;
-    text-overflow: ellipsis;
     -webkit-box-orient: vertical;
-    height: 40px;
+    height: auto;
     -webkit-line-clamp: 2;
 }
 .community-topic-list .item-info {

@@ -12,15 +12,32 @@ use Intervention\Image\Facades\Image;
 
 class CommunityCategoryController extends Controller
 {
-    //
+
+    /**
+     * 显示后台分区列表页
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function showZonesAndSections(){
         $zones = CommunityZone::with('communitySections')->get();
         return view('admin.community-category.zones-and-sections-list',compact('zones'));
     }
+
+    /**
+     * 显示后台分区创建页
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminZoneCreateShow(){
         return view('admin.community-category.zone-create');
     }
+
+    /**
+     * 分区创建逻辑
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function adminZoneStore(){
+        //验证权限
+        $this->authorize('create',CommunityZone::class);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -53,11 +70,24 @@ class CommunityCategoryController extends Controller
 
     }
 
+    /**
+     * 显示分区编辑页面
+     * @param CommunityZone $zone
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminZoneEditShow(CommunityZone $zone){
         return view('admin.community-category.zone-edit',compact('zone'));
     }
 
+    /**
+     * 分区更新逻辑
+     * @param CommunityZone $zone
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function adminZoneUpdate(CommunityZone $zone){
+        //验证权限
+        $this->authorize('update',$zone);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -91,6 +121,10 @@ class CommunityCategoryController extends Controller
      */
     public function zoneSoftDelete(Request $request){
         $zone = CommunityZone::where('id',$request->id)->first();
+
+        //验证权限
+        $this->authorize('delete',$zone);
+
         $zone->delete();
         if($zone->trashed()){
             $status = 1;
@@ -113,7 +147,13 @@ class CommunityCategoryController extends Controller
         return view('admin.community-category.section-create',compact('zones','selectedZone'));
     }
 
+    /**
+     * 板块创建逻辑
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function adminSectionStore(){
+        $this->authorize('create',CommunitySection::class);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -151,13 +191,25 @@ class CommunityCategoryController extends Controller
 
     }
 
+    /**
+     * 显示后台版块编辑页
+     * @param CommunitySection $section
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function adminSectionEditShow(CommunitySection $section){
         $zones = CommunityZone::all();
         return view('admin.community-category.section-edit',compact('section','zones')
         );
     }
 
+    /**
+     * 板块编辑逻辑
+     * @param CommunitySection $section
+     * @return $this|\Illuminate\Http\RedirectResponse
+     */
     public function adminSectionUpdate(CommunitySection $section){
+        $this->authorize('update',$section);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -196,6 +248,10 @@ class CommunityCategoryController extends Controller
      */
     public function sectionSoftDelete(Request $request){
         $section = CommunitySection::where('id',$request->id)->first();
+
+        //验证权限
+        $this->authorize('delete',$section);
+
         $section->delete();
         if($section->trashed()){
             $status = 1;
@@ -208,6 +264,11 @@ class CommunityCategoryController extends Controller
 
     }
 
+    /**
+     * ajax获得分区下的板块
+     * @param Request $request
+     * @return string
+     */
     public function getSectionsByZoneId(Request $request){
         $this->validate($request,[
             'id'=>'required|integer|exists:community_zones'
@@ -218,12 +279,14 @@ class CommunityCategoryController extends Controller
 
 
     /**
-     * 处理上传的新闻封面
+     * 处理上传的分区封面
      * @param Request $request
      * @return string
      */
     public function uploadZoneImg(Request $request)
     {
+        $this->authorize('uploadCover',CommunityZone::class);
+
         $user = Auth::user();
         if ($request->isMethod('post')) {
             $this->validate($request,[

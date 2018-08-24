@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
@@ -16,6 +17,8 @@ class AdminPermissionController extends Controller
     }
 
     public function removeRole(Request $request){
+        $this->authorize('manage', User::class);
+
         $permission = Permission::findOrFail($request->permissionId);
         $role = Role::findOrFail($request->roleId);
 
@@ -34,6 +37,8 @@ class AdminPermissionController extends Controller
     }
 
     public function store(Request $request){
+        $this->authorize('manage', User::class);
+
         $this->validate($request,[
            'name'=>'required'
         ]);
@@ -55,6 +60,8 @@ class AdminPermissionController extends Controller
     }
 
     public function update(Permission $permission,Request $request){
+        $this->authorize('manage', User::class);
+
         $this->validate($request,[
            'name'=>'required'
         ]);
@@ -68,6 +75,8 @@ class AdminPermissionController extends Controller
     }
 
     public function delete(Request $request){
+        $this->authorize('manage', User::class);
+
         Permission::findOrFail($request->id)->delete();
 
         $status = 1;

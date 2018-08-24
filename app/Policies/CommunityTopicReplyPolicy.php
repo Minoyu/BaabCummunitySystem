@@ -10,17 +10,6 @@ class CommunityTopicReplyPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view the communityTopicReply.
-     *
-     * @param  \App\Model\User  $user
-     * @param  \App\Model\CommunityTopicReply  $communityTopicReply
-     * @return mixed
-     */
-    public function view(User $user, CommunityTopicReply $communityTopicReply)
-    {
-        //
-    }
 
     /**
      * Determine whether the user can create communityTopicReplies.
@@ -31,6 +20,7 @@ class CommunityTopicReplyPolicy
     public function create(User $user)
     {
         //
+        return $user->hasPermissionTo('do_action');
     }
 
     /**
@@ -43,6 +33,11 @@ class CommunityTopicReplyPolicy
     public function update(User $user, CommunityTopicReply $communityTopicReply)
     {
         //
+        if ($user->id === $communityTopicReply->user->id ||$user->hasPermissionTo('manage_contents')){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     /**
@@ -55,5 +50,10 @@ class CommunityTopicReplyPolicy
     public function delete(User $user, CommunityTopicReply $communityTopicReply)
     {
         //
+        if ($user->id === $communityTopicReply->user->id ||$user->hasPermissionTo('manage_contents')){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

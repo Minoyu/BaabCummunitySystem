@@ -10,17 +10,6 @@ class CommunitySectionPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Determine whether the user can view the communitySection.
-     *
-     * @param  \App\Model\User  $user
-     * @param  \App\Model\CommunitySection  $communitySection
-     * @return mixed
-     */
-    public function view(User $user, CommunitySection $communitySection)
-    {
-        //
-    }
 
     /**
      * Determine whether the user can create communitySections.
@@ -31,6 +20,7 @@ class CommunitySectionPolicy
     public function create(User $user)
     {
         //
+        return $user->hasPermissionTo('manage_contents');
     }
 
     /**
@@ -43,6 +33,7 @@ class CommunitySectionPolicy
     public function update(User $user, CommunitySection $communitySection)
     {
         //
+        return $user->hasPermissionTo('manage_contents');
     }
 
     /**
@@ -55,5 +46,6 @@ class CommunitySectionPolicy
     public function delete(User $user, CommunitySection $communitySection)
     {
         //
+        return $user->hasPermissionTo('manage_contents');
     }
 }

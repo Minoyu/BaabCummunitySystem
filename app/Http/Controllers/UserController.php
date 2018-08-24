@@ -37,6 +37,7 @@ class UserController extends Controller
             return json_encode(compact('status','msg'));//ajax
         }
     }
+
     public function ajaxGetFollowers(Request $request){
         //验证
         $this->validate($request, [
@@ -216,7 +217,7 @@ class UserController extends Controller
     public function updateUserInfo(User $user,Request $request)
     {
         //用户验证权限
-        $this->authorize('updateUserInfo', $user);
+        $this->authorize('update', $user->info);
         //验证
         $this->validate($request, [
             'name' => 'required',
@@ -273,7 +274,7 @@ class UserController extends Controller
 
     public function helpUpdateUserWechat(User $user,Request $request){
         //用户验证权限
-        $this->authorize('updateUserInfo',$user);
+        $this->authorize('update',$user->info);
 
         //逻辑
         $wechat = $request->wechat;
@@ -294,7 +295,7 @@ class UserController extends Controller
     }
     public function helpUpdateUserLivingCity(User $user,Request $request){
         //用户验证权限
-        $this->authorize('updateUserInfo',$user);
+        $this->authorize('update',$user->info);
 
         //逻辑
         $living_city = $request->living_city;
@@ -315,7 +316,7 @@ class UserController extends Controller
     }
     public function helpUpdateUserNation(User $user,Request $request){
         //用户验证权限
-        $this->authorize('updateUserInfo',$user);
+        $this->authorize('update',$user->info);
 
         //逻辑
         $nation = $request->nation;
@@ -336,7 +337,7 @@ class UserController extends Controller
     }
     public function helpUpdateUserEngaged(User $user,Request $request){
         //用户验证权限
-        $this->authorize('updateUserInfo',$user);
+        $this->authorize('update',$user->info);
 
         //逻辑
         $engaged_in = $request->engaged_in;
@@ -358,7 +359,7 @@ class UserController extends Controller
 
     public function helpUpdateUserMotto(User $user,Request $request){
         //用户验证权限
-        $this->authorize('updateUserInfo',$user);
+        $this->authorize('update',$user->info);
 
         //逻辑
         $motto = $request->motto;
@@ -378,7 +379,7 @@ class UserController extends Controller
 
     public function helpUpdateClose(User $user){
         //用户验证权限
-        $this->authorize('updateUserInfo',$user);
+        $this->authorize('update',$user->info);
 
         //逻辑
         $help_tip_open = false;
@@ -408,7 +409,8 @@ class UserController extends Controller
     public function uploadAvatar(User $user,Request $request)
     {
         //用户验证权限
-        $this->authorize('uploadAvatar',$user);
+        $this->authorize('uploadImgs',$user->info);
+
         if ($request->isMethod('post')) {
             $this->validate($request,[
                 'avatar'=>'required|image'
@@ -446,7 +448,8 @@ class UserController extends Controller
     public function uploadCover(User $user,Request $request)
     {
         //用户验证权限
-        $this->authorize('uploadCover',$user);
+        $this->authorize('uploadImgs',$user->info);
+
         if ($request->isMethod('post')) {
             $this->validate($request,[
                 'cover'=>'required|image'

@@ -10,8 +10,7 @@ use Intervention\Image\Facades\Image;
 
 class IndexCarouselController extends Controller
 {
-    //
-    //
+
     /**
      * 展示后台列表页
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -34,6 +33,8 @@ class IndexCarouselController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function store(){
+        $this->authorize('create',IndexCarousel::class);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -82,6 +83,8 @@ class IndexCarouselController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(IndexCarousel $indexCarousel){
+        $this->authorize('update',$indexCarousel);
+
         $status = \request('status');
         //验证
         $this->validate(\request(), [
@@ -121,6 +124,8 @@ class IndexCarouselController extends Controller
      */
     public function softDelete(Request $request){
         $indexCarousel = IndexCarousel::where('id',$request->id)->first();
+        $this->authorize('delete',$indexCarousel);
+
         $indexCarousel->delete();
         if($indexCarousel->trashed()){
             $status = 1;
@@ -134,11 +139,26 @@ class IndexCarouselController extends Controller
 
     }
 
+    /**
+     * 提高优先级
+     * @param IndexCarousel $indexCarousel
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function turnUpOrder(IndexCarousel $indexCarousel){
+        $this->authorize('manage',$indexCarousel);
+
         $indexCarousel->increment('order');
         return \redirect()->back()->with('tips', ['优先级已自增1']);
     }
+
+    /**
+     * 降低优先级
+     * @param IndexCarousel $indexCarousel
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function turnDownOrder(IndexCarousel $indexCarousel){
+        $this->authorize('manage',$indexCarousel);
+
         $indexCarousel->decrement('order');
         return \redirect()->back()->with('tips', ['优先级已自减1']);
     }
@@ -148,8 +168,9 @@ class IndexCarouselController extends Controller
      * @param Request $request
      * @return string
      */
-    public function uploadCover(Request $request)
-    {
+    public function uploadCover(Request $request){
+        $this->authorize('uploadImgs');
+
         $user = Auth::user();
         if ($request->isMethod('post')) {
             $this->validate($request,[

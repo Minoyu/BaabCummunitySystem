@@ -2,7 +2,12 @@
 <a href="{{route('showCommunityContent',$topic->id)}}">
     <li class="mdui-list-item mdui-ripple">
         <div class="mdui-list-item-avatar"><img src="{{$topic->user->info->avatar_url}}"/></div>
-        <div class="mdui-list-item-content mdui-list-item-three-line">{{$topic->title}}</div>
+        <div class="mdui-list-item-content mdui-list-item-three-line">
+            @if($topic->is_excellent)
+                <span class="layui-badge layui-bg-blue">精华</span>
+            @endif
+            {{$topic->title}}
+        </div>
         <div class="item-info mdui-hidden-xs">
             <span style="color: #8700ff;" mdui-tooltip="{content: '点赞数'}">{{numForHuman($topic->thumb_up_count)}}</span> /
             <span mdui-tooltip="{content: '评论数'}">{{numForHuman($topic->reply_count)}}</span> /
