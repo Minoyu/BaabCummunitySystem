@@ -18,10 +18,11 @@
         </div>
     </div>
 </div>
-<h2 class="title-with-bottom-border mdui-m-t-2 mdui-p-x-2 mdui-p-t-2 mdui-m-b-0 mdui-card" style="padding-bottom: 12px">
-    热点新闻
-</h2>
-<div class="mdui-card mdui-p-t-1 mdui-m-b-5">
+<div class="mdui-card mdui-p-x-2 mdui-m-t-2 mdui-m-b-5" style="border-radius: 8px">
+    <h2 class="part-title-red mdui-m-t-2">
+        <i class="mdui-icon material-icons">explore</i>
+        热点新闻
+    </h2>
     @include('news.left-list-data')
     <div  id="NewsCenterData"></div>
     <div id="NewsCenterLoadingTip" class="mdui-m-y-2" style="display:none">

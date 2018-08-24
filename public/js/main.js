@@ -58,6 +58,57 @@ function GetUrlRelativePath()
     return relUrl;
 }
 
+/**
+ * 前台Drawer
+ */
+var indexDrawer =  new mdui.Drawer('#index-drawer', {swipe:true});
+
+function toggleIndexDrawer() {
+    indexDrawer.toggle();
+}
+
+var handleDrawerStatusDialog = new mdui.Dialog('#handleDrawerStatusDialog');
+var handleDrawerStatusDialogDom = document.getElementById('handleDrawerStatusDialog');
+
+function handleDrawerDefaultStatus() {
+    handleDrawerStatusDialog.open();
+    handleDrawerStatusDialogDom.addEventListener('cancel.mdui.dialog', function () {
+        $$.ajax({
+            method: 'get',
+            url: '/switch/drawerOpen',
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    handleDrawerStatusDialog.close();
+                    mdui.snackbar({
+                        message:data.msg,
+                        position:'top'
+                    });
+                }
+            }
+        });
+
+    });
+    handleDrawerStatusDialogDom.addEventListener('confirm.mdui.dialog', function () {
+        $$.ajax({
+            method: 'get',
+            url: '/switch/drawerClose',
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    handleDrawerStatusDialog.close();
+                    indexDrawer.close();
+                    mdui.snackbar({
+                        message:data.msg,
+                        position:'top'
+                    });
+                }
+            }
+        });
+
+    });
+}
+
 /************************
  * 顶部appbar right menu
  */
@@ -272,6 +323,13 @@ var bottomVal = $$('#bottomNavActiveVal').text();
 $$('#'+tabVal).addClass('mdui-tab-active');
 $$('#'+bottomVal).addClass('mdui-bottom-nav-active');
 
+$("input[name='loginPassword']").keydown(function (e) {
+    var curKey = e.which;
+    if (curKey === 13) {
+        loginSubmit();
+    }
+});
+
 //Ajax用户登录验证
 function loginSubmit() {
     var email=$$('input[name="loginEmail"]').val();
@@ -370,6 +428,13 @@ function loginSubmit() {
     }
 }
 
+$("input[name='registerEmail']").keydown(function (e) {
+    var curKey = e.which;
+    if (curKey === 13) {
+        registerStep1Next();
+    }
+});
+
 //注册部分下一步
 function registerStep1Next() {
     var userName = $$('input[name="registerName"]').val();
@@ -444,6 +509,13 @@ function registerStep1Next() {
         });
     }
 }
+
+$("input[name='registerPasswordConfirmation']").keydown(function (e) {
+    var curKey = e.which;
+    if (curKey === 13) {
+        registerStep2Next();
+    }
+});
 
 //Ajax注册提交部分
 function registerStep2Submit() {

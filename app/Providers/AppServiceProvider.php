@@ -13,6 +13,7 @@ use App\Model\News;
 use App\Model\NewsReply;
 use App\Model\User;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         News::observe(NewsObserver::class);
         User::observe(UserObserver::class);
         Schema::defaultStringLength(191);
+
     }
 
     /**

@@ -1428,6 +1428,62 @@ function deleteIndexCarousel(id,name) {
         ]
     });
 }
+/**
+ * 删除首页头条
+ * @param id
+ * @param name
+ */
+function deleteIndexHeadline(id,name) {
+    mdui.dialog({
+        title: '删除首页头条',
+        content: '您确定要删除此首页头条吗<br/>'+name,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/index-headline/delete',
+                        data: {
+                            id:id
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
 
 /**
  * 处理首页轮播图上传

@@ -15,7 +15,7 @@
             @include('index.carousel-right')
         </div>
     </div>
-    <div class="mdui-card content-card mdui-m-y-2">
+    <div class="mdui-card index-content-card mdui-m-y-2">
         {{--头条 此部分内容可后台自定义--}}
         @include('index.topnews')
         <div class="mdui-row">
@@ -27,7 +27,8 @@
                 @include('index.regional')
             </div>
         </div>
+    </div>
+    <div class="mdui-card index-content-card mdui-m-y-2">
         @include('index.community')
     </div>
-
 @endsection

@@ -18,7 +18,7 @@
     <link href="https://cdn.bootcss.com/ionicons/4.1.2/css/ionicons.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet" type="text/css">
 </head>
-<body class="mdui-drawer-body-left body-padding mdui-bottom-nav-fixed mdui-theme-primary-blue">
+<body class=" @if($isDrawerOpen) mdui-drawer-body-left @endif body-padding mdui-bottom-nav-fixed mdui-theme-primary-blue">
     {{--顶部应用栏--}}
     @include('layout.appbar')
     {{--侧边抽屉导航--}}

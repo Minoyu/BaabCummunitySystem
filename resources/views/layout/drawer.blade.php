@@ -1,4 +1,4 @@
-<div class="mdui-drawer drawer-padding-top" id="index-drawer">
+<div class="mdui-drawer drawer-padding-top @if(!$isDrawerOpen) mdui-drawer-close @endif" id="index-drawer">
     <ul class="mdui-list drawer-menu mdui-color-white" id="drawerMenu" mdui-collapse>
 
         <div class="mdui-m-b-1 drawer-top">
@@ -17,7 +17,11 @@
                 </span>
                 <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
             @endif
-            <button class="mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple" mdui-drawer-close>
+            <button @if(!Auth::check()||empty(Auth::user()->info->is_drawer_open)) onclick="handleDrawerDefaultStatus()"@else mdui-drawer-close @endif class="mdui-hidden-sm-down mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple">
+                <i class="mdui-icon material-icons">clear_all</i>
+            </button>
+
+            <button class="mdui-hidden-md-up mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple" mdui-drawer-close>
                 <i class="mdui-icon material-icons">clear_all</i>
             </button>
         </div>
@@ -80,4 +84,16 @@
         {{--</li>--}}
 
     </ul>
+</div>
+
+<div class="mdui-dialog" id="handleDrawerStatusDialog">
+    <div class="mdui-dialog-title">厌烦了悬浮的抽屉栏?</div>
+    <div class="mdui-dialog-content">
+        你可以选择将抽屉栏默认隐藏，此后抽屉栏将不再自动弹出。
+        <br>若已登录，你的喜好将永久保留。
+    </div>
+    <div class="mdui-dialog-actions">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>保留抽屉栏并不再提醒</button>
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>默认隐藏</button>
+    </div>
 </div>

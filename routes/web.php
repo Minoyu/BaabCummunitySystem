@@ -37,6 +37,10 @@ Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')-
 //切换语言
 Route::get('/switch/lang','IndexController@switchLang')->name('switchLang');
 
+//切换是否打开抽屉栏
+Route::get('/switch/drawerClose','IndexController@handleDrawerDefaultClose')->name('switchDrawerClose');
+Route::get('/switch/drawerOpen','IndexController@handleDrawerDefaultOpen')->name('switchDrawerOpen');
+
 //用户登录、注册
 Route::post('/auth/login','AuthController@login')->name('userLogin');
 Route::get('/auth/not/login','AuthController@notLogin')->name('notLogin');
@@ -241,5 +245,16 @@ Route::group(['prefix'=>'admin','middleware' => ['role:Founder|Maintainer']],fun
     Route::get("/index-carousel/{indexCarousel}/down/order",'IndexCarouselController@turnDownOrder')->name('indexCarouselTurnDownNewsOrder');
 
     Route::post('/index-carousel/upload','IndexCarouselController@uploadCover')->name('uploadIndexCarousel');
+
+    //首页头条管理模块
+    Route::get("/index-headline",'IndexHeadlineController@adminListShow')->name('adminIndexHeadlinesList');
+    Route::get("/index-headline/create",'IndexHeadlineController@adminCreateShow')->name('adminIndexHeadlineCreate');
+    Route::post("/index-headline/store",'IndexHeadlineController@store')->name('adminIndexHeadlineStore');
+    Route::get("/index-headline/{indexHeadline}/edit",'IndexHeadlineController@adminEditShow')->name('adminIndexHeadlineEdit');
+    Route::post("/index-headline/{indexHeadline}/update",'IndexHeadlineController@update')->name('adminIndexHeadlineUpdate');
+    Route::post("/index-headline/delete",'IndexHeadlineController@softDelete')->name('indexHeadlineSoftDelete');
+    Route::get("/index-headline/{indexHeadline}/up/order",'IndexHeadlineController@turnUpOrder')->name('indexHeadlineTurnUpNewsOrder');
+    Route::get("/index-headline/{indexHeadline}/down/order",'IndexHeadlineController@turnDownOrder')->name('indexHeadlineTurnDownNewsOrder');
+
 
 });

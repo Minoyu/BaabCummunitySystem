@@ -130,6 +130,9 @@
                 <a href="{{route('adminIndexCarouselsList')}}">
                     <li class="mdui-list-item mdui-ripple">首页轮播图</li>
                 </a>
+                <a href="{{route('adminIndexHeadlinesList')}}">
+                    <li class="mdui-list-item mdui-ripple">首页头条</li>
+                </a>
             </ul>
         </li>
 

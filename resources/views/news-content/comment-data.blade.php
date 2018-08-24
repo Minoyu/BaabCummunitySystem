@@ -8,12 +8,14 @@
         <div class="news-content-comment-p">{!! $reply->content !!}</div>
         <div class="action-area">
             <span class="action-need-hover">
-                <a href="{{route('adminNewsReplyEdit',[$news->id,$reply->id])}}" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
-                    <i class="mdui-icon material-icons">edit</i>
-                </a>
-                <button onclick="deleteNewsReply('{{$reply->id}}','{{str_limit(strip_tags($reply->content), $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
-                    <i class="mdui-icon material-icons">delete</i>
-                </button>
+                @can('update',$reply)
+                    <a href="{{route('adminNewsReplyEdit',[$news->id,$reply->id])}}" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
+                        <i class="mdui-icon material-icons">edit</i>
+                    </a>
+                    <button onclick="deleteNewsReply('{{$reply->id}}','{{str_limit(strip_tags($reply->content), $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
+                        <i class="mdui-icon material-icons">delete</i>
+                    </button>
+                @endcan
                 <a onclick="replyToReply('{{$reply->user->name}}','{{$reply->user->id}}')" class="mdui-btn mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i>回复</a>
             </span>
             <a onclick="ajaxHandleReplyVote('{{route('newsReplyVote')}}','{{route('newsReplyCancelVote')}}','{{$reply->id}}',this)"

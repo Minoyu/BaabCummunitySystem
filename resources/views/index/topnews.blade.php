@@ -38,18 +38,15 @@
             </div>
 
             <div class="mdui-col-xs-8">
-                <a href="#" class="topnews-h1">测试头条1测试头条1测试头条1</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条2测试头条2测试头条2</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条3测试头条3测试头条3</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条4测试头条4测试头条4</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条5测试头条5测试头条5</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条6测试头条6测试头条6</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
+                @foreach($indexLeftHeadlines as $headline)
+                        @if($loop->first)
+                            <a href="{{$headline->url}}" class="topnews-h1">{{$headline->title}}</a>
+                            <a href="{{$headline->subUrl}}" class="topnews-part-name">{{$headline->subtitle}}</a>
+                        @else
+                            <a href="{{$headline->url}}" class="topnews-h2">{{$headline->title}}</a>
+                            <a href="{{$headline->subUrl}}" class="topnews-part-name">{{$headline->subtitle}}</a>
+                        @endif
+                @endforeach
             </div>
         </div>
     </div>
@@ -85,19 +82,15 @@
                 </div>
             </div>
             <div class="mdui-col-xs-8">
-                <a href="#" class="topnews-h1">测试头条1测试头条1测试头条1</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条2测试头条2测试头条2</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条3测试头条3测试头条3</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条4测试头条4测试头条4</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条5测试头条5测试头条5</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-                <a href="#" class="topnews-h2">测试头条6测试头条6测试头条6</a>
-                <a href="#" class="topnews-part-name">测试板块</a>
-
+                @foreach($indexRightHeadlines as $headline)
+                    @if($loop->first)
+                        <a href="{{$headline->url}}" class="topnews-h1">{{$headline->title}}</a>
+                        <a href="{{$headline->subUrl}}" class="topnews-part-name">{{$headline->subtitle}}</a>
+                    @else
+                        <a href="{{$headline->url}}" class="topnews-h2">{{$headline->title}}</a>
+                        <a href="{{$headline->subUrl}}" class="topnews-part-name">{{$headline->subtitle}}</a>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>

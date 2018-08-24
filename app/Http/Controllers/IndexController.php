@@ -6,9 +6,11 @@ use App\Model\CommunitySection;
 use App\Model\CommunityTopic;
 use App\Model\CommunityZone;
 use App\Model\IndexCarousel;
+use App\Model\IndexHeadline;
 use App\Model\NewsCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class IndexController extends Controller
@@ -21,6 +23,19 @@ class IndexController extends Controller
     public function showIndex(){
         $indexCarousels = IndexCarousel::where('status','publish')
             ->orderBy('order','desc')
+            ->orderBy('created_at','desc')
+            ->get();
+        $indexLeftHeadlines = IndexHeadline::where('position','left')
+            ->where('status','publish')
+            ->orderBy('order','desc')
+            ->orderBy('created_at','desc')
+            ->limit(6)
+            ->get();
+        $indexRightHeadlines = IndexHeadline::where('position','right')
+            ->where('status','publish')
+            ->orderBy('order','desc')
+            ->orderBy('created_at','desc')
+            ->limit(6)
             ->get();
         $hotTopics = CommunityTopic::where('status','publish')
             ->orderBy('reply_count','desc')
@@ -62,6 +77,8 @@ class IndexController extends Controller
 
         return view('index',compact(
             'indexCarousels',
+            'indexLeftHeadlines',
+            'indexRightHeadlines',
             'hotTopics',
             'newTopics',
             'newsCategories',
@@ -81,5 +98,35 @@ class IndexController extends Controller
             Session::put('language', 'en');
         }
         return redirect()->back();
+    }
+
+    public function handleDrawerDefaultClose(){
+        if(Auth::check()){
+            $userInfo = Auth::user()->info();
+            //用户验证权限
+            $this->authorize('update',$userInfo->first());
+            $userInfo->update(['is_drawer_open'=>false]);
+        }
+        Session::put('isDrawerOpen',false);
+
+        $status = 1;
+        $msg = "抽屉栏已默认关闭";
+
+        return json_encode(compact('status','msg'));//ajax
+    }
+
+    public function handleDrawerDefaultOpen(){
+        if(Auth::check()){
+            $userInfo = Auth::user()->info();
+            //用户验证权限
+            $this->authorize('update',$userInfo->first());
+            $userInfo->update(['is_drawer_open'=>true]);
+        }
+        Session::put('isDrawerOpen',true);
+
+        $status = 1;
+        $msg = "抽屉栏将默认开启";
+
+        return json_encode(compact('status','msg'));//ajax
     }
 }

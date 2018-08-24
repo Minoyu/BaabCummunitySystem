@@ -244,24 +244,22 @@ body {
 .part-title-blue,
 .part-title-red{
     border-left: 8px solid rgba(0, 0, 0, 0.65);
-    border-bottom: 2px solid rgba(0, 0, 0, 0.65);
     font-size: 22px;
     font-weight: bold;
-    margin: 8px 0 10px 0;
+    margin: 20px 0 10px 0;
     padding: 10px 20px 9px 10px;
     line-height: 18px;
-    background-color: #fff;
+    background-color: #f0f0f0;
     color: #3f3f3f;
+    border-radius: 5px;
 }
 /*板块标题蓝*/
 .part-title-blue{
     border-left: 8px solid #42a5f5;
-    border-bottom: 2px solid #42a5f5;
 }
 /*板块标题红*/
 .part-title-red{
     border-left: 8px solid #FF3338;
-    border-bottom: 2px solid #FF3338;
 }
 
 /*板块标题按钮*/
@@ -431,6 +429,11 @@ body {
     border-radius: 10px;
     padding: 10px 20px;
 }
+.index-content-card{
+    overflow: visible;
+    border-radius: 8px;
+    padding: 1px 20px 10px;
+}
 
 /*首页新闻头条板块*/
 /*图片*/
@@ -491,9 +494,18 @@ body {
     .topnews-h1{
         font-size: 18px;
         font-weight: bold;
+        overflow: visible;/*溢出不隐藏*/
+        white-space: normal;/*不换行*/
     }
     .topnews-h2{
         font-size: 16px;
+        overflow: visible;/*溢出不隐藏*/
+        text-overflow: ellipsis;/*文本溢出省略号*/
+        white-space: normal;/*不换行*/
+    }
+    .topnews-part-name{
+        overflow: visible;/*溢出不隐藏*/
+        white-space: normal;/*不换行*/
     }
 }
 

@@ -1,6 +1,6 @@
 <div class="mdui-appbar mdui-appbar-fixed mdui-appbar-scroll-toolbar-hide">
     <div class="mdui-toolbar mdui-color-theme-600">
-        <button id="barMenu" mdui-drawer="{target: '#index-drawer',swipe:true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></button>
+        <button id="barMenu" onclick="toggleIndexDrawer()" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></button>
         <a id="barTitle" href="{{route('showIndex')}}" class="mdui-typo-title">{{ __('index.app_name') }}</a>
         <a id="barSubTitle" href="@yield('subtitleUrl')" class="mdui-typo-subheading mdui-hidden-xs">@yield('title')</a>
         <div class="mdui-toolbar-spacer "></div>
