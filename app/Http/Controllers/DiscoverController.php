@@ -22,9 +22,16 @@ class DiscoverController extends Controller
                     break;
                 case 'mine':
                     //我的动态
-                    $activities = Activity::where('causer_id',Auth::id())
+                    $activities = Activity::where('causer_id', Auth::id())
                         ->orderBy('created_at','desc')
+                        ->orWhere([
+                            ['subject_id',Auth::id()],
+                            ['subject_type','App\Model\User'],
+                            ['description','用户加入社区']
+                        ])
+                        ->orderBy('created_at', 'desc')
                         ->paginate(15);
+
                     break;
                 default:
                     //用户关注的动态

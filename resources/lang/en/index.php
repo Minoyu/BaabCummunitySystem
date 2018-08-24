@@ -39,6 +39,7 @@ return [
     //Regional
     'regional'=>'Regional',
     //Community
-    'postsCount'=>'Topics'
+    'postsCount'=>'Topics',
+    'sectionsCount'=>'Sections'
 
 ];

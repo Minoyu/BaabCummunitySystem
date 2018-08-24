@@ -138,6 +138,9 @@ class CommunityCategoryController extends Controller
         //渲染
         if ($res) {
             if ($status == 'publish') {
+                $section_count = $res->communityZone->communitySections()->where('status','publish')->count();
+                $res->communityZone->update(compact('section_count'));
+
                 return \redirect()->back()->with('tips', ['社区板块' . $name . '创建成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['社区板块' . $name . '暂存成功',]);
@@ -174,6 +177,9 @@ class CommunityCategoryController extends Controller
         //渲染
         if ($res) {
             if ($status == 'publish') {
+                $section_count = $section->communityZone->communitySections()->where('status','publish')->count();
+                $section->communityZone->update(compact('section_count'));
+
                 return \redirect()->back()->with('tips', ['社区板块' . $name . '编辑成功',]);
             } else {
                 return \redirect()->back()->with('tips', ['社区板块' . $name . '暂存成功',]);

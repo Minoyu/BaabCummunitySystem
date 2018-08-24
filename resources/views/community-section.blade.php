@@ -21,10 +21,6 @@
                             <span class="mdui-chip-icon mdui-color-blue"><i class="mdui-icon material-icons">&#xe0bf;</i></span>
                             <span class="mdui-chip-title"><span class="mdui-hidden-xs">{{__('index.postsCount')}} : </span>{{$section->topic_count}}</span>
                         </div>
-                        <div class="mdui-chip">
-                            <span class="mdui-chip-icon mdui-color-brown"><i class="mdui-icon material-icons">&#xe85e;</i></span>
-                            <span class="mdui-chip-title"><span class="mdui-hidden-xs">{{__('community.moderator')}} : </span><a href="#">测试用户</a></span>
-                        </div>
                     </div>
                     <div class="community-section-top-tip">Section</div>
                 </div>

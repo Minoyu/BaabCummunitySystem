@@ -19,12 +19,11 @@
                     </div>
                     <div class="community-zone-top-sub-area">
                         <div class="mdui-chip mdui-m-r-1">
+                            <span class="mdui-chip-icon mdui-color-blue-grey"><i class="mdui-icon material-icons">storage</i></span>
+                            <span class="mdui-chip-title"><span class="mdui-hidden-xs">{{__('index.sectionsCount')}} : </span>{{$zone->section_count}}</span>
+                        </div>                        <div class="mdui-chip mdui-m-r-1">
                             <span class="mdui-chip-icon mdui-color-blue"><i class="mdui-icon material-icons">&#xe0bf;</i></span>
                             <span class="mdui-chip-title"><span class="mdui-hidden-xs">{{__('index.postsCount')}} : </span>{{$zone->topic_count}}</span>
-                        </div>
-                        <div class="mdui-chip">
-                            <span class="mdui-chip-icon mdui-color-brown"><i class="mdui-icon material-icons">&#xe85e;</i></span>
-                            <span class="mdui-chip-title"><span class="mdui-hidden-xs">{{__('community.moderator')}} : </span><a href="#">测试用户</a></span>
                         </div>
                     </div>
                     <div class="community-zone-top-tip">Zone</div>
