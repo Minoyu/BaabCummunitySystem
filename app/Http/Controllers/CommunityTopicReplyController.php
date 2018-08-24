@@ -204,7 +204,8 @@ class CommunityTopicReplyController extends Controller
 
         $reply->delete();
         if($reply->trashed()){
-            $reply->communityTopic()->decrement('reply_count');
+            $reply_count = $reply->communityTopic->replies->count();
+            $reply->communityTopic->update(compact('reply_count'));
             $status = 1;
             $msg = "The reply has been deleted";
         }else{
@@ -230,7 +231,8 @@ class CommunityTopicReplyController extends Controller
             if(!$reply->trashed()){
                 $failedCount++;
             }else{
-                $reply->communityTopic()->decrement('reply_count');
+                $reply_count = $reply->communityTopic->replies->count();
+                $reply->communityTopic->update(compact('reply_count'));
             }
         }
         if($failedCount==0){

@@ -17,7 +17,7 @@
             @include('news-content.comment')
         </div>
         {{--侧边栏，小屏隐藏--}}
-        <div class="mdui-col-md-3 mdui-hidden-sm-down" style="padding-top: 20px">
+        <div class="mdui-col-md-3 mdui-hidden-sm-down" style="padding-top: 4px">
             @include('news-content.side-clumn')
         </div>
     </div>

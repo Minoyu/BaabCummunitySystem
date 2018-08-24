@@ -34,11 +34,18 @@
             @foreach($topics as $topic)
                 <tr class="mdui-table-row" id="{{$topic->id}}" name="{{str_limit($topic->title, $limit = 30, $end = '...')}}">
                     <td>@if($topic->status=='hidden')
-                            <span class="layui-badge">暂存</span>
+                            <span class="layui-badge layui-bg-orange">暂存</span>
+                        @endif
+                        @if($topic->order >0)
+                            <span class="layui-badge">置顶</span>
                         @endif
                         @if($topic->is_excellent)
                             <span class="layui-badge layui-bg-blue">精华</span>
                         @endif
+                        @if($topic->order <0)
+                            <span class="layui-badge layui-bg-black">下沉</span>
+                        @endif
+
                         <a target="_blank" href="{{route('showCommunityContent',$topic->id)}}">{{str_limit($topic->title, $limit = 40, $end = '...')}}</a>
                     </td>
                     <td>{{$topic->id}}</td>
@@ -62,20 +69,10 @@
                             <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
                         </button>
                         <br>
-                        @php
-                            $canTurnUpOrder = false;
-                            $canTurnDownOrder = false;
-                            if ($topic->order>=0&&$topic->order<20){
-                                $canTurnUpOrder= true;
-                            }
-                            if ($topic->order>0&&$topic->order<=20){
-                                $canTurnDownOrder= true;
-                            }
-                        @endphp
-                        <a @if($canTurnUpOrder) href="{{route('communityTopicTurnUpOrder',$topic->id)}}" @endif class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-deep-orange" @if(!$canTurnUpOrder) disabled @endif>
+                        <a href="{{route('communityTopicTurnUpOrder',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-deep-orange">
                             <i class="mdui-icon material-icons mdui-icon-left">arrow_upward</i>上升
                         </a>
-                        <a @if($canTurnDownOrder) href="{{route('communityTopicTurnDownOrder',$topic->id)}}" @endif class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-blue" @if(!$canTurnDownOrder) disabled @endif>
+                        <a href="{{route('communityTopicTurnDownOrder',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-text-color-blue">
                             <i class="mdui-icon material-icons mdui-icon-left">arrow_downward</i>下降
                         </a>
                         @if(!$topic->is_excellent)

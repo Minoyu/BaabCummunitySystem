@@ -1,4 +1,4 @@
-<div class="mdui-card mdui-hoverable side-card">
+<div class="mdui-card mdui-hoverable side-card mdui-m-t-2">
     <div class="side-card-header">
         <div class="side-card-header-text mdui-center">
             新闻版块

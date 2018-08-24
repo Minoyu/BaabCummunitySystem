@@ -2472,4 +2472,12 @@ body {
     color: rgba(23, 81, 153, 0.56);
 }
 
+.side-edit-tool-btn{
+    width: 100%;
+}
+
+.side-edit-tool-content{
+    padding-left: 12px;
+    padding-right: 12px;
+}
 

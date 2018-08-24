@@ -3,8 +3,14 @@
     <li class="mdui-list-item mdui-ripple">
         <div class="mdui-list-item-avatar"><img src="{{$topic->user->info->avatar_url}}"/></div>
         <div class="mdui-list-item-content mdui-list-item-three-line">
+            @if($topic->order >0)
+                <span class="layui-badge">置顶</span>
+            @endif
             @if($topic->is_excellent)
                 <span class="layui-badge layui-bg-blue">精华</span>
+            @endif
+            @if($topic->order <0)
+                <span class="layui-badge layui-bg-black">下沉</span>
             @endif
             {{$topic->title}}
         </div>

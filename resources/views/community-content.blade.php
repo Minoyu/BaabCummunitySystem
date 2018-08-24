@@ -13,7 +13,7 @@
             @include('community-content.comment')
         </div>
         {{--侧边栏，小屏隐藏--}}
-        <div class="mdui-col-md-3 mdui-col-xs-12" style="padding-top: 20px">
+        <div class="mdui-col-md-3 mdui-col-xs-12" style="padding-top: 4px">
             @include('community-content.side-clumn')
         </div>
     </div>

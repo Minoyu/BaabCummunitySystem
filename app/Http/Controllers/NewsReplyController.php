@@ -193,7 +193,8 @@ class NewsReplyController extends Controller
         $newsReply = NewsReply::where('id',$request->id)->first();
         $newsReply->delete();
         if($newsReply->trashed()){
-            $newsReply->news()->decrement('reply_count');
+            $reply_count = $newsReply->news->replies->count();
+            $newsReply->news->update(compact('reply_count'));
             $status = 1;
             $msg = "The reply has been deleted";
         }else{
@@ -216,7 +217,8 @@ class NewsReplyController extends Controller
             if(!$newsReply->trashed()){
                 $failedCount++;
             }else{
-                $newsReply->news()->decrement('reply_count');
+                $reply_count = $newsReply->news->replies->count();
+                $newsReply->news->update(compact('reply_count'));
             }
         }
         if($failedCount==0){

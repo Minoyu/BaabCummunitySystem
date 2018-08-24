@@ -10,7 +10,7 @@
             @include('news.carousel')
             @include('news.left-list')
         </div>
-        <div class="mdui-col-md-4 mdui-hidden-sm-down">
+        <div class="mdui-col-md-4 mdui-hidden-sm-down" style="margin-top: -16px">
             @include('news.right-categories')
         </div>
     </div>

@@ -1787,6 +1787,119 @@ function ajaxLoadSearchNews(){
     });
 }
 
+/**
+ * 删除社区话题
+ * @param topicId
+ * @param topicContent
+ */
+function deleteCommunityTopic(topicId,topicContent) {
+    mdui.dialog({
+        title: '删除社区话题',
+        content: '您确定要删除此社区话题吗<br/>'+topicContent,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/community/topic/delete',
+                        data: {
+                            id:topicId
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
+/**
+ * 删除新闻
+ * @param newsId
+ * @param newsTitle
+ */
+function deleteNews(newsId,newsTitle) {
+    mdui.dialog({
+        title: '删除新闻',
+        content: '您确定要删除此新闻吗<br/>'+newsTitle,
+        buttons: [
+            {
+                text: '取消'
+            },
+            {
+                text: '确认',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/news/delete',
+                        data: {
+                            id:newsId
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data)
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar(data.msg,{
+                                    position:'top',
+                                    timeout:0,
+                                    buttonText:'ok'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
 
 // 过滤html标签
 function removeHTMLTag(str) {

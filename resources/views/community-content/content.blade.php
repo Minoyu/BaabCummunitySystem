@@ -15,6 +15,15 @@
                     · <i class="mdui-icon material-icons">&#xe541;</i> 暂存
                 </span>
             @endif
+            @if($topic->order >0)
+                <span class="layui-badge">置顶</span>
+            @endif
+            @if($topic->is_excellent)
+                <span class="layui-badge layui-bg-blue">精华</span>
+            @endif
+            @if($topic->order <0)
+                <span class="layui-badge">下沉</span>
+            @endif
             · <i class="mdui-icon material-icons" style="padding-bottom: 3px">&#xe2c7;</i> <a href="{{route('showCommunitySection',$topic->communitySection->id)}}">{{$topic->communitySection->name}}</a>
             · <i class="mdui-icon material-icons" style="padding-bottom: 3px">&#xe417;</i> <span class="mdui-hidden-xs">访问量</span>{{$topic->view_count}}
             · <i class="mdui-icon material-icons">&#xe0b9;</i> <span class="mdui-hidden-xs">评论量</span>{{$topic->reply_count}}

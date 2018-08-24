@@ -6,6 +6,15 @@
             @if($topic->status == 'hidden')
                 <span class="layui-badge">暂存</span>
             @endif
+            @if($topic->order >0)
+                <span class="layui-badge">已被置顶</span>
+            @endif
+            @if($topic->is_excellent)
+                <span class="layui-badge layui-bg-blue">精华</span>
+            @endif
+            @if($topic->order <0)
+                <span class="layui-badge">已被下沉</span>
+            @endif
             {{$topic->title}}
         </div>
         <div class="item-info mdui-hidden-xs">
