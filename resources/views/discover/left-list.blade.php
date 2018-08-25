@@ -10,7 +10,7 @@
             <div class=" mdui-color-green-50 admin-error-tip">
                 <div>
                     <ul>
-                        你所关注的用户动态太少啦，多关注些用户吧，接下来为您展示全站动态
+                        你所关注的用户动态太少啦，多关注些用户吧，接下来为您展示推荐动态
                     </ul>
                 </div>
             </div>

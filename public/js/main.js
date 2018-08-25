@@ -140,6 +140,11 @@ var bannarSwiper = new Swiper ('.bannar-container', {
         el: '.bannar-pagination'
     },
 
+    navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+    },
+
     scrollbar: {
         el: '.swiper-scrollbar',
         hide: true
