@@ -1,4 +1,4 @@
-<h1 class="part-h mdui-m-b-4">
+<h1 class="part-title-red mdui-m-b-4" style="background: #fff;line-height: 28px;font-size: 24px">
     {{__('community.zonesOfCommunity')}}
     <a href="{{route('communityTopicCreate')}}" class="mdui-btn mdui-text-color-pink-accent mdui-float-right">
         <i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>

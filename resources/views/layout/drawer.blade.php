@@ -17,7 +17,7 @@
                 </span>
                 <span class="drawer-top-subtitle mdui-text-color-white">{{__('index.top-subtitle')}}</span>
             @endif
-            <button @if(!Auth::check()||empty(Auth::user()->info->is_drawer_open)) onclick="handleDrawerDefaultStatus()"@else mdui-drawer-close @endif class="mdui-hidden-sm-down mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple">
+            <button @if($showDrawerTips) onclick="handleDrawerDefaultStatus()"@else mdui-drawer-close @endif class="mdui-hidden-sm-down mdui-btn mdui-btn-icon drawer-top-close mdui-text-color-white mdui-ripple">
                 <i class="mdui-icon material-icons">clear_all</i>
             </button>
 

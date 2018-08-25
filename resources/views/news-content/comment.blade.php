@@ -38,6 +38,10 @@
     </div>
     <div class="side-card-content">
         @include('news-content.comment-data')
+        @if(count($replies)==0)
+            <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">hot_tub</i>
+            <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">成为第一个在此回复的人吧</span>
+        @endif
         <div  id="NewsReplyData"></div>
         <div id="NewsReplyLoadingTip" class="mdui-m-y-2" style="display:none">
             <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>

@@ -117,23 +117,67 @@
         @case('topics')
             <div class="community-topic-list">
                 @include('personal-center.left-topic-data')
+                @if(count($topics)==0)
+                    <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">bubble_chart</i>
+                    <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">
+                        @if($userIsMe)
+                            尝试发布自己的第一条社区话题<br>
+                            <a href="{{route('communityTopicCreate')}}" class="mdui-btn mdui-text-color-pink-accent">
+                                <i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>
+                                创建话题
+                            </a>
+                        @else
+                            此用户暂无发布的话题
+                        @endif
+                    </span>
+                @endif
                 <div  id="PersonalCenterListData"></div>
             </div>
         @break
         @case('replies')
             <div class="community-topic-list">
                 @include('personal-center.left-reply-data')
+                @if(count($replies)==0)
+                    <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">chat_bubble_outline</i>
+                    <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">
+                        @if($userIsMe)
+                            尝试在社区中参与讨论
+                        @else
+                            此用户暂无回复
+                        @endif
+                    </span>
+                @endif
                 <div  id="PersonalCenterListData"></div>
             </div>
         @break
         @case('voted')
             <div class="community-topic-list">
                 @include('personal-center.left-voted-data')
+                @if(count($votes)==0)
+                    <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">thumb_up</i>
+                    <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">
+                        @if($userIsMe)
+                            尝试在社区中给喜欢的内容点赞
+                        @else
+                            此用户暂无赞同的内容
+                        @endif
+                    </span>
+                @endif
                 <div id="PersonalCenterListData"></div>
             </div>
         @break
         @default
             @include('personal-center.left-activity-data')
+            @if(count($activities)==0)
+                <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">hot_tub</i>
+                <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">
+                        @if($userIsMe)
+                        尝试在社区中更加活跃
+                    @else
+                        此用户暂无动态
+                    @endif
+                </span>
+            @endif
             <div  id="PersonalCenterListData"></div>
     @endswitch
 

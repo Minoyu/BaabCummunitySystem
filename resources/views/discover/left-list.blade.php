@@ -16,6 +16,13 @@
             </div>
         @endif
         @include('discover.left-list-data')
+        @if(count($activities)==0)
+            <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">directions_walk</i>
+            <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">
+                暂无有关动态
+                <br>尝试在社区中更加活跃！
+            </span>
+        @endif
         <div  id="ActivityListData"></div>
         <div id="ActivityListLoadingTip" class="mdui-m-y-2" style="display:none">
             <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>
@@ -33,6 +40,10 @@
         </div>
         @if($view =='all'||!$view)
             @include('discover.left-list-data')
+            @if(count($activities)==0)
+                <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">directions_walk</i>
+                <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">暂无有关动态</span>
+            @endif
             <div  id="ActivityListData"></div>
             <div id="ActivityListLoadingTip" class="mdui-m-y-2" style="display:none">
                 <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>

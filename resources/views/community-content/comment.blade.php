@@ -11,6 +11,10 @@
     </div>
     <div class="side-card-content" id="replies">
         @include('community-content.comment-data')
+        @if(count($replies)==0)
+            <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">hot_tub</i>
+            <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">成为第一个在此回复的人吧</span>
+        @endif
         <div  id="TopicRepliesData"></div>
         <div id="TopicRepliesLoadingBtn" class="mdui-m-y-1" style="">
             <button onclick="ajaxLoadTopicReplies()" class="mdui-btn mdui-color-pink-a200 mdui-ripple mdui-center">

@@ -27,6 +27,15 @@ class SetIsDrawerOpen
 
             $view->with('isDrawerOpen',$res);
         });
+
+        //给drawer视图传递是否默认开启
+        view()->composer('layout.drawer',function($view){
+            $res = (!Auth::check()&& !Session::has('isDrawerOpen'))||(Auth::check()&&empty(Auth::user()->info->is_drawer_open));
+            $view->with('showDrawerTips',$res);
+        });
+
+
+
         return $next($request);
     }
 }

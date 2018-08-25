@@ -67,8 +67,8 @@ class CommunityController extends Controller
                 case 'recent':
                     $topics = $section->communityTopics()
                         ->where('status','publish')
-                        ->orderBy('created_at','desc')
                         ->orderBy('order','desc')
+                        ->orderBy('created_at','desc')
                         ->with('user.info')
                         ->paginate(15);
                     break;
