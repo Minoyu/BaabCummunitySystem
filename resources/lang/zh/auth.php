@@ -43,4 +43,6 @@ return [
     'failed' => '用户名和密码不匹配',
     'throttle' => '频繁的登录！ 请在 :seconds 秒后在试。',
 
+    'notLoggedTip' =>'对不起，你还没有登录',
+
 ];

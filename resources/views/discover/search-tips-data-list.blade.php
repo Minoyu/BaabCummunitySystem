@@ -4,14 +4,14 @@
         @php($isAllEmpty = false)
         <li class="mdui-menu-item search-tips search-tips-type">
                  <a class="mdui-ripple">
-                     <i class="mdui-icon material-icons">view_list</i> 社区分区及板块
+                     <i class="mdui-icon material-icons">view_list</i> {{__('discover.communityZonesAndSections')}}
                  </a>
             </li>
         <li class="mdui-divider"></li>
         @foreach($community_zones as $community_zone)
             <li class="mdui-menu-item search-tips search-tips-item">
                 <a href="{{route('showCommunityZone',$community_zone->id)}}" class="mdui-ripple">
-                    <span class="layui-badge">分区</span>
+                    <span class="layui-badge">{{__('community.zone')}}</span>
                     {{$community_zone->name}}
                 </a>
             </li>
@@ -19,7 +19,7 @@
         @foreach($community_sections as $community_section)
             <li class="mdui-menu-item search-tips search-tips-item">
                 <a href="{{route('showCommunitySection',$community_section->id)}}" class="mdui-ripple">
-                    <span class="layui-badge layui-bg-green">板块</span>
+                    <span class="layui-badge layui-bg-green">{{__('community.section')}}</span>
                     {{$community_section->name}}
                 </a>
             </li>
@@ -29,7 +29,7 @@
         @php($isAllEmpty = false)
         <li class="mdui-menu-item search-tips search-tips-type">
                  <a class="mdui-ripple">
-                     <i class="mdui-icon material-icons">view_list</i> 新闻板块
+                     <i class="mdui-icon material-icons">view_list</i> {{__('discover.newsCategories')}}
                  </a>
             </li>
         <li class="mdui-divider"></li>
@@ -43,7 +43,7 @@
         @php($isAllEmpty = false)
         <li class="mdui-menu-item search-tips search-tips-type">
                  <a class="mdui-ripple">
-                     <i class="mdui-icon material-icons">account_circle</i> 用户
+                     <i class="mdui-icon material-icons">account_circle</i> {{__('discover.users')}}
                  </a>
             </li>
         <li class="mdui-divider"></li>
@@ -57,7 +57,7 @@
         @php($isAllEmpty = false)
         <li class="mdui-menu-item search-tips search-tips-type">
                  <a class="mdui-ripple">
-                     <i class="mdui-icon ion-md-paper"></i> 新闻
+                     <i class="mdui-icon ion-md-paper"></i> {{__('index.news')}}
                  </a>
             </li>
         <li class="mdui-divider"></li>
@@ -71,7 +71,7 @@
         @php($isAllEmpty = false)
         <li class="mdui-menu-item search-tips search-tips-type">
                  <a class="mdui-ripple">
-                     <i class="mdui-icon material-icons">bubble_chart</i> 社区话题
+                     <i class="mdui-icon material-icons">bubble_chart</i> {{__('discover.communityTopics')}}
                  </a>
             </li>
         <li class="mdui-divider"></li>
@@ -84,32 +84,32 @@
     @if($isAllEmpty)
         <li class="mdui-menu-item search-tips search-tips-null">
              <a class="mdui-ripple mdui-text-color-grey-800">
-                 <i class="mdui-icon material-icons">feedback</i>  暂无相关搜索推荐 您可以回车尝试详细搜索
+                 <i class="mdui-icon material-icons">feedback</i>  {{__('discover.noRecommendTips')}}
              </a>
         </li>
         <li class="mdui-menu-item search-tips search-tips-null">
             <a class="mdui-ripple mdui-text-color-grey">
-                : ) 目前 您可以尝试输入您所想要查找的
+                : ) {{__('discover.searchTipHeader')}}
             </a>
         </li>
         <li class="mdui-menu-item search-tips search-tips-null" style="margin-left: 20px">
             <a class="mdui-ripple mdui-text-color-grey">
-                <i class="mdui-icon ion-md-paper"></i> 新闻
+                <i class="mdui-icon ion-md-paper"></i> {{__('index.news')}}
             </a>
         </li>
         <li class="mdui-menu-item search-tips search-tips-null" style="margin-left: 20px">
             <a class="mdui-ripple mdui-text-color-grey">
-                <i class="mdui-icon material-icons">bubble_chart</i> 社区话题
+                <i class="mdui-icon material-icons">bubble_chart</i> {{__('discover.communityTopics')}}
             </a>
         </li>
         <li class="mdui-menu-item search-tips search-tips-null" style="margin-left: 20px">
             <a class="mdui-ripple mdui-text-color-grey">
-                <i class="mdui-icon material-icons">account_circle</i> 用户
+                <i class="mdui-icon material-icons">account_circle</i> {{__('discover.users')}}
             </a>
         </li>
         <li class="mdui-menu-item search-tips search-tips-null" style="margin-left: 20px">
             <a class="mdui-ripple mdui-text-color-grey">
-                <i class="mdui-icon material-icons">view_list</i> 新闻版块、社区分区及板块
+                <i class="mdui-icon material-icons">view_list</i> {{__('discover.categories')}}
             </a>
         </li>
     @endif

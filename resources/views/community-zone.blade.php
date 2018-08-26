@@ -10,7 +10,7 @@
             <div class="mdui-card content-card community-zone-content">
                 <a href="{{route('communityTopicCreate',['zone_id'=>$zone->id])}}" class="mdui-btn create-topic-btn mdui-text-color-pink-accent ">
                     <i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>
-                    创建话题
+                    {{__('community.createTopics')}}
                 </a>
                 <img src="{{$zone->img_url}}" class="community-zone-top-img mdui-hoverable">
                 <div class="community-zone-top-txt-area">
@@ -26,7 +26,7 @@
                             <span class="mdui-chip-title"><span class="mdui-hidden-xs">{{__('index.postsCount')}} : </span>{{$zone->topic_count}}</span>
                         </div>
                     </div>
-                    <div class="community-zone-top-tip">Zone</div>
+                    <div class="community-zone-top-tip">{{__('community.zone')}}</div>
                 </div>
                 <div class="community-zone-top-description">
                     {{$zone->description}}

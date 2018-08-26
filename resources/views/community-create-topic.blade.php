@@ -10,20 +10,20 @@
             {{csrf_field()}}
             <h1 class="create-page-title mdui-text-color-indigo">
                 <i class="mdui-icon material-icons">&#xe0bf;</i>
-                创建话题
+                {{__('community.createTopics')}}
             </h1>
             @include('admin.layout.msg')
             <div class="mdui-textfield" style="max-width: 500px">
-                <h3 class="create-page-part-title mdui-text-color-indigo">1.话题标题</h3>
+                <h3 class="create-page-part-title mdui-text-color-indigo">1.{{__('admin.topicTitle')}}</h3>
                 <input class="mdui-textfield-input" name="title"/>
             </div>
 
-            <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-4">2.所属分区及板块</h3>
+            <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-4">2.{{__('admin.selectZonesAndSections')}}</h3>
             <select name="zone_id" required class="mdui-select" mdui-select="{position: 'bottom'}" onchange="handleSelGetSections(this.value,'sections-to-select')">
-                <option value="null">请选择分区</option>
+                <option value="null">{{__('admin.selectZonesP')}}</option>
                 @foreach($zones as $zone)
                     @if(isset($zone_id)&&$zone_id==$zone->id)
-                        <option value="{{$zone->id}}" selected>已选中:{{$zone->name}}</option>
+                        <option value="{{$zone->id}}" selected>{{__('admin.selected')}}: {{$zone->name}}</option>
                     @else
                         <option value="{{$zone->id}}">{{$zone->name}}</option>
                     @endif
@@ -31,11 +31,11 @@
             </select>
             &nbsp;&nbsp;&nbsp;
             <select name="section_id" required class="mdui-select sections-to-select" id="selectSection">
-                <option value="null">请先选择分区</option>
+                <option value="null">{{__('admin.selectZonesPF')}}</option>
                 @if(isset($section_id))
                     @foreach($selectedSections as $section)
                         @if($section_id&&$section_id==$section->id)
-                            <option value="{{$section->id}}" selected>已选中:{{$section->name}}</option>
+                            <option value="{{$section->id}}" selected>{{__('admin.selected')}}: {{$section->name}}</option>
                         @else
                             <option value="{{$section->id}}">{{$section->name}}</option>
                         @endif
@@ -47,16 +47,16 @@
                 @endif
             </select>
 
-            <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-4">3.话题内容</h3>
+            <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-4">3.{{__('admin.topicContent')}}</h3>
             <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
-            <div class="editor-middle-bar">编辑区域</div>
+            <div class="editor-middle-bar">{{__('admin.editArea')}}</div>
             <div id="editorText" class="editor-text-for-create-page mdui-hoverable" ></div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
-            <div class="mdui-divider" style="margin-top: 50px;margin-bottom: 10px"></div>
-            <button onclick="formPublicSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent"><i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>发布</button>
-            <button onclick="formHiddenSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple"><i class="mdui-icon material-icons mdui-icon-left">&#xe541;</i>暂存</button>
-            <a href="{{route('showCommunity')}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-m-l-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe5c4;</i>返回社区</a>
+            <div class="mdui-divider" style="margin-top: 50px;"></div>
+            <button onclick="formPublicSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent mdui-m-t-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>{{__('admin.publish')}}</button>
+            <button onclick="formHiddenSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-m-l-1 mdui-m-t-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe541;</i>{{__('admin.save')}}</button>
+            <a href="{{route('showCommunity')}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-m-l-1 mdui-m-t-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe5c4;</i>{{__('index.backTo')}}{{__('index.community')}}</a>
 
         </form>
 

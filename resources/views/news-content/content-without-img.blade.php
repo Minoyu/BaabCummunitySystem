@@ -10,13 +10,13 @@
         <small>
             @if($news->status=='hidden')
                 <span class="mdui-text-color-pink">
-                    · <i class="mdui-icon material-icons">&#xe541;</i> 暂存
+                    · <i class="mdui-icon material-icons">&#xe541;</i> {{__('community.saved')}}
                 </span>
             @endif
-            <a href="{{route('showNews')}}">News Center</a> > <a href="{{route('showNewsSec',$cat->id)}}">{{$cat->name}}</a>
+            <a href="{{route('showNews')}}">{{__('news.newsCenter')}}</a> > <a href="{{route('showNewsSec',$cat->id)}}">{{$cat->name}}</a>
             <span style="white-space: nowrap;">
-            · <i class="mdui-icon material-icons" style="padding-bottom: 3px">remove_red_eye</i> <span class="mdui-hidden-xs">访问量</span>{{$news->view_count}}
-            · <i class="mdui-icon material-icons">comment</i> <span class="mdui-hidden-xs">评论量</span>{{$news->reply_count}}
+            · <i class="mdui-icon material-icons" style="padding-bottom: 3px">remove_red_eye</i> <span class="mdui-hidden-xs">{{__('community.visitedCount')}}</span>{{$news->view_count}}
+            · <i class="mdui-icon material-icons">comment</i> <span class="mdui-hidden-xs">{{__('community.commentCount')}}</span>{{$news->reply_count}}
             </span>
         </small>
     </h1>

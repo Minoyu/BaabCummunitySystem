@@ -16,6 +16,6 @@
             侧边栏
         </div>
     </div>
-    <input class="mdui-hidden" name="__follow" value="关注"/>
-    <input class="mdui-hidden" name="__followed" value="已关注"/>
+    <input class="mdui-hidden" name="__follow" value="{{__('user.follow')}}"/>
+    <input class="mdui-hidden" name="__followed" value="{{__('user.followed')}}"/>
 @endsection

@@ -5,6 +5,9 @@ body {
 .mdui-bottom-nav-fixed .mdui-bottom-nav{
     z-index: 1000;
 }
+.mdui-select {
+    margin-top: 16px;
+}
 /*小屏设备右下按钮底部边距*/
 @media (max-width: 599px) {
     .mdui-fab-fixed, .mdui-fab-wrapper {
@@ -351,9 +354,6 @@ body {
     color: #2b2b2b;
 }
 .side-card-header-text small{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 90%;
     font-weight: normal;
     color: #646464;
@@ -516,6 +516,10 @@ body {
     padding: 12px;
     font-size: 14px;
     opacity: .7;
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
 
 }
 
@@ -1214,14 +1218,14 @@ body {
 /* 社区二级页面顶部介绍卡片副标题 */
 .community-sec-top-card-header-subtitle {
     display: block;
-    margin-left: 52px;
+    margin-left: 110px;
     padding-bottom: 8px;
     padding-right: 8px;
-    overflow: hidden;
     font-size: 14px;
     font-weight: 300;
     line-height: 20px;
     opacity: .8;
+    white-space: normal;
 }
 .community-section-top-tip,
 .community-zone-top-tip{
@@ -1233,6 +1237,8 @@ body {
     font-style: italic;
     opacity: .1;
     z-index: -1;
+    line-height: 58px;
+
 }
 
 @media (max-width: 600px){
@@ -1241,6 +1247,7 @@ body {
         right: 10px;
         top: -30px;
         font-size: 30px;
+        line-height: 34px;
     }
 }
 
@@ -1457,6 +1464,7 @@ body {
 }
 .news-content-create-comment .title{
     font-size: 20px;
+    padding-bottom: 8px;
 }
 .news-content-create-comment .title .mdui-icon{
     font-size: 22px;
@@ -1606,7 +1614,7 @@ body {
 .user-center-cover-info .right-btn {
     background-color: #fff;
     color: rgba(0, 0, 0, 0.87);
-    width: 120px;
+    width: auto;
     font-size: 15px;
     height: 42px;
     line-height: 42px;
@@ -1965,10 +1973,10 @@ body {
         min-height: 120px;
     }
     .editor-text-for-create-page{
-        min-height: 150px;
+        min-height: 200px;
     }
-    .w-e-text {
-        min-height: 120px;
+    .editor-text-for-create-page .w-e-text {
+        min-height: 200px;
     }
 }
 .editor-middle-bar{
@@ -2472,9 +2480,10 @@ body {
     float: right;
     z-index: 2;
     right: 0;
+    bottom: 10px;
+    padding: 0 8px;
 }
 .search-card-view-more{
-
     padding-bottom: 10px;
 }
 .search-card-view-more a{
@@ -2486,10 +2495,26 @@ body {
 
 .side-edit-tool-btn{
     width: 100%;
+    height: auto;
+    line-height: 20px;
+    white-space: normal;
+}
+.side-edit-tool-btn .mdui-icon{
+    font-size: 16px;
+    padding-right: 5px;
 }
 
 .side-edit-tool-content{
     padding-left: 12px;
     padding-right: 12px;
+}
+
+.info-helper-card-header{
+    height: auto;
+    padding: 10px 20px;
+}
+
+.info-helper-card-header .side-card-header-text{
+    white-space: normal;
 }
 

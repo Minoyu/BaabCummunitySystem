@@ -32,8 +32,8 @@
     <input class="mdui-hidden" name="userId" value="{{$user->id}}"/>
     <input class="mdui-hidden" name="userIsMe" value="{{$userIsMe}}"/>
     {{--Js所需翻译库--}}
-    <input class="mdui-hidden" name="__follow" value="关注"/>
-    <input class="mdui-hidden" name="__followed" value="已关注"/>
-    <input class="mdui-hidden" name="__closeHelpEditTitle" value="关闭更新资料引导"/>
-    <input class="mdui-hidden" name="__closeHelpEditContent" value="关闭后引导将不再显示，你可以在编辑个人资料中继续更改您的信息"/>
+    <input class="mdui-hidden" name="__follow" value="{{__('user.follow')}}"/>
+    <input class="mdui-hidden" name="__followed" value="{{__('user.followed')}}"/>
+    <input class="mdui-hidden" name="__closeHelpEditTitle" value="{{__('user.closeHelpEditTitle')}}"/>
+    <input class="mdui-hidden" name="__closeHelpEditContent" value="{{__('user.closeHelpEditContent')}}"/>
 @endsection

@@ -1,12 +1,13 @@
 @if(!$user->info->motto)
-    <div class="mdui-card  mdui-m-b-1 mdui-hoverable">
+    <div class="mdui-card  mdui-m-b-2 mdui-hoverable">
         <form method="post" action="{{route('helpEditUserMotto',$user->id)}}">
             {{csrf_field()}}
-            <div class="side-card-header">
+            <div class="side-card-header info-helper-card-header">
                 <div class="side-card-header-text">
-                    用一句话介绍下自己吧
+                    {{__('user.mottoHelperHeader')}}
+                    <br>
                     <small>
-                        让大家更了解你
+                        {{__('user.mottoHelperHeaderTip')}}
                     </small>
                 </div>
                 <button type="button" onclick="handleCloseHelpUpdateInfo('{{route('closeHelpEditUserInfo',$user->id)}}')" class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-theme-accent mdui-ripple mdui-float-right mdui-text-color-grey-800"><i class="mdui-icon material-icons">close</i></button>
@@ -14,7 +15,7 @@
             </div>
             <div class="side-card-content-with-p-x">
                 <div class="mdui-textfield mdui-p-y-0">
-                    <label class="mdui-textfield-label">一句话介绍</label>
+                    <label class="mdui-textfield-label">{{__('user.motto')}}</label>
                     <input class="mdui-textfield-input" name="motto" type="text" required/>
                 </div>
             </div>
@@ -24,14 +25,15 @@
         </form>
     </div>
 @elseif(!$user->info->nation)
-    <div class="mdui-card  mdui-m-b-1 mdui-hoverable">
+    <div class="mdui-card  mdui-m-b-2 mdui-hoverable">
         <form method="post" action="{{route('helpEditUserNation',$user->id)}}">
             {{csrf_field()}}
-            <div class="side-card-header">
+            <div class="side-card-header info-helper-card-header">
                 <div class="side-card-header-text">
-                    你来自哪里？
+                    {{__('user.nationHelperHeader')}}？
+                    <br>
                     <small>
-                        若选择不展示此信息，我们会保护您的隐私
+                        {{__('user.notShowTip')}}
                     </small>
                 </div>
                 <button type="button" onclick="handleCloseHelpUpdateInfo('{{route('closeHelpEditUserInfo',$user->id)}}')" class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-theme-accent mdui-ripple mdui-float-right mdui-text-color-grey-800"><i class="mdui-icon material-icons">close</i></button>
@@ -39,7 +41,7 @@
             </div>
             <div class="side-card-content-with-p-x">
                 <div class="mdui-textfield mdui-p-y-0">
-                    <label class="mdui-textfield-label">国家/国籍</label>
+                    <label class="mdui-textfield-label">{{__('user.nation')}}</label>
                     <input class="mdui-textfield-input" name="nation" type="text" required/>
                 </div>
             </div>
@@ -47,21 +49,22 @@
                 <label class="mdui-switch mdui-p-r-1">
                     <input type="checkbox" name="nation_open" checked/>
                     <i class="mdui-switch-icon"></i>
-                    <span class="mdui-hidden-xs">在个人页面</span>公开展示
+                    {{__('user.publicDisplay')}}
                 </label>
                 <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
             </div>
         </form>
     </div>
 @elseif(!$user->info->engaged_in)
-    <div class="mdui-card  mdui-m-b-1 mdui-hoverable">
+    <div class="mdui-card  mdui-m-b-2 mdui-hoverable">
         <form method="post" action="{{route('helpEditUserEngaged',$user->id)}}">
             {{csrf_field()}}
-            <div class="side-card-header">
+            <div class="side-card-header info-helper-card-header">
                 <div class="side-card-header-text">
-                    你现在所从事的行业？
+                    {{__('user.engagedInHelperHeader')}}？
+                    <br>
                     <small>
-                        若选择不展示此信息，我们会保护您的隐私
+                        {{__('user.notShowTip')}}
                     </small>
                 </div>
                 <button type="button" onclick="handleCloseHelpUpdateInfo('{{route('closeHelpEditUserInfo',$user->id)}}')" class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-theme-accent mdui-ripple mdui-float-right mdui-text-color-grey-800"><i class="mdui-icon material-icons">close</i></button>
@@ -69,7 +72,7 @@
             </div>
             <div class="side-card-content-with-p-x">
                 <div class="mdui-textfield mdui-p-y-0">
-                    <label class="mdui-textfield-label">职业/从事行业</label>
+                    <label class="mdui-textfield-label">{{__('user.engagedIn')}}</label>
                     <input class="mdui-textfield-input" name="engaged_in" type="text" required/>
                 </div>
             </div>
@@ -77,21 +80,22 @@
                 <label class="mdui-switch mdui-p-r-1">
                     <input type="checkbox" name="engaged_in_open" checked/>
                     <i class="mdui-switch-icon"></i>
-                    <span class="mdui-hidden-xs">在个人页面</span>公开展示
+                    {{__('user.publicDisplay')}}
                 </label>
                 <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
             </div>
         </form>
     </div>
 @elseif(!$user->info->living_city)
-    <div class="mdui-card  mdui-m-b-1 mdui-hoverable">
+    <div class="mdui-card  mdui-m-b-2 mdui-hoverable">
         <form method="post" action="{{route('helpEditUserLivingCity',$user->id)}}">
             {{csrf_field()}}
-            <div class="side-card-header">
+            <div class="side-card-header info-helper-card-header">
                 <div class="side-card-header-text">
-                    你现居哪座城市？
+                    {{__('user.livingCityHelperHeader')}}？
+                    <br>
                     <small>
-                        若选择不展示此信息，我们会保护您的隐私
+                        {{__('user.notShowTip')}}
                     </small>
                 </div>
                 <button type="button" onclick="handleCloseHelpUpdateInfo('{{route('closeHelpEditUserInfo',$user->id)}}')" class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-theme-accent mdui-ripple mdui-float-right mdui-text-color-grey-800"><i class="mdui-icon material-icons">close</i></button>
@@ -99,7 +103,7 @@
             </div>
             <div class="side-card-content-with-p-x">
                 <div class="mdui-textfield mdui-p-y-0">
-                    <label class="mdui-textfield-label">现居城市</label>
+                    <label class="mdui-textfield-label">{{__('user.livingCity')}}</label>
                     <input class="mdui-textfield-input" name="living_city" type="text" required/>
                 </div>
             </div>
@@ -107,21 +111,22 @@
                 <label class="mdui-switch mdui-p-r-1">
                     <input type="checkbox" name="living_city_open" checked/>
                     <i class="mdui-switch-icon"></i>
-                    <span class="mdui-hidden-xs">在个人页面</span>公开展示
+                    {{__('user.publicDisplay')}}
                 </label>
                 <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
             </div>
         </form>
     </div>
 @elseif(!$user->info->wechat)
-    <div class="mdui-card  mdui-m-b-1 mdui-hoverable">
+    <div class="mdui-card  mdui-m-b-2 mdui-hoverable">
         <form method="post" action="{{route('helpEditUserWechat',$user->id)}}">
             {{csrf_field()}}
-            <div class="side-card-header">
+            <div class="side-card-header info-helper-card-header">
                 <div class="side-card-header-text">
-                    你拥有微信账号吗？
+                    {{__('user.wechatHelperHeader')}}？
+                    <br>
                     <small>
-                        微信是一个中国的即时交流APP
+                        {{__('user.wechatHelperHeaderTip')}}
                     </small>
                 </div>
                 <button type="button" onclick="handleCloseHelpUpdateInfo('{{route('closeHelpEditUserInfo',$user->id)}}')" class="mdui-btn mdui-btn-icon mdui-btn-dense mdui-color-theme-accent mdui-ripple mdui-float-right mdui-text-color-grey-800"><i class="mdui-icon material-icons">close</i></button>
@@ -129,7 +134,7 @@
             </div>
             <div class="side-card-content-with-p-x">
                 <div class="mdui-textfield mdui-p-y-0">
-                    <label class="mdui-textfield-label">微信号</label>
+                    <label class="mdui-textfield-label">{{__('user.wechatId')}}</label>
                     <input class="mdui-textfield-input" name="wechat" type="text" required/>
                 </div>
             </div>
@@ -137,7 +142,7 @@
                 <label class="mdui-switch mdui-p-r-1">
                     <input type="checkbox" name="wechat_open" checked/>
                     <i class="mdui-switch-icon"></i>
-                    <span class="mdui-hidden-xs">在个人页面</span>公开展示
+                    {{__('user.publicDisplay')}}
                 </label>
                 <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
             </div>

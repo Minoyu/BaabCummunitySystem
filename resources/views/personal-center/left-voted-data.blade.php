@@ -6,7 +6,7 @@
             </a>
             <div class="activity-list-title activity-list-title-pink-a">
                 <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
-                点赞了社区话题
+                {{__('discover.likedTopics')}}
                 <a href="{{route('showCommunityContent',$vote->id)}}" class="subject-title">{{$vote->title}}</a>
                 <div class="activity-list-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$vote->created_at->diffForHumans()}}</div>
             </div>
@@ -18,9 +18,8 @@
             </a>
             <div class="activity-list-title activity-list-title-indigo-a">
                 <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
-                点赞了社区话题
+                {{__('discover.likedTopicReply')}}
                 <a href="{{route('showCommunityContent',$vote->communityTopic->id)}}#reply-{{$vote->id}}" class="subject-title">{{$vote->communityTopic->title}}</a>
-                下的回复
                 <div class="activity-list-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$vote->created_at->diffForHumans()}}</div>
             </div>
             <div class="activity-list-p">
@@ -35,9 +34,8 @@
             </a>
             <div class="activity-list-title activity-list-title-purple-a">
                 <i class="mdui-icon material-icons icon-mini">&#xe8dc;</i>
-                点赞了新闻
+                {{__('discover.likedNewsReply')}}
                 <a href="{{route('showCommunityContent',$vote->news->id)}}#reply-{{$vote->id}}" class="subject-title">{{$vote->news->title}}</a>
-                下的回复
                 <div class="activity-list-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$vote->created_at->diffForHumans()}}</div>
             </div>
             <div class="activity-list-p">

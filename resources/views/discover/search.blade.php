@@ -1,7 +1,7 @@
 <!--搜索-->
 <span class="search-input mdui-center">
     <form id="discoverSearchForm" action="{{route('showSearchRes')}}" method="get">
-        <input id="search" autocomplete="off" name="keywords" placeholder="搜索话题、新闻及用户" class="search-input-field search-input-field" style="position: relative" type="text" />
+        <input id="search" autocomplete="off" name="keywords" placeholder="{{__('discover.searchTip')}}" class="search-input-field search-input-field" style="position: relative" type="text" />
         <button type="submit" class="mdui-btn mdui-btn-icon mdui-color-red-accent mdui-ripple search-input-button" ><i class="mdui-icon material-icons">search</i></button>
 
         <label class="search-input-label search-input-label" for="search">

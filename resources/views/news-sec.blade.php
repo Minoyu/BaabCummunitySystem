@@ -10,7 +10,7 @@
         <div class="mdui-panel mdui-hidden-md-up" mdui-panel>
             <div class="mdui-panel-item news-sec-cat-panel-mobile">
                 <div class="mdui-panel-item-header">
-                    <div class="mdui-panel-item-title" style="width: auto">查看新闻版块</div>
+                    <div class="mdui-panel-item-title" style="width: auto">{{__('discover.newsCategories')}}</div>
                     <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
                 </div>
                 <div class="mdui-panel-item-body">

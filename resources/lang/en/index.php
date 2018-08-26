@@ -12,6 +12,7 @@ return [
     'or'=>'or',
     'next'=>'Next',
     'back'=>'Back',
+    'backTo'=>'Back To ',
     'register'=>'Register',
     'submit'=>'Submit',
     'news'=>'News',
@@ -40,6 +41,7 @@ return [
     'regional'=>'Regional',
     //Community
     'postsCount'=>'Topics',
-    'sectionsCount'=>'Sections'
+    'sectionsCount'=>'Sections',
+    'likedCount'=>'Likes',
 
 ];

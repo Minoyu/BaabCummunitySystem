@@ -1,7 +1,7 @@
 <div class="mdui-card mdui-hoverable side-card mdui-m-t-2">
     <div class="side-card-header">
         <div class="side-card-header-text mdui-center">
-            作者信息
+            {{__('user.authInfo')}}
         </div>
     </div>
     <div class="side-card-content">
@@ -15,21 +15,19 @@
         <div class="side-card-user-motto">
             @if($topic->user->info->motto)
                 {{$topic->user->info->motto}}
-            @else
-                此用户还未添加一句话介绍
             @endif
         </div>
         <div class="mdui-panel mdui-panel-gapless mdui-m-b-1 side-card-user-info" mdui-panel>
             <div class="mdui-panel-item">
                 <div class="mdui-panel-item-header">
-                    <div class="mdui-panel-item-title" style="width: auto">查看个人资料</div>
+                    <div class="mdui-panel-item-title" style="width: auto">{{__('user.viewPersonalInfo')}}</div>
                     <i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
                 </div>
                 <div class="mdui-panel-item-body">
                     <div class="side-card-content">
                         @if($topic->user->info->sex&&$topic->user->info->sex_open=="true")
                             <div class="side-card-content-item">
-                                <div class="side-card-content-item-h">性别</div>
+                                <div class="side-card-content-item-h">{{__('user.sex')}}</div>
                                 @if($topic->user->info->sex)
                                     <div class="side-card-content-item-c"><i class="mdui-icon ion-md-male mdui-text-color-blue"></i></div>
                                 @else
@@ -40,7 +38,7 @@
                         @if($topic->user->info->wechat&&$topic->user->info->wechat_open=="true")
                             <div class="side-card-content-item">
                                 <div class="side-card-content-item-h">
-                                    微信号
+                                    {{__('user.wechatId')}}
                                 </div>
                                 <div class="side-card-content-item-c">
                                     {{$topic->user->info->wechat}}
@@ -50,7 +48,7 @@
                         @if($topic->user->info->nation&&$topic->user->info->nation_open=="true")
                             <div class="side-card-content-item">
                                 <div class="side-card-content-item-h">
-                                    国家
+                                    {{__('user.nation')}}
                                 </div>
                                 <div class="side-card-content-item-c">
                                     {{$topic->user->info->nation}}
@@ -60,7 +58,7 @@
                         @if($topic->user->info->living_city&&$topic->user->info->living_city_open=="true")
                             <div class="side-card-content-item">
                                 <div class="side-card-content-item-h">
-                                    现居城市
+                                    {{__('user.livingCity')}}
                                 </div>
                                 <div class="side-card-content-item-c">
                                     {{$topic->user->info->living_city}}
@@ -70,7 +68,7 @@
                         @if($topic->user->info->engaged_in&&$topic->user->info->engaged_in_open=="true")
                             <div class="side-card-content-item">
                                 <div class="side-card-content-item-h">
-                                    职业/从事行业
+                                    {{__('user.engagedIn')}}
                                 </div>
                                 <div class="side-card-content-item-c">
                                     {{$topic->user->info->engaged_in}}
@@ -86,18 +84,18 @@
             @if(Auth::check() && $topic->user->isFollowedBy(Auth::user()))
                 <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$topic->user->id}}',this)" class="mdui-btn mdui-color-pink-accent mdui-center side-card-user-btn">
                     <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87d;</i>
-                    <span>已关注</span>
+                    <span>{{__('user.followed')}}</span>
                 </a>
             @else
                 <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$topic->user->id}}',this)" class="mdui-btn mdui-text-color-pink-accent mdui-center side-card-user-btn">
                     <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87e;</i>
-                    <span>关注</span>
+                    <span>{{__('user.follow')}}</span>
                 </a>
             @endif
         @endif
-        <button href="{{route('showPersonalCenter',$topic->user->id)}}" class="mdui-btn mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn">
+        <a href="{{route('showPersonalCenter',$topic->user->id)}}" class="mdui-btn mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn">
             <i class="mdui-icon material-icons">account_circle</i>
-            个人页面
-        </button>
+            {{__('index.personalCenter')}}
+        </a>
     </div>
 </div>

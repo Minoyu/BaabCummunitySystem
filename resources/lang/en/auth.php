@@ -44,4 +44,5 @@ return [
     'failed' => 'Mismatch of username and password',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    'notLoggedTip' =>'Sorry, you are not logged in yet',
 ];

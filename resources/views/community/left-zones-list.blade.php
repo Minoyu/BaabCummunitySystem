@@ -2,7 +2,7 @@
     {{__('community.zonesOfCommunity')}}
     <a href="{{route('communityTopicCreate')}}" class="mdui-btn mdui-text-color-pink-accent mdui-float-right">
         <i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>
-        创建话题
+        {{__('community.createTopics')}}
     </a>
 </h1>
 @foreach($zones as $zone)

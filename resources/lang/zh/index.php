@@ -12,6 +12,7 @@ return [
     'or'=>'或',
     'next'=>'下一步',
     'back'=>'返回',
+    'backTo'=>'返回到',
     'register'=>'注册',
     'submit'=>'提交',
     'news'=>'新闻',
@@ -40,6 +41,7 @@ return [
     'regional'=>'区域',
     //Community
     'postsCount'=>'话题数',
-    'sectionsCount'=>'板块数'
+    'sectionsCount'=>'板块数',
+    'likedCount'=>'赞同数',
 
 ];

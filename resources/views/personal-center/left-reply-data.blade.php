@@ -6,7 +6,7 @@
             </a>
             <div class="activity-list-title activity-list-title-blue-a">
                 <i class="mdui-icon material-icons icon-mini">&#xe15e;</i>
-                回复了社区话题
+                {{__('discover.replyTopic')}}
                 <a href="{{route('showCommunityContent',$reply->communityTopic->id)}}#reply-{{$reply->id}}" class="subject-title">{{$reply->communityTopic->title}}</a>
                 <div class="activity-list-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$reply->created_at->diffForHumans()}}</div>
             </div>
@@ -21,7 +21,7 @@
             </a>
             <div class="activity-list-title activity-list-title-teal-a">
                 <i class="mdui-icon material-icons icon-mini">&#xe15e;</i>
-                回复了新闻
+                {{__('discover.replyNews')}}
                 <a href="{{route('showNewsContent',$reply->news->id)}}#reply-{{$reply->id}}" class="subject-title">{{$reply->news->title}}</a>
                 <div class="activity-list-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$reply->created_at->diffForHumans()}}</div>
             </div>
