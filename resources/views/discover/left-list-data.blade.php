@@ -72,7 +72,7 @@
                 </a>
                 <div class="activity-list-title activity-list-title-pink-a">
                     <i class="mdui-icon material-icons icon-mini">&#xe815;</i>
-                    {{__('index.welcome')}}
+                    {{__('discover.welcome')}}
                     <a href="{{route('showPersonalCenter',$activity->properties['userId'])}}" class="user-name">{{$activity->properties['userName']}}</a>
                     {{__('discover.newUser')}}
                     <div class="activity-list-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$activity->created_at->diffForHumans()}}</div>

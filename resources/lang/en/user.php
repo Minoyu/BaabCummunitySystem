@@ -54,5 +54,15 @@ return [
     'commentsTip'=>'View recently posted comments',
     'likedTip'=>'View liked content',
 
+    'emptyActivitiesMe'=>'Try to be more active in Community',
+    'emptyActivities'=>'This user has no dynamic yet',
+    'emptyCommentsMe'=>'Try to participate in the discussion',
+    'emptyComments'=>'This user has no comment',
+    'emptyLikedMe'=>'Try to like what you like in Community',
+    'emptyLiked'=>'This user has no consent',
+    'emptyTopicsMe'=>'Try to post your first community topic',
+    'emptyTopics'=>'This user has no published topics yet',
+
+
 
 ];
