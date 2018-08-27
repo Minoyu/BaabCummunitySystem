@@ -268,7 +268,7 @@ body {
 /*板块标题按钮*/
 .part-title-more-btn{
     float: right !important;
-    margin: -5px 0;
+    margin: -2px 0;
 }
 .part-title-blue>.part-title-more-btn{
     color: #3c89d2;

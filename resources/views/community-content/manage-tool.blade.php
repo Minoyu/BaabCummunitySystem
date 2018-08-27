@@ -22,7 +22,7 @@
         <div class="mdui-row-xs-2">
             <div class="mdui-text-center mdui-m-t-1 mdui-m-b-1" style="font-weight: 500">
                 <span class="layui-badge"> {{__('admin.currentPriority')}} {{$topic->order}} </span>
-            @if($news->status=='hidden')
+            @if($topic->status=='hidden')
                 <span class="layui-badge layui-bg-orange"> {{__('community.saved')}} </span>
             @endif
             @if($topic->order >0)

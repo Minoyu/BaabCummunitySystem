@@ -39,3 +39,7 @@
 .layui-form-checkbox i{
     height: 30px;
 }
+
+#admin-drawer .mdui-list-item-content{
+    white-space: normal;
+}

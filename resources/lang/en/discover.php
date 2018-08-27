@@ -27,7 +27,7 @@ return [
     'replyNews'=>'Reply to news',
     'likedTopics'=>'Liked the community topic',
     'welcome'=>'Welcome!',
-    'newUser'=>'Joined the community',
+    'newUser'=>'Joined Community',
     'likedTopicReply'=>'Liked the reply of the community topic',
     'likedNewsReply'=>'Liked the reply of the news',
 
