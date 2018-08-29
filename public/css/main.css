@@ -242,7 +242,7 @@ body {
 }
 
 /*=====================公用标题部分类=========================*/
-/*板块标题*/
+/*版块标题*/
 .part-title,
 .part-title-blue,
 .part-title-red{
@@ -256,16 +256,16 @@ body {
     color: #3f3f3f;
     border-radius: 5px;
 }
-/*板块标题蓝*/
+/*版块标题蓝*/
 .part-title-blue{
     border-left: 8px solid #42a5f5;
 }
-/*板块标题红*/
+/*版块标题红*/
 .part-title-red{
     border-left: 8px solid #FF3338;
 }
 
-/*板块标题按钮*/
+/*版块标题按钮*/
 .part-title-more-btn{
     float: right !important;
     margin: -2px 0;
@@ -277,7 +277,7 @@ body {
     color: #d1292d;
 }
 
-/*板块标题*/
+/*版块标题*/
 .part-title-with-bg,
 .part-title-with-bg-blue,
 .part-title-with-bg-red{
@@ -435,7 +435,7 @@ body {
     padding: 1px 20px 10px;
 }
 
-/*首页新闻头条板块*/
+/*首页新闻头条版块*/
 /*图片*/
 .topnews-img-card{
     max-height: 300px;
@@ -523,7 +523,7 @@ body {
 
 }
 
-/*首页资讯板块*/
+/*首页资讯版块*/
 .info-first-img{
     width: 100%;
     max-width: 200px;
@@ -576,13 +576,13 @@ body {
     opacity: .95;
 }
 
-/*首页社区板块（二级分类）卡片样式*/
+/*首页社区版块（二级分类）卡片样式*/
 .category-card-header {
     position: relative;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-/*首页社区板块（二级分类）卡*/
+/*首页社区版块（二级分类）卡*/
 .index-community-card {
     position: relative;
     -webkit-box-sizing: border-box;
@@ -937,7 +937,7 @@ body {
 }
 
 
-/*社区板块页*/
+/*社区版块页*/
 .part-h{
     font-size: 25px;
     font-weight: 600;

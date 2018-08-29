@@ -21,12 +21,15 @@ return [
     'editArea'=>'编辑区域',
     'publish'=>'发布',
     'save'=>'暂存',
+    'view'=>'浏览',
+    'expendAll'=>'展开全部',
+    'collapse'=>'收起',
 
 
 
     //社区管理
     'topicTitle'=>'话题标题',
-    'selectZonesAndSections'=>'所属分区及板块',
+    'selectZonesAndSections'=>'所属分区及版块',
     'selectZonesP'=>'请选择分区',
     'selectZonesPF'=>'请先选择分区',
     'topicContent'=>'话题内容',
@@ -49,18 +52,18 @@ return [
     'newsCenterCarousel'=>'新闻中心轮播图',
 
     'communityCatManage'=>'社区分区管理',
-    'communityCatList'=>'分区及板块列表',
+    'communityCatList'=>'分区及版块列表',
     'createZones'=>'创建新分区',
-    'createSections'=>'创建新板块',
+    'createSections'=>'创建新版块',
 
     'communityTopicsManage'=>'社区话题管理',
     'communityTopicsList'=>'全站话题列表',
     'createTopics'=>'创建新话题',
-    'findTopicsBySections'=>'检索话题-按板块',
+    'findTopicsBySections'=>'检索话题-按版块',
 
     'topicRepliesManage'=>'话题回复管理',
     'topicRepliesList'=>'全站话题回复列表',
-    'findRepliesBySections'=>'检索话题回复-按板块',
+    'findRepliesBySections'=>'检索话题回复-按版块',
     'findRepliesByTopics'=>'检索话题回复-按话题',
 
     'indexSettings'=>'首页设置',
@@ -73,5 +76,7 @@ return [
     'permissionsList'=>'权限列表',
 
     'backToFront'=>'回到前台',
+
+    'new'=>'新',
 
 ];

@@ -1,7 +1,7 @@
 .admin-title {
     font-weight: 500;
     font-size: 24px;
-    margin: 20px 15px 5px 15px;
+    margin: 20px 15px 5px 0;
     z-index: 15;
 }
 
@@ -42,4 +42,9 @@
 
 #admin-drawer .mdui-list-item-content{
     white-space: normal;
+}
+
+.admin-index-title{
+    margin-top: 30px;
+    margin-bottom: 5px;
 }

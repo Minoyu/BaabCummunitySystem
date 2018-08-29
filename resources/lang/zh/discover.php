@@ -39,8 +39,8 @@ return [
     'categories'=>'分类',
 
     //搜索提示框
-    'communityZonesAndSections'=>'社区分区及板块',
-    'newsCategories'=>'新闻板块',
+    'communityZonesAndSections'=>'社区分区及版块',
+    'newsCategories'=>'新闻版块',
     'noRecommendTips'=>'暂无相关搜索推荐 您可以尝试详细搜索',
 
     //搜索结果页

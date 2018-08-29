@@ -40,7 +40,7 @@ class CommunityController extends Controller
     }
 
     /**
-     * 显示社区板块页 三级
+     * 显示社区版块页 三级
      * @param CommunitySection $section
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\JsonResponse|\Illuminate\View\View

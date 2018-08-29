@@ -21,11 +21,11 @@
             <tr>
                 <th>话题名称</th>
                 <th class="mdui-table-col-numeric">ID</th>
-                <th class="mdui-table-col-numeric">分区</th>
+                <th class="mdui-table-col-numeric">{{__('community.section')}}</th>
                 <th class="mdui-table-col-numeric">发布者</th>
-                <th class="mdui-table-col-numeric">浏览量</th>
-                <th class="mdui-table-col-numeric">回复量</th>
-                {{--<th class="mdui-table-col-numeric">点赞数</th>--}}
+                <th class="mdui-table-col-numeric">{{__('community.visitedCount')}}</th>
+                <th class="mdui-table-col-numeric">{{__('community.commentCount')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.likedCount')}}</th>
                 <th class="mdui-table-col-numeric">优先级</th>
                 <th style="min-width: 275px" class="mdui-table-col-numeric">操作</th>
             </tr>
@@ -57,6 +57,7 @@
                             <i class="mdui-icon material-icons mdui-icon-left">comment</i>{{$topic->reply_count}}
                         </a>
                     </td>
+                    <td>{{$topic->countVoters()}}</td>
                     <td>{{$topic->order}}</td>
                     <td>
                         <a target="_blank" href="{{route('showCommunityContent',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">

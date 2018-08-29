@@ -5,7 +5,7 @@ return [
 //   管理相关
     'adminToolHeader'=>'Administrator tools',
     'authToolHeader'=>'Auth tools',
-    'priority'=>'priority',
+    'priority'=>'Priority',
     'currentPriority'=>'Current priority',
     'manageComment'=>'Manage Comments',
 
@@ -21,6 +21,9 @@ return [
     'editArea'=>'Edit Area',
     'publish'=>'Publish',
     'save'=>'Save',
+    'view'=>'View',
+    'expendAll'=>'Expend All',
+    'collapse'=>'Collapse',
 
     //社区管理
     'topicTitle'=>'Topic title',
@@ -72,4 +75,5 @@ return [
 
     'backToFront'=>'Back to front',
 
+    'new'=>'New ',
 ];

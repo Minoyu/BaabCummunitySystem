@@ -37,7 +37,7 @@
                         </li>
                         <li class="mdui-menu-item bar-search-tips search-tips-null" style="margin-left: 20px">
                             <a class="mdui-ripple mdui-text-color-grey-700">
-                                <i class="mdui-icon material-icons">view_list</i> 新闻版块、社区分区及板块
+                                <i class="mdui-icon material-icons">view_list</i> 新闻版块、社区分区及版块
                             </a>
                         </li>
                     </div>

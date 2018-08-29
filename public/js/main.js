@@ -169,10 +169,10 @@ layui.use('carousel', function(){
 //轮播图右侧最新内容
 var carsouelRightTab = new mdui.Tab('#carousel-right',{trigger:'hover'});
 
-//首页资讯板块tab
+//首页资讯版块tab
 var infoTab = new mdui.Tab('#info-tab',{trigger:'hover'});
 
-//首页地区板块tab
+//首页地区版块tab
 var regionalTab = new mdui.Tab('#regional-tab',{trigger:'hover'});
 
 //登录对话框

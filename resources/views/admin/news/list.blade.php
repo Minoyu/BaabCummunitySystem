@@ -14,8 +14,8 @@
                 <th>新闻名称</th>
                 <th class="mdui-table-col-numeric">ID</th>
                 <th class="mdui-table-col-numeric">发布者</th>
-                <th class="mdui-table-col-numeric">浏览量</th>
-                <th class="mdui-table-col-numeric">回复量</th>
+                <th class="mdui-table-col-numeric">{{__('community.visitedCount')}}</th>
+                <th class="mdui-table-col-numeric">{{__('community.commentCount')}}</th>
                 <th class="mdui-table-col-numeric">优先级</th>
                 <th style="min-width: 275px" class="mdui-table-col-numeric">操作</th>
             </tr>

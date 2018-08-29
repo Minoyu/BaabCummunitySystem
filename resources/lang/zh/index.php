@@ -41,7 +41,7 @@ return [
     'regional'=>'区域',
     //Community
     'postsCount'=>'话题数',
-    'sectionsCount'=>'板块数',
+    'sectionsCount'=>'版块数',
     'likedCount'=>'赞同数',
 
 ];

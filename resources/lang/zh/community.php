@@ -24,7 +24,7 @@ return [
     'likedResTip_right'=>'人觉得它很赞',
 
     'zone'=>'分区',
-    'section'=>'板块',
+    'section'=>'版块',
 
     //section
     'active'=>'活跃',
@@ -38,8 +38,8 @@ return [
     'latestTip'=>'按发布时间排序',
     'no_replyTip'=>'未回复过的话题',
 
-    'noReplyInSection'=>'此板块下暂无话题',
-    'SectionCreatedAt'=>'板块创建于',
+    'noReplyInSection'=>'此版块下暂无话题',
+    'SectionCreatedAt'=>'版块创建于',
 
 
 ];

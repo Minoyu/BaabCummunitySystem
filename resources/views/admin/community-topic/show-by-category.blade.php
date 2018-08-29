@@ -4,7 +4,7 @@
 @section('adminDrawerActiveVal','drawer-communityTopicItem')
 
 @section('content')
-    <h3 class="admin-title mdui-text-color-indigo">社区话题——按分区及板块检索</h3>
+    <h3 class="admin-title mdui-text-color-indigo">社区话题——按分区及版块检索</h3>
     @include('admin.layout.msg')
     <a href="{{route('adminCommunityZonesAndSectionsShow')}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-teal admin-btn"><i class="mdui-icon material-icons mdui-icon-left">format_list_bulleted</i>分区及话题管理</a>
         <ul class="mdui-list mdui-color-white mdui-card mdui-hoverable" id="adminCommunityCategoryCollapse" style="border-radius: 5px" >

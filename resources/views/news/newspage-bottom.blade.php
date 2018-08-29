@@ -1,5 +1,5 @@
 
-{{--新闻板块1--}}
+{{--新闻版块1--}}
 <div class="mdui-col-md-3 card-margin">
     <h2 class="part-title-red">
         {{__('index.topNews')}}
@@ -18,7 +18,7 @@
     <a href="#" class="mdui-list-item">newsTitle</a>
     <a href="#" class="mdui-list-item">newsTitle</a>
 </div>
-{{--新闻板块2--}}
+{{--新闻版块2--}}
 <div class="mdui-col-md-3 card-margin">
     <h2 class="part-title-red">
         {{__('index.topNews')}}
@@ -37,7 +37,7 @@
     <a href="#" class="mdui-list-item">newsTitle</a>
     <a href="#" class="mdui-list-item">newsTitle</a>
 </div>
-{{--新闻板块3--}}
+{{--新闻版块3--}}
 <div class="mdui-col-md-3 card-margin">
     <h2 class="part-title-red">
         {{__('index.topNews')}}
@@ -56,7 +56,7 @@
     <a href="#" class="mdui-list-item">newsTitle</a>
     <a href="#" class="mdui-list-item">newsTitle</a>
 </div>
-{{--新闻板块4--}}
+{{--新闻版块4--}}
 <div class="mdui-col-md-3 card-margin">
     <h2 class="part-title-red">
         {{__('index.topNews')}}

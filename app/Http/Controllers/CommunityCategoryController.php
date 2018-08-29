@@ -138,7 +138,7 @@ class CommunityCategoryController extends Controller
     }
 
     /**
-     * 后台社区板块创建
+     * 后台社区版块创建
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function adminSectionCreateShow(Request $request){
@@ -148,7 +148,7 @@ class CommunityCategoryController extends Controller
     }
 
     /**
-     * 板块创建逻辑
+     * 版块创建逻辑
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function adminSectionStore(){
@@ -181,9 +181,9 @@ class CommunityCategoryController extends Controller
                 $section_count = $res->communityZone->communitySections()->where('status','publish')->count();
                 $res->communityZone->update(compact('section_count'));
 
-                return \redirect()->back()->with('tips', ['社区板块' . $name . '创建成功',]);
+                return \redirect()->back()->with('tips', ['社区版块' . $name . '创建成功',]);
             } else {
-                return \redirect()->back()->with('tips', ['社区板块' . $name . '暂存成功',]);
+                return \redirect()->back()->with('tips', ['社区版块' . $name . '暂存成功',]);
             }
         }else{
             return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
@@ -203,7 +203,7 @@ class CommunityCategoryController extends Controller
     }
 
     /**
-     * 板块编辑逻辑
+     * 版块编辑逻辑
      * @param CommunitySection $section
      * @return $this|\Illuminate\Http\RedirectResponse
      */
@@ -232,9 +232,9 @@ class CommunityCategoryController extends Controller
                 $section_count = $section->communityZone->communitySections()->where('status','publish')->count();
                 $section->communityZone->update(compact('section_count'));
 
-                return \redirect()->back()->with('tips', ['社区板块' . $name . '编辑成功',]);
+                return \redirect()->back()->with('tips', ['社区版块' . $name . '编辑成功',]);
             } else {
-                return \redirect()->back()->with('tips', ['社区板块' . $name . '暂存成功',]);
+                return \redirect()->back()->with('tips', ['社区版块' . $name . '暂存成功',]);
             }
         }else{
             return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
@@ -265,7 +265,7 @@ class CommunityCategoryController extends Controller
     }
 
     /**
-     * ajax获得分区下的板块
+     * ajax获得分区下的版块
      * @param Request $request
      * @return string
      */

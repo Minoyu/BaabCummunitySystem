@@ -17,7 +17,7 @@
                 </div>
             </div>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">2.所属分区及板块</h3>
+            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">2.所属分区及版块</h3>
             <select name="zone_id" class="mdui-select" mdui-select="{position: 'bottom'}" onchange="handleSelGetSections(this.value,'sections-to-select')">
                 <option value="null">请选择分区</option>
                 @foreach($zones as $zone)
@@ -58,9 +58,9 @@
             </label>
 
             <div class="mdui-divider" style="margin-top: 50px"></div>
-            <button onclick="formPublicSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>发布</button>
-            <button onclick="formHiddenSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">local_cafe</i>暂存</button>
-            <a href="{{route('adminNewsList')}}" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">arrow_back</i>返回</a>
+            <button onclick="formPublicSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>{{__('admin.publish')}}</button>
+            <button onclick="formHiddenSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">local_cafe</i>{{__('community.save')}}</button>
+            <a href="{{route('adminNewsList')}}" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">arrow_back</i>{{__('index.back')}}</a>
             <div class="mdui-divider" style="margin-bottom: 200px"></div>
 
 

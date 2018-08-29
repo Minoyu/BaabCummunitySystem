@@ -718,7 +718,7 @@ function deleteCommunityZone(zoneId,zoneContent) {
 function deleteCommunitySection(sectionId,sectionContent) {
     mdui.dialog({
         title: '删除新闻回复',
-        content: '您确定要删除此社区板块吗<br/>'+sectionContent,
+        content: '您确定要删除此社区版块吗<br/>'+sectionContent,
         buttons: [
             {
                 text: '取消'
