@@ -21,11 +21,26 @@
     margin-bottom: 5px;
 }
 
+.admin-table-btn-icon{
+    min-width: 0 !important;
+    height: 28px;
+    width: 28px !important;
+    margin-bottom: 5px;
+}
+.admin-table-btn-icon .mdui-icon{
+    font-size: 18px;
+}
+
 .admin-editor-text{
     min-height: 300px;
     background: #fff;
     box-shadow: 0 1px 3px rgba(26,26,26,.1);
 }
+
+.w-e-text {
+    min-height: 300px;
+}
+
 .admin-editor-middle-bar{
     padding: 5px 0;
     color: #6d6d6d;

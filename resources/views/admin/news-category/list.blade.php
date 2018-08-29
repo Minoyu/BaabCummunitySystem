@@ -60,7 +60,7 @@
     </div>
     {{$newsCategories->links()}}
     <div class="mdui-typo-caption mdui-text-color-red mdui-m-t-1">注意:含有新闻的父分类无法被删除,请先删除其下所有新闻.</div>
-    <button onclick="deleteNewsCategories()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">delete</i>批量删除</button>
+    <button onclick="deleteNewsCategories()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">delete</i>{{__('admin.batchDelete')}}</button>
 
     <!--/内容-->
 

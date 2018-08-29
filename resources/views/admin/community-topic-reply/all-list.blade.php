@@ -45,7 +45,7 @@
         </table>
     </div>
     {{$replies->links()}}
-    <button onclick="deleteCommunityTopicReplies()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">delete</i>批量删除</button>
+    <button onclick="deleteCommunityTopicReplies()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-red-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">delete</i>{{__('admin.batchDelete')}}</button>
 
     <!--/内容-->
 

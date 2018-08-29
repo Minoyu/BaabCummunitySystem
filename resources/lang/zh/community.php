@@ -26,6 +26,8 @@ return [
     'zone'=>'分区',
     'section'=>'版块',
 
+    'zonesAndSections'=>'分区&版块',
+
     //section
     'active'=>'活跃',
     'likes'=>'赞数',

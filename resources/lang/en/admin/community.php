@@ -35,4 +35,12 @@ return [
     'noSectionsUnder'=>'There is no section under it',
     'deleteCategoryTip'=>'Note: Zones with child sections cannot be deleted. Please delete all their child sections first',
 
+    'topicPriorityTip1'=>'Priority range -5 to 5 , increasing from left to right',
+    'topicPriorityTip2-1'=>'Normally 0, greater than 0 mark',
+    'topicPriorityTip2-2'=>' , less than 0 mark',
+    'topicPriorityTip3'=>'Topics will be sorted according to priority , then sorted by release time under the same priority',
+
+    'editTopic'=>'Edit topic',
+    'topicsList'=>'Topics list',
+    'allTopicsList'=>'All topics list',
 ];

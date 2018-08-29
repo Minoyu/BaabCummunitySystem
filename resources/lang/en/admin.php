@@ -4,14 +4,16 @@ return [
 
 //   管理相关
     'adminToolHeader'=>'Administrator tools',
-    'authToolHeader'=>'Auth tools',
+    'authToolHeader'=>'Author tools',
     'priority'=>'Priority',
     'currentPriority'=>'Current priority',
     'manageComment'=>'Manage Comments',
+    'manage'=>'Manage ',
 
     //一些操作
     'edit'=>'Edit ',
     'delete'=>'Delete',
+    'batchDelete'=>'Batch delete',
     'up'=>'Up',
     'down'=>'Down',
     'setExcellent'=>'Set Excellent',
@@ -56,7 +58,7 @@ return [
 
     'communityTopicsManage'=>'Community Topics',
     'communityTopicsList'=>'All topics list',
-    'createTopics'=>'Create Topics',
+    'createTopics'=>'Create Topic',
     'findTopicsBySections'=>'Find topics by sections',
 
     'topicRepliesManage'=>'Topic Replies',

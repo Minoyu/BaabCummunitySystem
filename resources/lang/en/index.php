@@ -16,6 +16,12 @@ return [
     'register'=>'Register',
     'submit'=>'Submit',
     'news'=>'News',
+    'author'=>'Author',
+    'actions'=>'Actions',
+    'firstPage'=>'First Page',
+    'lastPage'=>'Last Page',
+    'nextPage'=>'Next Page',
+    'previousPage'=>'Previous Page',
     //Appbar
     'home' => 'Home',
     'community' => 'Community',

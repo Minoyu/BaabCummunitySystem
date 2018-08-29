@@ -16,6 +16,12 @@ return [
     'register'=>'注册',
     'submit'=>'提交',
     'news'=>'新闻',
+    'author'=>'作者',
+    'actions'=>'操作',
+    'firstPage'=>'首页',
+    'lastPage'=>'尾页',
+    'nextPage'=>'下一页',
+    'previousPage'=>'上一页',
     //Appbar
     'home' => '首页',
     'community' => '社区',

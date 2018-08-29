@@ -25,4 +25,7 @@ return [
     'orderByTime'=>'按发布时间排序',
     'orderByLike'=>'按赞同数排序',
 
+    //topics
+    'topicsCountTip'=>'共有 <span class="mdui-text-color-pink-accent">:num</span> 条话题',
+    'viewTopicsCountTip'=>'浏览其下的 <span class="mdui-text-color-pink-accent">:num</span> 条话题',
 ];

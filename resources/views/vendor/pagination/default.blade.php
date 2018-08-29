@@ -3,9 +3,9 @@
     <ul class="pagination mdui-color-indigo-400">
         {{-- 前翻页 --}}
         @if ($paginator->onFirstPage())
-            <li class="pagination__item"><span class="pagination__number pagination__control pagination__control_prev">首页</span></li>
+            <li class="pagination__item"><span class="pagination__number pagination__control pagination__control_prev">{{__('index.firstPage')}}</span></li>
         @else
-            <li class="pagination__item"><a href="{{ $paginator->previousPageUrl() }}" class="pagination__number"><i class="mdui-icon material-icons">chevron_left</i><span class="pagination__control pagination__control_prev">上一页</span></a></li>
+            <li class="pagination__item"><a href="{{ $paginator->previousPageUrl() }}" class="pagination__number"><i class="mdui-icon material-icons">chevron_left</i><span class="pagination__control pagination__control_prev">{{__('index.previousPage')}}</span></a></li>
         @endif
         {{-- 页码 --}}
         @foreach ($elements as $element)
@@ -27,9 +27,9 @@
         @endforeach
         {{-- 下一页 --}}
         @if ($paginator->hasMorePages())
-            <li class="pagination__item"><a href="{{ $paginator->nextPageUrl()}}" class="pagination__number"><i class="mdui-icon material-icons">chevron_right</i><span class="pagination__control pagination__control_next">下一页</span></a></li>
+            <li class="pagination__item"><a href="{{ $paginator->nextPageUrl()}}" class="pagination__number"><i class="mdui-icon material-icons">chevron_right</i><span class="pagination__control pagination__control_next">{{__('index.nextPage')}}</span></a></li>
         @else
-            <li class="pagination__item"><span class="pagination__number pagination__control pagination__control_next">尾页</span></li>
+            <li class="pagination__item"><span class="pagination__number pagination__control pagination__control_next">{{__('index.lastPage')}}</span></li>
         @endif
 
     </ul>

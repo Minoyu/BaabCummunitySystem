@@ -1,28 +1,27 @@
 @extends('frame.adminframe')
-@section('title','社区话题管理')
+@section('title',__('admin.communityTopicsManage'))
 @section('subtitleUrl',route('adminCommunityTopicList'))
 @section('adminDrawerActiveVal','drawer-communityTopicItem')
 
 @section('content')
         <form id="createCommunityTopicForm" method="post" action="{{route('adminCommunityTopicStore')}}">
             {{csrf_field()}}
-            <h3 class="admin-title mdui-text-color-indigo">创建话题</h3>
+            <h3 class="admin-title mdui-text-color-indigo">{{__('admin.createTopics')}}</h3>
 
             @include('admin.layout.msg')
             <div class="mdui-row">
                 <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-12 mdui-col-sm-10 mdui-col-md-6">
-                    <h3 class="admin-index-title mdui-text-color-indigo">1.话题标题</h3>
-                    <label class="mdui-textfield-label">请输入话题标题</label>
+                    <h3 class="admin-index-title mdui-text-color-indigo">1.{{__('admin.topicTitle')}}</h3>
                     <input class="mdui-textfield-input" name="title"/>
                 </div>
             </div>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">2.所属分区及版块</h3>
+            <h3 class="admin-index-title mdui-text-color-indigo">2.{{__('admin.selectZonesAndSections')}}</h3>
             <select name="zone_id" class="mdui-select" mdui-select="{position: 'bottom'}" onchange="handleSelGetSections(this.value,'sections-to-select')">
-                <option value="null">请选择分区</option>
+                <option value="null">{{__('admin.selectZonesP')}}</option>
                 @foreach($zones as $zone)
                     @if(isset($zone_id)&&$zone_id==$zone->id)
-                        <option value="{{$zone->id}}" selected>已选中:{{$zone->name}}</option>
+                        <option value="{{$zone->id}}" selected>{{__('admin.selected')}}:{{$zone->name}}</option>
                     @else
                         <option value="{{$zone->id}}">{{$zone->name}}</option>
                     @endif
@@ -30,11 +29,11 @@
             </select>
             &nbsp;&nbsp;&nbsp;
             <select name="section_id" class="mdui-select sections-to-select" id="adminSelectSection">
-                <option value="null">请先选择分区</option>
+                <option value="null">{{__('admin.selectZonesPF')}}</option>
                 @if(isset($section_id))
                     @foreach($selectedSections as $section)
                         @if($section_id&&$section_id==$section->id)
-                            <option value="{{$section->id}}" selected>已选中:{{$section->name}}</option>
+                            <option value="{{$section->id}}" selected>{{__('admin.selected')}}:{{$section->name}}</option>
                         @else
                             <option value="{{$section->id}}">{{$section->name}}</option>
                         @endif
@@ -42,17 +41,18 @@
                 @endif
             </select>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.话题内容</h3>
+            <h3 class="admin-index-title mdui-text-color-indigo">3.{{__('admin.topicContent')}}</h3>
             <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
-            <div class="admin-editor-middle-bar">编辑区域</div>
-            <div id="editorText" class="admin-editor-text mdui-hoverable" ><p>在此添加话题内容</p></div>
+            <div class="admin-editor-middle-bar">{{__('admin.editArea')}}</div>
+            <div id="editorText" class="admin-editor-text mdui-hoverable" ></div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.优先级
-                <br><small class="show-file-title-sub">优先级范围-5～5，从左到右递增。
-                    <br>正常为0，大于0标记 <span class="layui-badge">置顶</span>，小于0标记 <span class="layui-badge layui-bg-black">下沉</span>
-                    <br>话题将先依照优先级排序，相同优先级下依照发布时间排序
+            <h3 class="admin-index-title mdui-text-color-indigo">4.{{__('admin.priority')}}
+                <br><small class="show-file-title-sub">{{__('admin/community.topicPriorityTip1')}}
+                    <br>{{__('admin/community.topicPriorityTip2-1')}} <span class="layui-badge">{{__('community.sticky')}}</span>{{__('admin/community.topicPriorityTip2-2')}} <span class="layui-badge layui-bg-black">{{__('community.sink')}}</span>
+                    <br>{{__('admin/community.topicPriorityTip3')}}
                 </small>
+            </h3>
             <label class="mdui-slider mdui-slider-discrete">
                 <input type="range" step="1" min="-5" max="5" value="0" name="order"/>
             </label>
@@ -60,7 +60,7 @@
             <div class="mdui-divider" style="margin-top: 50px"></div>
             <button onclick="formPublicSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>{{__('admin.publish')}}</button>
             <button onclick="formHiddenSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">local_cafe</i>{{__('community.save')}}</button>
-            <a href="{{route('adminNewsList')}}" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">arrow_back</i>{{__('index.back')}}</a>
+            <a href="{{route('adminCommunityTopicList')}}" class="mdui-btn mdui-btn-raised mdui-ripple admin-btn"><i class="mdui-icon material-icons mdui-icon-left">arrow_back</i>{{__('index.back')}}</a>
             <div class="mdui-divider" style="margin-bottom: 200px"></div>
 
 

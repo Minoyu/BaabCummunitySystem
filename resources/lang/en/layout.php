@@ -24,4 +24,9 @@ return [
     'hottest'=>'Hottest',
     'orderByTime'=>'Order by publication time',
     'orderByLike'=>'Order by approval number',
+
+    //topics
+    'topicsCountTip'=>'<span class="mdui-text-color-pink-accent">:num</span> topics',
+    'viewTopicsCountTip'=>'Browse the <span class="mdui-text-color-pink-accent">:num</span> topics here',
+
 ];

@@ -16,7 +16,7 @@
                         <div class="mdui-list-item-content">
                             @if($zone->status=='hidden')
                                 <span class="mdui-text-color-pink">
-                                    [<i class="mdui-icon material-icons">local_cafe</i>{{__('community.save')}}]
+                                    <i class="mdui-icon material-icons">local_cafe</i><span class="layui-badge mdui-color-pink-accent">{{__('community.saved')}}</span>
                                 </span>
                             @endif
                             {{$zone->name}}
@@ -44,7 +44,7 @@
                                     <div class="mdui-list-item-content">
                                         @if($section->status=='hidden')
                                             <span class="mdui-text-color-pink">
-                                                [<i class="mdui-icon material-icons">local_cafe</i>{{__('community.save')}}]
+                                                [<i class="mdui-icon material-icons">local_cafe</i>{{__('community.saved')}}]
                                             </span>
                                         @endif {{$section->name}}
                                     </div>

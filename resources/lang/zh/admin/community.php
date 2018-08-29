@@ -35,5 +35,12 @@ return [
     'noSectionsUnder'=>'其下无版块',
     'deleteCategoryTip'=>'注意:含有子级版块的分区无法被删除,请先删除其所有子级版块',
 
+    'topicPriorityTip1'=>'优先级范围-5～5，从左到右递增',
+    'topicPriorityTip2-1'=>'正常为0，大于0标记',
+    'topicPriorityTip2-2'=>'，小于0标记',
+    'topicPriorityTip3'=>'话题将先依照优先级排序，相同优先级下依照发布时间排序',
 
+    'editTopic'=>'编辑话题',
+    'topicsList'=>'话题列表',
+    'allTopicsList'=>'全站话题列表',
 ];

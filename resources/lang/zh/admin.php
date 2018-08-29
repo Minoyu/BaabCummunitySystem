@@ -8,10 +8,12 @@ return [
     'priority'=>'优先级',
     'currentPriority'=>'当前优先级',
     'manageComment'=>'回复管理',
+    'manage'=>'管理',
 
     //一些操作
     'edit'=>'编辑',
     'delete'=>'删除',
+    'batchDelete'=>'批量删除',
     'up'=>'提高',
     'down'=>'降低',
     'setExcellent'=>'设为精华',

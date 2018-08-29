@@ -8,6 +8,9 @@ body {
 .mdui-select {
     margin-top: 16px;
 }
+.none-text-transform-btn{
+    text-transform: none;
+}
 /*小屏设备右下按钮底部边距*/
 @media (max-width: 599px) {
     .mdui-fab-fixed, .mdui-fab-wrapper {
@@ -1925,6 +1928,9 @@ body {
     text-decoration: none;
     display: inline-block;
     color: #fff;
+}
+.pagination__item a:hover{
+    color: #fe76e1;
 }
 
 .pagination__number:hover{

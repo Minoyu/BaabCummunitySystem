@@ -26,6 +26,8 @@ return [
     'zone'=>'Zone ',
     'section'=>'Section ',
 
+    'zonesAndSections'=>'Zones&Sections',
+
     //section
     'active'=>'Active',
     'likes'=>'Most Likes',
