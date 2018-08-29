@@ -43,4 +43,8 @@ return [
     'editTopic'=>'Edit topic',
     'topicsList'=>'Topics list',
     'allTopicsList'=>'All topics list',
+
+    'allTopicRepliesList'=>'All Topic Replies List',
+    'fromTopic'=>'From Topic',
+
 ];

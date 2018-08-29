@@ -88,32 +88,32 @@
                 <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
             </div>
             <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
-                <a href="{{route('adminCommunityTopicListByCategory')}}">
-                    <li class="mdui-list-item mdui-ripple">{{__('admin.findTopicsBySections')}}</li>
-                </a>
                 <a href="{{route('adminCommunityTopicList')}}">
                     <li class="mdui-list-item mdui-ripple">{{__('admin.communityTopicsList')}}</li>
+                </a>
+                <a href="{{route('adminCommunityTopicListByCategory')}}">
+                    <li class="mdui-list-item mdui-ripple">{{__('admin.findTopicsBySections')}}</li>
                 </a>
                 <a href="{{route('adminCommunityTopicCreate')}}">
                     <li class="mdui-list-item mdui-ripple">{{__('admin.createTopics')}}</li>
                 </a>
             </ul>
         </li>
-        <li class="mdui-collapse-item" id="drawer-communityTopicItem">
+        <li class="mdui-collapse-item" id="drawer-communityTopicReplyItem">
             <div class="mdui-collapse-item-header mdui-list-item mdui-ripple">
                 <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-pink">&#xe6dd;</i>
                 <div class="mdui-list-item-content">{{__('admin.topicRepliesManage')}}</div>
                 <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
             </div>
             <ul class="mdui-collapse-item-body mdui-list mdui-list-dense">
+                <a href="{{route('adminCommunityTopicReplyAllList')}}">
+                    <li class="mdui-list-item mdui-ripple">{{__('admin.topicRepliesList')}}</li>
+                </a>
                 <a href="{{route('adminCommunityTopicListByCategory')}}">
                     <li class="mdui-list-item mdui-ripple">{{__('admin.findRepliesBySections')}}</li>
                 </a>
                 <a href="{{route('adminCommunityTopicList')}}">
                     <li class="mdui-list-item mdui-ripple">{{__('admin.findRepliesByTopics')}}</li>
-                </a>
-                <a href="{{route('adminCommunityTopicReplyAllList')}}">
-                    <li class="mdui-list-item mdui-ripple">{{__('admin.topicRepliesList')}}</li>
                 </a>
             </ul>
         </li>

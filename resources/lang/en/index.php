@@ -22,6 +22,8 @@ return [
     'lastPage'=>'Last Page',
     'nextPage'=>'Next Page',
     'previousPage'=>'Previous Page',
+    'time'=>'Time',
+
     //Appbar
     'home' => 'Home',
     'community' => 'Community',

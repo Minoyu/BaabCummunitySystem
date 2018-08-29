@@ -27,7 +27,7 @@
                 <th class="mdui-table-col-numeric">{{__('community.commentCount')}}</th>
                 <th class="mdui-table-col-numeric">{{__('index.likedCount')}}</th>
                 <th class="mdui-table-col-numeric">{{__('admin.priority')}}</th>
-                <th style="min-width: 275px" class="mdui-table-col-numeric">{{__('index.actions')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.actions')}}</th>
             </tr>
             </thead>
             <tbody>

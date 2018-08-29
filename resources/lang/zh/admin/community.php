@@ -43,4 +43,8 @@ return [
     'editTopic'=>'编辑话题',
     'topicsList'=>'话题列表',
     'allTopicsList'=>'全站话题列表',
+
+    'allTopicRepliesList'=>'全站话题回复列表',
+    'fromTopic'=>'来自话题',
+
 ];

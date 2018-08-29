@@ -22,6 +22,8 @@ return [
     'lastPage'=>'尾页',
     'nextPage'=>'下一页',
     'previousPage'=>'上一页',
+    'time'=>'时间',
+
     //Appbar
     'home' => '首页',
     'community' => '社区',

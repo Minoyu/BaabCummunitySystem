@@ -27,6 +27,11 @@ return [
     'expendAll'=>'Expend All',
     'collapse'=>'Collapse',
 
+    'createReply'=>'Create Reply',
+    'editReply'=>'Edit Reply',
+    'repliesList'=>'Replies List',
+    'replyContent'=>'Reply Content',
+
     //社区管理
     'topicTitle'=>'Topic title',
     'selectZonesAndSections'=>'Zones and Sections',

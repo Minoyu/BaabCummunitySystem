@@ -1,23 +1,23 @@
 @extends('frame.adminframe')
-@section('title','社区话题回复管理')
+@section('title',__('admin.topicRepliesManage'))
 @section('subtitleUrl',route('adminCommunityTopicReplyAllList'))
-@section('adminDrawerActiveVal','drawer-communityTopicItem')
+@section('adminDrawerActiveVal','drawer-communityTopicReplyItem')
 
 @section('content')
-    <h3 class="admin-title mdui-text-color-indigo">{{str_limit($topic->title, $limit = 30, $end = '...')}}－回复列表</h3>
+    <h3 class="admin-title mdui-text-color-indigo">{{str_limit($topic->title, $limit = 30, $end = '...')}}－{{__('admin/community.repliesList')}}</h3>
     @include('admin.layout.msg')
     <a href="{{route('adminCommunityTopicReplyCreate',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn">
-        <i class="mdui-icon material-icons mdui-icon-left">add</i>创建回复
+        <i class="mdui-icon material-icons mdui-icon-left">add</i>{{__('admin.createReply')}}
     </a>
     <div class="mdui-table-fluid">
         <table id="listTable" class="mdui-table mdui-table-selectable mdui-table-hoverable" style="min-width: 1000px">
             <thead>
             <tr>
-                <th>内容</th>
-                <th class="mdui-table-col-numeric">ID</th>
-                <th class="mdui-table-col-numeric">用户</th>
-                <th class="mdui-table-col-numeric">回复时间</th>
-                <th style="min-width: 275px" class="mdui-table-col-numeric">操作</th>
+                <th>{{__('admin/community.replyContent')}}</th>
+                <th class="">ID</th>
+                <th class="">{{__('index.author')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.time')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.actions')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -28,14 +28,14 @@
                     <td>{{$reply->user->name}}</td>
                     <td>{{$reply->created_at}}</td>
                     <td>
-                        <a href="#" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
-                            <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>查看
+                        <a mdui-tooltip="{content: '{{__('admin.view')}}', position: 'top'}" target="_blank" href="{{route('showCommunityContent',$reply->communityTopic->id)}}#reply-{{$reply->id}}" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense admin-table-btn-icon">
+                            <i class="mdui-icon material-icons">remove_red_eye</i>
                         </a>
-                        <a href="{{route('adminCommunityTopicReplyEdit',[$reply->communityTopic->id,$reply->id])}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
-                            <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
+                        <a mdui-tooltip="{content: '{{__('admin.edit')}}', position: 'top'}" href="{{route('adminCommunityTopicReplyEdit',[$reply->communityTopic->id,$reply->id])}}" class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn-icon">
+                            <i class="mdui-icon material-icons">edit</i>
                         </a>
-                        <button onclick="deleteCommunityTopicReply('{{$reply->id}}','{{str_limit($reply->content, $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
-                            <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
+                        <button mdui-tooltip="{content: '{{__('admin.delete')}}', position: 'top'}" onclick="deleteCommunityTopicReply('{{$reply->id}}','{{str_limit($reply->content, $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn-icon mdui-color-pink-accent">
+                            <i class="mdui-icon material-icons">delete</i>
                         </button>
                     </td>
                 </tr>

@@ -28,6 +28,11 @@ return [
     'collapse'=>'收起',
 
 
+    'createReply'=>'创建回复',
+    'editReply'=>'编辑回复',
+    'repliesList'=>'回复列表',
+    'replyContent'=>'回复内容',
+
 
     //社区管理
     'topicTitle'=>'话题标题',
