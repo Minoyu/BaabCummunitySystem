@@ -33,7 +33,7 @@ class UserController extends Controller
             return json_encode(compact('status','html'));//ajax
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
             return json_encode(compact('status','msg'));//ajax
         }
     }
@@ -51,7 +51,7 @@ class UserController extends Controller
             return json_encode(compact('status','html'));//ajax
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
             return json_encode(compact('status','msg'));//ajax
         }
     }
@@ -67,7 +67,7 @@ class UserController extends Controller
             $status = 1;
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg','follower_count'));//ajax
     }
@@ -83,7 +83,7 @@ class UserController extends Controller
             $status = 1;
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg','follower_count'));//ajax
 
@@ -257,10 +257,10 @@ class UserController extends Controller
         //渲染
         if ($userRes && $userInfoRes) {
             $status = 1;
-            $msg = 'Update user info successful';
+            $msg = __('controller.infoUpdateSuccessful');
         } else {
             $status = 0;
-            $msg = 'Update user info failed';
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status', 'msg'));
     }
@@ -287,9 +287,9 @@ class UserController extends Controller
 
         //渲染
         if ($userInfoRes) {
-            return \redirect()->back()->with('tips', ['微信更新成功',]);
+            return \redirect()->back()->with('tips', [__('controller.infoUpdateSuccessful'),]);
         } else {
-            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -308,9 +308,9 @@ class UserController extends Controller
 
         //渲染
         if ($userInfoRes) {
-            return \redirect()->back()->with('tips', ['现居城市更新成功',]);
+            return \redirect()->back()->with('tips', [__('controller.infoUpdateSuccessful'),]);
         } else {
-            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -329,9 +329,9 @@ class UserController extends Controller
 
         //渲染
         if ($userInfoRes) {
-            return \redirect()->back()->with('tips', ['国家更新成功',]);
+            return \redirect()->back()->with('tips', [__('controller.infoUpdateSuccessful'),]);
         } else {
-            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -350,9 +350,9 @@ class UserController extends Controller
 
         //渲染
         if ($userInfoRes) {
-            return \redirect()->back()->with('tips', ['职业/从事行业更新成功',]);
+            return \redirect()->back()->with('tips', [__('controller.infoUpdateSuccessful'),]);
         } else {
-            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -370,9 +370,9 @@ class UserController extends Controller
 
         //渲染
         if ($userInfoRes) {
-            return \redirect()->back()->with('tips', ['一句话介绍更新成功',]);
+            return \redirect()->back()->with('tips', [__('controller.infoUpdateSuccessful'),]);
         } else {
-            return \redirect()->back()->withErrors('更新失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -391,10 +391,10 @@ class UserController extends Controller
         //渲染
         if($userInfoRes){
             $status = 1;
-            $msg = "引导已关闭";
+            $msg = __('controller.infoHelperClose');
         }else{
             $status = 0;
-            $msg = "更新失败,服务器内部错误,请联系管理员";
+            $msg = __('controller.failedServerError');
         }
     return json_encode(compact('status','msg'));//ajax
 

@@ -60,12 +60,12 @@ class CommunityCategoryController extends Controller
         //渲染
         if ($res) {
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['社区分区' . $name . '创建成功',]);
+                return \redirect()->back()->with('tips', [__('controller.createSuccess',['name'=>$name]),]);
             } else {
-                return \redirect()->back()->with('tips', ['社区分区' . $name . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$name]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -105,12 +105,12 @@ class CommunityCategoryController extends Controller
         //渲染
         if ($res) {
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['社区分区' . $name . '编辑成功',]);
+                return \redirect()->back()->with('tips', [__('controller.editSuccess',['name'=>$name]),]);
             } else {
-                return \redirect()->back()->with('tips', ['社区分区' . $name . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$name]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -128,10 +128,10 @@ class CommunityCategoryController extends Controller
         $zone->delete();
         if($zone->trashed()){
             $status = 1;
-            $msg = "The Zone has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
 
@@ -181,12 +181,12 @@ class CommunityCategoryController extends Controller
                 $section_count = $res->communityZone->communitySections()->where('status','publish')->count();
                 $res->communityZone->update(compact('section_count'));
 
-                return \redirect()->back()->with('tips', ['社区版块' . $name . '创建成功',]);
+                return \redirect()->back()->with('tips', [__('controller.createSuccess',['name'=>$name]),]);
             } else {
-                return \redirect()->back()->with('tips', ['社区版块' . $name . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$name]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -232,12 +232,12 @@ class CommunityCategoryController extends Controller
                 $section_count = $section->communityZone->communitySections()->where('status','publish')->count();
                 $section->communityZone->update(compact('section_count'));
 
-                return \redirect()->back()->with('tips', ['社区版块' . $name . '编辑成功',]);
+                return \redirect()->back()->with('tips', [__('controller.editSuccess',['name'=>$name]),]);
             } else {
-                return \redirect()->back()->with('tips', ['社区版块' . $name . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$name]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -255,10 +255,10 @@ class CommunityCategoryController extends Controller
         $section->delete();
         if($section->trashed()){
             $status = 1;
-            $msg = "The Section has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
 

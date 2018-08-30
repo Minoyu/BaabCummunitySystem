@@ -57,12 +57,12 @@ class NewsCarouselController extends Controller
         //渲染
         if ($res) {
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['新闻轮播图' . $title . '创建成功',]);
+                return \redirect()->back()->with('tips', [__('controller.createSuccess',['name'=>$title]),]);
             } else {
-                return \redirect()->back()->with('tips', ['新闻轮播图' . $title . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$title]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
     }
 
@@ -105,12 +105,12 @@ class NewsCarouselController extends Controller
         //渲染
         if ($res) {
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['新闻轮播图' . $title . '编辑成功',]);
+                return \redirect()->back()->with('tips', [__('controller.editSuccess',['name'=>$title]),]);
             } else {
-                return \redirect()->back()->with('tips', ['新闻轮播图' . $title . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$title]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
     }
 
@@ -128,7 +128,7 @@ class NewsCarouselController extends Controller
             $msg = "The news carousel has been deleted";
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
 
@@ -139,13 +139,13 @@ class NewsCarouselController extends Controller
         $this->authorize('manage',$newsCarousel);
 
         $newsCarousel->increment('order');
-        return \redirect()->back()->with('tips', ['优先级已自增1']);
+        return \redirect()->back()->with('tips', [__('controller.priorityUp1')]);
     }
     public function turnDownOrder(NewsCarousel $newsCarousel){
         $this->authorize('manage',$newsCarousel);
 
         $newsCarousel->decrement('order');
-        return \redirect()->back()->with('tips', ['优先级已自减1']);
+        return \redirect()->back()->with('tips', [__('controller.priorityDown1')]);
     }
 
     /**

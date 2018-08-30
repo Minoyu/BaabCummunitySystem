@@ -50,7 +50,7 @@ class AdminPermissionController extends Controller
                 $permission ->assignRole($role);
             }
         }
-        return \redirect()->back()->with('tips', ['权限创建成功',]);
+        return \redirect()->back()->with('tips', [__('controller.createSuccess',['name'=>$request->name]),]);
 
     }
 
@@ -70,7 +70,7 @@ class AdminPermissionController extends Controller
         if (!empty($request->role_id)){
             $permission ->syncRoles($request->role_id);
         }
-        return \redirect()->back()->with('tips', ['权限编辑成功',]);
+        return \redirect()->back()->with('tips', [__('controller.editSuccess',['name'=>$request->name]),]);
 
     }
 

@@ -34,7 +34,7 @@ class CommunityTopicController extends Controller
             return json_encode(compact('status','html'));//ajax
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
             return json_encode(compact('status','msg'));//ajax
         }
     }
@@ -67,7 +67,7 @@ class CommunityTopicController extends Controller
                 ->log('点赞了社区话题');
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg','thumb_up_count'));//ajax
     }
@@ -98,7 +98,7 @@ class CommunityTopicController extends Controller
             $status = 1;
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg','thumb_up_count'));//ajax
 
@@ -223,12 +223,12 @@ class CommunityTopicController extends Controller
             CommunityZone::find($zone_id)->increment('topic_count');
             CommunitySection::find($section_id)->increment('topic_count');
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['话题' . $title . '创建成功',]);
+                return \redirect()->back()->with('tips', [__('controller.createSuccess',['name'=>$title]),]);
             } else {
-                return \redirect()->back()->with('tips', ['话题' . $title . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$title]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
     }
 
@@ -263,12 +263,12 @@ class CommunityTopicController extends Controller
             CommunityZone::find($zone_id)->increment('topic_count');
             CommunitySection::find($section_id)->increment('topic_count');
             if ($status == 'publish') {
-                return \redirect()->route('showCommunitySection', $section_id)->with('tips', ['话题' . $title . '创建成功',]);
+                return \redirect()->route('showCommunitySection', $section_id)->with('tips', [__('controller.createSuccess',['name'=>$title]),]);
             }else{
-                return \redirect()->route('showCommunityContent', $res->id)->with('tips', ['话题暂存成功，你可以在本页或个人中心中继续编辑、发布此话题。',]);
+                return \redirect()->route('showCommunityContent', $res->id)->with('tips', [__('controller.saveTopicSuccess'),]);
             }
         }else{
-            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
     }
 
@@ -326,12 +326,12 @@ class CommunityTopicController extends Controller
             CommunityZone::find($zone_id)->update(['topic_count'=>CommunityTopic::where('zone_id',$zone_id)->count()]);
             CommunitySection::find($section_id)->update(['topic_count'=>CommunityTopic::where('section_id',$section_id)->count()]);
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['话题' . $title . '编辑成功',]);
+                return \redirect()->back()->with('tips', [__('controller.editSuccess',['name'=>$title]),]);
             } else {
-                return \redirect()->back()->with('tips', ['话题' . $title . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$title]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
     }
 
@@ -376,13 +376,13 @@ class CommunityTopicController extends Controller
             CommunityZone::find($zone_id)->update(['topic_count'=>CommunityTopic::where('zone_id',$zone_id)->count()]);
             CommunitySection::find($section_id)->update(['topic_count'=>CommunityTopic::where('section_id',$section_id)->count()]);
             if ($status == 'publish') {
-                return \redirect()->route('showCommunitySection', $section_id)->with('tips', ['话题' . $title . '编辑成功',]);
+                return \redirect()->route('showCommunitySection', $section_id)->with('tips', [__('controller.saveSuccess',['name'=>$title]),]);
             } else {
-                return \redirect()->route('showCommunityContent', $topic->id)->with('tips', ['话题暂存成功，你可以在本页或个人中心中继续编辑、发布此话题。']);
+                return \redirect()->route('showCommunityContent', $topic->id)->with('tips', [__('controller.saveTopicSuccess')]);
             }
 
         }else{
-            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
     }
 
@@ -399,10 +399,10 @@ class CommunityTopicController extends Controller
             $topic->communityZone()->decrement('topic_count');
             $topic->communitySection()->decrement('topic_count');
             $status = 1;
-            $msg = "The topic has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
 
@@ -429,10 +429,10 @@ class CommunityTopicController extends Controller
         }
         if($failedCount==0){
             $status = 1;
-            $msg = "The selected topic has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = $failedCount."Server internal error";
+            $msg = $failedCount.__('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
     }
@@ -446,7 +446,7 @@ class CommunityTopicController extends Controller
         $this->authorize('manage',$topic);
 
         $topic->increment('order');
-        return \redirect()->back()->with('tips', ['优先级已自增1']);
+        return \redirect()->back()->with('tips', [__('controller.priorityUp1')]);
     }
 
     /**
@@ -458,7 +458,7 @@ class CommunityTopicController extends Controller
         $this->authorize('manage',$topic);
 
         $topic->decrement('order');
-        return \redirect()->back()->with('tips', ['优先级已自减1']);
+        return \redirect()->back()->with('tips', [__('controller.priorityDown1')]);
     }
 
     /**
@@ -470,10 +470,10 @@ class CommunityTopicController extends Controller
         $this->authorize('manage',$topic);
         if (!$topic->is_excellent){
             $topic->update(['is_excellent'=> true]);
-            return \redirect()->back()->with('tips', ['已成功设为精华']);
+            return \redirect()->back()->with('tips', [__('controller.excellentSuccess')]);
         }else{
             $topic->update(['is_excellent'=> false]);
-            return \redirect()->back()->with('tips', ['已成功取消精华']);
+            return \redirect()->back()->with('tips', [__('controller.unexcellentSuccess')]);
         }
     }
 

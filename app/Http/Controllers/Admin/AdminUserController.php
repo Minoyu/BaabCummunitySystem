@@ -107,7 +107,7 @@ class AdminUserController extends Controller
             $msg = "The user has been deleted";
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
 
@@ -130,7 +130,7 @@ class AdminUserController extends Controller
             $msg = "The selected users has been deleted";
         }else{
             $status = 0;
-            $msg = $failedCount."Server internal error";
+            $msg = $failedCount.__('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
     }

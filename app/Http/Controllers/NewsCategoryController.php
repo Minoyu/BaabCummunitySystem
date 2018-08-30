@@ -57,12 +57,12 @@ class NewsCategoryController extends Controller
         //渲染
         if ($res) {
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['新闻分类' . $name . '创建成功',]);
+                return \redirect()->back()->with('tips', [__('controller.createSuccess',['name'=>$name]),]);
             } else {
-                return \redirect()->back()->with('tips', ['新闻分类' . $name . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveTopicSuccess',['name'=>$name]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
     }
 
@@ -104,12 +104,12 @@ class NewsCategoryController extends Controller
         //渲染
         if ($res) {
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['新闻分类' . $name . '编辑成功',]);
+                return \redirect()->back()->with('tips', [__('controller.editSuccess',['name'=>$name]),]);
             } else {
-                return \redirect()->back()->with('tips', ['新闻分类' . $name . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$name]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -126,14 +126,14 @@ class NewsCategoryController extends Controller
         $newsCategory->delete();
         if($newsCategory->trashed()){
             $status = 1;
-            $msg = "The news category has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
     }else{
         $status = 2;
-        $msg = "删除失败，此分类下仍存在新闻";
+        $msg = __('controller.deleteFailedWithNews');
     }
         return json_encode(compact('status','msg'));//ajax
 
@@ -160,21 +160,21 @@ class NewsCategoryController extends Controller
 
         if($failedCount==0){
             $status = 1;
-            $msg = "The selected news categories has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = $failedCount."项分类删除失败:分类下仍存在新闻";
+            $msg = $failedCount.__('controller.deletesFailedWithNews');
         }
         return json_encode(compact('status','msg'));//ajax
     }
 
     public function turnUpOrder(NewsCategory $newsCategory){
         $newsCategory->increment('order');
-        return \redirect()->back()->with('tips', ['优先级已自增1']);
+        return \redirect()->back()->with('tips', [__('controller.priorityUp1')]);
     }
     public function turnDownOrder(NewsCategory $newsCategory){
         $newsCategory->decrement('order');
-        return \redirect()->back()->with('tips', ['优先级已自减1']);
+        return \redirect()->back()->with('tips', [__('controller.priorityDown1')]);
     }
 
 }

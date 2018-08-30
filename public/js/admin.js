@@ -32,14 +32,14 @@ $$(function () {
  */
 function deleteNewsCategory(catId,catName) {
     mdui.dialog({
-        title: '删除新闻分类',
-        content: '您确定要删除此新闻分类吗<br/>'+catName,
+        title: 'Delete News Category<br><small>删除新闻分类</small>',
+        content: 'Are you sure you want to delete this news category?<br><small>您确定要删除此新闻分类吗</small><br/>'+catName,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -121,14 +121,14 @@ function deleteNewsCategories() {
     var names=getSelectedNames();
     //弹出确认对话框
     mdui.dialog({
-        title: '批量删除新闻分类',
-        content: '您确定要删除我们吗<br/>'+names,
+        title: 'Batch delete News Category<br><small>批量删除新闻分类</small>',
+        content: 'Are you sure you want to delete these news categories?<br><small>您确定要删除这些新闻分类吗</small><br/>'+names,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -183,14 +183,14 @@ function deleteNewsCategories() {
  */
 function deleteNewsCarousel(id,name) {
     mdui.dialog({
-        title: '删除新闻轮播图',
-        content: '您确定要删除此新闻轮播图吗<br/>'+name,
+        title: 'Delete News Carousel<br><small>删除新闻轮播图</small>',
+        content: 'Are you sure you want to delete this news carousel?<br><small>您确定要删除此新闻轮播图吗</small><br/>'+name,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -378,14 +378,14 @@ if ($$('#selInvalidedAt').length>0){
  */
 function deleteNews(newsId,newsTitle) {
     mdui.dialog({
-        title: '删除新闻',
-        content: '您确定要删除此新闻吗<br/>'+newsTitle,
+        title: 'Delete News<br><small>删除新闻</small>',
+        content: 'Are you sure you want to delete this news?<br><small>您确定要删除此新闻吗</small><br/>'+newsTitle,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -436,14 +436,14 @@ function deleteNewses() {
     var titles=getSelectedNames();
     //弹出确认对话框
     mdui.dialog({
-        title: '批量删除新闻',
-        content: '您确定要删除我们吗<br/>'+titles,
+        title: 'Batch delete News<br><small>批量删除新闻</small>',
+        content: 'Are you sure you want to delete these news?<br><small>您确定要删除这些新闻吗</small><br/>'+titles,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -493,14 +493,14 @@ function deleteNewses() {
  */
 function deleteNewsReply(newsReplyId,newsReplyContent) {
     mdui.dialog({
-        title: '删除新闻回复',
-        content: '您确定要删除此新闻回复吗<br/>'+newsReplyContent,
+        title: 'Delete News Reply<br><small>删除新闻回复</small>',
+        content: 'Are you sure you want to delete this news reply?<br><small>您确定要删除此新闻回复吗</small><br/>'+newsReplyContent,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -551,14 +551,14 @@ function deleteNewsReplies() {
     var titles=getSelectedNames();
     //弹出确认对话框
     mdui.dialog({
-        title: '批量删除新闻回复',
-        content: '您确定要删除我们吗<br/>'+titles,
+        title: 'Batch delete News Replies<br><small>批量删除新闻回复</small>',
+        content: 'Are you sure you want to delete these news replies?<br><small>您确定要删除这些新闻回复吗</small><br/>'+titles,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -571,7 +571,7 @@ function deleteNewsReplies() {
                         },
                         statusCode: {
                             500: function (xhr, textStatus) {
-                                mdui.alert('服务器内部错误');
+                                mdui.alert('Server internal error<br/>服务器内部错误');
                             }
                         },
                         success: function (data) {
@@ -660,14 +660,15 @@ function adminCommunityCatCloseAll(){
  */
 function deleteCommunityZone(zoneId,zoneContent) {
     mdui.dialog({
-        title: '删除新闻回复',
-        content: '您确定要删除此社区分区吗<br/>'+zoneContent,
+        title: 'Delete Community Zone<br><small>删除社区分区</small>',
+        content: 'Are you sure you want to delete this Community Zone?<br><small>您确定要删除此社区分区吗</small><br/>'+zoneContent,
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -717,14 +718,15 @@ function deleteCommunityZone(zoneId,zoneContent) {
  */
 function deleteCommunitySection(sectionId,sectionContent) {
     mdui.dialog({
-        title: '删除新闻回复',
-        content: '您确定要删除此社区版块吗<br/>'+sectionContent,
+        title: 'Delete Community Section<br><small>删除社区版块</small>',
+        content: 'Are you sure you want to delete this Community Section?<br><small>您确定要删除此社区版块吗</small><br/>'+sectionContent,
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -781,7 +783,7 @@ function handleSelGetSections(zoneId,classToAppend){
         },
         success: function (data) {
             data=JSON.parse(data);
-            var sectionsHtmlToAppend='<option value="null">请选择分区</option>';
+            var sectionsHtmlToAppend='<option value="null">Please select a section</option>';
             $$.each(data.sections,function (i,value) {
                 sectionsHtmlToAppend+='<option value="'+value.id+'">'+value.name+'</option>'
             });
@@ -800,14 +802,15 @@ function handleSelGetSections(zoneId,classToAppend){
  */
 function deleteCommunityTopic(topicId,topicContent) {
     mdui.dialog({
-        title: '删除社区话题',
-        content: '您确定要删除此社区话题吗<br/>'+topicContent,
+        title: 'Delete Community Topic<br><small>删除社区话题</small>',
+        content: 'Are you sure you want to delete this Community Topic?<br><small>您确定要删除此社区话题吗</small><br/>'+topicContent,
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -857,14 +860,15 @@ function deleteCommunityTopics() {
     var titles=getSelectedNames();
     //弹出确认对话框
     mdui.dialog({
-        title: '批量删除社区话题',
-        content: '您确定要删除我们吗<br/>'+titles,
+        title: 'Batch delete Community Topics<br><small>批量删除社区话题</small>',
+        content: 'Are you sure you want to delete these Community Topics?<br><small>您确定要删除这些社区话题吗</small><br/>'+titles,
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -914,14 +918,15 @@ function deleteCommunityTopics() {
 
 function deleteCommunityTopicReply(Id,Content) {
     mdui.dialog({
-        title: '删除话题回复',
-        content: '您确定要删除此话题回复吗<br/>'+Content,
+        title: 'Delete Community Topic Reply<br><small>删除社区话题回复</small>',
+        content: 'Are you sure you want to delete this Community Topic Reply?<br><small>您确定要删除此话题回复吗</small><br/>'+Content,
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -971,14 +976,15 @@ function deleteCommunityTopicReplies() {
     var titles=getSelectedNames();
     //弹出确认对话框
     mdui.dialog({
-        title: '批量删除话题回复',
-        content: '您确定要删除我们吗<br/>'+titles,
+        title: 'Batch delete Community Topic Replies<br><small>批量删除社区话题回复</small>',
+        content: 'Are you sure you want to delete these Community Topic Replies?<br><small>您确定要删除这些社区话题回复吗</small><br/>'+titles,
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1031,14 +1037,16 @@ function deleteCommunityTopicReplies() {
  */
 function deleteUser(Id,Content) {
     mdui.dialog({
-        title: '删除用户',
-        content: '您确定要删除此用户吗<br/>'+Content+'<br><span class="mdui-text-color-red">警告：删除用户将一并删除用户产生的所有内容</span>',
+        title: 'Delete User<br><small>删除用户</small>',
+        content: 'Are you sure you want to delete this User?<br><small>您确定要删除此用户吗</small>'+
+        '<br><span class="mdui-text-color-red">Warning: deleting the user will delete all content generated by the user at the same time</span>'+
+        '<br><span class="mdui-text-color-red"><small>警告：删除用户将一并删除用户产生的所有内容</small></span><br/>'+Content,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1089,14 +1097,16 @@ function deleteUsers() {
     var titles=getSelectedNames();
     //弹出确认对话框
     mdui.dialog({
-        title: '批量删除用户',
-        content: '您确定要删除我们吗<br/>'+titles+'<br><span class="mdui-text-color-red">警告：删除用户将一并删除用户产生的所有内容</span>',
+        title: 'Batch Delete User<br><small>批量删除用户</small>',
+        content: 'Are you sure you want to delete these User?<br><small>您确定要删除这些用户吗</small>'+
+        '<br><span class="mdui-text-color-red">Warning: deleting the user will delete all content generated by the user at the same time</span>'+
+        '<br><span class="mdui-text-color-red"><small>警告：删除用户将一并删除用户产生的所有内容</small></span><br/>'+titles,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1109,7 +1119,7 @@ function deleteUsers() {
                         },
                         statusCode: {
                             500: function (xhr, textStatus) {
-                                mdui.alert('服务器内部错误');
+                                mdui.alert('Server internal error<br/>服务器内部错误');
                             }
                         },
                         success: function (data) {
@@ -1146,15 +1156,17 @@ function deleteUsers() {
 
 function handlePermissionRemoveRole(permissionName,permissionId,roleName,roleId) {
     mdui.dialog({
-        title: '移除此权限下的角色',
-        content: '您确定要为'+roleName+'角色移除'+permissionName+'权限吗？' +
-        '<br><span class="mdui-text-color-red">警告：移除后该角色下的用户将失去此权限，请谨慎对权限及角色进行操作</span>',
+        title: 'Remove roles from permission<br><small>移除此权限下的角色</small>',
+        content: 'Are you sure to remove '+roleName+' from '+permissionName+
+        '？<br><small>您确定要为'+permissionName+'权限移除'+roleName+'角色吗</small>' +
+        '<br><span class="mdui-text-color-red">Warning: Users under this role will lose this permission after removal, please be cautious about the permissions and roles</span>'+
+        '<br><span class="mdui-text-color-red"><small>警告：移除后该角色下的用户将失去此权限，请谨慎对权限及角色进行操作</small></span>',
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1206,15 +1218,18 @@ function handlePermissionRemoveRole(permissionName,permissionId,roleName,roleId)
 
 function handleRoleRemovePermission(permissionName,permissionId,roleName,roleId) {
     mdui.dialog({
-        title: '移除此角色下的权限',
-        content: '您确定要为'+roleName+'角色移除'+permissionName+'权限吗？' +
-        '<br><span class="mdui-text-color-red">警告：移除后该角色下的用户将失去此权限，请谨慎对权限及角色进行操作</span>',
+        title: 'Remove permission from role<br><small>移除此角色下的权限</small>',
+        content: 'Are you sure to remove '+permissionName+' from '+roleName+
+        '？<br><small>您确定要为'+roleName+'角色移除'+permissionName+'权限吗</small>' +
+        '<br><span class="mdui-text-color-red">Warning: Users under this role will lose this permission after removal, please be cautious about the permissions and roles</span>'+
+        '<br><span class="mdui-text-color-red"><small>警告：移除后该角色下的用户将失去此权限，请谨慎对权限及角色进行操作</small></span>',
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1269,14 +1284,16 @@ function handleRoleRemovePermission(permissionName,permissionId,roleName,roleId)
  */
 function deletePermission(Id,Content) {
     mdui.dialog({
-        title: '删除权限',
-        content: '您确定要删除此权限吗<br/>'+Content+'<br><span class="mdui-text-color-red">警告：请谨慎进行权限操作</span>',
+        title: 'Delete Permission<br><small>删除权限</small>',
+        content: 'Are you sure you want to delete this Permission?<br><small>您确定要删除此权限吗</small>'+
+        '<br><span class="mdui-text-color-red">Warning: Please be cautious about permission operations</span>'+
+        '<br><span class="mdui-text-color-red"><small>警告：请谨慎进行权限操作</small></span><br/>'+Content,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1323,14 +1340,17 @@ function deletePermission(Id,Content) {
  */
 function deleteRole(Id,Content) {
     mdui.dialog({
-        title: '删除角色',
-        content: '您确定要删除此角色吗<br/>'+Content+'<br><span class="mdui-text-color-red">警告：请谨慎进行角色操作</span>',
+        title: 'Delete Role<br><small>删除角色</small>',
+        content: 'Are you sure you want to delete this Role?<br><small>您确定要删除此角色吗</small>'+
+        '<br><span class="mdui-text-color-red">Warning: Please be cautious about role operations</span>'+
+        '<br><span class="mdui-text-color-red"><small>警告：请谨慎进行角色操作</small></span><br/>'+Content,
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1379,14 +1399,14 @@ function deleteRole(Id,Content) {
  */
 function deleteIndexCarousel(id,name) {
     mdui.dialog({
-        title: '删除首页轮播图',
-        content: '您确定要删除此首页轮播图吗<br/>'+name,
+        title: 'Delete Index Carousel<br><small>删除首页轮播图</small>',
+        content: 'Are you sure you want to delete this Index Carousel?<br><small>您确定要删除此首页轮播图吗</small><br>'+name,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1435,14 +1455,15 @@ function deleteIndexCarousel(id,name) {
  */
 function deleteIndexHeadline(id,name) {
     mdui.dialog({
-        title: '删除首页头条',
-        content: '您确定要删除此首页头条吗<br/>'+name,
+        title: 'Delete Index Headline<br><small>删除首页头条</small>',
+        content: 'Are you sure you want to delete this Index Headline?<br><small>您确定要删除此首页头条吗</small><br>'+name,
+
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {

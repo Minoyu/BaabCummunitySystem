@@ -110,7 +110,7 @@ class IndexController extends Controller
         Session::put('isDrawerOpen',false);
 
         $status = 1;
-        $msg = "抽屉栏已默认关闭";
+        $msg = __('controller.drawerDefaultClose');
 
         return json_encode(compact('status','msg'));//ajax
     }
@@ -125,7 +125,7 @@ class IndexController extends Controller
         Session::put('isDrawerOpen',true);
 
         $status = 1;
-        $msg = "抽屉栏将默认开启";
+        $msg = __('controller.drawerDefaultOpen');
 
         return json_encode(compact('status','msg'));//ajax
     }

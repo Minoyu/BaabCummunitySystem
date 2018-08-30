@@ -44,7 +44,7 @@ class CommunityTopicReplyController extends Controller
 
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg','thumb_up_count'));//ajax
     }
@@ -75,7 +75,7 @@ class CommunityTopicReplyController extends Controller
             $status = 1;
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg','thumb_up_count'));//ajax
 
@@ -137,10 +137,10 @@ class CommunityTopicReplyController extends Controller
                 $last_reply_id = $res->id;
                 $topic->update(compact('reply_count','last_reply_at','last_reply_id'));
                 $status = 1;
-                $msg = "Reply Successfully";
+                $msg = __('controller.replySuccess');
             }else{
                 $status = 0;
-                $msg = "Server internal error";
+                $msg = __('controller.failedServerError');
             }
             return json_encode(compact('status','msg'));//ajax
         }else{
@@ -150,9 +150,9 @@ class CommunityTopicReplyController extends Controller
                 $last_reply_at = Carbon::now();
                 $last_reply_id = $res->id;
                 $topic->update(compact('reply_count','last_reply_at','last_reply_id'));
-                return \redirect()->back()->with('tips', ['回复创建成功',]);
+                return \redirect()->back()->with('tips', [__('controller.replySuccess'),]);
             }else{
-                return \redirect()->back()->withErrors('创建失败,服务器内部错误,请联系管理员');
+                return \redirect()->back()->withErrors(__('controller.failedServerError'));
             }
         }
     }
@@ -187,9 +187,9 @@ class CommunityTopicReplyController extends Controller
 
         //渲染
         if ($res) {
-            return \redirect()->back()->with('tips', ['回复编辑成功',]);
+            return \redirect()->back()->with('tips', [__('controller.replySuccess'),]);
         }else{
-            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -207,10 +207,10 @@ class CommunityTopicReplyController extends Controller
             $reply_count = $reply->communityTopic->replies->count();
             $reply->communityTopic->update(compact('reply_count'));
             $status = 1;
-            $msg = "The reply has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
 
@@ -237,10 +237,10 @@ class CommunityTopicReplyController extends Controller
         }
         if($failedCount==0){
             $status = 1;
-            $msg = "The selected replies has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = $failedCount."Server internal error";
+            $msg = $failedCount.__('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
     }

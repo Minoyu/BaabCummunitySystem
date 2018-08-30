@@ -165,12 +165,12 @@ class NewsController extends Controller
         if ($res) {
             $res->newsCategory->update(['news_count'=>$res->newsCategory->news()->count()]);
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['新闻' . $title . '创建成功',]);
+                return \redirect()->back()->with('tips', [__('controller.createSuccess',['name'=>$title]),]);
             } else {
-                return \redirect()->back()->with('tips', ['新闻' . $title . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$title]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('创建/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
     }
 
@@ -218,12 +218,12 @@ class NewsController extends Controller
             $oldCategory->update(['news_count'=>$oldCategory->news()->count()]);
             $news->newsCategory->update(['news_count'=>$news->newsCategory->news()->count()]);
             if ($status == 'publish') {
-                return \redirect()->back()->with('tips', ['新闻' . $title . '编辑成功',]);
+                return \redirect()->back()->with('tips', [__('controller.editSuccess',['name'=>$title]),]);
             } else {
-                return \redirect()->back()->with('tips', ['新闻' . $title . '暂存成功',]);
+                return \redirect()->back()->with('tips', [__('controller.saveSuccess',['name'=>$title]),]);
             }
         }else{
-            return \redirect()->back()->withErrors('编辑/暂存失败,服务器内部错误,请联系管理员');
+            return \redirect()->back()->withErrors(__('controller.failedServerError'));
         }
 
     }
@@ -240,10 +240,10 @@ class NewsController extends Controller
         if($news->trashed()){
             $news->newsCategory->update(['news_count'=>$news->newsCategory->news()->count()]);
             $status = 1;
-            $msg = "The news has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = "Server internal error";
+            $msg = __('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
 
@@ -266,10 +266,10 @@ class NewsController extends Controller
         }
         if($failedCount==0){
             $status = 1;
-            $msg = "The selected news has been deleted";
+            $msg = __('controller.deleteSuccess');
         }else{
             $status = 0;
-            $msg = $failedCount."Server internal error";
+            $msg = $failedCount.__('controller.failedServerError');
         }
         return json_encode(compact('status','msg'));//ajax
     }
@@ -282,7 +282,7 @@ class NewsController extends Controller
         $this->authorize('manage',$news);
 
         $news->increment('order');
-        return \redirect()->back()->with('tips', ['优先级已自增1']);
+        return \redirect()->back()->with('tips', [__('controller.priorityUp1')]);
     }
 
     /**
@@ -293,7 +293,7 @@ class NewsController extends Controller
         $this->authorize('manage',$news);
 
         $news->decrement('order');
-        return \redirect()->back()->with('tips', ['优先级已自减1']);
+        return \redirect()->back()->with('tips', [__('controller.priorityDown1')]);
     }
 
 

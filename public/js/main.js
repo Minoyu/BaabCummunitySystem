@@ -222,13 +222,33 @@ if ($$('#editorToolbar').length>0){
     };
     editor.customConfig.zIndex = 0;
     editor.customConfig.lang = {
-        '设置标题': 'title',
+        '设置标题': 'Title',
+        '字号': 'Font Size',
+        '字体': 'Font Family',
         '正文': 'p',
-        '链接文字': 'link text',
-        '链接': 'link',
-        '上传图片': 'upload image',
+        '链接文字': 'Link text',
+        '链接': 'Link',
+        '文字颜色': 'Font color',
+        '背景色': 'BG color',
+        '设置列表': 'Insert list',
+        '有序列表': 'Ordered list',
+        '无序列表': 'Unordered list',
+        '上传图片': 'Upload image',
+        '网络图片': 'Image URL',
+        '对齐方式': 'Text align',
+        '靠左': 'Left',
+        '靠右': 'Right',
+        '居中': 'Center',
         '上传': 'upload',
-        '创建': 'init'
+        '创建': 'Create',
+        '默认': 'Default',
+        '插入表格': 'Insert Table',
+        '插入': 'Insert',
+        '视频': ' Video',
+        '代码': ' Code',
+        '行': 'line',
+        '列': 'col',
+        '的表格': ' table',
         // 还可自定添加更多
     };
     switch ($$('#editorToolbar').attr('type')){
@@ -861,14 +881,14 @@ function ajaxSubmitNewsCommentForm(url) {
  */
 function deleteNewsReply(newsReplyId,newsReplyContent) {
     mdui.dialog({
-        title: '删除新闻回复',
-        content: '您确定要删除此新闻回复吗<br/>'+newsReplyContent,
+        title: 'Delete news replies <br><small>删除新闻回复</small>',
+        content: 'Are you sure you want to delete this news reply?<br><small>您确定要删除此新闻回复吗</small><br/>'+newsReplyContent,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1871,14 +1891,14 @@ function ajaxLoadSearchNews(){
  */
 function deleteCommunityTopic(topicId,topicContent) {
     mdui.dialog({
-        title: '删除社区话题',
-        content: '您确定要删除此社区话题吗<br/>'+topicContent,
+        title: 'Delete Community topic <br><small>删除社区话题</small>',
+        content: 'Are you sure you want to delete this topic?<br><small>您确定要删除此社区话题吗</small><br/>'+topicContent,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {
@@ -1927,14 +1947,14 @@ function deleteCommunityTopic(topicId,topicContent) {
  */
 function deleteNews(newsId,newsTitle) {
     mdui.dialog({
-        title: '删除新闻',
-        content: '您确定要删除此新闻吗<br/>'+newsTitle,
+        title: 'Delete News <br><small>删除新闻</small>',
+        content: 'Are you sure you want to delete this news?<br><small>您确定要删除此社区话题吗</small><br/>'+newsTitle,
         buttons: [
             {
-                text: '取消'
+                text: 'Cancel'
             },
             {
-                text: '确认',
+                text: 'OK',
                 onClick: function(inst){
                     $$.ajax({
                         headers: {

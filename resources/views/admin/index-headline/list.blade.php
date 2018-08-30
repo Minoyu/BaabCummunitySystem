@@ -1,5 +1,5 @@
 @extends('frame.adminframe')
-@section('title','首页头条管理')
+@section('title',__('admin.indexHeadlines'))
 @section('subtitleUrl',route('adminIndexHeadlinesList'))
 @section('adminDrawerActiveVal','drawer-indexItem')
 
