@@ -1532,62 +1532,65 @@ function handleChangeUserRoles(userName,userId) {
 }
 
 var changeRolesDialogDom = document.getElementById('changeRolesDialog');
+if (changeRolesDialogDom){
+    changeRolesDialogDom.addEventListener('confirm.mdui.dialog',function () {
+        var role_ids=[];
+        $$('input[name="role_id[]"]:checked').each(function(){
+            role_ids.push($$(this).val());//向数组中添加元素
+        });
+        var userId =  $$('#changeRolesUserId').val();
 
-changeRolesDialogDom.addEventListener('confirm.mdui.dialog',function () {
-    var role_ids=[];
-    $$('input[name="role_id[]"]:checked').each(function(){
-        role_ids.push($$(this).val());//向数组中添加元素
-    });
-    var userId =  $$('#changeRolesUserId').val();
+        $$.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            method: 'POST',
+            url: '/admin/user/changeRoles',
+            data: {
+                userId:userId,
+                role_ids:role_ids
+            },
+            statusCode: {
+                500: function (xhr, textStatus) {
+                    mdui.alert('Server internal error<br/>服务器内部错误');
+                }
+            },
+            success: function (data) {
+                data = JSON.parse(data);
+                if (data.status ===1) {
+                    mdui.snackbar({
+                        message:data.msg,
+                        position:'top'
+                    });
+                    setTimeout(function(){
+                        //使用  setTimeout（）方法设定定时5000毫秒
+                        window.location.reload();//页面刷新
+                    },2000);
+                } else {
+                    mdui.snackbar(data.msg,{
+                        position:'top',
+                        timeout:0,
+                        buttonText:'ok'
+                    });
+                }
 
-    $$.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-        },
-        method: 'POST',
-        url: '/admin/user/changeRoles',
-        data: {
-            userId:userId,
-            role_ids:role_ids
-        },
-        statusCode: {
-            500: function (xhr, textStatus) {
-                mdui.alert('Server internal error<br/>服务器内部错误');
             }
-        },
-        success: function (data) {
-            data = JSON.parse(data);
-            if (data.status ===1) {
-                mdui.snackbar({
-                    message:data.msg,
-                    position:'top'
-                });
-                setTimeout(function(){
-                    //使用  setTimeout（）方法设定定时5000毫秒
-                    window.location.reload();//页面刷新
-                },2000);
-            } else {
-                mdui.snackbar(data.msg,{
-                    position:'top',
-                    timeout:0,
-                    buttonText:'ok'
-                });
-            }
+        });
 
-        }
     });
+}
 
-});
 
 
 //layui加载form样式
 layui.use('form', function(){
     var form = layui.form;
-
-    changeRolesDialogDom.addEventListener('closed.mdui.dialog',function () {
-        $$("input[type=checkbox]").each(function(){ //循环checkbox选择或取消
-            $$(this).prop("checked",false);
+    if (changeRolesDialogDom){
+        changeRolesDialogDom.addEventListener('closed.mdui.dialog',function () {
+            $$("input[type=checkbox]").each(function(){ //循环checkbox选择或取消
+                $$(this).prop("checked",false);
+            });
+            form.render();
         });
-        form.render();
-    });
+    }
 });

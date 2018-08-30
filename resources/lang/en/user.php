@@ -63,6 +63,19 @@ return [
     'emptyTopicsMe'=>'Try to post your first community topic',
     'emptyTopics'=>'This user has no published topics yet',
 
+    //admin
+    'editPersonalInformation'=>'Edit User Information',
+    'changePassword'=>'Change Password',
+    'changePasswordTip'=>'No change, please leave space.',
+    'userAvatar'=>'User Avatar',
+    'avatar'=>'Avatar',
+    'userAvatarTip'=>'Click on the image below to change',
+    'userInfoPart'=>'User Info Part',
+    'confirmUpdate'=>'Confirm update',
+    'backToUsersList'=>'Backs to users list',
+    'assignRoles'=>'Assign Roles',
+    'createUser'=>'Create User',
 
+    'assignRoleFor'=>'Assign Roles To User <span id="changeRolesUserName"></span>',
 
 ];

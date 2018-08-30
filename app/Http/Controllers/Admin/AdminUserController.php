@@ -18,13 +18,13 @@ class AdminUserController extends Controller
         foreach ($users as $user){
             $topicsCount = $user->communityTopics()->count();
             $repliesCount = $user->communityTopicReplies()->count() + $user->newsReplies()->count();
-            $followingsCount = $user->followings()->count();
+            $followersCount = $user->followers()->count();
 
             $user_collection->push(compact(
                 'user',
                 'topicsCount',
                 'repliesCount',
-                'followingsCount'
+                'followersCount'
             ));
         }
 

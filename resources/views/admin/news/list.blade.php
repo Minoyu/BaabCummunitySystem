@@ -34,7 +34,7 @@
                         @endif
                         <a href="{{route('showNewsContent',$news->id)}}" target="_blank">{{$news->title}}
                             <br>
-                            <small>{{$news->created_at}}</small>
+                            <small style="opacity: 0.8">{{$news->created_at}}</small>
                         </a>
                     </td>
                     <td>

@@ -1,24 +1,24 @@
 @extends('frame.adminframe')
-@section('title','用户及权限管理')
+@section('title',__('admin.usersAndPermissionsManage'))
 @section('subtitleUrl',route('adminShowUsersList'))
 @section('adminDrawerActiveVal','drawer-userItem')
 
 @section('content')
-    <h3 class="admin-title mdui-text-color-indigo">用户列表</h3>
+    <h3 class="admin-title mdui-text-color-indigo">{{__('admin.usersList')}}</h3>
     @include('admin.layout.msg')
-    <a onclick="openRegisterDialog()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>创建新用户</a>
+    <a onclick="openRegisterDialog()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>{{__('user.createUser')}}</a>
     <div class="mdui-table-fluid">
         <table id="listTable" class="mdui-table mdui-table-selectable mdui-table-hoverable" style="min-width: 1000px">
             <thead>
             <tr>
                 <th class="">ID</th>
-                <th>头像</th>
-                <th>角色</th>
-                <th>用户名</th>
-                <th class="mdui-table-col-numeric">话题数</th>
-                <th class="mdui-table-col-numeric">回复数</th>
-                <th class="mdui-table-col-numeric">关注数</th>
-                <th class="mdui-table-col-numeric">操作</th>
+                <th>{{__('user.avatar')}}</th>
+                <th>{{__('admin/user-permission.roles')}}</th>
+                <th>{{__('user.username')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.postsCount')}}</th>
+                <th class="mdui-table-col-numeric">{{__('community.commentCount')}}</th>
+                <th class="mdui-table-col-numeric">{{__('user.followers')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.actions')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -34,22 +34,22 @@
                         @foreach($user_item['user']->roles as $role)
                             @switch($role->name)
                                 @case('Founder')
-                                    <div onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-chip mdui-color-pink-accent">
+                                    <div mdui-tooltip="{content: '{{__('user.assignRoles')}}', position: 'top'}" onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-chip mdui-color-pink-accent">
                                         <span class="mdui-chip-title">{{$role->name}}</span>
                                     </div>
                                     @break
                                 @case('Maintainer')
-                                    <div onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-chip mdui-color-blue-accent">
+                                    <div mdui-tooltip="{content: '{{__('user.assignRoles')}}', position: 'top'}" onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-chip mdui-color-blue-accent">
                                         <span class="mdui-chip-title">{{$role->name}}</span>
                                     </div>
                                     @break
                                 @case('NormalUser')
-                                    <div onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-chip mdui-color-blue-grey">
+                                    <div mdui-tooltip="{content: '{{__('user.assignRoles')}}', position: 'top'}" onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-chip mdui-color-blue-grey">
                                         <span class="mdui-chip-title">{{$role->name}}</span>
                                     </div>
                                     @break
                                 @case('BanedUser')
-                                    <div onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-chip mdui-color-grey mdui-text-color-white">
+                                    <div mdui-tooltip="{content: '{{__('user.assignRoles')}}', position: 'top'}" onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-chip mdui-color-grey mdui-text-color-white">
                                         <span class="mdui-chip-title">{{$role->name}}</span>
                                     </div>
                                     @break
@@ -65,17 +65,16 @@
                     </td>
                     <td>{{$user_item['topicsCount']}}</td>
                     <td>{{$user_item['repliesCount']}}</td>
-                    <td>{{$user_item['followingsCount']}}</td>
+                    <td>{{$user_item['followersCount']}}</td>
                     <td>
-                        <a target="_blank" href="{{route('adminShowUserEdit',$user_item['user']->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
-                            <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
+                        <a mdui-tooltip="{content: '{{__('admin.edit')}}', position: 'top'}" target="_blank" href="{{route('adminShowUserEdit',$user_item['user']->id)}}" class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn-icon">
+                            <i class="mdui-icon material-icons">edit</i>
                         </a>
-                        <button onclick="deleteUser('{{$user_item['user']->id}}','{{$user_item['user']->name}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
-                            <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
+                        <button  mdui-tooltip="{content: '{{__('user.assignRoles')}}', position: 'top'}" onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn-icon mdui-color-blue-grey">
+                            <i class="mdui-icon material-icons">account_box</i>
                         </button>
-                        <br>
-                        <button onclick="handleChangeUserRoles('{{$user_item['user']->name}}','{{$user_item['user']->id}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-blue-grey">
-                            <i class="mdui-icon material-icons mdui-icon-left">account_circle</i>指定角色
+                        <button  mdui-tooltip="{content: '{{__('admin.delete')}}', position: 'top'}" onclick="deleteUser('{{$user_item['user']->id}}','{{$user_item['user']->name}}')" class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn-icon mdui-color-pink-accent">
+                            <i class="mdui-icon material-icons">delete</i>
                         </button>
                     </td>
                 </tr>
@@ -88,14 +87,14 @@
 
     {{--更改角色对话框--}}
     <div class="mdui-dialog" id="changeRolesDialog">
-        <div class="mdui-dialog-title">为用户 <span id="changeRolesUserName"></span> 指定角色</div>
+        <div class="mdui-dialog-title">{!! __('user.assignRoleFor')!!}</div>
         <div class="mdui-dialog-content">
-            在下方多选框选中即可
+            {{__('admin/user-permission.roleHasPermissionsTip')}}
             <br>
             <br>
             <div class="layui-form">
                 <div class="layui-form-item">
-                    <label class="layui-form-label">用户组</label>
+                    <label class="layui-form-label">{{__('admin/user-permission.roles')}}</label>
                     <div class="layui-input-block">
                         @foreach($roles as $role)
                             <input type="checkbox" name="role_id[]" value="{{$role->id}}" title="{{$role->name}}">

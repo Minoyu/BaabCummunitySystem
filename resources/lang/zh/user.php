@@ -63,4 +63,18 @@ return [
     'emptyTopicsMe'=>'尝试发布自己的第一条社区话题',
     'emptyTopics'=>'此用户暂无发布的话题',
 
+    //admin
+    'editPersonalInformation'=>'编辑用户信息',
+    'changePassword'=>'修改密码',
+    'changePasswordTip'=>'无需修改请留空',
+    'userAvatar'=>'用户头像',
+    'avatar'=>'头像',
+    'userAvatarTip'=>'点击下方图片更改',
+    'userInfoPart'=>'用户信息部分',
+    'confirmUpdate'=>'确认更新',
+    'backToUsersList'=>'返回到用户列表',
+    'assignRoles'=>'分配角色',
+    'createUser'=>'创建用户',
+
+    'assignRoleFor'=>'为用户 <span id="changeRolesUserName"></span> 分配角色',
 ];

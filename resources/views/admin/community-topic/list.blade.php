@@ -48,7 +48,7 @@
 
                         <a target="_blank" href="{{route('showCommunityContent',$topic->id)}}">{{str_limit($topic->title, $limit = 40, $end = '...')}}
                             <br>
-                            <small>{{$topic->created_at}}</small>
+                            <small style="opacity: 0.8">{{$topic->created_at}}</small>
                         </a>
                     </td>
                     <td>{{$topic->id}}</td>
