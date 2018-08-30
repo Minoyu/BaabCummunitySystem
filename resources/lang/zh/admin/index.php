@@ -19,4 +19,20 @@ return [
     'topic_topTip'=>'话题上方轮播图',
     'info_topic_topTip'=>'资讯及话题上方轮播图',
     'recommendSize'=>'推荐尺寸',
+
+    'indexHeadlinesList'=>'首页轮播图列表',
+    'createIndexHeadline'=>'创建首页头条',
+    'editIndexHeadline'=>'编辑首页头条',
+    'headlinePosition'=>'头条位置',
+    'headlinePositionLeftTip'=>'首页左侧头条',
+    'headlinePositionRightTip'=>'首页右左侧头条',
+    'headlineTitle'=>'头条主标题',
+    'headlineTitleLink'=>'主标题超链接',
+    'headlineTitleLinkTip'=>'请输入链接用于主标题跳转',
+    'headlineSubtitle'=>'头条副标题',
+    'headlineSubtitleLink'=>'副标题超链接',
+    'headlineSubtitleLinkTip'=>'请输入链接用于副标题跳转',
+    'headlinePriorityTip1'=>'优先级范围0-20，从左到右递增，默认为0',
+    'headlinePriorityTip2'=>'头条将先依照优先级排序，相同优先级下依照发布时间排序',
+
 ];

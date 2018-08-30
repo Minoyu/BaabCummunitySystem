@@ -1,54 +1,52 @@
 @extends('frame.adminframe')
-@section('title','首页头条管理')
+@section('title',__('admin.indexHeadlines'))
 @section('subtitleUrl',route('adminIndexHeadlinesList'))
 @section('adminDrawerActiveVal','drawer-indexItem')
 
 @section('content')
     <form id="editIndexHeadlineForm" method="post" action="{{route('adminIndexHeadlineUpdate',$indexHeadline->id)}}">
         {{csrf_field()}}
-        <h3 class="admin-title mdui-text-color-indigo">编辑首页头条</h3>
+        <h3 class="admin-title mdui-text-color-indigo">{{__('admin/index.editIndexHeadline')}}</h3>
 
         @include('admin.layout.msg')
         <div class="mdui-row">
             <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-12 mdui-col-sm-10 mdui-col-md-6">
-                <h3 class="admin-index-title mdui-text-color-indigo">1.头条标题</h3>
-                <label class="mdui-textfield-label">请输入头条的标题</label>
+                <h3 class="admin-index-title mdui-text-color-indigo">1.{{__('admin/index.headlineTitle')}}</h3>
                 <input class="mdui-textfield-input" name="title" value="{{$indexHeadline->title}}" required/>
             </div>
         </div>
 
         <div class="mdui-textfield mdui-textfield-floating-label ">
-            <h3 class="admin-index-title mdui-text-color-indigo">2.头条超链接
-                <br><small class="show-file-title-sub">请输入链接用于跳转</small>
+            <h3 class="admin-index-title mdui-text-color-indigo">2.{{__('admin/index.headlineTitleLink')}}
+                <br><small class="show-file-title-sub">{{__('admin/index.headlineTitleLinkTip')}}</small>
             </h3>
             <input class="mdui-textfield-input" name="url" placeholder="http(s)://" value="{{$indexHeadline->url}}" required>
         </div>
 
         <div class="mdui-textfield mdui-textfield-floating-label ">
-            <h3 class="admin-index-title mdui-text-color-indigo">3.头条副标题</h3>
-            <label class="mdui-textfield-label">请输入头条副标题用于展示</label>
+            <h3 class="admin-index-title mdui-text-color-indigo">3.{{__('admin/index.headlineSubtitle')}}</h3>
             <input class="mdui-textfield-input" name="subtitle" value="{{$indexHeadline->subtitle}}" required>
         </div>
 
         <div class="mdui-textfield mdui-textfield-floating-label ">
-            <h3 class="admin-index-title mdui-text-color-indigo">4.副头条超链接
-                <br><small class="show-file-title-sub">请输入链接用于跳转</small>
+            <h3 class="admin-index-title mdui-text-color-indigo">4.{{__('admin/index.headlineSubtitleLink')}}
+                <br><small class="show-file-title-sub">{{__('admin/index.headlineSubtitleLinkTip')}}</small>
             </h3>
             <input class="mdui-textfield-input" name="subUrl" placeholder="http(s)://" value="{{$indexHeadline->subUrl}}" required>
         </div>
 
 
-        <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-3">5.头条位置
+        <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-3">5.{{__('admin/index.headlinePosition')}}
         </h3>
         <select name="position" class="mdui-select" required mdui-select>
-            <option value="left" @if($indexHeadline->position == 'left') selected @endif >left——首页左侧头条</option>
-            <option value="right" @if($indexHeadline->position == 'right') selected @endif >right——首页右侧头条</option>
+            <option value="left" @if($indexHeadline->position == 'left') selected @endif >left // {{__('admin/index.headlinePositionLeftTip')}}</option>
+            <option value="right" @if($indexHeadline->position == 'right') selected @endif >right // {{__('admin/index.headlinePositionRightTip')}}</option>
         </select>
 
 
-        <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">6.优先级
-            <br><small class="show-file-title-sub">优先级范围0-20，从左到右递增，推荐默认为0</small>
-            <br><small class="show-file-title-sub">头条将先依照优先级排序，相同优先级下依照发布时间排序</small></h3>
+        <h3 class="admin-index-title mdui-text-color-indigo">6.{{__('admin.priority')}}
+            <br><small class="show-file-title-sub">{{__('admin/index.headlinePriorityTip1')}}</small>
+            <br><small class="show-file-title-sub">{{__('admin/index.headlinePriorityTip2')}}</small></h3>
         <label class="mdui-slider mdui-slider-discrete">
             <input type="range" step="1" min="0" max="20" value="{{$indexHeadline->order}}" name="order"/>
         </label>
