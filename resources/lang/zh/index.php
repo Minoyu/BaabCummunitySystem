@@ -23,6 +23,8 @@ return [
     'nextPage'=>'下一页',
     'previousPage'=>'上一页',
     'time'=>'时间',
+    'note'=>'注意',
+    'img'=>'图片',
 
     //Appbar
     'home' => '首页',

@@ -26,11 +26,22 @@ return [
     'view'=>'View',
     'expendAll'=>'Expend All',
     'collapse'=>'Collapse',
+    'clickBelowToUploadNote'=>'Click on the image below to upload',
 
     'createReply'=>'Create Reply',
     'editReply'=>'Edit Reply',
     'repliesList'=>'Replies List',
     'replyContent'=>'Reply Content',
+
+    'createCarousel'=>'Create Carousel',
+    'carouselTitle'=>'Carousel Title',
+    'carouselSubtitle'=>'Carousel Subtitle',
+    'jumpLink'=>'Jump link',
+    'jumpLinkTip'=>'Please enter the link(URL) for jumping',
+    'imgUpload'=>'Image upload',
+    'carouselPriorityTip1'=>'Priority range 0-20, increasing from left to right, default is 0',
+    'carouselPriorityTip2'=>'The carousels will be sorted by priority, then sorted by the release time under the same priority.',
+
 
     //社区管理
     'topicTitle'=>'Topic title',
@@ -53,7 +64,7 @@ return [
     'newsReplyList'=>'All replies list',
     'findReplyByNews'=>'Find replies by News',
 
-    'newsComplexSettings'=>'News Complex Setup',
+    'newsComplexSettings'=>'News Page Setup',
     'newsCenterCarousel'=>'News Carousels',
 
     'communityCatManage'=>'Community Categories',
@@ -71,7 +82,7 @@ return [
     'findRepliesBySections'=>'Find replies by sections',
     'findRepliesByTopics'=>'Find replies by topics',
 
-    'indexSettings'=>'Index Setup',
+    'indexSettings'=>'Home Setup',
     'indexCarousels'=>'Index Carousels',
     'indexHeadlines'=>'Index Headlines',
 

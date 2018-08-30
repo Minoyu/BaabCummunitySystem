@@ -130,14 +130,14 @@ var indexSwiper = new Swiper ('.index-swiper-container', {
     }
 });
 
-var bannarSwiper = new Swiper ('.bannar-container', {
+var bannerSwiper = new Swiper ('.banner-container', {
     direction: 'horizontal',
     loop: true,
     autoplay:true,
 
     // 如果需要分页器
     pagination: {
-        el: '.bannar-pagination'
+        el: '.banner-pagination'
     },
 
     navigation: {

@@ -1,4 +1,4 @@
-<div class="swiper-container bannar-container">
+<div class="swiper-container banner-container">
     <div class="swiper-wrapper">
         @foreach($newsCarousels as $newsCarousel)
             <div class="swiper-slide">
@@ -21,7 +21,7 @@
     <div class="swiper-button-prev mdui-hidden-sm-down"></div><!--左箭头-->
     <div class="swiper-button-next mdui-hidden-sm-down"></div><!--右箭头-->
     <!-- 如果需要分页器 -->
-    <div class="swiper-pagination bannar-pagination"></div>
+    <div class="swiper-pagination banner-pagination"></div>
 
     <div class="swiper-scrollbar mdui-hidden-md-up"></div>
 </div>

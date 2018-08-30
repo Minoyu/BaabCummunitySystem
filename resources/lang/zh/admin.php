@@ -26,6 +26,7 @@ return [
     'view'=>'浏览',
     'expendAll'=>'展开全部',
     'collapse'=>'收起',
+    'clickBelowToUploadNote'=>'点击下方图片上传',
 
 
     'createReply'=>'创建回复',
@@ -33,6 +34,14 @@ return [
     'repliesList'=>'回复列表',
     'replyContent'=>'回复内容',
 
+    'createCarousel'=>'创建轮播图',
+    'carouselTitle'=>'轮播图标题',
+    'carouselSubtitle'=>'轮播图副标题',
+    'jumpLink'=>'跳转链接',
+    'jumpLinkTip'=>'请输入链接(URL)用于跳转',
+    'imgUpload'=>'图片上传',
+    'carouselPriorityTip1'=>'优先级范围0-20，从左到右递增，默认为0',
+    'carouselPriorityTip2'=>'轮播图将先依照优先级排序，相同优先级下依照发布时间排序',
 
     //社区管理
     'topicTitle'=>'话题标题',

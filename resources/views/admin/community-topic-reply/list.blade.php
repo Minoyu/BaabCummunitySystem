@@ -4,7 +4,7 @@
 @section('adminDrawerActiveVal','drawer-communityTopicReplyItem')
 
 @section('content')
-    <h3 class="admin-title mdui-text-color-indigo">{{str_limit($topic->title, $limit = 30, $end = '...')}}－{{__('admin/community.repliesList')}}</h3>
+    <h3 class="admin-title mdui-text-color-indigo">{{str_limit($topic->title, $limit = 30, $end = '...')}}－{{__('admin.repliesList')}}</h3>
     @include('admin.layout.msg')
     <a href="{{route('adminCommunityTopicReplyCreate',$topic->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn">
         <i class="mdui-icon material-icons mdui-icon-left">add</i>{{__('admin.createReply')}}
@@ -13,7 +13,7 @@
         <table id="listTable" class="mdui-table mdui-table-selectable mdui-table-hoverable" style="min-width: 1000px">
             <thead>
             <tr>
-                <th>{{__('admin/community.replyContent')}}</th>
+                <th>{{__('admin.replyContent')}}</th>
                 <th class="">ID</th>
                 <th class="">{{__('index.author')}}</th>
                 <th class="mdui-table-col-numeric">{{__('index.time')}}</th>

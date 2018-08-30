@@ -23,6 +23,8 @@ return [
     'nextPage'=>'Next Page',
     'previousPage'=>'Previous Page',
     'time'=>'Time',
+    'note'=>'NOTE',
+    'img'=>'Image',
 
     //Appbar
     'home' => 'Home',

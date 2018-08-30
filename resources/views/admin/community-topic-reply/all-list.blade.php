@@ -10,7 +10,7 @@
         <table id="listTable" class="mdui-table mdui-table-selectable mdui-table-hoverable" style="min-width: 1000px">
             <thead>
             <tr>
-                <th>{{__('admin/community.replyContent')}}</th>
+                <th>{{__('admin.replyContent')}}</th>
                 <th class="">{{__('admin/community.fromTopic')}}</th>
                 <th class="">{{__('index.author')}}</th>
                 <th class="mdui-table-col-numeric">{{__('index.time')}}</th>
