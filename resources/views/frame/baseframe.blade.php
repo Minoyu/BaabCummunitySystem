@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="isLogged" content="{{ Auth::check() }}">
 
-    <title>{{ env('APP_NAME','留学生网站') }} - @yield('title')</title>
+    <title>{{ __('index.app_name') }} - @yield('title')</title>
 
     <!-- Styles -->
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">

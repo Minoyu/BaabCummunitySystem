@@ -23,7 +23,7 @@
             @foreach($indexHeadlines as $indexHeadline)
                 <tr class="mdui-table-row" id="{{$indexHeadline->id}}" name="{{str_limit($indexHeadline->title, $limit = 30, $end = '...')}}">
                     <td>@if($indexHeadline->status=='hidden')
-                            <i class="mdui-icon material-icons">local_cafe</i><span class="layui-badge mdui-color-pink-accent">{{__('community.saved')}}</span>
+                            <i class="mdui-icon material-icons mdui-color-pink-accent">local_cafe</i><span class="layui-badge mdui-color-pink-accent">{{__('community.saved')}}</span>
                         @endif
                         <a href="{{$indexHeadline->url}}">{{$indexHeadline->title}}</a>
                     </td>

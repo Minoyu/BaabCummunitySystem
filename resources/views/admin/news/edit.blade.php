@@ -1,25 +1,24 @@
 @extends('frame.adminframe')
-@section('title','新闻管理')
+@section('title',__('admin.newsManage'))
 @section('subtitleUrl',route('adminNewsList'))
 @section('adminDrawerActiveVal','drawer-newsItem')
 
 @section('content')
         <form id="editNewsForm" method="post" action="{{route('adminNewsUpdate',$news->id)}}">
             {{csrf_field()}}
-            <h3 class="admin-title mdui-text-color-indigo">编辑新闻</h3>
+            <h3 class="admin-title mdui-text-color-indigo">{{__('admin/news.editNews')}}</h3>
 
             @include('admin.layout.msg')
             <div class="mdui-row">
                 <div class="mdui-textfield mdui-textfield-floating-label mdui-col-xs-12 mdui-col-sm-10 mdui-col-md-6">
-                    <h3 class="admin-index-title mdui-text-color-indigo">1.编辑新闻标题</h3>
-                    <label class="mdui-textfield-label">请输入新闻标题</label>
+                    <h3 class="admin-index-title mdui-text-color-indigo">1.{{__('admin/news.newsTitle')}}</h3>
                     <input class="mdui-textfield-input" name="title" value="{{$news->title}}"/>
                 </div>
             </div>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">2.编辑新闻分类</h3>
+            <h3 class="admin-index-title mdui-text-color-indigo">2.{{__('admin/news.newsCategory')}}</h3>
             <select name="news_category_id" class="mdui-select" mdui-select="{position: 'bottom'}">
-                <option value="null">请选择分类</option>
+                <option value="null">{{__('admin/news.newsCategoryP')}}</option>
                 @foreach($newsCategories as $newsCategory)
                     @if($newsCategory->id==$news->news_category_id)
                         <option value="{{$newsCategory->id}}" selected>当前：{{$newsCategory->name}}</option>
@@ -29,27 +28,27 @@
                 @endforeach
             </select>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">3.编辑新闻内容</h3>
+            <h3 class="admin-index-title mdui-text-color-indigo">3.{{__('admin/news.newsContent')}}</h3>
             <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="news"></div>
-            <div class="admin-editor-middle-bar">编辑区域</div>
+            <div class="admin-editor-middle-bar">{{__('admin.editArea')}}</div>
             <div id="editorText" class="admin-editor-text mdui-hoverable" >{!!$news->content!!}</div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">4.封面图片
-            <br><small class="show-file-title-sub">点击下方图片上传,留空则无封面</small></h3>
+            <h3 class="admin-index-title mdui-text-color-indigo">4.{{__('admin/news.coverImg')}}
+            <br><small class="show-file-title-sub">{!! __('admin/news.coverImgTip') !!}</small></h3>
             <label for="newsCoverUploadInput">
                 <img @if($news->cover_img) src="{{$news->cover_img}}" @else src="/imgs/default_news_cover.png" @endif class="avatar mdui-hoverable newsCover" style="width: 300px; height: 200px">
             </label>
             <input class="mdui-hidden" id="newsCoverUploadInput" type="file" onchange="handleNewsCoverUpdate(this,'newsCover')" accept="image/jpeg,image/png">
             <input class="mdui-hidden" value="{{$news->cover_img}}" type="text" name="cover_img">
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">5.失效日期
-            <br><small class="show-file-title-sub">超过失效日期的文章将不在列表中显示，留空则不设置失效日期</small></h3>
+            <h3 class="admin-index-title mdui-text-color-indigo">5.{{__('admin/news.invalidTime')}}
+            <br><small class="show-file-title-sub">{{__('admin/news.invalidTimeTip')}}</small></h3>
             <input type="text" class="layui-input" name="invalided_at" style="max-width: 300px" value="{{$news->invalided_at}}" id="selInvalidedAt">
 
-            <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2 mdui-m-b-1">6.优先级
-            <br><small class="show-file-title-sub">优先级范围0-20，从左到右递增，推荐默认为0</small>
-            <br><small class="show-file-title-sub">文章将先依照优先级排序，相同优先级下依照发布时间排序</small></h3>
+            <h3 class="admin-index-title mdui-text-color-indigo">6.{{__('admin.priority')}}
+                <br><small class="show-file-title-sub">{{__('admin/news.newsPriorityTip1')}}</small>
+                <br><small class="show-file-title-sub">{{__('admin/news.newsPriorityTip2')}}</small></h3>
             <label class="mdui-slider mdui-slider-discrete">
                 <input type="range" step="1" min="0" max="20" value="{{$news->order}}" name="order"/>
             </label>

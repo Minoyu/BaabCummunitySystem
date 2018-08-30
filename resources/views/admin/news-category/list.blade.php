@@ -25,7 +25,11 @@
                     <td>@if($newsCategory->status=='hidden')<span class="mdui-text-color-pink">[<i class="mdui-icon material-icons">local_cafe</i>暂存] </span>@endif <i class="mdui-icon material-icons">{{$newsCategory->icon}}</i>{{$newsCategory->name}}</td>
                     <td>{{$newsCategory->id}}</td>
                     <td>{{$newsCategory->description}}</td>
-                    <td>{{$newsCategory->news_count}}</td>
+                    <td>
+                        <a target="_blank" href="{{route('adminNewsList',['category_id'=>$newsCategory->id])}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense mdui-color-indigo-400 admin-table-btn">
+                            <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>{{$newsCategory->news_count}}
+                        </a>
+                    </td>
                     <td>{{$newsCategory->order}}</td>
                     <td>
                         <a href="{{route('adminNewsCategoriesEdit',$newsCategory->id)}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">

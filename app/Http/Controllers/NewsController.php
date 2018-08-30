@@ -103,9 +103,23 @@ class NewsController extends Controller
      * 后台新闻列表页
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function adminListShow(){
-        $newses=News::with('user')->orderBy('order','desc')->paginate(10);
-        return view('admin.news.list',compact('newses'));
+    public function adminListShow(Request $request){
+        $selectedCategory = false;
+        if($request->input('category_id')){
+            $newsCategory = NewsCategory::findOrFail($request->input('category_id'));
+            $newses=$newsCategory->news()
+                ->with('user','newsCategory')
+                ->orderBy('order','desc')
+                ->orderBy('created_at','desc')
+                ->paginate(15);
+            $selectedCategory = true;
+        }else{
+            $newses=News::with('user','newsCategory')
+                ->orderBy('order','desc')
+                ->orderBy('created_at','desc')
+                ->paginate(15);
+        }
+        return view('admin.news.list',compact('newses','selectedCategory','newsCategory'));
     }
 
     /**
@@ -149,6 +163,7 @@ class NewsController extends Controller
 
         //渲染
         if ($res) {
+            $res->newsCategory->update(['news_count'=>$res->newsCategory->news()->count()]);
             if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['新闻' . $title . '创建成功',]);
             } else {
@@ -173,6 +188,7 @@ class NewsController extends Controller
      * @return $this|\Illuminate\Http\RedirectResponse
      */
     public function update(News $news){
+        $oldCategory = $news->newsCategory;
         $this->authorize('update',$news);
 
         $status = \request('status');
@@ -199,6 +215,8 @@ class NewsController extends Controller
 
         //渲染
         if ($res) {
+            $oldCategory->update(['news_count'=>$oldCategory->news()->count()]);
+            $news->newsCategory->update(['news_count'=>$news->newsCategory->news()->count()]);
             if ($status == 'publish') {
                 return \redirect()->back()->with('tips', ['新闻' . $title . '编辑成功',]);
             } else {
@@ -220,6 +238,7 @@ class NewsController extends Controller
         $this->authorize('delete',$news);
         $news->delete();
         if($news->trashed()){
+            $news->newsCategory->update(['news_count'=>$news->newsCategory->news()->count()]);
             $status = 1;
             $msg = "The news has been deleted";
         }else{
@@ -240,6 +259,7 @@ class NewsController extends Controller
             $news = News::where('id',$request->ids[$i])->first();
             $this->authorize('delete',$news);
             $news->delete();
+            $news->newsCategory->update(['news_count'=>$news->newsCategory->news()->count()]);
             if(!$news->trashed()){
                 $failedCount++;
             }

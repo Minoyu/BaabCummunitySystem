@@ -23,7 +23,7 @@
             @foreach($indexCarousels as $indexCarousel)
                 <tr class="mdui-table-row" id="{{$indexCarousel->id}}" name="{{str_limit($indexCarousel->title, $limit = 30, $end = '...')}}">
                     <td>@if($indexCarousel->status=='hidden')
-                            <i class="mdui-icon material-icons">local_cafe</i><span class="layui-badge mdui-color-pink-accent">{{__('community.saved')}}</span>
+                            <i class="mdui-icon material-icons mdui-color-pink-accent">local_cafe</i><span class="layui-badge mdui-color-pink-accent">{{__('community.saved')}}</span>
                         @endif <a href="{{$indexCarousel->url}}">{{$indexCarousel->title}}</a></td>
                     <td>{{$indexCarousel->id}}</td>
                     <td>{{$indexCarousel->position}}</td>

@@ -46,7 +46,10 @@
                             <span class="layui-badge layui-bg-black">{{__('community.sink')}}</span>
                         @endif
 
-                        <a target="_blank" href="{{route('showCommunityContent',$topic->id)}}">{{str_limit($topic->title, $limit = 40, $end = '...')}}</a>
+                        <a target="_blank" href="{{route('showCommunityContent',$topic->id)}}">{{str_limit($topic->title, $limit = 40, $end = '...')}}
+                            <br>
+                            <small>{{$topic->created_at}}</small>
+                        </a>
                     </td>
                     <td>{{$topic->id}}</td>
                     <td>{{$topic->communitySection->name}}</td>
