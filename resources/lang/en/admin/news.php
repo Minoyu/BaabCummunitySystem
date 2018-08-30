@@ -25,4 +25,16 @@ return [
     'editNewsCarousel'=>'Edit News Center Carousel',
     'newsCarouselImgUploadTip'=>'Click on the image below to upload, recommend size 1000*500(2:1)',
 
-];
+    'editCategory'=>'Edit News Category',
+    'newsCategoriesList'=>'News Categories List',
+    'categoryName'=>'Category Name',
+    'categoryDescription'=>'Category Description',
+    'categoryDescriptionTip'=>'Please enter a description of the category for display',
+    'categoryIcon'=>'Category Icon',
+    'categoryIconTip1'=>'Enter the short code for the icon here , such as: book ，send etc',
+    'categoryIconTip2'=>'Using Google Material Icon Library by default，<a href="https://www.mdui.org/docs/material_icon" class="mdui-text-color-red" target="_blank">Please go to find icon short code out</a>',
+
+    'newsCatPriorityTip1'=>'Priority range 0-20, incremented from left to right, default is 0',
+    'newsCatPriorityTip2'=>'Categories will be sorted first by priority and by release time at the same priority',
+    'newsCategoryDeleteNote'=>'Note: the parent category containing news can not be deleted. Please delete all the news below.'
+    ];

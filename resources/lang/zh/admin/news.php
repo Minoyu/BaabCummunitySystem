@@ -25,4 +25,17 @@ return [
     'editNewsCarousel'=>'编辑新闻中心轮播图',
     'newsCarouselImgUploadTip'=>'点击下方图片上传,推荐尺寸 1000*500(2:1)',
 
+    'editCategory'=>'编辑新闻分类',
+    'newsCategoriesList'=>'新闻分类列表',
+    'categoryName'=>'分类名称',
+    'categoryDescription'=>'分类描述',
+    'categoryDescriptionTip'=>'请输入分类的描述用于展示',
+    'categoryIcon'=>'分类图标',
+    'categoryIconTip1'=>'请在此输入图标的短代码，如: book 、send 等',
+    'categoryIconTip2'=>'默认使用谷歌Material图标库，<a href="https://www.mdui.org/docs/material_icon" class="mdui-text-color-red" target="_blank">请前往查找</a>',
+
+    'newsCatPriorityTip1'=>'优先级范围0-20，从左到右递增，默认为0',
+    'newsCatPriorityTip2'=>'分类将先依照优先级排序，相同优先级下依照发布时间排序',
+    'newsCategoryDeleteNote'=>'注意:含有新闻的父分类无法被删除,请先删除其下所有新闻.'
+
 ];
