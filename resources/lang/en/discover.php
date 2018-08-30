@@ -33,7 +33,7 @@ return [
 
     //搜索
     'searchTip'=>'Search for Everything',
-    'searchTipHeader'=>'Currently，you can try to search',
+    'searchTipHeader'=>'Currently，You can try to search',
     'users'=>'Users',
     'communityTopics'=>'Community Topics',
     'categories'=>'Categories',

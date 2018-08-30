@@ -28,4 +28,11 @@ return [
     //topics
     'topicsCountTip'=>'共有 <span class="mdui-text-color-pink-accent">:num</span> 条话题',
     'viewTopicsCountTip'=>'浏览其下的 <span class="mdui-text-color-pink-accent">:num</span> 条话题',
+
+    'dontLikeDrawer'=>'不喜欢悬浮的抽屉栏?',
+    'dontLikeDrawerContent1'=>'你可以选择将抽屉栏默认隐藏，此后抽屉栏将不再自动弹出。',
+    'dontLikeDrawerContent2'=>'若已登录，你的喜好将永久保留。',
+    'showDrawer'=>'保留抽屉栏并不再提醒',
+    'hideDrawer'=>'默认隐藏',
+
 ];

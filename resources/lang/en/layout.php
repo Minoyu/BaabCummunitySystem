@@ -29,4 +29,9 @@ return [
     'topicsCountTip'=>'<span class="mdui-text-color-pink-accent">:num</span> topics',
     'viewTopicsCountTip'=>'Browse the <span class="mdui-text-color-pink-accent">:num</span> topics here',
 
+    'dontLikeDrawer'=>'Don\'t like suspended drawers?',
+    'dontLikeDrawerContent1'=>'You can choose to hide the drawer bar by default, after which the drawer bar will no longer pop up automatically.',
+    'dontLikeDrawerContent2'=>'If logged in, your preferences will remain permanently.',
+    'showDrawer'=>'Keep the drawer bar and no reminders',
+    'hideDrawer'=>'Default hiding',
 ];

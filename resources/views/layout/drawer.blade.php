@@ -87,13 +87,13 @@
 </div>
 
 <div class="mdui-dialog" id="handleDrawerStatusDialog">
-    <div class="mdui-dialog-title">厌烦了悬浮的抽屉栏?</div>
+    <div class="mdui-dialog-title">{{__('layout.dontLikeDrawer')}}</div>
     <div class="mdui-dialog-content">
-        你可以选择将抽屉栏默认隐藏，此后抽屉栏将不再自动弹出。
-        <br>若已登录，你的喜好将永久保留。
+        {{__('layout.dontLikeDrawerContent1')}}
+        <br>{{__('layout.dontLikeDrawerContent2')}}
     </div>
-    <div class="mdui-dialog-actions">
-        <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>保留抽屉栏并不再提醒</button>
-        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>默认隐藏</button>
+    <div class="mdui-dialog-actions mdui-dialog-actions-stacked">
+        <button class="mdui-btn mdui-ripple" mdui-dialog-cancel>{{__('layout.showDrawer')}}</button>
+        <button class="mdui-btn mdui-ripple" mdui-dialog-confirm>{{__('layout.hideDrawer')}}</button>
     </div>
 </div>
