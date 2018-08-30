@@ -36,5 +36,11 @@ return [
 
     'newsCatPriorityTip1'=>'Priority range 0-20, incremented from left to right, default is 0',
     'newsCatPriorityTip2'=>'Categories will be sorted first by priority and by release time at the same priority',
-    'newsCategoryDeleteNote'=>'Note: the parent category containing news can not be deleted. Please delete all the news below.'
-    ];
+    'newsCategoryDeleteNote'=>'Note: the parent category containing news can not be deleted. Please delete all the news below.',
+
+    'allRepliesList'=>'All News Replies List',
+    'repliesList'=>'News Replies List',
+    'createReply'=>'Create Reply',
+    'editReply'=>'Edit Reply',
+    'fromNews'=>'From News',
+];

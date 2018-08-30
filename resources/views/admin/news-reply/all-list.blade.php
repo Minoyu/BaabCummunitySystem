@@ -1,20 +1,20 @@
 @extends('frame.adminframe')
-@section('title','新闻回复管理')
+@section('title',__('admin.newsReplyManage'))
 @section('subtitleUrl',route('adminNewsReplyAllList'))
 @section('adminDrawerActiveVal','drawer-newsReplyItem')
 
 @section('content')
-    <h3 class="admin-title mdui-text-color-indigo">全站新闻回复列表</h3>
+    <h3 class="admin-title mdui-text-color-indigo">{{__('admin/news.allRepliesList')}}</h3>
     @include('admin.layout.msg')
     <div class="mdui-table-fluid">
         <table id="listTable" class="mdui-table mdui-table-selectable mdui-table-hoverable" style="min-width: 1000px">
             <thead>
             <tr>
-                <th>内容</th>
-                <th class="mdui-table-col-numeric">来自新闻</th>
-                <th class="mdui-table-col-numeric">用户</th>
-                <th class="mdui-table-col-numeric">回复时间</th>
-                <th style="min-width: 275px" class="mdui-table-col-numeric">操作</th>
+                <th>{{__('admin.replyContent')}}</th>
+                <th class="mdui-table-col-numeric">{{__('admin/news.fromNews')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.author')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.time')}}</th>
+                <th class="mdui-table-col-numeric">{{__('index.actions')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -22,21 +22,21 @@
                 <tr class="mdui-table-row" id="{{$reply->id}}" name="{{str_limit(strip_tags($reply->content), $limit = 30, $end = '...')}}">
                     <td>{!! str_limit(strip_tags($reply->content), $limit = 50, $end = '...')!!}</td>
                     <td>
-                        <a href="#">
+                        <a href="{{route('showNewsContent',$reply->news->id)}}">
                             {{str_limit($reply->news->title , $limit = 30, $end = '...')}}
                         </a>
                     </td>
                     <td>{{$reply->user->name}}</td>
                     <td>{{$reply->created_at}}</td>
                     <td>
-                        <a href="#" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
-                            <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>查看
+                        <a mdui-tooltip="{content: '{{__('admin.view')}}', position: 'top'}" target="_blank" href="{{route('showNewsContent',$reply->news->id)}}#reply-{{$reply->id}}" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense admin-table-btn-icon">
+                            <i class="mdui-icon material-icons">remove_red_eye</i>
                         </a>
-                        <a href="{{route('adminNewsReplyEdit',[$reply->news->id,$reply->id])}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn">
-                            <i class="mdui-icon material-icons mdui-icon-left">edit</i>编辑
+                        <a mdui-tooltip="{content: '{{__('admin.edit')}}', position: 'top'}" target="_blank" href="{{route('adminNewsReplyEdit',[$reply->news->id,$reply->id])}}" class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn-icon">
+                            <i class="mdui-icon material-icons">edit</i>
                         </a>
-                        <button onclick="deleteNewsReply('{{$reply->id}}','{{str_limit(strip_tags($reply->content), $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn mdui-color-pink-accent">
-                            <i class="mdui-icon material-icons mdui-icon-left">delete</i>删除
+                        <button mdui-tooltip="{content: '{{__('admin.delete')}}', position: 'top'}" onclick="deleteNewsReply('{{$reply->id}}','{{str_limit(strip_tags($reply->content), $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-icon mdui-btn-raised mdui-ripple mdui-btn-dense admin-table-btn-icon mdui-color-pink-accent">
+                            <i class="mdui-icon material-icons">delete</i>
                         </button>
                     </td>
                 </tr>

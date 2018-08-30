@@ -36,6 +36,11 @@ return [
 
     'newsCatPriorityTip1'=>'优先级范围0-20，从左到右递增，默认为0',
     'newsCatPriorityTip2'=>'分类将先依照优先级排序，相同优先级下依照发布时间排序',
-    'newsCategoryDeleteNote'=>'注意:含有新闻的父分类无法被删除,请先删除其下所有新闻.'
+    'newsCategoryDeleteNote'=>'注意:含有新闻的父分类无法被删除,请先删除其下所有新闻.',
 
+    'allRepliesList'=>'全站新闻回复列表',
+    'repliesList'=>'新闻回复列表',
+    'createReply'=>'创建回复',
+    'editReply'=>'编辑回复',
+    'fromNews'=>'来自新闻',
 ];
