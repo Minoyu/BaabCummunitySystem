@@ -6,6 +6,7 @@ use App\Model\News;
 use App\Model\NewsCarousel;
 use App\Model\NewsCategory;
 use App\Model\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -22,6 +23,8 @@ class NewsController extends Controller
      */
     public function showNews(Request $request){
         $newses = News::where('status','publish')
+            ->where('invalided_at',null)
+            ->orWhere('invalided_at','>',Carbon::now())
             ->orderBy('order','desc')
             ->with('newsCategory')
             ->paginate(10);
@@ -50,6 +53,8 @@ class NewsController extends Controller
     {
         $newses = $cat->news()
             ->where('status','publish')
+            ->where('invalided_at',null)
+            ->orWhere('invalided_at','>',Carbon::now())
             ->orderBy('order','desc')
             ->paginate(15);
         if ($request->ajax()) {

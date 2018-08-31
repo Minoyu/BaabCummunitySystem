@@ -21,9 +21,9 @@
         <div class="actions mdui-clearfix">
             <button class="mdui-btn mdui-ripple more-option" type="button" mdui-menu="{target: '#login-dialog-menu', position: 'top', covered: false}">{{__('auth.moreOptions')}}</button>
             <ul class="mdui-menu full-width-menu" id="login-dialog-menu">
-                <li class="mdui-menu-item">
-                    <a onclick="loginToReset()" class="mdui-ripple">{{__('auth.forgotPassword')}}</a>
-                </li>
+                {{--<li class="mdui-menu-item">--}}
+                    {{--<a onclick="loginToReset()" class="mdui-ripple">{{__('auth.forgotPassword')}}</a>--}}
+                {{--</li>--}}
                 <li class="mdui-menu-item">
                     <a onclick="loginToRegister()" class="mdui-ripple">{{__('auth.createAccount')}}</a>
                 </li>

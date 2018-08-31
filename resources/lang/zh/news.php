@@ -6,5 +6,6 @@ return [
     'hotNews'=>'热点新闻',
     'newsCenter'=>'新闻中心',
     'newsCount'=>'新闻数',
+    'invalidTip'=>'失效',
 
 ];

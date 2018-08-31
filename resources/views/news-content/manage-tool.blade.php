@@ -25,6 +25,9 @@
                 @if($news->status=='hidden')
                     <span class="layui-badge layui-bg-orange"> {{__('community.saved')}} </span>
                 @endif
+                @if(isset($news->invalided_at) && $news->invalided_at < \Carbon\Carbon::now())
+                    <span class="layui-badge layui-bg-black">{{__('news.invalidTip')}}</span>
+                @endif
             </div>
             <div class="mdui-col">
                 <a href="{{route('newsTurnUpNewsOrder',$news->id)}}" class="mdui-center mdui-btn mdui-ripple mdui-center side-edit-tool-btn mdui-text-color-deep-orange">

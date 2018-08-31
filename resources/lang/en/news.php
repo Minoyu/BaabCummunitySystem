@@ -6,5 +6,5 @@ return [
     'hotNews'=>'Hot News',
     'newsCenter'=>'News Center',
     'newsCount'=>'News Count',
-
+    'invalidTip'=>'Invalid',
 ];
