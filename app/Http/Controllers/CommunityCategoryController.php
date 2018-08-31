@@ -127,6 +127,7 @@ class CommunityCategoryController extends Controller
 
         $zone->delete();
         if($zone->trashed()){
+            $zone->communityTopics()->delete();
             $status = 1;
             $msg = __('controller.deleteSuccess');
         }else{
@@ -254,6 +255,7 @@ class CommunityCategoryController extends Controller
 
         $section->delete();
         if($section->trashed()){
+            $section->communityTopics()->delete();
             $status = 1;
             $msg = __('controller.deleteSuccess');
         }else{
