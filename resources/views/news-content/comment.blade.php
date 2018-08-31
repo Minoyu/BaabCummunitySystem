@@ -40,7 +40,7 @@
         @include('news-content.comment-data')
         @if(count($replies)==0)
             <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">hot_tub</i>
-            <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">{{__('layout.beFirstComment')}}</span>
+            <span class="loading-tip-text mdui-m-t-1 mdui-m-b-3" style="font-size: 15px">{{__('layout.beFirstComment')}}</span>
         @endif
         <div  id="NewsReplyData"></div>
         <div id="NewsReplyLoadingTip" class="mdui-m-y-2" style="display:none">

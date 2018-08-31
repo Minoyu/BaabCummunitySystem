@@ -18,7 +18,7 @@
         @include('discover.left-list-data')
         @if(count($activities)==0)
             <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">directions_walk</i>
-            <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">
+            <span class="loading-tip-text mdui-m-t-1 mdui-m-b-3" style="font-size: 15px">
                 {{__('discover.noActivities')}}
                 <br>{{__('discover.noActivitiesTip')}}
             </span>
@@ -42,7 +42,7 @@
             @include('discover.left-list-data')
             @if(count($activities)==0)
                 <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">directions_walk</i>
-                <span class="loading-tip-text mdui-m-t-1 mdui-m-b-2" style="font-size: 15px">{{__('discover.noActivities')}}</span>
+                <span class="loading-tip-text mdui-m-t-1 mdui-m-b-3" style="font-size: 15px">{{__('discover.noActivities')}}</span>
             @endif
             <div  id="ActivityListData"></div>
             <div id="ActivityListLoadingTip" class="mdui-m-y-2" style="display:none">

@@ -1460,6 +1460,16 @@ body {
     font-size: 20px;
     opacity: 0.5;
 }
+
+@media (max-width: 600px) {
+    .news-content-create-comment .tip-text{
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+}
 .news-content-create-comment .tip-action{
     text-align: center;
     margin-top: 10px;

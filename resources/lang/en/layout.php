@@ -19,7 +19,7 @@ return [
     'createCommentHeader'=>'Give your opinion',
     'saySomething'=>'Say something?',
     'send'=>'Fire',
-    'commentCountTip'=>'There are :num comments',
+    'commentCountTip'=>'<span class="mdui-hidden-xs-down">There are </span>:num comments',
     'latest'=>'Latest',
     'hottest'=>'Hottest',
     'orderByTime'=>'Order by publication time',
