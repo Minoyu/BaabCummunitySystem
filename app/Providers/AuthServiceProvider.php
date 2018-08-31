@@ -17,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
         \App\Model\User::class  => \App\Policies\UserPolicy::class,
         \App\Model\UserInfo::class  => \App\Policies\UserInfoPolicy::class,
         \App\Model\NewsCategory::class  => \App\Policies\NewsCategoryPolicy::class,
+        \App\Model\NewsCarousel::class  => \App\Policies\NewsCarouselPolicy::class,
         \App\Model\NewsReply::class  => \App\Policies\NewsReplyPolicy::class,
         \App\Model\News::class  => \App\Policies\NewsPolicy::class,
         \App\Model\IndexCarousel::class  => \App\Policies\IndexCarouselPolicy::class,
