@@ -14,6 +14,9 @@
         <div class="admin-editor-middle-bar">{{__('admin.editArea')}}</div>
         <div id="editorText" class="admin-editor-text mdui-hoverable" >{!! $reply->content !!}</div>
         <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
+        <div class="mdui-progress">
+            <div class="mdui-progress-indeterminate" id="editor-progress" style="display: none"></div>
+        </div>
 
         <div class="mdui-divider" style="margin-top: 50px"></div>
         <button type="submit" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent admin-btn"><i class="mdui-icon material-icons mdui-icon-left">add</i>{{__('admin.publish')}}</button>

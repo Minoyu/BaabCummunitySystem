@@ -412,31 +412,30 @@ class UserController extends Controller
         $this->authorize('uploadImgs',$user->info);
 
         if ($request->isMethod('post')) {
-            $this->validate($request,[
-                'avatar'=>'required|image'
-            ]);
-            $file = $request->file('avatar');
-            // 文件是否上传成功
-            if ($file->isValid()) {
-                // 获取文件相关信息
-                $originalName = $file->getClientOriginalName(); // 文件原名
-                $ext = $file->getClientOriginalExtension();     // 扩展名
-                $realPath = $file->getRealPath();   //临时文件的绝对路径
-                $type = $file->getClientMimeType();     // image/jpeg
 
-                // 上传文件
-                $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-                // 裁剪图片 生成200x200的缩略图
-                Image::make($realPath)->fit(200)->save();
-                // 使用我们新建的uploads本地存储空间（目录）
-                // 这里的userAvatar是配置文件的名称
-                $bool = Storage::disk('userAvatar')->put($filename, file_get_contents($realPath));
-                $avatar_url = "/uploads/avatar/" . $filename;
-                if ($bool) {
-                    UserInfo::where('user_id', $user->id)->update(compact('avatar_url'));
-                }
-                return json_encode(["status" => 1, "src" => $avatar_url]);//ajax
+            $this->validate($request,[
+                'img_data'=>'required'
+            ]);
+
+            $image=$request->img_data;
+            $realPath = decodeBase64ImgToFile($image);
+
+            // 获取文件相关信息
+            $ext = 'jpeg'; // 扩展名
+
+            // 上传文件
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+            // 裁剪图片 生成200x200的缩略图
+            Image::make($realPath)->fit(200)->save();
+            // 使用我们新建的uploads本地存储空间（目录）
+            // 这里的userAvatar是配置文件的名称
+            $bool = Storage::disk('userAvatar')->put($filename, file_get_contents($realPath));
+            $avatar_url = "/uploads/avatar/" . $filename;
+            if ($bool) {
+                UserInfo::where('user_id', $user->id)->update(compact('avatar_url'));
             }
+            return json_encode(["status" => 1, "src" => $avatar_url]);//ajax
+
         }
     }
     /**
@@ -451,36 +450,35 @@ class UserController extends Controller
         $this->authorize('uploadImgs',$user->info);
 
         if ($request->isMethod('post')) {
-            $this->validate($request,[
-                'cover'=>'required|image'
-            ]);
-            $file = $request->file('cover');
-            // 文件是否上传成功
-            if ($file->isValid()) {
-                // 获取文件相关信息
-                $originalName = $file->getClientOriginalName(); // 文件原名
-                $ext = $file->getClientOriginalExtension();     // 扩展名
-                $realPath = $file->getRealPath();   //临时文件的绝对路径
-                $type = $file->getClientMimeType();     // image/jpeg
 
-                // 上传文件
-                $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-//                // 如果宽大于1280 裁剪图片
-                $img=Image::make($realPath);
-                if ($img->width()>1280){
-                    $img->resize(1280, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
-                        $constraint->aspectRatio();
-                    })->save();
-                }
-                // 使用我们新建的uploads本地存储空间（目录）
-                // 这里的userCover是配置文件的名称
-                $bool = Storage::disk('userCover')->put($filename, file_get_contents($realPath));
-                $cover_bg_url = "/uploads/cover/" . $filename;
-                if ($bool) {
-                    UserInfo::where('user_id', $user->id)->update(compact('cover_bg_url'));
-                }
-                return json_encode(["status" => 1, "src" => $cover_bg_url]);//ajax
+            $this->validate($request,[
+                'img_data'=>'required'
+            ]);
+
+            $image=$request->img_data;
+
+            $realPath = decodeBase64ImgToFile($image);
+            // 获取文件相关信息
+            $ext = 'jpeg'; // 扩展名
+
+            // 上传文件
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+            // 如果宽大于1280 裁剪图片
+            $img=Image::make($realPath);
+            if ($img->width()>1280){
+                $img->resize(1280, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
             }
+            // 使用我们新建的uploads本地存储空间（目录）
+            // 这里的userCover是配置文件的名称
+            $bool = Storage::disk('userCover')->put($filename, file_get_contents($realPath));
+            $cover_bg_url = "/uploads/cover/" . $filename;
+            if ($bool) {
+                UserInfo::where('user_id', $user->id)->update(compact('cover_bg_url'));
+            }
+            return json_encode(["status" => 1, "src" => $cover_bg_url]);//ajax
+
         }
     }
 }

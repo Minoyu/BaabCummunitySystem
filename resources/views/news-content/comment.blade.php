@@ -8,6 +8,10 @@
                     <div class="editor-middle-bar">{{__('layout.saySomething')}}</div>
                     <div id="editorText" class="editor-text mdui-hoverable" ></div>
                     <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
+                    <div class="mdui-progress">
+                        <div class="mdui-progress-indeterminate" id="editor-progress" style="display: none"></div>
+                    </div>
+
                     <a onclick="ajaxSubmitNewsCommentForm('{{route('newsReplyStore',$news->id)}}')" class="mdui-btn mdui-color-pink-400 submit-btn"><i class="mdui-icon material-icons mdui-icon-left">send</i>{{__('layout.send')}}</a>
                 </div>
         </div>

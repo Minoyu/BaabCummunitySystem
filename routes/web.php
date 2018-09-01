@@ -19,8 +19,6 @@ Route::get('/news','NewsController@showNews')->name('showNews');
 Route::get('/news/category/{cat}','NewsController@showNewsSec')->name('showNewsSec');
 Route::get('/news/{news}','NewsController@showNewsContent')->name('showNewsContent');
 
-//新闻回复图片上传
-Route::post('/news/reply/upload/img','NewsController@uploadReplyImg')->name('uploadNewsImg');
 
 
 //社区页面
@@ -30,8 +28,6 @@ Route::get('/community/section/{section}','CommunityController@showCommunitySect
 Route::get('/community/topic/{topic}','CommunityController@showCommunityContent')->name('showCommunityContent');
 Route::post("/community/topic/vote/getVoters",'CommunityTopicController@ajaxGetVoters')->name('communityTopicGetVoters');
 
-//社区话题图片上传
-Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')->name('uploadCommunityTopicImg');
 
 
 //切换语言
@@ -64,6 +60,9 @@ Route::group(['middleware'=>'auth:web'],function (){
 
 //  新闻回复
     Route::post("/news/{news}/reply/store",'NewsReplyController@store')->name('newsReplyStore');
+    //新闻回复图片上传
+    Route::post('/news/reply/upload/img','NewsController@uploadReplyImg')->name('uploadNewsImg');
+
 //  社区话题回复
     Route::post("/community/topic/{topic}/reply/store",'CommunityTopicReplyController@store')->name('communityTopicReplyStore');
 
@@ -73,6 +72,9 @@ Route::group(['middleware'=>'auth:web'],function (){
     Route::get("/community/edit/topic/{topic}",'CommunityTopicController@edit')->name('communityTopicEdit');
     Route::post("/community/edit/topic/{topic}/update",'CommunityTopicController@updateMini')->name('communityTopicUpdate');
 
+    //社区话题图片上传
+    Route::post('/community/topic/upload/img','CommunityTopicController@uploadImg')->name('uploadCommunityTopicImg');
+    Route::post('/community/topic/reply/upload/img','CommunityTopicController@uploadReplyImg')->name('uploadCommunityTopicReplyImg');
 
     //ajax通过zoneid获取sections
     Route::post('/community/category/getSectionsByZoneId','CommunityCategoryController@getSectionsByZoneId')->name('communitygetSectionsByZoneId');

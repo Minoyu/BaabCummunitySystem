@@ -98,6 +98,11 @@ return [
             'driver' => 'local',
             'root' => public_path('uploads/community/topic/img'),
         ],
+        // 新建一个本地端base64ImgTmp空间（目录） 用于存储base64临时文件
+        'base64ImgTmp' => [
+            'driver' => 'local',
+            'root' => public_path('uploads/tmp/base64Img'),
+        ],
 
 
         'public' => [

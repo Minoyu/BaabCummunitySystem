@@ -253,7 +253,7 @@ if ($$('#editorToolbar').length>0){
     };
     switch ($$('#editorToolbar').attr('type')){
         case 'community-topic':
-            editor.customConfig.uploadImgServer = '/community/topic/upload/img';
+            var serverUrl = '/community/topic/upload/img';
             if ($$('body').width()<800){
                 editor.customConfig.menus = [
                     'emoticon',  // 表情
@@ -269,10 +269,21 @@ if ($$('#editorToolbar').length>0){
             }
             break;
         case 'news':
-            editor.customConfig.uploadImgServer = '/admin/news/upload/img';
+            var serverUrl = '/admin/news/upload/img';
             break;
         case 'news-reply':
-            editor.customConfig.uploadImgServer = '/news/reply/upload/img';
+            var serverUrl = '/news/reply/upload/img';
+            editor.customConfig.menus = [
+                'emoticon',  // 表情
+                'image', // 插入图片
+                'bold',  // 粗体
+                'italic',  // 斜体
+                'underline',  // 下划线
+                'quote'  // 引用
+            ];
+            break;
+        case 'community-reply':
+            var serverUrl = '/community/topic/reply/upload/img';
             editor.customConfig.menus = [
                 'emoticon',  // 表情
                 'image', // 插入图片
@@ -289,6 +300,43 @@ if ($$('#editorToolbar').length>0){
     };
     editor.customConfig.uploadFileName = 'img[]';
     editor.customConfig.zIndex = 1;
+    editor.customConfig.debug = location.href.indexOf('wangeditor_debug_mode=1') > 0;
+
+    //文件上传逻辑
+    editor.customConfig.uploadImgTimeout = 300000;
+    editor.customConfig.uploadImgMaxSize = 10 * 1024 * 1024;
+    editor.customConfig.customUploadImg = function (files, insert) {
+        // files 是 input 中选中的文件列表
+        editorProgress = $$('#editor-progress');
+        $$.each(files, function (i, file) {
+            editorProgress.show();
+            ImgToBase64(file, 900, function (base64) {
+                $$.ajax({
+                    method: 'POST',
+                    url: serverUrl,
+                    headers: {
+                        'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {
+                        img_data:base64
+                    },
+                    //禁止的原因是,FormData已经帮我们做了处理
+                    success: function (data) {
+                        data=JSON.parse(data);
+                        if (data.status===1){
+                            // insert 是获取图片 url 后，插入到编辑器的方法
+                            // 上传代码返回结果之后，将图片插入到编辑器中
+                            insert(data.src);
+                            editorProgress.hide();
+                        }
+                    }
+                });
+            });
+
+
+        });
+    };
+
     editor.create();
     // 初始化 textarea 的值
     textArea.val(editor.txt.html());
@@ -678,30 +726,29 @@ function handleAvatarUpdate(obj,className) {
     var avatar = obj.files[0];
     var id = $$('input[name="userId"]').val();
 
-    var form = new FormData();
-    form.append('avatar',avatar);
-    $$.ajax({
-        method: 'POST',
-        url: '/user/'+id+'/upload/avatar',
-        headers: {
-            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-        },
-        data: form,
-        contentType: false, //禁止设置请求类型
-        processData: false, //禁止jquery对DAta数据的处理,默认会处理
-        //禁止的原因是,FormData已经帮我们做了处理
-        success: function (data) {
-            data=JSON.parse(data);
-            if (data.status===1){
-                avatarImg.attr('src',data.src);
-                mdui.snackbar({
-                    message:'The Avatar has been uploaded successfully<br/>头像已成功上传',
-                    position:'top'
-                });
+    ImgToBase64(avatar, 400, function (base64) {
+        $$.ajax({
+            method: 'POST',
+            url: '/user/'+id+'/upload/avatar',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                img_data:base64
+            },
+            //禁止的原因是,FormData已经帮我们做了处理
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    avatarImg.attr('src',data.src);
+                    mdui.snackbar({
+                        message:'The Avatar has been uploaded successfully<br/>头像已成功上传',
+                        position:'top'
+                    });
+                }
             }
-        }
+        });
     });
-
 }
 
 /**
@@ -715,31 +762,29 @@ function handleCoverUpdate(obj,className) {
     var cover = obj.files[0];
     var id = $$('input[name="userId"]').val();
 
-    var form = new FormData();
-    form.append('cover',cover);
-    $$.ajax({
-        method: 'POST',
-        url: '/user/'+id+'/upload/cover',
-        headers: {
-            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-        },
-        data: form,
-        contentType: false, //禁止设置请求类型
-        processData: false, //禁止jquery对DAta数据的处理,默认会处理
-        //禁止的原因是,FormData已经帮我们做了处理
-        success: function (data) {
-            data=JSON.parse(data);
-            if (data.status===1){
-                coverImg.css('background-image','url('+data.src+')');
-                coverDrawerImg.attr('src',data.src);
-                mdui.snackbar({
-                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
-                    position:'top'
-                });
+    ImgToBase64(cover, 1280, function (base64) {
+        $$.ajax({
+            method: 'POST',
+            url: '/user/'+id+'/upload/cover',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                img_data: base64
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    coverImg.css('background-image','url('+data.src+')');
+                    coverDrawerImg.attr('src',data.src);
+                    mdui.snackbar({
+                        message:'The Cover has been uploaded successfully<br/>封面已成功上传',
+                        position:'top'
+                    });
+                }
             }
-        }
+        });
     });
-
 }
 
 //新闻页面的ajax翻页
@@ -1294,7 +1339,7 @@ function handleSelGetSections(zoneId,classToAppend){
         },
         success: function (data) {
             data=JSON.parse(data);
-            var sectionsHtmlToAppend='<option value="null">请选择分区</option>';
+            var sectionsHtmlToAppend='<option value="null">Please select Section</option>';
             $$.each(data.sections,function (i,value) {
                 sectionsHtmlToAppend+='<option value="'+value.id+'">'+value.name+'</option>'
             });
@@ -2002,4 +2047,47 @@ function deleteNews(newsId,newsTitle) {
 function removeHTMLTag(str) {
     str = str.replace(/<\/?[^>]*>/g,''); //去除HTML tag
     return str;
+}
+
+/**
+ * 将图片压缩转换为base64
+ * @param file
+ * @param maxLen
+ * @param callBack
+ * @constructor
+ */
+function ImgToBase64(file, maxLen, callBack) {
+    var img = new Image();
+
+    var reader = new FileReader();//读取客户端上的文件
+    reader.onload = function () {
+        var url = reader.result;//读取到的文件内容.这个属性只在读取操作完成之后才有效,并且数据的格式取决于读取操作是由哪个方法发起的.所以必须使用reader.onload，
+        img.src = url;//reader读取的文件内容是base64,利用这个url就能实现上传前预览图片
+    };
+    img.onload = function () {
+        //生成比例
+        var width = img.width, height = img.height;
+        //计算缩放比例
+        var rate = 1;
+        if (width >= height) {
+            if (width > maxLen) {
+                rate = maxLen / width;
+            }
+        } else {
+            if (height > maxLen) {
+                rate = maxLen / height;
+            }
+        };
+        img.width = width * rate;
+        img.height = height * rate;
+        //生成canvas
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+        var base64 = canvas.toDataURL('image/jpeg', 0.9);
+        callBack(base64);
+    };
+    reader.readAsDataURL(file);
 }

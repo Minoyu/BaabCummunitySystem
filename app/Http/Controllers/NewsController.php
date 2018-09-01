@@ -307,109 +307,81 @@ class NewsController extends Controller
      * @param Request $request
      * @return string
      */
-    public function uploadImg(Request $request){
+    public function uploadImg(Request $request)
+    {
         $this->authorize('uploadImgs',News::class);
 
         $user = Auth::user();
-        $data = [];
-        $failCount=0;
         if ($request->isMethod('post')) {
-            $file = $request->file('img');
-            $len=0;
-            foreach ($file as $key => $value) {
-                $len = $key;
-            }
-            for ($i = 0; $i <= $len; $i++) {
-                // 文件是否上传成功
-                if ($file[$i]->isValid()) {
-                    $this->validate($request,[
-                        'img.*'=>'required|image'
-                    ]);
-                    // 获取文件相关信息
-                    $originalName = $file[$i]->getClientOriginalName(); // 文件原名
-                    $ext = $file[$i]->getClientOriginalExtension();     // 扩展名
-                    $realPath = $file[$i]->getRealPath();   //临时文件的绝对路径
-                    $type = $file[$i]->getClientMimeType();     // image/jpeg
+            $this->validate($request,[
+                'img_data'=>'required'
+            ]);
 
-                    // 上传文件
-                    $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-//                // 如果宽大于900 裁剪图片
-                    $img=Image::make($realPath);
-                    if ($img->width()>900){
-                        $img->resize(900, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
-                            $constraint->aspectRatio();
-                        })->save();
-                    }
+            $image=$request->img_data;
 
-                    // 使用我们新建的uploads本地存储空间（目录）
-                    // 这里的userCover是配置文件的名称
-                    $bool = Storage::disk('newsImg')->put($filename, file_get_contents($realPath));
-                    $img_url = "/uploads/news/img/" . $filename;
-                    if ($bool) {
-                        array_push($data,$img_url);
-                    }else{
-                        $failCount++;
-                    }
-                }
+            $realPath = decodeBase64ImgToFile($image);
+            // 获取文件相关信息
+            $ext = 'jpeg'; // 扩展名
+
+            // 上传文件
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+            // 如果宽大于900 裁剪图片
+            $img=Image::make($realPath);
+            if ($img->width()>900){
+                $img->resize(900, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
             }
-            if ($failCount==0){
-                return json_encode(["errno" => 0, "data" => $data]);//ajax
-            }
+
+            // 使用communityTopicImg本地存储空间（目录）
+            $bool = Storage::disk('newsImg')->put($filename, file_get_contents($realPath));
+            $img_url = "/uploads/news/img/" . $filename;
+            return json_encode(["status" => 1, "src" => $img_url]);//ajax
         }
     }
+
     /**
      * uploadReplyImg
      * @param Request $request
      * @return string
      */
-    public function uploadReplyImg(Request $request){
+    public function uploadReplyImg(Request $request)
+    {
         $this->authorize('uploadReplyImgs',News::class);
 
         $user = Auth::user();
-        $data = [];
-        $failCount=0;
         if ($request->isMethod('post')) {
-            $file = $request->file('img');
-            $len=0;
-            foreach ($file as $key => $value) {
-                $len = $key;
-            }
-            for ($i = 0; $i <= $len; $i++) {
-                // 文件是否上传成功
-                if ($file[$i]->isValid()) {
-                    $this->validate($request,[
-                        'img.*'=>'required|image'
-                    ]);
-                    // 获取文件相关信息
-                    $originalName = $file[$i]->getClientOriginalName(); // 文件原名
-                    $ext = $file[$i]->getClientOriginalExtension();     // 扩展名
-                    $realPath = $file[$i]->getRealPath();   //临时文件的绝对路径
-                    $type = $file[$i]->getClientMimeType();     // image/jpeg
+            $this->validate($request,[
+                'img_data'=>'required'
+            ]);
 
-                    // 上传文件
-                    $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-//                // 如果宽大于900 裁剪图片
-                    $img=Image::make($realPath);
-                    if ($img->width()>600){
-                        $img->resize(600, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
-                            $constraint->aspectRatio();
-                        })->save();
-                    }
+            $image=$request->img_data;
+            $imageName = "tmpImg-".$user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() .'.jpeg';
+            if (strstr($image,",")){
+                $image = explode(',',$image);
+                $image = $image[1];
+            }
+            Storage::disk('base64ImgTmp')->put($imageName, base64_decode($image));
+            $realPath= public_path()."/uploads/tmp/base64Img/". $imageName;  //图片名字
 
-                    // 使用我们新建的uploads本地存储空间（目录）
-                    // 这里的userCover是配置文件的名称
-                    $bool = Storage::disk('newsReplyImg')->put($filename, file_get_contents($realPath));
-                    $img_url = "/uploads/news/reply/img/" . $filename;
-                    if ($bool) {
-                        array_push($data,$img_url);
-                    }else{
-                        $failCount++;
-                    }
-                }
+            // 获取文件相关信息
+            $ext = 'jpeg'; // 扩展名
+
+            // 上传文件
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+
+            $img=Image::make($realPath);
+            if ($img->width()>600){
+                $img->resize(600, null, function($constraint){		// 调整图像的宽到600，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
             }
-            if ($failCount==0){
-                return json_encode(["errno" => 0, "data" => $data]);//ajax
-            }
+
+            // 使用我们新建的uploads本地存储空间（目录）
+            // 这里的userCover是配置文件的名称
+            $bool = Storage::disk('newsReplyImg')->put($filename, file_get_contents($realPath));
+            $img_url = "/uploads/news/reply/img/" . $filename;
+            return json_encode(["status" => 1, "src" => $img_url]);//ajax
         }
     }
 
@@ -424,33 +396,30 @@ class NewsController extends Controller
         $user = Auth::user();
         if ($request->isMethod('post')) {
             $this->validate($request,[
-                'cover'=>'required|image'
+                'img_data'=>'required'
             ]);
-            $file = $request->file('cover');
-            // 文件是否上传成功
-            if ($file->isValid()) {
-                // 获取文件相关信息
-                $originalName = $file->getClientOriginalName(); // 文件原名
-                $ext = $file->getClientOriginalExtension();     // 扩展名
-                $realPath = $file->getRealPath();   //临时文件的绝对路径
-                $type = $file->getClientMimeType();     // image/jpeg
 
-                // 上传文件
-                $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
+            $image=$request->img_data;
+
+            $realPath = decodeBase64ImgToFile($image);
+            // 获取文件相关信息
+            $ext = 'jpeg'; // 扩展名
+
+            // 上传文件
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
 //                // 如果宽大于1280 裁剪图片
-                $img=Image::make($realPath);
-                if ($img->width()>1280){
-                    $img->resize(1280, null, function($constraint){		// 调整图像的宽到1280，并约束宽高比(高自动)
-                        $constraint->aspectRatio();
-                    })->save();
-                }
-                // 使用我们新建的uploads本地存储空间（目录）
-                // 这里的userCover是配置文件的名称
-                $bool = Storage::disk('newsCover')->put($filename, file_get_contents($realPath));
-                $cover_url = "/uploads/news/cover/" . $filename;
-                if ($bool) {
-                    return json_encode(["status" => 1, "src" => $cover_url]);//ajax
-                }
+            $img=Image::make($realPath);
+            if ($img->width()>1280){
+                $img->resize(1280, null, function($constraint){		// 调整图像的宽到1280，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
+            }
+            // 使用我们新建的uploads本地存储空间（目录）
+            // 这里的userCover是配置文件的名称
+            $bool = Storage::disk('newsCover')->put($filename, file_get_contents($realPath));
+            $cover_url = "/uploads/news/cover/" . $filename;
+            if ($bool) {
+                return json_encode(["status" => 1, "src" => $cover_url]);//ajax
             }
         }
     }

@@ -5,10 +5,14 @@
             <div class="title"><i class="mdui-icon material-icons">comment</i>{{__('layout.createCommentHeader')}}</div>
             <img src="{{\Auth::user()->info->avatar_url}}" class="avatar-img mdui-hoverable">
             <div class="comment-edit-area">
-                <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="news-reply"></div>
+                <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="community-reply"></div>
                 <div class="editor-middle-bar">{{__('layout.saySomething')}}</div>
                 <div id="editorText" class="editor-text mdui-hoverable" ></div>
                 <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
+                <div class="mdui-progress">
+                    <div class="mdui-progress-indeterminate" id="editor-progress" style="display: none"></div>
+                </div>
+
                 <a onclick="ajaxSubmitTopicCommentForm('{{route('communityTopicReplyStore',$topic->id)}}')" class="mdui-btn mdui-color-pink-400 submit-btn"><i class="mdui-icon material-icons mdui-icon-left">send</i>{{__('layout.send')}}</a>
             </div>
         </div>

@@ -29,6 +29,9 @@
             <div class="admin-editor-middle-bar">{{__('admin.editArea')}}</div>
             <div id="editorText" class="admin-editor-text mdui-hoverable" ></div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
+            <div class="mdui-progress">
+                <div class="mdui-progress-indeterminate" id="editor-progress" style="display: none"></div>
+            </div>
 
             <h3 class="admin-index-title mdui-text-color-indigo">4.{{__('admin/news.coverImg')}}
             <br><small class="show-file-title-sub">{!! __('admin/news.coverImgTip')!!}</small></h3>

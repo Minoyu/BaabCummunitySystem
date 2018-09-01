@@ -52,6 +52,9 @@
             <div class="editor-middle-bar">{{__('admin.editArea')}}</div>
             <div id="editorText" class="editor-text-for-create-page mdui-hoverable" ></div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
+            <div class="mdui-progress">
+                <div class="mdui-progress-indeterminate" id="editor-progress" style="display: none"></div>
+            </div>
 
             <div class="mdui-divider" style="margin-top: 50px;"></div>
             <button onclick="formPublicSubmit('#createCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent mdui-m-t-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>{{__('admin.publish')}}</button>

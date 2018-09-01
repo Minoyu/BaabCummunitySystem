@@ -10,3 +10,15 @@ function numForHuman($num) {
         return $num;
     }
 }
+
+function decodeBase64ImgToFile($image){
+    $userId = Auth::id();
+    $imageName = "tmpImg-".$userId . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() .'.jpeg';
+    if (strstr($image,",")){
+        $image = explode(',',$image);
+        $image = $image[1];
+    }
+    Storage::disk('base64ImgTmp')->put($imageName, base64_decode($image));
+    $realPath= public_path()."/uploads/tmp/base64Img/". $imageName;  //图片名字
+    return $realPath;
+}

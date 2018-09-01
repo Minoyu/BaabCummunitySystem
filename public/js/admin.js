@@ -234,55 +234,6 @@ function deleteNewsCarousel(id,name) {
 }
 
 
-//新闻编辑器
-var E = window.wangEditor;
-if ($$('#editorToolbar').length>0){
-    var editor = new E('#editorToolbar','#editorText');
-    var textArea = $$('#editorTextArea');
-    editor.customConfig.onchange = function (html) {
-        // 监控变化，同步更新到 textarea
-        textArea.val(html);
-    };
-    editor.customConfig.zIndex = 0;
-    editor.customConfig.lang = {
-        '设置标题': 'title',
-        '正文': 'p',
-        '链接文字': 'link text',
-        '链接': 'link',
-        '上传图片': 'upload image',
-        '上传': 'upload',
-        '创建': 'init'
-        // 还可自定添加更多
-    };
-    switch ($$('#editorToolbar').attr('type')){
-        case 'community-topic':
-            editor.customConfig.uploadImgServer = '/community/topic/upload/img';
-            break;
-        case 'news':
-            editor.customConfig.uploadImgServer = '/admin/news/upload/img';
-            break;
-        case 'news-reply':
-            editor.customConfig.uploadImgServer = '/news/reply/upload/img';
-            editor.customConfig.menus = [
-                'emoticon',  // 表情
-                'image', // 插入图片
-                'bold',  // 粗体
-                'italic',  // 斜体
-                'underline',  // 下划线
-                'quote'  // 引用
-            ];
-            break;
-    }
-    editor.customConfig.uploadImgHeaders = {
-        'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content'),
-        'X-Requested-With': 'XMLHttpRequest'
-    };
-    editor.customConfig.uploadFileName = 'img[]';
-    editor.create();
-    // 初始化 textarea 的值
-    textArea.val(editor.txt.html());
-}
-
 /**
  * 处理新闻封面上传
  * @param obj
@@ -294,31 +245,29 @@ function handleNewsCoverUpdate(obj,className) {
     var cover = obj.files[0];
     var id = $$('input[name="userId"]').val();
 
-    var form = new FormData();
-    form.append('cover',cover);
-    $$.ajax({
-        method: 'POST',
-        url: '/admin/news/upload/cover',
-        headers: {
-            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-        },
-        data: form,
-        contentType: false, //禁止设置请求类型
-        processData: false, //禁止jquery对DAta数据的处理,默认会处理
-        //禁止的原因是,FormData已经帮我们做了处理
-        success: function (data) {
-            data=JSON.parse(data);
-            if (data.status===1){
-                coverImg.attr('src',data.src);
-                coverInput.val(data.src);
-                mdui.snackbar({
-                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
-                    position:'top'
-                });
+    ImgToBase64(cover, 900, function (base64) {
+        $$.ajax({
+            method: 'POST',
+            url: '/admin/news/upload/cover',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                img_data:base64
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    coverImg.attr('src',data.src);
+                    coverInput.val(data.src);
+                    mdui.snackbar({
+                        message:'The Cover has been uploaded successfully<br/>封面已成功上传',
+                        position:'top'
+                    });
+                }
             }
-        }
+        });
     });
-
 }
 
 /**
@@ -332,29 +281,28 @@ function handleNewsCarouselUpdate(obj,className) {
     var cover = obj.files[0];
     var id = $$('input[name="userId"]').val();
 
-    var form = new FormData();
-    form.append('cover',cover);
-    $$.ajax({
-        method: 'POST',
-        url: '/admin/news-carousel/upload',
-        headers: {
-            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-        },
-        data: form,
-        contentType: false, //禁止设置请求类型
-        processData: false, //禁止jquery对DAta数据的处理,默认会处理
-        //禁止的原因是,FormData已经帮我们做了处理
-        success: function (data) {
-            data=JSON.parse(data);
-            if (data.status===1){
-                coverImg.attr('src',data.src);
-                coverInput.val(data.src);
-                mdui.snackbar({
-                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
-                    position:'top'
-                });
+    ImgToBase64(cover, 1000, function (base64) {
+        $$.ajax({
+            method: 'POST',
+            url: '/admin/news-carousel/upload',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                img_data:base64
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    coverImg.attr('src',data.src);
+                    coverInput.val(data.src);
+                    mdui.snackbar({
+                        message:'The News Carousel has been uploaded successfully<br/>新闻轮播图已成功上传',
+                        position:'top'
+                    });
+                }
             }
-        }
+        });
     });
 
 }
@@ -616,30 +564,30 @@ function handleZoneImgUpdate(obj,className) {
     var Input = $$('input[name="img_url"]');
     var file = obj.files[0];
 
-    var form = new FormData();
-    form.append('img',file);
-    $$.ajax({
-        method: 'POST',
-        url: '/admin/community/category/zones/upload/img',
-        headers: {
-            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-        },
-        data: form,
-        contentType: false, //禁止设置请求类型
-        processData: false, //禁止jquery对DAta数据的处理,默认会处理
-        //禁止的原因是,FormData已经帮我们做了处理
-        success: function (data) {
-            data=JSON.parse(data);
-            if (data.status===1){
-                Img.attr('src',data.src);
-                Input.val(data.src);
-                mdui.snackbar({
-                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
-                    position:'top'
-                });
+    ImgToBase64(file, 500, function (base64) {
+        $$.ajax({
+            method: 'POST',
+            url: '/admin/community/category/zones/upload/img',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                img_data:base64
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    Img.attr('src',data.src);
+                    Input.val(data.src);
+                    mdui.snackbar({
+                        message:'The Cover has been uploaded successfully<br/>封面已成功上传',
+                        position:'top'
+                    });
+                }
             }
-        }
+        });
     });
+
 
 }
 
@@ -1517,29 +1465,29 @@ function handleIndexCarouselUpdate(obj,className) {
     var cover = obj.files[0];
     var id = $$('input[name="userId"]').val();
 
-    var form = new FormData();
-    form.append('cover',cover);
-    $$.ajax({
-        method: 'POST',
-        url: '/admin/index-carousel/upload',
-        headers: {
-            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-        },
-        data: form,
-        contentType: false, //禁止设置请求类型
-        processData: false, //禁止jquery对DAta数据的处理,默认会处理
-        //禁止的原因是,FormData已经帮我们做了处理
-        success: function (data) {
-            data=JSON.parse(data);
-            if (data.status===1){
-                coverImg.attr('src',data.src);
-                coverInput.val(data.src);
-                mdui.snackbar({
-                    message:'The Cover has been uploaded successfully<br/>封面已成功上传',
-                    position:'top'
-                });
+
+    ImgToBase64(cover, 1000, function (base64) {
+        $$.ajax({
+            method: 'POST',
+            url: '/admin/index-carousel/upload',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                img_data:base64
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    coverImg.attr('src',data.src);
+                    coverInput.val(data.src);
+                    mdui.snackbar({
+                        message:'The Index Carousel has been uploaded successfully<br/>首页轮播图已成功上传',
+                        position:'top'
+                    });
+                }
             }
-        }
+        });
     });
 
 }
