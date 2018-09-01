@@ -1363,8 +1363,7 @@ body {
     max-width: 80%;
     height: auto;
     display: block;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 10px auto;
     box-shadow: 0 0 30px #ccc;
     -moz-box-shadow: 0 0 30px #ccc;
     -webkit-box-shadow: 0 0 30px #ccc;
@@ -1411,6 +1410,20 @@ body {
     font-size: 15px;
     opacity: .8;
     line-height: 1.5em;
+}
+.news-content-comment-p img{
+    display: block;
+    margin: 10px auto;
+    max-width: 80%;
+    box-shadow: 0 0 30px #ccc;
+    -moz-box-shadow: 0 0 30px #ccc;
+    -webkit-box-shadow: 0 0 30px #ccc;
+}
+@media (min-width: 600px) {
+    .news-content-comment-p img{
+        max-width: 60%;
+        max-height: 300px;
+    }
 }
 /*新闻内容页评论区用户头像样式*/
 .news-content-comment-users-img{
@@ -1902,7 +1915,7 @@ body {
 /*新闻图片80%自适应*/
 .topic-content-primary-text img{
     max-width: 80% !important;
-    margin: 5px auto 5px auto;
+    margin: 10px auto;
     height: auto;
     display: block;
     box-shadow: 0 0 30px #ccc;
