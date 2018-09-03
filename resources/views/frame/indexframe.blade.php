@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="isLogged" content="{{ Auth::check() }}">
-    <title>@yield('title') - {{__('index.app_name')}}</title>
+    <title>@yield('titleContent')@yield('title') - {{__('index.app_name')}}</title>
 
     <!-- Styles -->
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">

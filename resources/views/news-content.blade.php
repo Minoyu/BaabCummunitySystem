@@ -1,5 +1,6 @@
 @extends('frame.indexframe')
-@section('title',$news->title)
+@section('title',__('index.news'))
+@section('titleContent',$news->title.' - ')
 @section('subtitleUrl',route('showNews'))
 @section('tabActiveVal','news-tab')
 @section('bottomNavActiveVal','news-bottom-nav')

@@ -1,5 +1,6 @@
 @extends('frame.indexframe')
-@section('title',$topic->title)
+@section('title',__('index.community'))
+@section('titleContent',$topic->title.' - ')
 @section('subtitleUrl',route('showCommunity'))
 @section('tabActiveVal','community-tab')
 @section('bottomNavActiveVal','community-bottom-nav')
