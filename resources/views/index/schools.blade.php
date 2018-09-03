@@ -30,16 +30,17 @@
     <div class="swiper-scrollbar"></div>
 </div>
 <div id="school-tab" class="mdui-tab part-divider-tab">
-    @foreach($schoolSections as $schoolSection)
-        <a href="#school-{{$schoolSection->id}}" class="mdui-ripple">{{$schoolSection->name}}</a>
+    @foreach($schoolCollections as $topicC_item)
+        <a href="#school-{{$topicC_item['schoolSection']->id}}" class="mdui-ripple">{{$topicC_item['schoolSection']->name}}</a>
     @endforeach
 </div>
-@foreach($schoolSections as $schoolSection)
-    <div id="school-{{$schoolSection->id}}">
+@foreach($schoolCollections as $topicC_item)
+    <div id="school-{{$topicC_item['schoolSection']->id}}">
         <div class="mdui-list index-list">
-            @foreach($schoolSection->communityTopics as $topic)
+            @foreach($topicC_item['topics'] as $topic)
                 <a href="{{route('showCommunityContent',$topic->id)}}" class="mdui-list-item mdui-ripple index-info-h">{{$topic->title}}</a>
             @endforeach
         </div>
     </div>
 @endforeach
+

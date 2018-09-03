@@ -29,17 +29,19 @@
     </div>
     <div class="swiper-scrollbar"></div>
 </div>
+
 <div id="flea-market-tab" class="mdui-tab part-divider-tab">
-    @foreach($businessSections as $businessSection)
-        <a href="#business-{{$businessSection->id}}" class="mdui-ripple">{{$businessSection->name}}</a>
+    @foreach($businessCollections as $topicC_item)
+        <a href="#business-{{$topicC_item['businessSection']->id}}" class="mdui-ripple">{{$topicC_item['businessSection']->name}}</a>
     @endforeach
 </div>
-@foreach($businessSections as $businessSection)
-    <div id="business-{{$businessSection->id}}">
+@foreach($businessCollections as $topicC_item)
+    <div id="business-{{$topicC_item['businessSection']->id}}">
         <div class="mdui-list index-list">
-            @foreach($businessSection->communityTopics as $topic)
+            @foreach($topicC_item['topics'] as $topic)
                 <a href="{{route('showCommunityContent',$topic->id)}}" class="mdui-list-item mdui-ripple index-info-h">{{$topic->title}}</a>
             @endforeach
         </div>
     </div>
 @endforeach
+

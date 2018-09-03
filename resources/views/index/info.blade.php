@@ -30,15 +30,15 @@
     <div class="swiper-scrollbar"></div>
 </div>
 <div id="info-tab" class="mdui-tab part-divider-tab">
-    @foreach($newsCategories as$newsCategory)
-        <a href="#info-{{$newsCategory->id}}" class="mdui-ripple">{{$newsCategory->name}}</a>
+    @foreach($newsCollections as$newsC_item)
+        <a href="#info-{{$newsC_item['newsCategory']->id}}" class="mdui-ripple">{{$newsC_item['newsCategory']->name}}</a>
     @endforeach
 </div>
-@foreach($newsCategories as$newsCategory)
-    <div id="info-{{$newsCategory->id}}">
+@foreach($newsCollections as$newsC_item)
+    <div id="info-{{$newsC_item['newsCategory']->id}}">
         <div class="mdui-list index-list">
-            @foreach($newsCategory->news as $news_item)
-                <a href="{{route('showNewsContent',$news_item->id)}}" class="mdui-list-item mdui-ripple index-info-h">{{$news_item->title}}</a>
+            @foreach($newsC_item['newses'] as $news)
+                <a href="{{route('showNewsContent',$news->id)}}" class="mdui-list-item mdui-ripple index-info-h">{{$news->title}}</a>
             @endforeach
         </div>
     </div>

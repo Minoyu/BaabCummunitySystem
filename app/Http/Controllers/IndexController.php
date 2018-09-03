@@ -8,6 +8,7 @@ use App\Model\CommunityZone;
 use App\Model\IndexCarousel;
 use App\Model\IndexHeadline;
 use App\Model\NewsCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
@@ -52,51 +53,78 @@ class IndexController extends Controller
         $newsCategories = NewsCategory::where('status','publish')
             ->orderBy('order','desc')
             ->limit(6)
-            ->with(['news' => function ($query) {
-                $query->where('status','publish')
-                    ->orderBy('order','desc')
-                    ->limit(7);
-            }])
             ->get();
+
+        $newsCollections = collect([]);
+        foreach ($newsCategories as $newsCategory){
+            $newses = $newsCategory
+                ->news()
+                ->where('status','publish')
+                ->where('invalided_at',null)
+                ->orWhere('invalided_at','>',Carbon::now())
+                ->orderBy('order','desc')
+                ->limit(7)
+                ->get();
+            $newsCollections->push(compact('newsCategory','newses'));
+        }
 
         $communityZones = CommunityZone::where('status','publish')
             ->orderBy('order','desc')
             ->with('communitySections')
             ->get();
 
-        $communitySections = CommunitySection::whereNotIn('zone_id', [1, 2])
+        $topicSections = CommunitySection::whereNotIn('zone_id', [1, 2])
             ->where('status','publish')
             ->orderBy('order','desc')
             ->limit(6)
-            ->with(['communityTopics' => function ($query) {
-                $query->where('status','publish')
-                    ->orderBy('order','desc')
-                    ->orderBy('last_reply_at','desc')
-                    ->limit(7);
-            }])
             ->get();
+        $topicCollections = collect([]);
+        foreach ($topicSections as $topicSection){
+            $topics = $topicSection
+                ->communityTopics()
+                ->where('status','publish')
+                ->orderBy('order','desc')
+                ->orderBy('last_reply_at','desc')
+                ->limit(7)
+                ->get();
+            $topicCollections->push(compact('topicSection','topics'));
+        }
+
         $businessSections = CommunitySection::where('zone_id', 1)
             ->where('status','publish')
             ->orderBy('order','desc')
             ->limit(6)
-            ->with(['communityTopics' => function ($query) {
-                $query->where('status','publish')
-                    ->orderBy('order','desc')
-                    ->orderBy('last_reply_at','desc')
-                    ->limit(7);
-            }])
             ->get();
+        $businessCollections = collect([]);
+        foreach ($businessSections as $businessSection){
+            $topics = $businessSection
+                ->communityTopics()
+                ->where('status','publish')
+                ->orderBy('order','desc')
+                ->orderBy('last_reply_at','desc')
+                ->limit(7)
+                ->get();
+            $businessCollections->push(compact('businessSection','topics'));
+        }
+
         $schoolSections = CommunitySection::where('zone_id', 2)
             ->where('status','publish')
             ->orderBy('order','desc')
             ->limit(6)
-            ->with(['communityTopics' => function ($query) {
-                $query->where('status','publish')
-                    ->orderBy('order','desc')
-                    ->orderBy('last_reply_at','desc')
-                    ->limit(7);
-            }])
             ->get();
+
+        $schoolCollections = collect([]);
+        foreach ($schoolSections as $schoolSection){
+            $topics = $schoolSection
+                ->communityTopics()
+                ->where('status','publish')
+                ->orderBy('order','desc')
+                ->orderBy('last_reply_at','desc')
+                ->limit(7)
+                ->get();
+            $schoolCollections->push(compact('schoolSection','topics'));
+        }
+
 
         return view('index',compact(
             'indexCarousels',
@@ -104,11 +132,12 @@ class IndexController extends Controller
             'indexRightHeadlines',
             'hotTopics',
             'newTopics',
-            'newsCategories',
+            'newsCollections',
             'communitySections',
             'communityZones',
-            'businessSections',
-            'schoolSections'
+            'topicCollections',
+            'businessCollections',
+            'schoolCollections'
         ));
     }
 
