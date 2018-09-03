@@ -12,7 +12,7 @@
                 <div class="swiper-slide">
                     <a href="{{$indexCarousel->url}}">
                         <div class="mdui-card">
-                            <div class="mdui-card-media">
+                            <div class="mdui-card-media index-small-top-carousel">
                                 <img class="mdui-img-fluid" src="{{$indexCarousel->cover_img}}"/>
                                 <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
                                     <div class="topnews-img-primary">
@@ -29,21 +29,13 @@
     </div>
     <div class="swiper-scrollbar"></div>
 </div>
-<div id="regional-tab" class="mdui-tab part-divider-tab">
+<div id="topic-tab" class="mdui-tab part-divider-tab">
     @foreach($communitySections as $communitySection)
         <a href="#topic-{{$communitySection->id}}" class="mdui-ripple">{{$communitySection->name}}</a>
     @endforeach
 </div>
 @foreach($communitySections as $communitySection)
     <div id="topic-{{$communitySection->id}}">
-        {{--<div class="mdui-row">--}}
-        {{--<div class="mdui-col-xs-4 mdui-col-sm-3 mdui-col-md-4 mdui-col-lg-3">--}}
-        {{--<img class="mdui-img-fluid info-first-img" src="http://via.placeholder.com/300x200"/>--}}
-        {{--</div>--}}
-        {{--<div class="mdui-col-xs-8 mdui-col-sm-9 mdui-col-md-8 mdui-col-lg-9 ">--}}
-        {{--<a href="" class="index-info-img-h">hahhahahahahhahahahahahahhaha</a>--}}
-        {{--</div>--}}
-        {{--</div>--}}
         <div class="mdui-list index-list">
             @foreach($communitySection->communityTopics as $topic)
                 <a href="{{route('showCommunityContent',$topic->id)}}" class="mdui-list-item mdui-ripple index-info-h">{{$topic->title}}</a>

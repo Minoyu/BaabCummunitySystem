@@ -17,7 +17,9 @@ return [
     'headlineTip'=>'头条两侧轮播图',
     'info_topTip'=>'资讯上方轮播图',
     'topic_topTip'=>'话题上方轮播图',
-    'info_topic_topTip'=>'资讯及话题上方轮播图',
+    'info_topic_topTip'=>'资讯/话题/跳蚤市场/学校上方轮播图',
+    'flea_market_topTip'=>'跳蚤市场上方轮播图',
+    'schools_topTip'=>'学校上方轮播图',
     'recommendSize'=>'推荐尺寸',
 
     'indexHeadlinesList'=>'首页轮播图列表',

@@ -32,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         News::observe(NewsObserver::class);
         User::observe(UserObserver::class);
         Schema::defaultStringLength(191);
+//        \URL::forceScheme('https');
 
     }
 

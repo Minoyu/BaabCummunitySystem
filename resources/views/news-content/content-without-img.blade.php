@@ -18,8 +18,8 @@
             @endif
             <a href="{{route('showNews')}}">· {{__('news.newsCenter')}}</a> > <a href="{{route('showNewsSec',$cat->id)}}">{{$cat->name}}</a>
             <span style="white-space: nowrap;">
-            · <i class="mdui-icon material-icons" style="padding-bottom: 3px">remove_red_eye</i> <span class="mdui-hidden-xs">{{__('community.visitedCount')}}</span>{{$news->view_count}}
-            · <i class="mdui-icon material-icons">comment</i> <span class="mdui-hidden-xs">{{__('community.commentCount')}}</span>{{$news->reply_count}}
+            · <i class="mdui-icon material-icons" style="padding-bottom: 3px">remove_red_eye</i> <span class="mdui-hidden-xs">{{__('community.visitedCount')}}</span> {{$news->view_count}}
+            · <i class="mdui-icon material-icons">comment</i> <span class="mdui-hidden-xs">{{__('community.commentCount')}}</span> {{$news->reply_count}}
             </span>
         </small>
     </h1>

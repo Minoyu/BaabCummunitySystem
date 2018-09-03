@@ -37,6 +37,8 @@
                 <option value="headline_right">headline_right // {{__('admin/index.headline_rightTip')}}</option>
                 <option value="info_top">info_top // {{__('admin/index.info_topTip')}}</option>
                 <option value="topic_top">topic_top // {{__('admin/index.topic_topTip')}}</option>
+                <option value="flea_market_top">flea_market_top // {{__('admin/index.flea_market_topTip')}}</option>
+                <option value="schools_top">schools_top // {{__('admin/index.schools_topTip')}}</option>
             </select>
 
             <h3 class="admin-index-title mdui-text-color-indigo">5.{{__('admin.imgUpload')}}
@@ -46,7 +48,7 @@
                     {{__('index.note')}}：<br>
                     <span class="layui-badge-dot"></span> banner<br>{{__('admin/index.bannerTip')}} —— {{__('admin/index.recommendSize')}} 1000*500(2:1)<br>
                     <span class="layui-badge-dot layui-bg-green"></span> headline<br>{{__('admin/index.headlineTip')}} —— {{__('admin/index.recommendSize')}} 200*300(2:3)<br>
-                    <span class="layui-badge-dot layui-bg-blue"></span> info_top & topic_top<br>{{__('admin/index.info_topic_topTip')}} —— {{__('admin/index.recommendSize')}} 600*200(3:1)
+                    <span class="layui-badge-dot layui-bg-blue"></span> info_top & topic_top & flea_market_top & schools_top<br>{{__('admin/index.info_topic_topTip')}} —— {{__('admin/index.recommendSize')}} 600*200(3:1)
                 </small>
             </h3>
             <label for="indexCoverUploadInput">

@@ -172,8 +172,13 @@ var carsouelRightTab = new mdui.Tab('#carousel-right',{trigger:'hover'});
 //首页资讯版块tab
 var infoTab = new mdui.Tab('#info-tab',{trigger:'hover'});
 
-//首页地区版块tab
-var regionalTab = new mdui.Tab('#regional-tab',{trigger:'hover'});
+//首页话题版块tab
+var topicTab = new mdui.Tab('#topic-tab',{trigger:'hover'});
+
+//首页话题版块tab
+var fleaMarketTab = new mdui.Tab('#flea-market-tab',{trigger:'hover'});
+//首页话题版块tab
+var schoolTab = new mdui.Tab('#school-tab',{trigger:'hover'});
 
 //登录对话框
 var loginDialog = new mdui.Dialog('#login-dialog',{modal:true});

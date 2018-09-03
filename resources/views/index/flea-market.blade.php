@@ -1,14 +1,14 @@
-<h2 class="part-title-blue">
-    <i class="mdui-icon ion-md-paper"></i>
-    {{__('index.info')}}
-    <a href="{{route('showNews')}}" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple">{{__('index.more')}}
+<h2 class="part-title-red">
+    <i class="mdui-icon material-icons">&#xe8f6;</i>
+    {{__('index.fleaMarket')}}
+    <a href="{{route('showCommunityZone',1)}}" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple">{{__('index.more')}}
         <i class="mdui-icon material-icons mdui-icon-right">chevron_right</i>
     </a>
 </h2>
 <div class="swiper-container index-swiper-container">
     <div class="swiper-wrapper">
         @foreach($indexCarousels as $indexCarousel)
-            @if($indexCarousel->position == 'info_top')
+            @if($indexCarousel->position == 'flea_market_top')
                 <div class="swiper-slide">
                     <a href="{{$indexCarousel->url}}">
                         <div class="mdui-card">
@@ -29,16 +29,16 @@
     </div>
     <div class="swiper-scrollbar"></div>
 </div>
-<div id="info-tab" class="mdui-tab part-divider-tab">
-    @foreach($newsCategories as$newsCategory)
-        <a href="#info-{{$newsCategory->id}}" class="mdui-ripple">{{$newsCategory->name}}</a>
+<div id="flea-market-tab" class="mdui-tab part-divider-tab">
+    @foreach($businessSections as $businessSection)
+        <a href="#business-{{$businessSection->id}}" class="mdui-ripple">{{$businessSection->name}}</a>
     @endforeach
 </div>
-@foreach($newsCategories as$newsCategory)
-    <div id="info-{{$newsCategory->id}}">
+@foreach($businessSections as $businessSection)
+    <div id="business-{{$businessSection->id}}">
         <div class="mdui-list index-list">
-            @foreach($newsCategory->news as $news_item)
-                <a href="{{route('showNewsContent',$news_item->id)}}" class="mdui-list-item mdui-ripple index-info-h">{{$news_item->title}}</a>
+            @foreach($businessSection->communityTopics as $topic)
+                <a href="{{route('showCommunityContent',$topic->id)}}" class="mdui-list-item mdui-ripple index-info-h">{{$topic->title}}</a>
             @endforeach
         </div>
     </div>

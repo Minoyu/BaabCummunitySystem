@@ -53,5 +53,9 @@ return [
     'postsCount'=>'话题数',
     'sectionsCount'=>'版块数',
     'likedCount'=>'赞同数',
+    //business
+    'fleaMarket'=>'跳蚤市场',
+    //School
+    'school'=>'学校',
 
 ];

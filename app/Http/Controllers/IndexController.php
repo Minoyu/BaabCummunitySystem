@@ -64,7 +64,30 @@ class IndexController extends Controller
             ->with('communitySections')
             ->get();
 
-        $communitySections = CommunitySection::where('status','publish')
+        $communitySections = CommunitySection::whereNotIn('zone_id', [1, 2])
+            ->where('status','publish')
+            ->orderBy('order','desc')
+            ->limit(6)
+            ->with(['communityTopics' => function ($query) {
+                $query->where('status','publish')
+                    ->orderBy('order','desc')
+                    ->orderBy('last_reply_at','desc')
+                    ->limit(7);
+            }])
+            ->get();
+        $businessSections = CommunitySection::where('zone_id', 1)
+            ->where('status','publish')
+            ->orderBy('order','desc')
+            ->limit(6)
+            ->with(['communityTopics' => function ($query) {
+                $query->where('status','publish')
+                    ->orderBy('order','desc')
+                    ->orderBy('last_reply_at','desc')
+                    ->limit(7);
+            }])
+            ->get();
+        $schoolSections = CommunitySection::where('zone_id', 2)
+            ->where('status','publish')
             ->orderBy('order','desc')
             ->limit(6)
             ->with(['communityTopics' => function ($query) {
@@ -83,7 +106,9 @@ class IndexController extends Controller
             'newTopics',
             'newsCategories',
             'communitySections',
-            'communityZones'
+            'communityZones',
+            'businessSections',
+            'schoolSections'
         ));
     }
 

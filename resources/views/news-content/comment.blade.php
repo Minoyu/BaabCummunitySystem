@@ -32,7 +32,7 @@
     <a name="reply-list" id="reply-list"></a>
     <div class="side-card-header" style="height: 40px">
         <div class="side-card-header-text">
-            {{__('layout.commentCountTip',['num'=>$news->reply_count])}}
+            {!! __('layout.commentCountTip',['num'=>$news->reply_count]) !!}
         </div>
         <div class="mdui-tab part-divider-tab reply-order-tab" mdui-tab>
             <a mdui-tooltip="{content: '{{__('layout.orderByTime')}}', position: 'top'}" onclick="jumpTo('?orderBy=default#reply-list')" href="#" class="mdui-ripple">{{__('layout.latest')}}</a>

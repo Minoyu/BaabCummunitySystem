@@ -17,7 +17,9 @@ return [
     'headlineTip'=>'Carousel on both sides of Headlines',
     'info_topTip'=>'Carousel above the Info',
     'topic_topTip'=>'Carousel above the Topics',
-    'info_topic_topTip'=>'Carousel above the Info & Topics',
+    'flea_market_topTip'=>'Carousel above the Flea Market',
+    'schools_topTip'=>'Carousel above the Schools',
+    'info_topic_topTip'=>'Carousel above the Info/Topics/Flea Market/Schools',
     'recommendSize'=>'Recommend size',
 
     'indexHeadlinesList'=>'Index(Homepage) Headlines List',

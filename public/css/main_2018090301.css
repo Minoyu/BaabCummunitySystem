@@ -243,6 +243,10 @@ body {
     height: 18px;
     padding-right: 5px;
 }
+/*首页板块上方小轮播*/
+.index-small-top-carousel{
+    max-height: 150px;
+}
 
 /*=====================公用标题部分类=========================*/
 /*版块标题*/
@@ -1344,6 +1348,8 @@ body {
     padding-bottom: 35%;
     background-repeat: no-repeat;
     background-size: 100%;
+    -webkit-filter: brightness(0.8);
+    filter: brightness(0.8);
 }
 @media (max-width: 600px){
     .news-content-cover-img{
@@ -1357,7 +1363,14 @@ body {
     text-indent: 36px;
     padding-top: 5px;
     padding-bottom: 5px;
+    font-family: "Times New Roman", Times, serif;
 }
+.news-content-primary-text p{
+    margin: 0 0 15px 0;
+    line-height: 1.6;
+    color: #414040;
+}
+
 /*新闻图片80%自适应*/
 .news-content-primary-text img{
     max-width: 80%;
@@ -1367,6 +1380,12 @@ body {
     box-shadow: 0 0 30px #ccc;
     -moz-box-shadow: 0 0 30px #ccc;
     -webkit-box-shadow: 0 0 30px #ccc;
+}
+
+@media (max-width: 600px) {
+    .news-content-primary-text img{
+        max-width: 100%;
+    }
 }
 /*新闻内容页侧边栏标题*/
 .news-content-side-clumn-list a{
@@ -1910,7 +1929,9 @@ body {
     color: #525252;
     padding-top: 5px;
     padding-bottom: 5px;
-    font-size: 16px;
+    font-size: 18px;
+    font-family: "Times New Roman", Times, serif;
+    line-height: 1.4;
 }
 /*新闻图片80%自适应*/
 .topic-content-primary-text img{
@@ -1923,6 +1944,11 @@ body {
     -webkit-box-shadow: 0 0 30px #ccc;
 }
 
+@media (max-width: 599px) {
+    .topic-content-primary-text img{
+        max-width: 100% !important;
+    }
+}
 
 /******
 分页

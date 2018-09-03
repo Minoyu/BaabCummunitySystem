@@ -53,5 +53,9 @@ return [
     'postsCount'=>'Topics',
     'sectionsCount'=>'Sections',
     'likedCount'=>'Likes',
+    //business
+    'fleaMarket'=>'Flea Market',
+    //School
+    'school'=>'Schools',
 
 ];

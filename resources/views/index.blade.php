@@ -24,7 +24,16 @@
                 @include('index.info')
             </div>
             <div class="mdui-col-md-6 mdui-col-xs-12">
-                @include('index.regional')
+                @include('index.topic')
+            </div>
+        </div>
+        <div class="mdui-row">
+            <div class="mdui-col-md-6 mdui-col-xs-12">
+                {{--资讯 此部分内容分版块数据库拉取--}}
+                @include('index.flea-market')
+            </div>
+            <div class="mdui-col-md-6 mdui-col-xs-12">
+                @include('index.schools')
             </div>
         </div>
     </div>

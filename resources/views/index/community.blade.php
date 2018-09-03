@@ -1,4 +1,4 @@
-<h2 class="part-title-red" style="background: #fff">
+<h2 class="part-title-blue" style="background: #fff">
     <i class="mdui-icon material-icons">&#xe6dd;</i>
     {{__('index.community')}}
     <a href="{{route('showCommunity')}}" class="mdui-btn mdui-btn-dense part-title-more-btn mdui-ripple" style="float: none !important;">{{__('index.more')}}
