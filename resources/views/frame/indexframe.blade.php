@@ -19,15 +19,15 @@
     <link href="/css/main_2018090301.css" rel="stylesheet" type="text/css">
 </head>
 <body class=" @if($isDrawerOpen) mdui-drawer-body-left @endif body-padding mdui-bottom-nav-fixed mdui-theme-primary-blue">
-    {{--顶部应用栏--}}
-    @include('layout.appbar')
-    {{--侧边抽屉导航--}}
-    @include('layout.drawer')
 
     <div class="mdui-container">
         {{--主体部分--}}
         @yield('content')
     </div>
+    {{--顶部应用栏--}}
+    @include('layout.appbar')
+    {{--侧边抽屉导航--}}
+    @include('layout.drawer')
 
     {{--底部导航栏--}}
     @include('layout.bottom-nav')
