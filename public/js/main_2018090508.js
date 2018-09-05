@@ -981,6 +981,58 @@ function deleteNewsReply(newsReplyId,newsReplyContent) {
     });
 }
 
+function deleteCommunityTopicReply(Id,Content) {
+    mdui.dialog({
+        title: 'Delete Community Topic Reply<br><small>删除社区话题回复</small>',
+        content: 'Are you sure you want to delete this Community Topic Reply?<br><small>您确定要删除此话题回复吗</small><br/>'+Content,
+
+        buttons: [
+            {
+                text: 'Cancel'
+            },
+            {
+                text: 'OK',
+                onClick: function(inst){
+                    $$.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                        },
+                        method: 'POST',
+                        url: '/admin/community/topic/reply/delete',
+                        data: {
+                            id:Id
+                        },
+                        statusCode: {
+                            500: function (xhr, textStatus) {
+                                mdui.alert('Server internal error<br/>服务器内部错误');
+                            }
+                        },
+                        success: function (data) {
+                            data = JSON.parse(data);
+                            if (data.status ===1) {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                                setTimeout(function(){
+                                    //使用  setTimeout（）方法设定定时5000毫秒
+                                    window.location.reload();//页面刷新
+                                },2000);
+                            } else {
+                                mdui.snackbar({
+                                    message:data.msg,
+                                    position:'top'
+                                });
+                            }
+
+                        }
+                    });
+                }
+            }
+        ]
+    });
+}
+
 function replyToReply(userName,userId) {
     editor.txt.html('<a href="/user/'+userId+'">@'+userId+'-'+userName+' :</a>');
     location.href = "#createComment";

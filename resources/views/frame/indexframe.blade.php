@@ -50,6 +50,6 @@
     <script src="/js/swiper-4.3.5.min.js"></script>
     <script src="/js/mdui.min.js"></script>
     <script src="/js/wangEditor.min.js"></script>
-    <script src="/js/main_2018090301.js"></script>
+    <script src="/js/main_2018090508.js"></script>
 </body>
 </html>

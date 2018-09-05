@@ -14,7 +14,7 @@
                     </a>
                 @endhasanyrole
                 @can('update',$reply)
-                    <button onclick="deleteNewsReply('{{$reply->id}}','{{str_limit(strip_tags($reply->content), $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
+                    <button onclick="deleteCommunityTopicReply('{{$reply->id}}','{{str_limit(strip_tags($reply->content), $limit = 20, $end = '...')}}')" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
                         <i class="mdui-icon material-icons">delete</i>
                     </button>
                 @endcan
