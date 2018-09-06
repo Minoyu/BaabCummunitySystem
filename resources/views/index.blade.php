@@ -40,4 +40,7 @@
     <div class="mdui-card index-content-card mdui-m-y-2">
         @include('index.community')
     </div>
+    <a href="{{route('communityTopicCreate')}}" mdui-tooltip="{content: '{{__('community.createTopics')}}', position: 'left'}" class="mdui-fab mdui-fab-fixed mdui-color-pink-accent">
+        <i class="mdui-icon material-icons">add</i>
+    </a>
 @endsection

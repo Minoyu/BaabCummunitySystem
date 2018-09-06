@@ -11,6 +11,9 @@ body {
 .none-text-transform-btn{
     text-transform: none;
 }
+.mdui-fab{
+    z-index: 2;
+}
 /*小屏设备右下按钮底部边距*/
 @media (max-width: 599px) {
     .mdui-fab-fixed, .mdui-fab-wrapper {
@@ -208,10 +211,6 @@ body {
     }
 }
 
-.banner-container .mdui-card-media-covered-gradient{
-    background: -webkit-gradient(linear,left bottom,left top,from(rgba(0,0,0,.4)),to(rgba(0,0,0,0)));
-    background: linear-gradient(to top,rgba(0,0,0,.4),rgba(0,0,0,0));
-}
 .banner-container .mdui-card-primary-title{
     text-shadow: 1px 1px 10px #333;
 }
@@ -2094,6 +2093,25 @@ body {
     position: absolute;
     right:15px;
     top: 10px;
+    color: #ff4081;
+}
+
+@media (max-width: 599px) {
+    .create-topic-btn{
+        position: relative;
+        top: 0;
+        margin-top: 5px;
+        right: 0;
+        background-color: #ff4081;
+        color: #fff !important;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 70%;
+    }
+    .create-topic-btn :hover{
+        background-color: #ff759d !important;
+    }
 }
 
 .follow-dialog .dialog-bg{

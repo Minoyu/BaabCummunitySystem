@@ -9,7 +9,7 @@
                             <div class="mdui-card-media-covered mdui-card-media-covered-gradient">
                                 <div class="index-carousel-primary">
                                     <div class="mdui-card-primary-title">{{$newsCarousel->title}}</div>
-                                    <div class="mdui-card-primary-subtitle">{{$newsCarousel->subtitle}}</div>
+                                    <div class="mdui-card-primary-subtitle mdui-hidden-xs-down">{{$newsCarousel->subtitle}}</div>
                                 </div>
                             </div>
                         </div>
