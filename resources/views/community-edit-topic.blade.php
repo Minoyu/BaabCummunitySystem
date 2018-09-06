@@ -52,7 +52,7 @@
 
             <div class="mdui-divider" style="margin-top: 50px;"></div>
             <button onclick="formPublicSubmit('#editCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-pink-accent mdui-m-t-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>{{__('admin.publish')}}</button>
-            <button onclick="formHiddenSubmit('#editCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-m-l-1 mdui-m-t-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe541;</i>{{__('admin.save')}}</button>
+            {{--<button onclick="formHiddenSubmit('#editCommunityTopicForm')" class="mdui-btn mdui-btn-raised mdui-ripple mdui-m-l-1 mdui-m-t-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe541;</i>{{__('admin.save')}}</button>--}}
             <a href="{{route('showCommunity')}}" class="mdui-btn mdui-btn-raised mdui-ripple mdui-m-l-1 mdui-m-t-1"><i class="mdui-icon material-icons mdui-icon-left">&#xe5c4;</i>{{__('index.backTo')}}{{__('index.community')}}</a>
 
         </form>

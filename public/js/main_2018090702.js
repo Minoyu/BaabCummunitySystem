@@ -122,7 +122,11 @@ var appbarRightMenu = new mdui.Menu('#appbar-right-menu-btn','#appbar-right-menu
 var indexSwiper = new Swiper ('.index-swiper-container', {
     direction: 'horizontal',
     loop: true,
-    autoplay:true,
+    autoplay: {
+        delay: 5000,
+        stopOnLastSlide: false,
+        disableOnInteraction: true
+    },
     // 如果需要滚动条
     scrollbar: {
         el: '.swiper-scrollbar',
@@ -133,7 +137,11 @@ var indexSwiper = new Swiper ('.index-swiper-container', {
 var bannerSwiper = new Swiper ('.banner-container', {
     direction: 'horizontal',
     loop: true,
-    autoplay:true,
+    autoplay: {
+       delay: 5000,
+       stopOnLastSlide: false,
+       disableOnInteraction: true
+   },
 
     // 如果需要分页器
     pagination: {

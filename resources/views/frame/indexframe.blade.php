@@ -16,7 +16,7 @@
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
     <link href="/css/animate.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.bootcss.com/ionicons/4.1.2/css/ionicons.min.css" rel="stylesheet">
-    <link href="/css/main_2018090301.css" rel="stylesheet" type="text/css">
+    <link href="/css/main_2018090702.css" rel="stylesheet" type="text/css">
 </head>
 <body class=" @if($isDrawerOpen) mdui-drawer-body-left @endif body-padding mdui-bottom-nav-fixed mdui-theme-primary-blue">
 
@@ -50,6 +50,6 @@
     <script src="/js/swiper-4.3.5.min.js"></script>
     <script src="/js/mdui.min.js"></script>
     <script src="/js/wangEditor.min.js"></script>
-    <script src="/js/main_2018090508.js"></script>
+    <script src="/js/main_2018090702.js"></script>
 </body>
 </html>

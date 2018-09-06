@@ -160,7 +160,7 @@ body {
 
 /*首页轮播图高度自适应*/
 .index-carousel{
-    height:240px;
+    height:200px;
 }
 @media (min-width: 600px){
     .index-carousel{
@@ -185,7 +185,7 @@ body {
 
 /*首页轮播图片高度自适应*/
 .index-carousel-img{
-    height: 240px;
+    height: 200px;
 }
 @media (min-width: 600px){
     .index-carousel-img{
@@ -207,6 +207,20 @@ body {
         height:420px;
     }
 }
+
+.banner-container .mdui-card-media-covered-gradient{
+    background: -webkit-gradient(linear,left bottom,left top,from(rgba(0,0,0,.4)),to(rgba(0,0,0,0)));
+    background: linear-gradient(to top,rgba(0,0,0,.4),rgba(0,0,0,0));
+}
+.banner-container .mdui-card-primary-title{
+    text-shadow: 1px 1px 10px #333;
+}
+.banner-container .mdui-card-primary-subtitle{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 
 /*宽度1024-1379之间的响应式工具*/
 @media (min-width: 1024px) and (max-width: 1397px){
@@ -2021,6 +2035,11 @@ body {
 
 .w-e-text {
     min-height: 80px;
+}
+.w-e-text img{
+    max-width: 80% !important;
+    display: block;
+    padding-right: 8px;
 }
 
 @media (min-width: 600px) {
