@@ -917,6 +917,8 @@ body {
     opacity: 0.8;
     margin-top: -5px;
     margin-bottom: 10px;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
 }
 
 /*二级新闻侧边栏列表*/
@@ -1086,6 +1088,8 @@ body {
     margin-top: 10px;
     font-size: 18px;
     opacity: .8;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
 }
 @media (max-width: 600px) {
     .community-zone-top-img{
@@ -1114,7 +1118,6 @@ body {
         margin-top: 5px;
         font-size: 18px;
         opacity: .8;
-        font-style: italic;
     }
 
 
@@ -1154,6 +1157,8 @@ body {
     margin-top: 10px;
     font-size: 16px;
     opacity: .8;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
 }
 @media (max-width: 600px) {
     .community-section-top-img{
@@ -1182,7 +1187,6 @@ body {
         margin-top: 5px;
         font-size: 16px;
         opacity: .8;
-        font-style: italic;
     }
 
 
@@ -1856,6 +1860,8 @@ body {
     color: #8590a6;
     font-weight: bold;
     margin-bottom: 3px;
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
 }
 .side-card-content-item-c{
     padding-left: 10px;
@@ -2100,13 +2106,11 @@ body {
     .create-topic-btn{
         position: relative;
         top: 0;
-        margin-top: 5px;
+        margin: 5px auto 16px auto;
         right: 0;
         background-color: #ff4081;
         color: #fff !important;
         display: block;
-        margin-left: auto;
-        margin-right: auto;
         width: 70%;
     }
     .create-topic-btn :hover{
