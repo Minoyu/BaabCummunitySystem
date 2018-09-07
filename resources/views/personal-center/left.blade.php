@@ -111,13 +111,13 @@
                     <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">bubble_chart</i>
                     <span class="loading-tip-text mdui-m-t-1 mdui-m-b-3" style="font-size: 15px">
                         @if($userIsMe)
-                            {{__('emptyTopicsMe')}}<br>
+                            {{__('user.emptyTopicsMe')}}<br>
                             <a href="{{route('communityTopicCreate')}}" class="mdui-btn mdui-text-color-pink-accent">
                                 <i class="mdui-icon material-icons mdui-icon-left">&#xe145;</i>
                                 {{__('community.createTopics')}}
                             </a>
                         @else
-                            {{__('emptyTopics')}}
+                            {{__('user.emptyTopics')}}
                         @endif
                     </span>
                 @endif
@@ -131,9 +131,9 @@
                     <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-2" style="font-size: 40px">chat_bubble_outline</i>
                     <span class="loading-tip-text mdui-m-t-1 mdui-m-b-3" style="font-size: 15px">
                         @if($userIsMe)
-                            {{__('emptyCommentsMe')}}
+                            {{__('user.emptyCommentsMe')}}
                         @else
-                            {{__('emptyComments')}}
+                            {{__('user.emptyComments')}}
                         @endif
                     </span>
                 @endif
