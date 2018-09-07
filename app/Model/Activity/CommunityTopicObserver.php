@@ -4,6 +4,7 @@ namespace App\Model\Activity;
 
 use App\Model\CommunityTopic;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 
 class CommunityTopicObserver{
@@ -42,6 +43,15 @@ class CommunityTopicObserver{
             ['causer_id',$topic->user_id],
             ['description', '发表了社区话题'],
         ])
+            ->delete();
+
+        $topic->replies()->delete();
+
+        DB::table('votes')
+            ->where([
+                ['votable_id',$topic->id],
+                ['votable_type','App\Model\CommunityTopic'],
+            ])
             ->delete();
     }
 }

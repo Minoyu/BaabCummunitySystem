@@ -17,4 +17,16 @@ class NewsObserver{
         $news->content = clean($news->content,'topic_content');
     }
 
+    public function deleted(News $news)
+    {
+        foreach ($news->replies as $reply){
+            Activity::where([
+                ['subject_id', $reply->id],
+                ['subject_type', 'App\Model\NewsReply'],
+            ])
+                ->delete();
+        }
+
+        $news->replies()->delete();
+    }
 }

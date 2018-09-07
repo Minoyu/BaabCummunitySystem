@@ -40,11 +40,15 @@ class NewsReplyObserver{
         Activity::where([
             ['subject_id', $reply->id],
             ['subject_type', 'App\Model\NewsReply'],
-            ['causer_id', $reply->user_id],
-            ['description', '回复了社区话题'],
         ])
             ->delete();
 
+        DB::table('votes')
+            ->where([
+                ['votable_id',$reply->id],
+                ['votable_type','App\Model\NewsReply'],
+            ])
+            ->delete();
     }
 
 }
