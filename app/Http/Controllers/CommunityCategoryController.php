@@ -18,7 +18,7 @@ class CommunityCategoryController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function showZonesAndSections(){
-        $zones = CommunityZone::with('communitySections')->get();
+        $zones = CommunityZone::orderBy('order','desc')->with('communitySections')->get();
         return view('admin.community-category.zones-and-sections-list',compact('zones'));
     }
 
@@ -143,7 +143,7 @@ class CommunityCategoryController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function adminSectionCreateShow(Request $request){
-        $zones = CommunityZone::all();
+        $zones = CommunityZone::orderBy('order','desc')->get();
         $selectedZone=$request->input('zone_id');
         return view('admin.community-category.section-create',compact('zones','selectedZone'));
     }
@@ -198,7 +198,7 @@ class CommunityCategoryController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function adminSectionEditShow(CommunitySection $section){
-        $zones = CommunityZone::all();
+        $zones = CommunityZone::orderBy('order','desc')->get();
         return view('admin.community-category.section-edit',compact('section','zones')
         );
     }
@@ -275,7 +275,7 @@ class CommunityCategoryController extends Controller
         $this->validate($request,[
             'id'=>'required|integer|exists:community_zones'
         ]);
-        $sections = CommunityZone::where('id',$request->id)->first()->communitySections()->get();
+        $sections = CommunityZone::where('id',$request->id)->first()->communitySections()->orderBy('order','desc')->get();
         return json_encode(compact('sections'));
     }
 

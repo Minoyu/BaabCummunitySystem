@@ -112,7 +112,7 @@ class CommunityTopicController extends Controller
     public function create(Request $request){
         $this->authorize('create',CommunityTopic::class);
 
-        $zones = CommunityZone::all();
+        $zones = CommunityZone::orderBy('order','desc')->get();
         if($request->input('zone_id')&&$request->input('section_id')){
             $zone_id = $request->input('zone_id');
             $section_id = $request->input('section_id');
@@ -134,7 +134,7 @@ class CommunityTopicController extends Controller
     public function edit(CommunityTopic $topic,Request $request){
         $this->authorize('update',$topic);
 
-        $zones = CommunityZone::all();
+        $zones = CommunityZone::orderBy('order','desc')->get();
         $selectedSections = CommunityZone::where('id',$topic->zone_id)->first()->communitySections;
 
         return view('community-edit-topic',compact('topic','zones','selectedSections'));
@@ -145,7 +145,7 @@ class CommunityTopicController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function adminListShowByCategory(){
-        $zones = CommunityZone::with('communitySections')->get();
+        $zones = CommunityZone::orderBy('order','desc')->with('communitySections')->get();
         return view('admin.community-topic.show-by-category',compact('zones'));
     }
 
@@ -179,7 +179,7 @@ class CommunityTopicController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function adminCreateShow(Request $request){
-        $zones = CommunityZone::all();
+        $zones = CommunityZone::orderBy('order','desc')->get();
         if($request->input('zone_id')&&$request->input('section_id')){
             $zone_id = $request->input('zone_id');
             $section_id = $request->input('section_id');
@@ -278,7 +278,7 @@ class CommunityTopicController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function adminEditShow(CommunityTopic $topic){
-        $zones = CommunityZone::all();
+        $zones = CommunityZone::orderBy('order','desc')->get();
         $selectedSections = CommunityZone::where('id',$topic->zone_id)->first()->communitySections;
 
         return view('admin.community-topic.edit',compact('topic','zones','selectedSections'));

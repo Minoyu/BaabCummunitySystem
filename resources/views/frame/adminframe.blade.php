@@ -17,7 +17,7 @@
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
     <link href="/css/animate.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.bootcss.com/ionicons/4.1.2/css/ionicons.min.css" rel="stylesheet">
-    <link href="/css/main_2018090705.css" rel="stylesheet" type="text/css">
+    <link href="/css/main_2018090706.css" rel="stylesheet" type="text/css">
     <link href="/css/admin.css" rel="stylesheet" type="text/css">
 </head>
 <body class="mdui-appbar-with-toolbar mdui-drawer-body-left">
