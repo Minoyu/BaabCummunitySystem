@@ -1728,8 +1728,8 @@ body {
         top: -32px;
         left: 16px;
         right: 16px;
-        overflow: hidden;
-        white-space: nowrap;
+        overflow: auto;
+        white-space: normal;
         text-overflow: ellipsis;
     }
     .user-center-cover-info .menu {
@@ -2614,3 +2614,39 @@ body {
     white-space: normal;
 }
 
+.topic-mobile-user-top{
+    padding: 16px;
+    height: auto;
+    margin: -10px -10px;
+    background: #f9f9f9;
+    border-radius: 10px;
+}
+
+.topic-mobile-user-top .mdui-card-header-title {
+    padding-right: 40px;
+    white-space: normal;
+}
+.topic-mobile-user-top .mdui-card-header-subtitle {
+    padding-right: 40px;
+}
+.mdui-card-header-title .layui-badge{
+    line-height: 20px;
+}
+
+.topic-mobile-user-info-btn{
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.4, 0, .2, 1);
+    transition: -webkit-transform .3s cubic-bezier(.4, 0, .2, 1);
+    transition:         transform .3s cubic-bezier(.4, 0, .2, 1);
+    transition:         transform .3s cubic-bezier(.4, 0, .2, 1), -webkit-transform .3s cubic-bezier(.4, 0, .2, 1);
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+
+    will-change: transform;
+}
+.topic-mobile-user-info-btn-180{
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}

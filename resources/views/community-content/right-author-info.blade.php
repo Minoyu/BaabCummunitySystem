@@ -9,10 +9,25 @@
             <img class="side-card-user-avatar mdui-hoverable" src="{{$topic->user->info->avatar_url}}">
         </a>
         <a href="{{route('showPersonalCenter',$topic->user->id)}}">
-            <div class="side-card-user-name">{{$topic->user->name}}</div>
+            <div class="side-card-user-name">
+                {{$topic->user->name}}
+            </div>
         </a>
 
         <div class="side-card-user-motto">
+            @foreach($topic->user->roles as $role)
+                @switch($role->name)
+                    @case('Founder')
+                    <span class="layui-badge">{{$role->name}}</span>
+                    @break
+                    @case('Maintainer')
+                    <span class="layui-badge layui-bg-blue">{{$role->name}}</span>
+                    @break
+                    @case('BanedUser')
+                    <span class="layui-badge layui-bg-black">Banned</span>
+                    @break
+                @endswitch
+            @endforeach
             @if($topic->user->info->motto)
                 {{$topic->user->info->motto}}
             @endif

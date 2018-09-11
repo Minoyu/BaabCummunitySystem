@@ -49,7 +49,21 @@
         <li class="mdui-divider"></li>
         @foreach($users as $user)
             <li class="mdui-menu-item search-tips search-tips-item">
-                <a href="{{route('showPersonalCenter',$user->id)}}" class="mdui-ripple">{{$user->name}}</a>
+                <a href="{{route('showPersonalCenter',$user->id)}}" class="mdui-ripple">{{$user->name}}
+                    @foreach($user->roles as $role)
+                        @switch($role->name)
+                            @case('Founder')
+                            <span class="layui-badge">{{$role->name}}</span>
+                            @break
+                            @case('Maintainer')
+                            <span class="layui-badge layui-bg-blue">{{$role->name}}</span>
+                            @break
+                            @case('BanedUser')
+                            <span class="layui-badge layui-bg-black">Banned</span>
+                            @break
+                        @endswitch
+                    @endforeach
+                </a>
             </li>
         @endforeach
     @endif

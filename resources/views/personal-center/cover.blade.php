@@ -27,9 +27,36 @@
         <div class="username-cover">{{$user->name}}</div>
         <div class="meta">
             @if($user->info->motto)
-                <a class="headline">{{$user->info->motto}}</a>
+                <a class="headline">
+                    @foreach($user->roles as $role)
+                        @switch($role->name)
+                            @case('Founder')
+                            <span class="layui-badge">{{$role->name}}</span>
+                            @break
+                            @case('Maintainer')
+                            <span class="layui-badge layui-bg-blue">{{$role->name}}</span>
+                            @break
+                            @case('BanedUser')
+                            <span class="layui-badge layui-bg-black">Banned</span>
+                            @break
+                        @endswitch
+                    @endforeach{{$user->info->motto}}</a>
             @else
-                <a class="headline">{{__('user.noMotto')}}</a>
+                <a class="headline">
+                    @foreach($user->roles as $role)
+                        @switch($role->name)
+                            @case('Founder')
+                            <span class="layui-badge">{{$role->name}}</span>
+                            @break
+                            @case('Maintainer')
+                            <span class="layui-badge layui-bg-blue">{{$role->name}}</span>
+                            @break
+                            @case('BanedUser')
+                            <span class="layui-badge layui-bg-black">Banned</span>
+                            @break
+                        @endswitch
+                    @endforeach
+                    {{__('user.noMotto')}}</a>
             @endif
 
         </div>

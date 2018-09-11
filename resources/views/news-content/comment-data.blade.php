@@ -2,7 +2,21 @@
     <a name="reply-{{$reply->id}}" id="reply-{{$reply->id}}"></a>
     <div class="news-content-comment-list">
         <a href="#"><img src="{{$reply->user->info->avatar_url}}" alt="users" class="news-content-comment-users-img mdui-hoverable"></a>
-        <a href="#" class="news-content-comment-username">{{$reply->user->name}}</a>
+        <a href="#" class="news-content-comment-username">{{$reply->user->name}}
+            @foreach($reply->user->roles as $role)
+                @switch($role->name)
+                    @case('Founder')
+                    <span class="layui-badge">{{$role->name}}</span>
+                    @break
+                    @case('Maintainer')
+                    <span class="layui-badge layui-bg-blue">{{$role->name}}</span>
+                    @break
+                    @case('BanedUser')
+                    <span class="layui-badge layui-bg-black">Banned</span>
+                    @break
+                @endswitch
+            @endforeach
+        </a>
         {{--<a href="#" class="news-content-comment-dianzan-btn"><i class="mdui-icon material-icons">thumb_up</i></a>--}}
         <div class="news-content-comment-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$reply->created_at->diffForHumans()}}</div>
         <div class="news-content-comment-p">{!! $reply->content !!}</div>

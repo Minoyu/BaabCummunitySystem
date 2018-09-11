@@ -2156,3 +2156,16 @@ function ImgToBase64(file, maxLen, callBack) {
     };
     reader.readAsDataURL(file);
 }
+
+//社区话题移动端页面顶部用户信息
+var mobileTopicUserInfoTop = new mdui.Collapse('#mobileTopicUserInfoTop');
+
+function toggleMobileTopicUserInfoTop() {
+    mobileTopicUserInfoTop.toggle(0);
+}
+$$('#mobileTopicUserInfoTopItem').on('open.mdui.collapse',function () {
+    $$('#mobileTopicUserInfoTopBtn').addClass('topic-mobile-user-info-btn-180');
+});
+$$('#mobileTopicUserInfoTopItem').on('close.mdui.collapse',function () {
+    $$('#mobileTopicUserInfoTopBtn').removeClass('topic-mobile-user-info-btn-180');
+});
