@@ -45,7 +45,11 @@
 
             </form>
         </div>
-        <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></button>
+        @if(!Auth::check())
+            <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></button>
+        @else
+            <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon"><img src="{{Auth::user()->info->avatar_url}}"></button>
+        @endif
         @include('layout.appbar-right-menu')
     </div>
 

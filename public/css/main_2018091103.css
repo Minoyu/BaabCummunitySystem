@@ -20,6 +20,10 @@ body {
         bottom: 66px;
     }
 }
+.mdui-textfield .mdui-icon~.mdui-textfield-error, .mdui-textfield .mdui-icon~.mdui-textfield-flex-wrap, .mdui-textfield .mdui-icon~.mdui-textfield-helper, .mdui-textfield .mdui-icon~.mdui-textfield-input, .mdui-textfield .mdui-icon~.mdui-textfield-label{
+    width: calc(100% - 45px);
+    margin-left: 45px;
+}
 /*顶部padding （移动端适配tab选项卡及drawer）*/
 /*无tab 有底部导航栏*/
 @media (min-width: 600px){
@@ -677,7 +681,8 @@ body {
     display: block;
     position: absolute;
     left: 4px;
-    top: 4px
+    top: 4px;
+    z-index: 2;
 }
 
 .login-dialog .avatar,.register-dialog .avatar,.reset-dialog .avatar {
@@ -693,7 +698,8 @@ body {
     padding: 146px 40px 28px;
     margin-bottom: 24px;
     line-height: 36px;
-    text-shadow: black 0.05em 0.05em 0.05em
+    text-shadow: black 0.05em 0.05em 0.05em;
+    position: relative;
 }
 
 .login-dialog .login-bg{
@@ -720,6 +726,7 @@ body {
     position: absolute;
     right: 5px;
     padding: 0 8px;
+    bottom: 28px;
 }
 
 .login-dialog .captcha-field,.register-dialog .captcha-field,.reset-dialog .captcha-field {
@@ -749,9 +756,13 @@ body {
     margin-top: 24px
 }
 
-.login-dialog .success,.register-dialog .success,.reset-dialog .success {
+.login-dialog .success,.register-dialog .success {
     min-height: 250px;
     padding: 0 40px 62px
+}
+.reset-dialog .success {
+    min-height: 250px;
+    padding: 0 10px 62px
 }
 .login-dialog .success .icon,.register-dialog .success .icon,.reset-dialog .success .icon {
     font-size: 100px;
@@ -782,7 +793,8 @@ body {
 
     .login-dialog .back,.login-dialog .close,.register-dialog .back,.register-dialog .close,.reset-dialog .back,.reset-dialog .close {
         left: 8px;
-        top: 10px
+        top: 10px;
+        z-index: 2;
     }
 
     .login-dialog .avatar,.register-dialog .avatar,.reset-dialog .avatar {
@@ -791,7 +803,18 @@ body {
 
     .login-dialog .mdui-dialog-title,.register-dialog .mdui-dialog-title,.reset-dialog .mdui-dialog-title {
         line-height: 36px;
-        padding: 10px 16px 10px 52px
+        height: 30%;
+        position: relative;
+        padding: 0 30px;
+    }
+
+    .login-dialog .mdui-dialog-title .dialog-title,.register-dialog .mdui-dialog-title .dialog-title,.reset-dialog .mdui-dialog-title .dialog-title {
+        position: absolute;
+        bottom: 30px;
+    }
+    .login-dialog .dialog-top-tip-button,.register-dialog .dialog-top-tip-button,.reset-dialog .dialog-top-tip-button {
+        position: absolute;
+        bottom: 30px;
     }
 
     .login-dialog form,.register-dialog form,.reset-dialog form {
@@ -2649,4 +2672,43 @@ body {
 .topic-mobile-user-info-btn-180{
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
+}
+
+.magnify-modal {
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.3);
+}
+
+.magnify-header .magnify-toolbar {
+    width: 40px;
+    background-color: rgba(0, 0, 0, .5);
+}
+
+.magnify-stage {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-width: 0;
+}
+
+.magnify-footer .magnify-toolbar {
+    display: inline-block;
+    height: 40px;
+    background-color: rgba(0, 0, 0, .5);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.magnify-stage img {
+    width: 0;
+}
+
+.magnify-loading {
+    background-color: transparent;
+}
+
+#appbar-right-menu-btn img{
+    width: 80%;
+    height: auto;
+    border-radius: 50%
 }

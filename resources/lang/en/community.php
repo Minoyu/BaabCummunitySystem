@@ -43,4 +43,7 @@ return [
     'noReplyInSection'=>'There is no topic under this section',
     'SectionCreatedAt'=>'The section was created at',
 
+    'zoneNotSelect'=>'Zone have not been selected',
+    'sectionNotSelect'=>'Section have not been selected',
+
 ];

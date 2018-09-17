@@ -20,11 +20,14 @@ return [
     'password_confirmation_failed'=>'Entered passwords differ from the another',
 
     'email'=>'Email',
+    'phone'=>'Phone',
     'logout'=>'Logout',
     'rememberMe'=>'Remember Me',
     'forgotPassword'=>'Forgot password',
     'confirmLogin'=>'Go',
     'createAccount'=>'Create New Account',
+    'registerByPhone'=>'Register By Phone',
+    'registerByEmail'=>'Register By Email',
     'notRegistered'=>"Haven't registered？",
     'Registered'=>"Have Account？",
     'RegisterSuccess'=>"Thank you for the successful registration",
@@ -36,6 +39,8 @@ return [
     'nameEmpty'=>'We need your Username',
     'needEmail'=>'Your email address?',
     'emailEmpty'=>'We need your email address',
+    'needPhone'=>'Your phone number?',
+    'phoneEmpty'=>'We need your phone number',
 
     'atLeast6P'=>'Please enter at least 6 bit passwords',
     'atLeast6'=>'The password is at least 6 bits',
@@ -45,4 +50,6 @@ return [
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
     'notLoggedTip' =>'Sorry, you are not logged in yet',
+
+    'emailError'=>'Email format error',
 ];

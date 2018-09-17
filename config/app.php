@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_EN_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -187,7 +187,9 @@ return [
         //Vote服务
         Jcc\LaravelVote\VoteServiceProvider::class,
         //搜索服务
-        TomLingham\Searchy\SearchyServiceProvider::class
+        TomLingham\Searchy\SearchyServiceProvider::class,
+        //短信服务
+        Mrgoon\AliSms\ServiceProvider::class,
 
     ],
 
@@ -239,6 +241,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Searchy' => TomLingham\Searchy\Facades\Searchy::class,
+        'AliSms'=>Mrgoon\AliSms\ServiceProvider::class,
     ],
 
 ];

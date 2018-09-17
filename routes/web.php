@@ -260,3 +260,5 @@ Route::group(['prefix'=>'admin','middleware' => ['role:Founder|Maintainer']],fun
 
 
 });
+
+Route::get("/test/resetPassEmail",'Auth\ResetPasswordController@handleResetPassword');

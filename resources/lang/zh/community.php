@@ -43,5 +43,8 @@ return [
     'noReplyInSection'=>'此版块下暂无话题',
     'SectionCreatedAt'=>'版块创建于',
 
+    'zoneNotSelect'=>'分区尚未选择',
+    'sectionNotSelect'=>'版块尚未选择',
+
 
 ];

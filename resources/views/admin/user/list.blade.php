@@ -111,5 +111,6 @@
     </div>
 
     <!--/内容-->
-    @include('layout.register')
+    @include('layout.registerByEmail')
+    @include('layout.registerByPhone')
 @endsection

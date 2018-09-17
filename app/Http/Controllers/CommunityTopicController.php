@@ -199,12 +199,18 @@ class CommunityTopicController extends Controller
         //发布验证 暂存不验证
 //        if($status=='publish') {
         //验证
+        $messages = [
+            'zone_id.required' => __('community.zoneNotSelect'),
+            'zone_id.integer' =>  __('community.zoneNotSelect'),
+            'section_id.required' =>  __('community.sectionNotSelect'),
+            'section_id.integer' =>  __('community.sectionNotSelect'),
+        ];
         $this->validate(\request(), [
             'title' => 'required',
             'content' => 'required',
             'zone_id' => 'required|integer|exists:community_zones,id',
             'section_id' => 'required|integer|exists:community_sections,id',
-        ]);
+        ],$messages);
 //        }
         //逻辑
         $title = \request('title');
@@ -241,12 +247,18 @@ class CommunityTopicController extends Controller
 
         $status = \request('status');
         //验证
+        $messages = [
+            'zone_id.required' => __('community.zoneNotSelect'),
+            'zone_id.integer' =>  __('community.zoneNotSelect'),
+            'section_id.required' =>  __('community.sectionNotSelect'),
+            'section_id.integer' =>  __('community.sectionNotSelect'),
+        ];
         $this->validate(\request(), [
             'title' => 'required',
             'content' => 'required',
             'zone_id' => 'required|integer|exists:community_zones,id',
             'section_id' => 'required|integer|exists:community_sections,id',
-        ]);
+        ],$messages);
         //逻辑
         $title = \request('title');
         $zone_id = \request('zone_id');

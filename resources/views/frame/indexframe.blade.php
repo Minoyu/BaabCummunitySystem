@@ -32,10 +32,12 @@
     {{--底部导航栏--}}
     @include('layout.bottom-nav')
     {{--注册登录重置模块--}}
-    @include('layout.login')
-    @include('layout.register')
-    @include('layout.reset')
-
+    @if(!Auth::check())
+        @include('layout.login')
+        @include('layout.registerByEmail')
+        {{--@include('layout.registerByPhone')--}}
+        @include('layout.reset')
+    @endif
     {{--激活导航栏值--}}
     <div id="tabActiveVal" class="mdui-hidden">@yield('tabActiveVal')</div>
     <div id="bottomNavActiveVal" class="mdui-hidden">@yield('bottomNavActiveVal')</div>
@@ -43,9 +45,8 @@
     @if (app()->isLocal())
         @include('sudosu::user-selector')
     @endif
-
     <!-- Js -->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="/layui/layui.js"></script>
     <script src="/js/swiper-4.3.5.min.js"></script>
     <script src="/js/mdui.min.js"></script>

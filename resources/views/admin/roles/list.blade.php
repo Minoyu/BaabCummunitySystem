@@ -54,5 +54,5 @@
     <div class="mdui-typo-caption mdui-text-color-red mdui-m-t-1">{{__('admin/user-permission.roleNote')}}</div>
 
     <!--/内容-->
-    @include('layout.register')
+    @include('layout.registerByEmail')
 @endsection

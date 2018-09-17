@@ -19,11 +19,14 @@ return [
     'password_confirmation_failed'=>'两次输入的密码不一致',
 
     'email'=>'邮箱',
+    'phone'=>'手机号',
     'logout'=>'登出',
     'rememberMe'=>'保持登录',
     'forgotPassword'=>'忘记密码',
     'confirmLogin'=>'登录',
     'createAccount'=>'创建新账号',
+    'registerByPhone'=>'手机注册',
+    'registerByEmail'=>'邮箱注册',
     'notRegistered'=>'还未注册？',
     'Registered'=>'已有账号？',
     'RegisterSuccess'=>"感谢你的成功注册",
@@ -35,6 +38,8 @@ return [
     'nameEmpty'=>'我们需要你的用户名',
     'needEmail'=>'你的电子邮箱是?',
     'emailEmpty'=>'我们需要你的电子邮箱地址',
+    'needPhone'=>'你的手机号是?',
+    'phoneEmpty'=>'我们需要你的手机号',
 
     'atLeast6P'=>'请至少输入6位密码',
     'atLeast6'=>'密码至少6位',
@@ -44,5 +49,7 @@ return [
     'throttle' => '频繁的登录！ 请在 :seconds 秒后在试。',
 
     'notLoggedTip' =>'对不起，你还没有登录',
+
+    'emailError'=>'邮箱格式错误',
 
 ];

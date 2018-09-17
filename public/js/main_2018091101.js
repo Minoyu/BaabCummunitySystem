@@ -197,10 +197,16 @@ function openLoginDialog() {
 }
 function loginToRegister() {
     loginDialog.close();
-    registerDialog.open();
+    registerByEmailDialog.open();
+    // registerByPhoneDialog.open();
 }
 function loginToReset() {
     loginDialog.close();
+    resetDialog.open();
+}
+function registerToReset() {
+    registerByEmailDialog.close();
+    // registerByPhoneDialog.close();
     resetDialog.open();
 }
 /*检测如果含有登录参数则打开登录对话框并提示登录*/
@@ -357,16 +363,29 @@ if ($$('#editorToolbar').length>0){
 
 
 //注册对话框
-var registerDialog = new mdui.Dialog('#register-dialog',{modal:true});
+var registerByEmailDialog = new mdui.Dialog('#register-by-email-dialog',{modal:true});
+// var registerByPhoneDialog = new mdui.Dialog('#register-by-phone-dialog',{modal:true});
 
 //打开注册框
 function openRegisterDialog() {
-    registerDialog.open();
+    // registerByPhoneDialog.open();
+    registerByEmailDialog.open();
 }
 function registerToLogin() {
-    registerDialog.close();
+    // registerByPhoneDialog.close();
+    registerByEmailDialog.close();
     loginDialog.open();
 }
+
+// function phoneRegisterToEmailRegister() {
+//     registerByPhoneDialog.close();
+//     registerByEmailDialog.open();
+// }
+
+// function emailRegisterToPhoneRegister() {
+//     registerByEmailDialog.close();
+//     registerByPhoneDialog.open();
+// }
 
 //密码重置对话框
 var resetDialog = new mdui.Dialog('#reset-dialog',{modal:true});
@@ -377,7 +396,8 @@ function openResetDialog() {
 }
 function resetToRegister() {
     resetDialog.close();
-    registerDialog.open();
+    // registerByPhoneDialog.open();
+    registerByEmailDialog.open();
 }
 function resetToLogin() {
     resetDialog.close();
@@ -487,6 +507,7 @@ function loginSubmit() {
                 $$('.personalCenterUrl').attr('href','/user/'+data.user.id);
                 console.log(data.user.name);
                 $$('#loginSuccessful').removeClass('mdui-hidden');
+                $$('#loginSuccessIcon').animateCss('rotateIn')
                 loginDialog.handleUpdate();
                 setTimeout(function(){
                     //使用  setTimeout（）方法设定定时3000毫秒
@@ -514,15 +535,160 @@ function loginSubmit() {
     }
 }
 
-$("input[name='registerEmail']").keydown(function (e) {
+$("input[name='resetEmail']").keydown(function (e) {
     var curKey = e.which;
     if (curKey === 13) {
-        registerStep1Next();
+        resetSubmit();
+    }
+});
+
+//Ajax用户登录验证
+function resetSubmit() {
+    var email=$$('input[name="resetEmail"]').val();
+    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //邮箱正则表达式
+    var resetEmailErrorField=$$('#resetEmailError');
+    var resetEmailTextField=$$('#resetEmailTextField');
+    var emailHasError=false;
+
+    //邮箱验证开始
+    if (email === ""){
+        emailHasError = true;
+    }else if(!reg.test(email)){ //邮箱正则验证不通过，格式不对
+        emailHasError = true;
+    }
+
+    if (emailHasError){
+        resetEmailTextField.addClass('mdui-textfield-invalid');
+    }else{
+        resetEmailTextField.removeClass('mdui-textfield-invalid');
+        $$.ajax({
+            method: 'POST',
+            url: '/auth/reset',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                email:email
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    if (data.errors.email){
+                        resetEmailErrorField.text(data.errors.email[0]);
+                        emailHasError=true;
+                    }
+                }
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    //登录成功
+                    $$('#resetForm').addClass('mdui-hidden');
+                    $$('.dialog-top-tip-button').addClass('mdui-hidden');
+                    $$('#resetSendSuccessful').removeClass('mdui-hidden');
+                    resetDialog.handleUpdate();
+                }
+            },
+            complete: function (xhr, textStatus) {
+                if(emailHasError ===true){
+                    resetEmailTextField.addClass('mdui-textfield-invalid');
+                }else{
+                    resetEmailTextField.removeClass('mdui-textfield-invalid');
+                }
+            }
+        });
+
+    }
+}
+
+$("input[name='registerByEmailEmail']").keydown(function (e) {
+    var curKey = e.which;
+    if (curKey === 13) {
+        registerByEmailStep1Next();
+    }
+});
+$("input[name='registerByPhonePhone']").keydown(function (e) {
+    var curKey = e.which;
+    if (curKey === 13) {
+        registerByPhoneStep1Next();
     }
 });
 
 //注册部分下一步
-function registerStep1Next() {
+function registerByEmailStep1Next() {
+    var userName = $$('input[name="registerByEmailName"]').val();
+    var email = $$('input[name="registerByEmailEmail"]').val();
+    var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //邮箱正则表达式
+    var registerEmailTextField=$$('#registerByEmailEmailTextField');
+    var registerEmailErrorField=$$('#registerByEmailEmailErrorField');
+    var registerNameTextField=$$('#registerByEmailNameTextField');
+    var nameHasError=false;
+    var emailHasError=false;
+    //用户名验证
+    if (userName === ""){
+        nameHasError = true;
+    }
+    //邮箱验证开始
+    if (email === ""){
+        emailHasError = true;
+    }else if(!reg.test(email)){ //邮箱正则验证不通过，格式不对
+        emailHasError = true;
+    }else{
+        $$.ajax({
+            method: 'POST',
+            url: '/auth/checkEmailUnique',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                email:email
+            },
+            statusCode: {
+                422: function (data) {
+                    data=JSON.parse(data.response);
+                    if (data.errors.email){
+                        registerEmailErrorField.text(data.errors.email[0]);
+                        emailHasError=true;
+                    }
+                },
+                404:function (data) {
+                    data=JSON.parse(data.response);
+                    if (data.errors.email){
+                        registerEmailErrorField.text('Server internal error');
+                        emailHasError=true;
+                    }
+                },
+                500:function (data) {
+                    data=JSON.parse(data.response);
+                    if (data.errors.email){
+                        registerEmailErrorField.text('Server internal error');
+                        emailHasError=true;
+                    }
+                }
+            },
+            complete: function (xhr, textStatus) {
+                //跳转
+                if( nameHasError || emailHasError){
+                    if(emailHasError ===true){
+                        registerEmailTextField.addClass('mdui-textfield-invalid');
+                    }else{
+                        registerEmailTextField.removeClass('mdui-textfield-invalid');
+                    }
+                    if(nameHasError ===true){
+                        registerNameTextField.addClass('mdui-textfield-invalid');
+                    }else{
+                        registerNameTextField.removeClass('mdui-textfield-invalid');
+                    }
+                }else{
+                    $$('#registerByEmailStep1Form').addClass('mdui-hidden');
+                    $$('#registerByEmailStep2Form').removeClass('mdui-hidden');
+                    registerByEmailDialog.handleUpdate();
+                }
+            }
+        });
+    }
+}
+function registerByPhoneStep1Next() {
     var userName = $$('input[name="registerName"]').val();
     var email = $$('input[name="registerEmail"]').val();
     var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$"); //邮箱正则表达式
@@ -589,22 +755,78 @@ function registerStep1Next() {
                 }else{
                     $$('#registerStep1Form').addClass('mdui-hidden');
                     $$('#registerStep2Form').removeClass('mdui-hidden');
-                    registerDialog.handleUpdate();
+                    registerByEmailDialog.handleUpdate();
                 }
             }
         });
     }
 }
 
-$("input[name='registerPasswordConfirmation']").keydown(function (e) {
+$("input[name='registerByEmailPasswordConfirmation']").keydown(function (e) {
     var curKey = e.which;
     if (curKey === 13) {
-        registerStep2Next();
+        registerByEmailStep2Submit();
     }
 });
 
 //Ajax注册提交部分
-function registerStep2Submit() {
+function registerByEmailStep2Submit() {
+    var userName = $$('input[name="registerByEmailName"]').val();
+    var email = $$('input[name="registerByEmailEmail"]').val();
+    var password = $$('input[name="registerByEmailPassword"]').val();
+    var password_confirmation = $$('input[name="registerByEmailPasswordConfirmation"]').val();
+    var registerPasswordErrorField=$$('#registerByEmailPasswordError');
+    var registerPasswordConfirmErrorField=$$('#registerByEmailPasswordConfirmError');
+    var registerPasswordTextField=$$('#registerByEmailPasswordTextField');
+    var registerPasswordConfirmTextField=$$('#registerByEmailPasswordConfirmTextField');
+    var passwordHasError=false;
+    var passwordConfirmHasError=false;
+
+    //至少6位
+    if (password.length<6){
+        passwordHasError = true;
+    }
+    if (password_confirmation!==password){
+        passwordConfirmHasError = true;
+    }
+
+    if (passwordHasError || passwordConfirmHasError){
+        if(passwordHasError ===true){
+            registerPasswordTextField.addClass('mdui-textfield-invalid');
+        }else{
+            registerPasswordTextField.removeClass('mdui-textfield-invalid');
+        }
+        if(passwordConfirmHasError ===true){
+            registerPasswordConfirmTextField.addClass('mdui-textfield-invalid');
+        }else{
+            registerPasswordConfirmTextField.removeClass('mdui-textfield-invalid');
+        }
+    }else{
+        $$.ajax({
+            method: 'POST',
+            url: '/auth/register',
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                email:email,
+                name:userName,
+                password:password,
+                password_confirmation:password_confirmation
+            },
+            success: function (data) {
+                data=JSON.parse(data);
+                if (data.status===1){
+                    $$('#registerByEmailStep2Form').addClass('mdui-hidden');
+                    $$('.registerSuccessful').removeClass('mdui-hidden');
+                    $$('#registerEmailSuccessIcon').animateCss('swing');
+                    registerByEmailDialog.handleUpdate();
+                }
+            }
+        });
+    }
+}
+function registerByPhoneStep2Submit() {
     var userName = $$('input[name="registerName"]').val();
     var email = $$('input[name="registerEmail"]').val();
     var password = $$('input[name="registerPassword"]').val();
@@ -653,7 +875,8 @@ function registerStep2Submit() {
                 if (data.status===1){
                     $$('#registerStep2Form').addClass('mdui-hidden');
                     $$('#registerSuccessful').removeClass('mdui-hidden');
-                    registerDialog.handleUpdate();
+                    $$('#registerEmailSuccessIcon').animateCss('swing');
+                    registerByEmailDialog.handleUpdate();
                 }
             }
         });
