@@ -13,10 +13,13 @@ return [
     |
     */
     'password'=>'密码',
+    'newPassword'=>'新密码',
+    'nowYouCanResetPass'=>'现在你可以重置你的密码了',
     'password_p'=>'你的账户密码至少需要6位',
     'password_confirmation'=>'确认密码',
     'password_confirmation_p'=>'再次输入密码确认',
     'password_confirmation_failed'=>'两次输入的密码不一致',
+    'confirmToChange'=>'确认重置',
 
     'email'=>'邮箱',
     'phone'=>'手机号',

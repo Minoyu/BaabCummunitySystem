@@ -17,11 +17,11 @@ class ResetPassword extends Mailable
      *
      * @return void
      */
-    public function __construct(User $user)
+    public function __construct($token,$username)
     {
         //
-        $this->link = route('showPersonalCenter',$user->id);
-        $this->username = $user->name;
+        $this->link = route('showResetPasswordPage',$token);
+        $this->username = $username;
     }
 
     /**

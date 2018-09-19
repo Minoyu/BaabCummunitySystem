@@ -563,12 +563,16 @@ function resetSubmit() {
         resetEmailTextField.removeClass('mdui-textfield-invalid');
         $$.ajax({
             method: 'POST',
-            url: '/auth/reset',
+            url: '/auth/resetPassword',
             headers: {
                 'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
             },
             data: {
                 email:email
+            },
+            beforeSend:function(){
+                $$('#resetSubmitBtn').html('<div class="mdui-spinner mdui-spinner-colorful"></div>');
+                mdui.mutation();
             },
             statusCode: {
                 422: function (data) {
@@ -577,15 +581,16 @@ function resetSubmit() {
                         resetEmailErrorField.text(data.errors.email[0]);
                         emailHasError=true;
                     }
+                    $$('#resetSubmitBtn').html('NEXT');
                 }
             },
             success: function (data) {
                 data=JSON.parse(data);
                 if (data.status===1){
-                    //登录成功
+                    //发送成功
                     $$('#resetForm').addClass('mdui-hidden');
-                    $$('.dialog-top-tip-button').addClass('mdui-hidden');
                     $$('#resetSendSuccessful').removeClass('mdui-hidden');
+                    $$('#resetSuccessIcon').animateCss('swing');
                     resetDialog.handleUpdate();
                 }
             },
@@ -595,6 +600,7 @@ function resetSubmit() {
                 }else{
                     resetEmailTextField.removeClass('mdui-textfield-invalid');
                 }
+                $$('#resetSubmitBtn').html('NEXT');
             }
         });
 

@@ -14,6 +14,11 @@ body {
 .mdui-fab{
     z-index: 2;
 }
+.mdui-btn .mdui-spinner{
+    width: 20px;
+    height: 20px;
+    top: 4px;
+}
 /*小屏设备右下按钮底部边距*/
 @media (max-width: 599px) {
     .mdui-fab-fixed, .mdui-fab-wrapper {
@@ -715,8 +720,8 @@ body {
     background-size: 100% 100%;
 }
 
-.login-dialog form,.register-dialog form,.reset-dialog form {
-    padding: 0 40px 62px
+.login-dialog form,.register-dialog form,.reset-dialog #resetForm {
+    padding: 0 40px 62px 30px;
 }
 
 .login-dialog .more-option,.register-dialog .more-option,.reset-dialog .more-option {
@@ -753,7 +758,8 @@ body {
 }
 
 .login-dialog .actions,.register-dialog .actions,.reset-dialog .actions {
-    margin-top: 24px
+    margin-top: 24px;
+    padding-left: 6px;
 }
 
 .login-dialog .success,.register-dialog .success {
@@ -817,11 +823,11 @@ body {
         bottom: 30px;
     }
 
-    .login-dialog form,.register-dialog form,.reset-dialog form {
+    .login-dialog form,.register-dialog form,.reset-dialog #resetForm {
         padding: 0 24px 24px
     }
 
-    .login-dialog form .mdui-textfield,.register-dialog form .mdui-textfield,.reset-dialog form .mdui-textfield {
+    .login-dialog form .mdui-textfield,.register-dialog form .mdui-textfield,.reset-dialog #resetForm .mdui-textfield {
         padding-top: 4px
     }
 

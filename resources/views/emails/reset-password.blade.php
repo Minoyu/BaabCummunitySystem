@@ -11,7 +11,7 @@ If you confirm that this is your own operation, you can click the button below t
     {{$link}}
 @endcomponent
 
-This link must be kept properly, effective within 5 minutes. If you don't operate it, please ignore this email.
+This link must be kept properly, effective within 10 minutes. If you don't operate it, please ignore this email.
 <br>
 <br>
 Thanks,<br>

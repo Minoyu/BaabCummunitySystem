@@ -7,7 +7,7 @@
             {{__('auth.resetPassword')}}
         </div>
     </div>
-    <form class="" id="resetForm">
+    <div class="" id="resetForm">
         <div class="mdui-textfield mdui-textfield-floating-label mdui-textfield-has-bottom" id="resetEmailTextField">
             <i class="mdui-icon material-icons">email</i>
             <label class="mdui-textfield-label">{{__('auth.email')}}</label>
@@ -24,9 +24,9 @@
                     <a onclick="resetToRegister()" class="mdui-ripple">{{__('auth.createAccount')}}</a>
                 </li>
             </ul>
-            <a onclick="resetSubmit()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.next')}}</a>
+            <a onclick="resetSubmit()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right" id="resetSubmitBtn">{{__('index.next')}}</a>
         </div>
-    </form>
+    </div>
     <div id="resetSendSuccessful" class="mdui-valign success mdui-hidden">
         <div class="mdui-center">
             <i class="mdui-icon material-icons mdui-text-color-teal mdui-center icon" id="resetSuccessIcon">&#xe862;</i>

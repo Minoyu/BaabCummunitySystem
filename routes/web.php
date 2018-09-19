@@ -43,6 +43,10 @@ Route::get('/auth/not/login','AuthController@notLogin')->name('notLogin');
 Route::post('/auth/checkEmailUnique','AuthController@checkEmailUnique')->name('userCheckEmail');
 Route::post('/auth/register','AuthController@register')->name('userRegister');
 
+//忘记密码重置
+Route::post("/auth/resetPassword",'Auth\ResetPasswordController@handleResetPassword');
+Route::get("/auth/resetPassword/{token}",'Auth\ResetPasswordController@showResetPage')->name('showResetPasswordPage');
+
 //用户相关
 Route::get('/user/{user}','UserController@showPersonalCenter')->name('showPersonalCenter');
 Route::post("/user/getFollowings",'UserController@ajaxGetFollowings')->name('userGetFollowings');
@@ -260,5 +264,3 @@ Route::group(['prefix'=>'admin','middleware' => ['role:Founder|Maintainer']],fun
 
 
 });
-
-Route::get("/test/resetPassEmail",'Auth\ResetPasswordController@handleResetPassword');

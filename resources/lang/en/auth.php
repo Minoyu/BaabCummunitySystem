@@ -14,10 +14,13 @@ return [
     */
 //    登录注册相关
     'password'=>'Password',
+    'newPassword'=>'New Password',
+    'nowYouCanResetPass'=>'Now you can reset your password',
     'password_p'=>'Your account password requires at least 6 bits',
     'password_confirmation'=>'Confirm Password',
     'password_confirmation_p'=>'Retype your password to confirm',
     'password_confirmation_failed'=>'Entered passwords differ from the another',
+    'confirmToChange'=>'Confirm to change',
 
     'email'=>'Email',
     'phone'=>'Phone',
@@ -33,7 +36,7 @@ return [
     'RegisterSuccess'=>"Thank you for the successful registration",
     'LoginSuccess'=>"Welcome home",
     'moreOptions'=>'More Options',
-    'resetPassword'=>'Reset password',
+    'resetPassword'=>'Reset Password',
     'username'=>'Username',
     'needName'=>'How do we address you?',
     'nameEmpty'=>'We need your Username',
