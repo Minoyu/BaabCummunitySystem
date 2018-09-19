@@ -37,6 +37,7 @@ return [
     'LoginSuccess'=>"Welcome home",
     'moreOptions'=>'More Options',
     'resetPassword'=>'Reset Password',
+    'resetPasswordPageTip'=>'Valid within ten minutes.',
     'username'=>'Username',
     'needName'=>'How do we address you?',
     'nameEmpty'=>'We need your Username',

@@ -46,6 +46,7 @@ Route::post('/auth/register','AuthController@register')->name('userRegister');
 //忘记密码重置
 Route::post("/auth/resetPassword",'Auth\ResetPasswordController@handleResetPassword');
 Route::get("/auth/resetPassword/{token}",'Auth\ResetPasswordController@showResetPage')->name('showResetPasswordPage');
+Route::post("/auth/resetPassword/{token}",'Auth\ResetPasswordController@storeResetPassword')->name('storeResetPassword');
 
 //用户相关
 Route::get('/user/{user}','UserController@showPersonalCenter')->name('showPersonalCenter');

@@ -41,9 +41,22 @@ class ResetPasswordController extends Controller
 
     public function showResetPage($token){
         if ($passwordReset = PasswordReset::where('token',$token)->first()){
-
             $user = $passwordReset->user;
-            return view('auth.reset-password-page',compact('user'));
+            return view('auth.reset-password-page',compact('user','token'));
+        }else{
+            return '错误的验证码或已失效';
+        }
+    }
+
+    public function storeResetPassword($token,Request $request){
+        $this->validate($request,[
+            'password'=>'required|min:6|confirmed'
+        ]);
+        if ($passwordReset = PasswordReset::where('token',$token)->first()){
+            $user = $passwordReset->user;
+            $password = bcrypt($request->password);
+            $user->update(compact('password'));
+            return view('auth.reset-password-page',compact('user','token'));
         }else{
             return '错误的验证码或已失效';
         }

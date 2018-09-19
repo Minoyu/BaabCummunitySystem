@@ -36,6 +36,7 @@ return [
     'LoginSuccess'=>"欢迎回家",
     'moreOptions'=>'更多选项',
     'resetPassword'=>'重置密码',
+    'resetPasswordPageTip'=>'此页十分钟内有效',
     'username'=>'用户名',
     'needName'=>'我们怎么称呼你？',
     'nameEmpty'=>'我们需要你的用户名',
