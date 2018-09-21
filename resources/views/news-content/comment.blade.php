@@ -35,8 +35,8 @@
             {!! __('layout.commentCountTip',['num'=>$news->reply_count]) !!}
         </div>
         <div class="mdui-tab part-divider-tab reply-order-tab" mdui-tab>
-            <a mdui-tooltip="{content: '{{__('layout.orderByTime')}}', position: 'top'}" onclick="jumpTo('?orderBy=default#reply-list')" href="#" class="mdui-ripple">{{__('layout.latest')}}</a>
-            <a mdui-tooltip="{content: '{{__('layout.orderByLike')}}', position: 'top'}" onclick="jumpTo('?orderBy=thumb_up#reply-list')" href="#" class="mdui-ripple @if($orderBy == 'thumb_up') mdui-tab-active @endif">{{__('layout.hottest')}}</a>
+            <a mdui-tooltip="{content: '{{__('layout.orderByTime')}}', position: 'top'}" onclick="jumpTo('?orderBy=default#reply-list')" href="#" class="mdui-ripple">{{__('index.time')}}</a>
+            <a mdui-tooltip="{content: '{{__('layout.orderByLike')}}', position: 'top'}" onclick="jumpTo('?orderBy=thumb_up#reply-list')" href="#" class="mdui-ripple @if($orderBy == 'thumb_up') mdui-tab-active @endif">{{__('layout.hot')}}</a>
         </div>
 
     </div>

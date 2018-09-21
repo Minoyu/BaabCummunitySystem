@@ -22,6 +22,7 @@ return [
     'commentCountTip'=>'共有 :num 条评论',
     'latest'=>'最新',
     'hottest'=>'最热',
+    'hot'=>'热度',
     'orderByTime'=>'按发布时间排序',
     'orderByLike'=>'按赞同数排序',
 

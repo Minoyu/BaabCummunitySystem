@@ -22,6 +22,7 @@ return [
     'commentCountTip'=>'<span class="mdui-hidden-xs-down">There are </span>:num comments',
     'latest'=>'Latest',
     'hottest'=>'Hottest',
+    'hot'=>'Hot',
     'orderByTime'=>'Order by publication time',
     'orderByLike'=>'Order by approval number',
 

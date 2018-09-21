@@ -3,6 +3,7 @@
 namespace App\Model\Activity;
 
 use App\Model\CommunityTopicReply;
+use App\Notifications\CommunityTopicReplied;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Activitylog\Models\Activity;
 
@@ -35,7 +36,7 @@ class CommunityTopicReplyObserver
             ->withProperties(compact('userId', 'userName', 'userAvatar', 'replyId', 'replyContent', 'topicId', 'topicTitle', 'event'))
             ->log('回复了社区话题');
 
-//        $reply->communityTopic->user->notify(new CommunityTopicReplied($reply));
+        $reply->communityTopic->user->notify(new CommunityTopicReplied($reply));
     }
 
     public function deleted(CommunityTopicReply $reply)

@@ -539,7 +539,7 @@ body {
 }
 
 .part-divider-tab > a{
-    min-width: 72px;
+    min-width: fit-content;
     min-height: 48px;
     max-height: 72px;
     padding: 12px;

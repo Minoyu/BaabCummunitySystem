@@ -27,12 +27,12 @@
             </div>
             @if($user->id != Auth::id())
                 @if($user->isFollowedBy(Auth::user()))
-                    <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this)" class="mdui-btn mdui-btn-dense mdui-color-pink-accent mdui-btn-raised">
+                    <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this)" class="mdui-btn mdui-btn-dense mdui-color-pink-accent">
                         <i class="mdui-icon material-icons mdui-icon-left">&#xe87d;</i>
                         <span>已关注</span>
                     </a>
                 @else
-                    <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this)" class="mdui-btn mdui-btn-dense mdui-text-color-pink-accent mdui-btn-raised">
+                    <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this)" class="mdui-btn mdui-btn-dense mdui-text-color-pink-accent">
                         <i class="mdui-icon material-icons mdui-icon-left">&#xe87e;</i>
                         <span>关注</span>
                     </a>

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Model\CommunityTopicReply;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -11,14 +12,16 @@ class CommunityTopicReplied extends Notification implements ShouldQueue
 {
     use Queueable;
 
+    protected $reply;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(CommunityTopicReply $reply)
     {
         //
+        $this->reply = $reply;
     }
 
     /**
@@ -41,9 +44,13 @@ class CommunityTopicReplied extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->greeting('Hello! '.$notifiable->name)
+                    ->subject('[BaabClub]Your Topic Has Been Replied!')
+                    ->line('Your Topic '.$this->reply->communityTopic->title.' has been replied')
+                    ->line('Replier : '.$this->reply->user->name)
+                    ->line('Content : '.strip_tags($this->reply->content))
+                    ->action('VIEW & REPLY', url(route('showCommunityContent',$this->reply->communityTopic->id).'#reply-'.$this->reply->id))
+                    ->line('Thank you for your participation in community!');
     }
 
     /**
