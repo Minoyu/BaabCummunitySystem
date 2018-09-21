@@ -36,8 +36,8 @@
         @include('layout.login')
         @include('layout.registerByEmail')
         {{--@include('layout.registerByPhone')--}}
-        @include('layout.reset')
     @endif
+    @include('layout.reset')
     {{--激活导航栏值--}}
     <div id="tabActiveVal" class="mdui-hidden">@yield('tabActiveVal')</div>
     <div id="bottomNavActiveVal" class="mdui-hidden">@yield('bottomNavActiveVal')</div>

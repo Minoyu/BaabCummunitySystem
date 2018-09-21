@@ -2102,6 +2102,12 @@ body {
     font-size: 30px;
     text-align: center;
 }
+.tip-page-title{
+    line-height: 60px;
+    font-size: 30px;
+    text-align: center;
+    margin-top: 0;
+}
 .create-page-subtitle{
     line-height: 20px;
     font-size: 16px;
@@ -2721,7 +2727,29 @@ body {
 }
 
 #appbar-right-menu-btn img{
-    width: 80%;
+    width: 70%;
     height: auto;
     border-radius: 50%
+}
+.tip-page-icon{
+    font-size: 120px;
+}
+
+.dialog-center-avatar{
+    border-radius:50%;
+    width: 80px;
+    height: 80px;
+    margin: 0 0 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.dialog-center-h1{
+    text-align: center;
+    font-size: 18px;
+    margin-top: 8px;
+}
+.dialog-center-h1-small{
+    text-align: center;
+    font-size: 14px;
 }

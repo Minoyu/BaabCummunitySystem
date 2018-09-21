@@ -190,7 +190,7 @@ return [
         TomLingham\Searchy\SearchyServiceProvider::class,
         //短信服务
         Mrgoon\AliSms\ServiceProvider::class,
-
+        //通知服务
     ],
 
     /*

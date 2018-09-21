@@ -9,6 +9,7 @@ return [
     //全局
     'app_name'=> env('APP_ZH_NAME','留学生网站'),
     'login'=>'登录',
+    'loginNow'=>'登录就现在',
     'or'=>'或',
     'next'=>'下一步',
     'back'=>'返回',
@@ -25,6 +26,7 @@ return [
     'time'=>'时间',
     'note'=>'注意',
     'img'=>'图片',
+    'retry'=>'重试',
 
     //Appbar
     'home' => '首页',

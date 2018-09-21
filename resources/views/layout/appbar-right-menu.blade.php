@@ -27,6 +27,11 @@
                 <i class="mdui-menu-item-icon mdui-icon material-icons">exit_to_app</i>{{__('auth.logout')}}
             </a>
         </li>
+        <li class="mdui-menu-item">
+            <a onclick="openResetDialog()" class="mdui-ripple">
+                <i class="mdui-menu-item-icon mdui-icon material-icons">lock</i>{{__('auth.resetPassword')}}
+            </a>
+        </li>
     @endif
     @role('Founder')
         <li class="mdui-menu-item">

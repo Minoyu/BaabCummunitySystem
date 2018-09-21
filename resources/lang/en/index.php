@@ -9,6 +9,7 @@ return [
     //全局
     'app_name'=> env('APP_EN_NAME','AfricaSystem'),
     'login'=>'Login',
+    'loginNow'=>'Login Now',
     'or'=>'or',
     'next'=>'Next',
     'back'=>'Back',
@@ -25,6 +26,7 @@ return [
     'time'=>'Time',
     'note'=>'NOTE',
     'img'=>'Image',
+    'retry'=>'Retry',
 
     //Appbar
     'home' => 'Home',

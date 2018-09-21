@@ -34,6 +34,8 @@ class CommunityTopicReplyObserver
         activity()->on($reply)
             ->withProperties(compact('userId', 'userName', 'userAvatar', 'replyId', 'replyContent', 'topicId', 'topicTitle', 'event'))
             ->log('回复了社区话题');
+
+//        $reply->communityTopic->user->notify(new CommunityTopicReplied($reply));
     }
 
     public function deleted(CommunityTopicReply $reply)

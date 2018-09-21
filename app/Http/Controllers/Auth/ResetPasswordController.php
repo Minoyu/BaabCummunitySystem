@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Jobs\SendEmail;
 use App\Mail\ResetPassword;
 use App\Model\PasswordReset;
 use App\Model\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use PhpParser\Node\Stmt\Return_;
 
@@ -24,27 +26,35 @@ class ResetPasswordController extends Controller
         ],$messages);
         $user = User::where('email',$request->email)->firstOrFail();
 //        Return new ResetPassword($user);
-        $email = $request->email;
+        $mailTo = $request->email;
         $token = str_random(40);
         $created_at = Carbon::now();
-        if ($passwordReset = PasswordReset::find($email)){
+        if ($passwordReset = PasswordReset::find($mailTo)){
             $passwordReset -> update(compact('token','created_at'));
         }else{
             PasswordReset::create(compact('email','token','created_at'));
         }
+
+        //发送邮件 队列服务
         $username = $user->name;
-        Mail::to($email)->send(new ResetPassword($token,$username));
+        $mailObj = new ResetPassword($token,$username);
+        Mail::to($user)->send($mailObj);
+
         $status = 1 ;
         $msg = 'send successfully' ;
         return json_encode(compact('status','msg'));//ajax
     }
 
     public function showResetPage($token){
-        if ($passwordReset = PasswordReset::where('token',$token)->first()){
+        $query = [
+            ['token',$token],
+            ['created_at','>',Carbon::parse('-10 minutes')],
+        ];
+        if ($passwordReset = PasswordReset::where($query)->first()){
             $user = $passwordReset->user;
             return view('auth.reset-password-page',compact('user','token'));
         }else{
-            return '错误的验证码或已失效';
+            return view('auth.reset-password-failed');
         }
     }
 
@@ -56,9 +66,11 @@ class ResetPasswordController extends Controller
             $user = $passwordReset->user;
             $password = bcrypt($request->password);
             $user->update(compact('password'));
-            return view('auth.reset-password-page',compact('user','token'));
+            $passwordReset->delete();
+            Auth::logout();
+            return view('auth.reset-password-success');
         }else{
-            return '错误的验证码或已失效';
+            return view('auth.reset-password-failed');
         }
     }
 }
