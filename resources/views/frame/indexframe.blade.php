@@ -8,6 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="isLogged" content="{{ Auth::check() }}">
+    {{--<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=0.9, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>--}}
+    <meta name="viewport" content="width=device-width,user-scalable=no" />
     <title>@yield('titleContent')@yield('title') - {{__('index.app_name')}}</title>
 
     <!-- Styles -->

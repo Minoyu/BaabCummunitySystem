@@ -189,7 +189,7 @@ var fleaMarketTab = new mdui.Tab('#flea-market-tab',{trigger:'hover'});
 var schoolTab = new mdui.Tab('#school-tab',{trigger:'hover'});
 
 //登录对话框
-var loginDialog = new mdui.Dialog('#login-dialog',{modal:true});
+var loginDialog = new mdui.Dialog('#login-dialog');
 
 //打开登录框
 function openLoginDialog() {
@@ -363,8 +363,8 @@ if ($$('#editorToolbar').length>0){
 
 
 //注册对话框
-var registerByEmailDialog = new mdui.Dialog('#register-by-email-dialog',{modal:true});
-// var registerByPhoneDialog = new mdui.Dialog('#register-by-phone-dialog',{modal:true});
+var registerByEmailDialog = new mdui.Dialog('#register-by-email-dialog');
+// var registerByPhoneDialog = new mdui.Dialog('#register-by-phone-dialog');
 
 //打开注册框
 function openRegisterDialog() {
@@ -388,7 +388,7 @@ function registerToLogin() {
 // }
 
 //密码重置对话框
-var resetDialog = new mdui.Dialog('#reset-dialog',{modal:true});
+var resetDialog = new mdui.Dialog('#reset-dialog');
 
 //打开重置框
 function openResetDialog() {
@@ -2398,3 +2398,5 @@ $$('#mobileTopicUserInfoTopItem').on('open.mdui.collapse',function () {
 $$('#mobileTopicUserInfoTopItem').on('close.mdui.collapse',function () {
     $$('#mobileTopicUserInfoTopBtn').removeClass('topic-mobile-user-info-btn-180');
 });
+
+//消息发送页面逻辑

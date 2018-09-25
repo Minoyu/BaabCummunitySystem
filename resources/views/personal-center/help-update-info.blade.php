@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="side-card-action">
-                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
+                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">{{__('index.submit')}}</button>
             </div>
         </form>
     </div>
@@ -51,7 +51,7 @@
                     <i class="mdui-switch-icon"></i>
                     {{__('user.publicDisplay')}}
                 </label>
-                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
+                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">{{__('index.submit')}}</button>
             </div>
         </form>
     </div>
@@ -82,7 +82,7 @@
                     <i class="mdui-switch-icon"></i>
                     {{__('user.publicDisplay')}}
                 </label>
-                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
+                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">{{__('index.submit')}}</button>
             </div>
         </form>
     </div>
@@ -113,7 +113,7 @@
                     <i class="mdui-switch-icon"></i>
                     {{__('user.publicDisplay')}}
                 </label>
-                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
+                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">{{__('index.submit')}}</button>
             </div>
         </form>
     </div>
@@ -144,7 +144,7 @@
                     <i class="mdui-switch-icon"></i>
                     {{__('user.publicDisplay')}}
                 </label>
-                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">提交</button>
+                <button type="submit" class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-pink-accent mdui-ripple mdui-hoverable">{{__('index.submit')}}</button>
             </div>
         </form>
     </div>

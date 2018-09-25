@@ -33,7 +33,7 @@ return [
     'dontLikeDrawer'=>'不喜欢悬浮的抽屉栏?',
     'dontLikeDrawerContent1'=>'你可以选择将抽屉栏默认隐藏，此后抽屉栏将不再自动弹出。',
     'dontLikeDrawerContent2'=>'若已登录，你的喜好将永久保留。',
-    'showDrawer'=>'保留抽屉栏并不再提醒',
+    'showDrawer'=>'保留抽屉栏',
     'hideDrawer'=>'默认隐藏',
 
 ];

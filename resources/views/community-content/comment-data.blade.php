@@ -9,7 +9,7 @@
         <div class="action-area">
             <span class="action-need-hover">
                 @hasanyrole('Founder|Maintainer')
-                    <a href="{{route('adminCommunityTopicReplyEdit',[$topic->id,$reply->id])}}" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
+                    <a href="{{route('adminCommunityTopicReplyEdit',[$reply->communityTopic->id,$reply->id])}}" target="_blank" class="mdui-btn mdui-btn-icon mdui-ripple mdui-btn-dense mdui-text-color-pink-accent">
                         <i class="mdui-icon material-icons">edit</i>
                     </a>
                 @endhasanyrole
@@ -18,8 +18,8 @@
                         <i class="mdui-icon material-icons">delete</i>
                     </button>
                 @endcan
-                <a onclick="replyToReply('{{$reply->user->name}}','{{$reply->user->id}}')" class="mdui-btn mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i>回复</a>
             </span>
+            <a onclick="replyToReply('{{$reply->user->name}}','{{$reply->user->id}}')" mdui-tooltip="{content: '{{__('index.reply')}}', position: 'top'}" class="mdui-btn mdui-btn-icon mdui-btn-dense news-content-comment-reply-btn" ><i class="mdui-icon material-icons mdui-icon-left ">comment</i></a>
             <a onclick="ajaxHandleReplyVote('{{route('communityTopicReplyVote')}}','{{route('communityTopicReplyCancelVote')}}','{{$reply->id}}',this)"
                class="mdui-btn mdui-btn-dense news-content-comment-reply-btn @if(Auth::check() && Auth::user()->hasVoted($reply)) mdui-text-color-pink-accent @endif">
                 <i class="mdui-icon material-icons mdui-icon-left">&#xe8dc;</i>

@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Cmgmyr\Messenger\Traits\Messagable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use Notifiable,CanFollow,CanBeFollowed,Vote,HasRoles,SoftDeletes;
+    use Notifiable,Messagable,CanFollow,CanBeFollowed,Vote,HasRoles,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.

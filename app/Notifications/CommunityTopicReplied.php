@@ -44,13 +44,12 @@ class CommunityTopicReplied extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->greeting('Hello! '.$notifiable->name)
-                    ->subject('[BaabClub]Your Topic Has Been Replied!')
-                    ->line('Your Topic '.$this->reply->communityTopic->title.' has been replied')
-                    ->line('Replier : '.$this->reply->user->name)
-                    ->line('Content : '.strip_tags($this->reply->content))
-                    ->action('VIEW & REPLY', url(route('showCommunityContent',$this->reply->communityTopic->id).'#reply-'.$this->reply->id))
-                    ->line('Thank you for your participation in community!');
+            ->subject('[BaabClub]Your Topic Has Been Replied!')
+            ->greeting('Hello! '.$notifiable->name.', Your Topic <i>'.$this->reply->communityTopic->title.'</i> has been replied')
+            ->line('Replier : '.$this->reply->user->name)
+            ->line('Content : '.strip_tags($this->reply->content))
+            ->action('VIEW & REPLY', url(route('showCommunityContent',$this->reply->communityTopic->id).'#reply-'.$this->reply->id))
+            ->line('<br>Thank you for your participation in community!');
     }
 
     /**
@@ -63,6 +62,13 @@ class CommunityTopicReplied extends Notification implements ShouldQueue
     {
         return [
             //
+            'type'=>'community.topic.replied',
+            'topicId'=>$this->reply->communityTopic->id,
+            'topicTitle'=>$this->reply->communityTopic->title,
+            'replyId'=>$this->reply->id,
+            'replyContent'=>$this->reply->content,
+            'replierId'=>$this->reply->user->id,
+            'replierName'=>$this->reply->user->id,
         ];
     }
 }

@@ -167,6 +167,9 @@ return [
         /*
          * Package Service Providers...
          */
+        //view变量绑定
+        \App\Providers\ValueToViewProvider::class,
+
         //图片处理
         Intervention\Image\ImageServiceProvider::class,
 
@@ -190,7 +193,8 @@ return [
         TomLingham\Searchy\SearchyServiceProvider::class,
         //短信服务
         Mrgoon\AliSms\ServiceProvider::class,
-        //通知服务
+        //message服务
+        Cmgmyr\Messenger\MessengerServiceProvider::class,
     ],
 
     /*

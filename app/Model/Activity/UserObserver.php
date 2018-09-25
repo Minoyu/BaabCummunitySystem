@@ -3,6 +3,7 @@
 namespace App\Model\Activity;
 
 use App\Model\User;
+use App\Notifications\WelcomeNewUser;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
@@ -24,6 +25,7 @@ class UserObserver{
                 'userAvatar',
                 'event'))
             ->log('用户加入社区');
+        $user->notify(new WelcomeNewUser());
     }
 
     public function deleted(User $user)

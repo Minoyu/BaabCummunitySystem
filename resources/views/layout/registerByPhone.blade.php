@@ -35,6 +35,9 @@
                 </li>
             </ul>
             <a onclick="registerByPhoneStep1Next()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('index.next')}}</a>
+            <a class="mdui-btn mdui-btn-icon mdui-float-right mdui-m-r-1 mdui-text-color-grey-600" mdui-dialog-close>
+                <i class="mdui-icon material-icons">arrow_back</i>
+            </a>
         </div>
     </form>
     <form id="registerByPhoneStep2Form" class="mdui-hidden">

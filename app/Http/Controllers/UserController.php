@@ -7,6 +7,7 @@ use App\Model\CommunityTopicReply;
 use App\Model\NewsReply;
 use App\Model\User;
 use App\Model\UserInfo;
+use App\Notifications\UserFollowed;
 use \Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -63,6 +64,7 @@ class UserController extends Controller
         ]);
         $user = User::find($request->id);
         if (Auth::user()->follow($user)){
+            $user->notify(new UserFollowed(Auth::user()));
             $follower_count = $user->followers()->count();
             $status = 1;
         }else{

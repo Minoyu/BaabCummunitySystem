@@ -11,16 +11,16 @@
         @foreach ($elements as $element)
             {{-- "Three Dots" Separator --}}
             @if (is_string($element))
-                <li class="disabled"><span>{{ $element }}</span></li>
+                <li class="disabled mdui-hidden-sm-down"><span>{{ $element }}</span></li>
             @endif
 
             {{-- Array Of Links --}}
             @if (is_array($element))
                 @foreach ($element as $page => $url)
                     @if ($page == $paginator->currentPage())
-                        <li class="pagination__item"><span class="pagination__number pagination__number_active mdui-color-theme-200">{{ $page }}</span></li>
+                        <li class="pagination__item mdui-hidden-sm-down"><span class="pagination__number pagination__number_active mdui-color-theme-200">{{ $page }}</span></li>
                     @else
-                        <li class="pagination__item"><a href="{{ $url }}" class="pagination__number">{{ $page }}</a></li>
+                        <li class="pagination__item mdui-hidden-sm-down"><a href="{{ $url }}" class="pagination__number">{{ $page }}</a></li>
                     @endif
                 @endforeach
             @endif

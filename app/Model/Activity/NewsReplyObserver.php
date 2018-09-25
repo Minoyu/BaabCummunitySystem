@@ -3,7 +3,10 @@
 namespace App\Model\Activity;
 
 use App\Model\NewsReply;
+use App\Model\User;
+use App\Notifications\NewsReplyReplied;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 
 class NewsReplyObserver{
@@ -33,6 +36,13 @@ class NewsReplyObserver{
         activity()->on($reply)
             ->withProperties(compact('userId','userName','userAvatar','replyId','replyContent','newsId','newsTitle','cover_img','event'))
             ->log('回复了社区话题');
+
+        //不回复本人和话题作者时通知原回复者
+        if (preg_match('/@(.*?)-/',$replyContent,$replyToId)){
+            if (($replyTo = User::find($replyToId[1]))&& ($replyTo !=Auth::user())){
+                $replyTo->notify(new NewsReplyReplied($reply));
+            }
+        };
     }
 
     public function deleted(NewsReply $reply)

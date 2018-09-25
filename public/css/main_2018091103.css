@@ -19,6 +19,10 @@ body {
     height: 20px;
     top: 4px;
 }
+.mdui-list-item-two-line{
+    height: auto;
+    max-height: 40px;
+}
 /*小屏设备右下按钮底部边距*/
 @media (max-width: 599px) {
     .mdui-fab-fixed, .mdui-fab-wrapper {
@@ -700,7 +704,7 @@ body {
 }
 
 .login-dialog .mdui-dialog-title,.register-dialog .mdui-dialog-title,.reset-dialog .mdui-dialog-title {
-    padding: 146px 40px 28px;
+    padding: 140px 40px 20px;
     margin-bottom: 24px;
     line-height: 36px;
     text-shadow: black 0.05em 0.05em 0.05em;
@@ -721,7 +725,7 @@ body {
 }
 
 .login-dialog form,.register-dialog form,.reset-dialog #resetForm {
-    padding: 0 40px 62px 30px;
+    padding: 0 40px 40px 30px;
 }
 
 .login-dialog .more-option,.register-dialog .more-option,.reset-dialog .more-option {
@@ -1472,9 +1476,10 @@ body {
 /*新闻内容页评论区p标签样式*/
 .news-content-comment-p{
     padding-left: 70px;
-    font-size: 15px;
-    opacity: .8;
+    font-size: 16px;
+    color: #585858;
     line-height: 1.5em;
+    padding-bottom: 25px;
 }
 .news-content-comment-p img{
     display: block;
@@ -1539,14 +1544,19 @@ body {
     opacity: 0.5;
 }
 
-@media (max-width: 600px) {
+@media (max-width:599px) {
+    .news-content-create-comment .tip-icon{
+        margin-top: 20px;
+    }
     .news-content-create-comment .tip-text{
         text-align: center;
         margin-top: 10px;
         margin-bottom: 15px;
         font-size: 16px;
     }
-
+    .news-content-create-comment .tip-action{
+        margin-bottom: 20px;
+    }
 }
 .news-content-create-comment .tip-action{
     text-align: center;
@@ -2752,4 +2762,101 @@ body {
 .dialog-center-h1-small{
     text-align: center;
     font-size: 14px;
+}
+
+.message-bubble-list{
+    margin-top: 8px;
+}
+.message-bubble-item{
+    position: relative;
+    margin-bottom: 8px;
+    min-height: 50px;
+}
+.message-bubble-avatar{
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    top: 5px;
+}
+.message-bubble-username{
+    margin-left: 53px;
+}
+.message-bubble-content{
+    margin-left: 53px;
+    margin-top: 2px;
+    font-size: 15px;
+    display: inline-block;
+    padding: 8px;
+    border-radius: 5px;
+    word-break: break-all;
+    background-color: rgba(3, 169, 244, 0.24);
+    color: black;
+}
+
+.message-bubble-right{
+    text-align: right;
+}
+.message-bubble-right .message-bubble-avatar{
+    right: 0;
+}
+.message-bubble-right .message-bubble-username{
+    margin-left: 0;
+    margin-right: 53px;
+    text-align: right;
+}
+.message-bubble-right .message-bubble-content{
+    margin-right: 53px;
+    text-align: right;
+    margin-left: 0;
+    background-color: #03a9f4;
+    color: white;
+}
+.message-content-form-div{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+}
+
+.message-content-form{
+    position: relative;
+    width: 100%;
+}
+
+.message-content-form-textarea{
+    margin-top: 20px;
+    background-color: #f3f3f3;
+    min-height: 35px;
+    line-height: 35px;
+    margin-right: 28px;
+    margin-left: 22px;
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 0 5px;
+    width: calc(100% - 60px);
+}
+
+.message-content-form-submit-btn{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.message-content-form-textarea-btn{
+    position: absolute;
+    bottom: 0;
+    left: -14px;
+
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.4, 0, .2, 1);
+    transition: -webkit-transform .3s cubic-bezier(.4, 0, .2, 1);
+    transition:         transform .3s cubic-bezier(.4, 0, .2, 1);
+    transition:         transform .3s cubic-bezier(.4, 0, .2, 1), -webkit-transform .3s cubic-bezier(.4, 0, .2, 1);
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+
+    will-change: transform;
+}
+.message-content-form-textarea-btn-45{
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
 }

@@ -108,7 +108,7 @@
                 </a>
             @endif
         @endif
-        <a href="{{route('showPersonalCenter',$topic->user->id)}}" class="mdui-btn mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn">
+        <a href="{{route('showPersonalCenter',$topic->user->id)}}" class="mdui-btn mdui-color-grey-100 mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn mdui-hoverable">
             <i class="mdui-icon material-icons">account_circle</i>
             {{__('index.personalCenter')}}
         </a>

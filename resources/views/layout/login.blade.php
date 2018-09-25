@@ -36,7 +36,13 @@
                     <i class="mdui-switch-icon"></i>&nbsp;&nbsp;{{__('auth.rememberMe')}}
                 </label>
             </ul>
-            <a onclick="loginSubmit()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">{{__('auth.confirmLogin')}}</a>
+            <a onclick="loginSubmit()" class="mdui-btn mdui-btn-raised mdui-color-theme-accent mdui-float-right">
+                {{__('auth.confirmLogin')}}
+            </a>
+
+            <a class="mdui-btn mdui-btn-icon mdui-float-right mdui-m-r-1 mdui-text-color-grey-600" mdui-dialog-close>
+                <i class="mdui-icon material-icons">arrow_back</i>
+            </a>
         </div>
     </form>
     <div id="loginSuccessful" class="mdui-valign success mdui-hidden">

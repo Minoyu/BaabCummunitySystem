@@ -61,6 +61,23 @@ Route::post('/search/tips','SearchController@discoverTips')->name('getSearchTips
 Route::get('/search','SearchController@showSearchRes')->name('showSearchRes');
 
 Route::group(['middleware'=>'auth:web'],function (){
+
+    Route::group(['prefix' => 'messages'], function () {
+        Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+        Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+        Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+        Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+        Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+    });
+
+    Route::group(['prefix' => 'testMessages'], function () {
+        Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
+        Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
+        Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+        Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
+        Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+    });
+
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');
 
 //  新闻回复
@@ -265,3 +282,9 @@ Route::group(['prefix'=>'admin','middleware' => ['role:Founder|Maintainer']],fun
 
 
 });
+
+//Route::get('/test/welcome', function () {
+//    $user = \App\Model\User::find(1);
+//
+//    return new App\Mail\SendWelcomeEmail($user->name);
+//});

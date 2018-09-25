@@ -27,6 +27,7 @@ return [
     'note'=>'NOTE',
     'img'=>'Image',
     'retry'=>'Retry',
+    'reply'=>'Reply',
 
     //Appbar
     'home' => 'Home',

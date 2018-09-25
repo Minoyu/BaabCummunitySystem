@@ -3,8 +3,11 @@
 namespace App\Model\Activity;
 
 use App\Model\CommunityTopicReply;
+use App\Model\User;
+use App\Notifications\CommunityReplyReplied;
 use App\Notifications\CommunityTopicReplied;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 
 class CommunityTopicReplyObserver
@@ -36,7 +39,17 @@ class CommunityTopicReplyObserver
             ->withProperties(compact('userId', 'userName', 'userAvatar', 'replyId', 'replyContent', 'topicId', 'topicTitle', 'event'))
             ->log('回复了社区话题');
 
-        $reply->communityTopic->user->notify(new CommunityTopicReplied($reply));
+        //不是作者回复时通知给作者
+        if ($reply->user != $reply->communityTopic->user){
+            $reply->communityTopic->user->notify(new CommunityTopicReplied($reply));
+        }
+
+        //不回复本人和话题作者时通知原回复者
+        if (preg_match('/@(.*?)-/',$replyContent,$replyToId)){
+            if (($replyTo = User::find($replyToId[1]))&& ($replyTo !=Auth::user()||$replyTo!=$reply->communityTopic->user)){
+                $replyTo->notify(new CommunityReplyReplied($reply));
+            }
+        };
     }
 
     public function deleted(CommunityTopicReply $reply)

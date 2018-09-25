@@ -27,6 +27,7 @@ return [
     'note'=>'注意',
     'img'=>'图片',
     'retry'=>'重试',
+    'reply'=>'回复',
 
     //Appbar
     'home' => '首页',
