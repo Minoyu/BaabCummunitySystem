@@ -55,7 +55,7 @@ return [
     'atLeast6'=>'The password is at least 6 bits',
     'noEmpty'=>'Account cannot be empty',
 
-    'failed' => 'Mismatch of username and password',
+    'failed' => 'Mismatch of Email and Password',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
     'notLoggedTip' =>'Sorry, you are not logged in yet',

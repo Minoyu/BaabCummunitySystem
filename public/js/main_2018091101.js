@@ -2399,4 +2399,90 @@ $$('#mobileTopicUserInfoTopItem').on('close.mdui.collapse',function () {
     $$('#mobileTopicUserInfoTopBtn').removeClass('topic-mobile-user-info-btn-180');
 });
 
-//消息发送页面逻辑
+//消息发送页面内容框高度
+var windowHeight =  $$(window).height();
+var windowWidth = $$(window).width();
+if (windowWidth > 1024){
+    $$('#messageContentList').height(windowHeight - 350);
+}else if (windowWidth > 599){
+    $$('#messageContentList').height(windowHeight - 290);
+}else{
+    $$('#messageContentList').height(windowHeight - 325);
+}
+
+var messageContentTextarea = $$('#messageContent');
+var messageContentList = $('#messageContentList');
+var messageSendBtn = $$('#messageSendBtn');
+var messageSendLoading = $$('#messageSendLoading');
+var isMessageNull = true;
+
+$(document).ready(function(){
+    if (messageContentList.length>0){
+        messageContentList.scrollTop( messageContentList[0].scrollHeight);
+    }
+});
+
+messageContentTextarea.on('input propertychange',function () {
+    var messageContent = $$('#messageContent').text();
+    if(messageContent.length>0){
+        messageSendBtn.removeAttr('disabled');
+        isMessageNull = false;
+    }else{
+        messageSendBtn.attr('disabled',true);
+        isMessageNull = true;
+    }
+});
+
+function handleMessagePageSend(threadId) {
+    if (isMessageNull){
+        mdui.snackbar({
+            message: 'Please say something :-)',
+            position: 'bottom'
+        });
+    }else{
+        messageSendBtn.animateCss('zoomOutRight',function () {
+            messageSendBtn.hide();
+            messageSendLoading.show();
+            var messageContent = $$('#messageContent').text();
+            $$.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'PUT',
+                url: '/messages/'+threadId,
+                data: {
+                    message:messageContent
+                },
+                success: function (data) {
+                    messageContentTextarea.empty();
+                    //JSON字符串转JSON
+                    data = $.parseJSON(data);
+                    messageContentList.append(data.html);
+                    messageContentList.scrollTop( messageContentList[0].scrollHeight);
+
+                },
+                complete:function () {
+                    setTimeout(function () {
+                        messageSendLoading.hide();
+                        messageSendBtn.show();
+                    },500);
+                }
+            });
+        });
+    }
+}
+
+//社区话题移动端页面顶部用户信息
+var messageContentMoreFunBar = new mdui.Collapse('#messageContentMoreFunBar');
+var messageContentMoreFunBarItem = $$('#messageContentMoreFunBarItem');
+var messageContentMoreFunBtn = $$('#messageContentMoreFunBtn');
+
+function toggleMessageContentMoreFunBar() {
+    messageContentMoreFunBar.toggle(0);
+}
+messageContentMoreFunBarItem.on('open.mdui.collapse',function () {
+    messageContentMoreFunBtn.addClass('message-content-form-textarea-btn-45');
+});
+messageContentMoreFunBarItem.on('close.mdui.collapse',function () {
+    messageContentMoreFunBtn.removeClass('message-content-form-textarea-btn-45');
+});

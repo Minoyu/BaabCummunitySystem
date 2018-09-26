@@ -13,7 +13,7 @@
             {{ $message['message']->body }}
         </div>
         <div class="message-bubble-time">
-            {{ $message['message']->created_at->diffForHumans() }}
+            {{ $message['message']->created_at}}
         </div>
     </li>
 @endforeach

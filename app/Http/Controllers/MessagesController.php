@@ -6,6 +6,7 @@ use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
 use Cmgmyr\Messenger\Models\Thread;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
@@ -57,36 +58,82 @@ class MessagesController extends Controller
 //        return view('messenger.index', compact('threads'));
         return view('message.message-index', compact('thread_collection','threads'));
     }
+
     /**
      * Shows a message thread.
-     *
      * @param $id
-     * @return mixed
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
-    public function show($id)
+    public function show($id,Request $request)
     {
+        $perPage = 15;
         $userId = Auth::id();
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            return redirect()->route('messages')->withErrors(['The thread with ID: ' . $id . ' was not found.']);
+            return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
         }
-        $messages = $thread->messages()->paginate(10);
+
+        $messageTooMuch = false;
+        $messagesCount = $thread->messages()->count();
+        $messages = $thread->messages()->with('user.info')->get()->slice($messagesCount-$perPage);
+
+        if ($messagesCount>$perPage){
+            $messageTooMuch = true;
+        };
+
         $messages_collection = collect([]);
-        foreach ($messages as $message){
-            $sender = $message->user()->with('info')->first();
+        foreach ($messages as $message) {
             $senderIsMe = $message->user->id == $userId;
-            $messages_collection ->push(compact('message','sender','senderIsMe'));
+            $messages_collection->push(compact('message', 'senderIsMe'));
         }
+
         // show current user in list if not a current participant
         // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
         // don't show the current user in list
 
+
 //        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
-        $thread->markAsRead($userId);
+            $thread->markAsRead($userId);
 //        return view('messenger.show', compact('thread', 'users'));
-        return view('message.message-content', compact('thread','messages_collection'));
+            return view('message.message-content', compact('thread', 'messages_collection','messageTooMuch'));
     }
+
+    /**
+     * Shows a message thread.
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function showHistory($id,Request $request)
+    {
+        $perPage = 20;
+        $userId = Auth::id();
+        try {
+            $thread = Thread::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
+        }
+
+        $messages = $thread->messages()->with('user.info')->paginate($perPage);
+
+        $messages_collection = collect([]);
+        foreach ($messages as $message) {
+            $senderIsMe = $message->user->id == $userId;
+            $messages_collection->push(compact('message', 'senderIsMe'));
+        }
+
+        // show current user in list if not a current participant
+        // $users = User::whereNotIn('id', $thread->participantsUserIds())->get();
+        // don't show the current user in list
+
+
+//        $users = User::whereNotIn('id', $thread->participantsUserIds($userId))->get();
+//        return view('messenger.show', compact('thread', 'users'));
+        return view('message.message-history', compact('thread','messages', 'messages_collection'));
+    }
+
     /**
      * Creates a new message thread.
      *
@@ -126,23 +173,24 @@ class MessagesController extends Controller
         }
         return redirect()->route('messages');
     }
+
     /**
      * Adds a new message to a current thread.
-     *
      * @param $id
-     * @return mixed
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @throws \Throwable
      */
-    public function update($id)
+    public function update($id,Request $request)
     {
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            Session::flash('error_message', 'The thread with ID: ' . $id . ' was not found.');
-            return redirect()->route('messages');
+            return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
         }
         $thread->activateAllParticipants();
         // Message
-        Message::create([
+        $message = Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
             'body' => Input::get('message'),
@@ -154,10 +202,21 @@ class MessagesController extends Controller
         ]);
         $participant->last_read = new Carbon;
         $participant->save();
-        // Recipients
-        if (Input::has('recipients')) {
-            $thread->addParticipant(Input::get('recipients'));
+
+        $messages_collection = collect([]);
+        $senderIsMe = true;
+        $messages_collection->push(compact('message','senderIsMe'));
+
+        if ($request->ajax()) {
+            $view = view('message.layout.message-bubble', compact('messages_collection'))->render();
+            return response()->json(['html' => $view]);
+        }else{
+            return redirect()->route('messages.show', $id);
         }
-        return redirect()->route('messages.show', $id);
     }
 }
+
+// 增加参与者
+//if (Input::has('recipients')) {
+//    $thread->addParticipant(Input::get('recipients'));
+//}

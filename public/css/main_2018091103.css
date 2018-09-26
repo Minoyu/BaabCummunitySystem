@@ -2782,6 +2782,11 @@ body {
 .message-bubble-username{
     margin-left: 53px;
 }
+.message-bubble-time{
+    margin-left: 53px;
+    font-size: 12px;
+    color: #bbb;
+}
 .message-bubble-content{
     margin-left: 53px;
     margin-top: 2px;
@@ -2801,6 +2806,11 @@ body {
     right: 0;
 }
 .message-bubble-right .message-bubble-username{
+    margin-left: 0;
+    margin-right: 53px;
+    text-align: right;
+}
+.message-bubble-right .message-bubble-time{
     margin-left: 0;
     margin-right: 53px;
     text-align: right;
@@ -2838,13 +2848,19 @@ body {
 
 .message-content-form-submit-btn{
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 2px;
+    right: 4px;
+}
+#messageSendLoading{
+    bottom: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
 }
 
 .message-content-form-textarea-btn{
     position: absolute;
-    bottom: 0;
+    bottom: 2px;
     left: -14px;
 
     -webkit-transition: -webkit-transform .3s cubic-bezier(.4, 0, .2, 1);

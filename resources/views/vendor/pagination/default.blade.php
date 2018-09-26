@@ -1,6 +1,6 @@
 @if ($paginator->hasPages())
 
-    <ul class="pagination mdui-color-indigo-400">
+    <ul class="pagination mdui-color-purple-300" style="border-radius: 8px">
         {{-- 前翻页 --}}
         @if ($paginator->onFirstPage())
             <li class="pagination__item"><span class="pagination__number pagination__control pagination__control_prev">{{__('index.firstPage')}}</span></li>
