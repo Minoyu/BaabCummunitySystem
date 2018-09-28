@@ -138,6 +138,8 @@
     </h1>
 
     <div class="topic-content-primary-text">
-        {!! $topic->content !!}
+        <div class="photo-gallery">
+            {!! $topic->content !!}
+        </div>
     </div>
 </div>

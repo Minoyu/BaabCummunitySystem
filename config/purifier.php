@@ -24,7 +24,7 @@ return [
     'settings'      => [
         'topic_content' => [
             'HTML.Doctype'             => 'XHTML 1.0 Transitional',
-            'HTML.Allowed'             => 'div,b,strong,i,em,a[href|title],ul,ol,ol[start],li,p[style],br,span[style],img[width|height|alt|src],*[style|class],pre,hr,code,h2,h3,h4,h5,h6,blockquote,del,table,thead,tbody,tr,th,td',
+            'HTML.Allowed'             => 'div,b,strong,i,em,a[href|title],ul,ol,ol[start],li,p[style],br,span[style],img[width|height|alt|src],*[style|class|data-size],pre,hr,code,h2,h3,h4,h5,h6,blockquote,del,table,thead,tbody,tr,th,td,figure,figcaption',
             'CSS.AllowedProperties'    => 'font,font-size,font-weight,font-style,margin,width,height,font-family,text-decoration,padding-left,color,background-color,text-align',
             'AutoFormat.AutoParagraph' => true,
             'AutoFormat.RemoveEmpty'   => true,
@@ -66,10 +66,12 @@ return [
 					'poster' => 'URI',
 					'preload' => 'Enum#auto,metadata,none',
 					'controls' => 'Bool',
+                    'data-size' => 'Text',
                 ]],
                 ['source', 'Block', 'Flow', 'Common', [
 					'src' => 'URI',
 					'type' => 'Text',
+					'data-size' => 'Text',
                 ]],
 
 				// http://developers.whatwg.org/text-level-semantics.html
@@ -92,6 +94,7 @@ return [
                 ['tr', 'width', 'Text'],
                 ['tr', 'height', 'Text'],
                 ['tr', 'border', 'Text'],
+                ['a', 'data-size', 'Text'],
             ],
         ],
         'custom_attributes' => [

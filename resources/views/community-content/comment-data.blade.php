@@ -5,7 +5,11 @@
         <a href="{{route('showPersonalCenter',$reply->user->id)}}" class="news-content-comment-username">{{$reply->user->name}}</a>
         {{--<a href="#" class="news-content-comment-dianzan-btn"><i class="mdui-icon material-icons">thumb_up</i></a>--}}
         <div class="news-content-comment-time" ><i class="mdui-icon material-icons">&#xe192;</i> {{$reply->created_at->diffForHumans()}}</div>
-        <div class="news-content-comment-p">{!! $reply->content !!}</div>
+        <div class="news-content-comment-p">
+            <div class="photo-gallery">
+                {!! $reply->content !!}
+            </div>
+        </div>
         <div class="action-area">
             <span class="action-need-hover">
                 @hasanyrole('Founder|Maintainer')

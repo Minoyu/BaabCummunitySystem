@@ -440,11 +440,13 @@ class UserController extends Controller
 
         }
     }
+
     /**
      * 处理用户上传的封面
      * @param User $user
      * @param Request $request
-     * @return string
+     * @return false|string
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function uploadCover(User $user,Request $request)
     {

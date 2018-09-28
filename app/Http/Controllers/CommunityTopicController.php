@@ -423,7 +423,8 @@ class CommunityTopicController extends Controller
     /**
      * 话题批量删除行为
      * @param Request $request
-     * @return string
+     * @return false|string
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function softDeletes(Request $request){
         $failedCount=0;
@@ -453,6 +454,7 @@ class CommunityTopicController extends Controller
      * 提高排序
      * @param CommunityTopic $topic
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function turnUpOrder(CommunityTopic $topic){
         $this->authorize('manage',$topic);
@@ -465,6 +467,7 @@ class CommunityTopicController extends Controller
      * 降低排序
      * @param CommunityTopic $topic
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function turnDownOrder(CommunityTopic $topic){
         $this->authorize('manage',$topic);
@@ -477,6 +480,7 @@ class CommunityTopicController extends Controller
      * 切换是否精华
      * @param CommunityTopic $topic
      * @return \Illuminate\Http\RedirectResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function toggleExcellent(CommunityTopic $topic){
         $this->authorize('manage',$topic);
@@ -493,7 +497,8 @@ class CommunityTopicController extends Controller
     /**
      * uploadTopicImg
      * @param Request $request
-     * @return string
+     * @return false|string
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function uploadImg(Request $request)
     {
@@ -518,19 +523,34 @@ class CommunityTopicController extends Controller
             $ext = 'jpeg'; // 扩展名
 
             // 上传文件
-            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-            // 如果宽大于900 裁剪图片
+            // 如果宽大于1280 裁剪图片
             $img=Image::make($realPath);
-            if ($img->width()>900){
-                $img->resize(900, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
+            if ($img->width()>1280){
+                $img->resize(1280, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
                     $constraint->aspectRatio();
                 })->save();
             }
+            $width = $img ->width();
+            $height = $img ->height();
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '@'.$width.'x'.$height .'@' . uniqid() . '.' . $ext;
+            //存储大图
+            Storage::disk('communityTopicImg')->put($filename, file_get_contents($realPath));
 
+            //图片压缩处理缩略图
+            $smallImg = Image::make($realPath);
+            if ($smallImg->width()>500) {
+                $smallImg->resize(500, null, function ($constraint) {        // 调整图像的宽到500，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
+            }
+            $s_filename = 's-'.$filename;
             // 使用communityTopicImg本地存储空间（目录）
-            $bool = Storage::disk('communityTopicImg')->put($filename, file_get_contents($realPath));
+            Storage::disk('communityTopicImg')->put($s_filename, file_get_contents($realPath));
+
             $img_url = "/uploads/community/topic/img/" . $filename;
-            return json_encode(["status" => 1, "src" => $img_url]);//ajax
+            $simg_url = "/uploads/community/topic/img/" . $s_filename;
+            $size = $width .'x' . $height ;
+            return json_encode(["status" => 1, "link" => $img_url, "slink" => $simg_url, "size" => $size]);//ajax
         }
     }
 
@@ -557,20 +577,35 @@ class CommunityTopicController extends Controller
             $ext = 'jpeg'; // 扩展名
 
             // 上传文件
-            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-
+            // 如果宽大于1280 裁剪图片
             $img=Image::make($realPath);
-            if ($img->width()>600){
-                $img->resize(600, null, function($constraint){		// 调整图像的宽到600，并约束宽高比(高自动)
+            if ($img->width()>1280){
+                $img->resize(1280, null, function($constraint){		// 调整图像的宽到1280，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
+            }
+            $width = $img ->width();
+            $height = $img ->height();
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '@'.$width.'x'.$height .'@' . uniqid() . '.' . $ext;
+            //存储大图
+            Storage::disk('communityTopicImg')->put($filename, file_get_contents($realPath));
+
+            //图片压缩处理缩略图
+            $smallImg = Image::make($realPath);
+            if ($smallImg->width()>400) {
+                $smallImg->resize(400, null, function ($constraint) {        // 调整图像的宽到500，并约束宽高比(高自动)
                     $constraint->aspectRatio();
                 })->save();
             }
 
-            // 使用我们新建的uploads本地存储空间（目录）
-            // 这里的userCover是配置文件的名称
-            $bool = Storage::disk('communityTopicImg')->put($filename, file_get_contents($realPath));
+            $s_filename = 's-'.$filename;
+            // 使用communityTopicImg本地存储空间（目录）
+            Storage::disk('communityTopicImg')->put($s_filename, file_get_contents($realPath));
+
             $img_url = "/uploads/community/topic/img/" . $filename;
-            return json_encode(["status" => 1, "src" => $img_url]);//ajax
+            $simg_url = "/uploads/community/topic/img/" . $s_filename;
+            $size = $width .'x' . $height ;
+            return json_encode(["status" => 1, "link" => $img_url, "slink" => $simg_url, "size" => $size]);//ajax
         }
     }
 

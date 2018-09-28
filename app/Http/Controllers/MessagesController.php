@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class MessagesController extends Controller
 {
@@ -214,8 +216,134 @@ class MessagesController extends Controller
             return redirect()->route('messages.show', $id);
         }
     }
-}
 
+    /**
+     * Adds a new Photo message to a current thread.
+     * @param $id
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     * @throws \Throwable
+     */
+    public function updatePhoto($id,Request $request)
+    {
+        try {
+            $thread = Thread::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
+        }
+        $thread->activateAllParticipants();
+        $user = Auth::user();
+
+        if ($request->isMethod('post')) {
+
+            $this->validate($request, [
+                'img_data' => 'required'
+            ]);
+
+            $image = $request->img_data;
+
+            $realPath = decodeBase64ImgToFile($image);
+            // 获取文件相关信息
+            $ext = 'jpeg'; // 扩展名
+
+            // 上传文件
+            // 如果宽大于1280 裁剪图片
+            $img = Image::make($realPath);
+            if ($img->width() > 1280) {
+                $img->resize(1280, null, function ($constraint) {        // 调整图像的宽到1280，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
+            }
+            $width = $img->width();
+            $height = $img->height();
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '@' . $width . 'x' . $height . '@' . uniqid() . '.' . $ext;
+            //存储大图
+            Storage::disk('messageImg')->put($filename, file_get_contents($realPath));
+
+            //图片压缩处理缩略图
+            $smallImg = Image::make($realPath);
+            if ($smallImg->width() > 300) {
+                $smallImg->resize(300, null, function ($constraint) {        // 调整图像的宽到300，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
+            }
+
+            $s_filename = 's-' . $filename;
+            // 使用communityTopicImg本地存储空间（目录）
+            Storage::disk('messageImg')->put($s_filename, file_get_contents($realPath));
+
+            $img_url = "/uploads/message/img/" . $filename;
+            $simg_url = "/uploads/message/img/" . $s_filename;
+            $size = $width . 'x' . $height;
+
+            $html = '  
+            <div class="photo-gallery">      
+                <figure>
+                  <a href="'.$img_url.'" data-size="'.$size.'">
+                      <img src="'.$simg_url.'" class="message-img animated zoomInRight"/>
+                  </a>
+                </figure>
+            </div>';
+
+            // Message
+            $message = Message::create([
+                'thread_id' => $thread->id,
+                'user_id' => Auth::id(),
+                'body' => $html,
+            ]);
+            // Add replier as a participant
+            $participant = Participant::firstOrCreate([
+                'thread_id' => $thread->id,
+                'user_id' => Auth::id(),
+            ]);
+            $participant->last_read = new Carbon;
+            $participant->save();
+
+            $messages_collection = collect([]);
+            $senderIsMe = true;
+            $messages_collection->push(compact('message', 'senderIsMe'));
+
+            if ($request->ajax()) {
+                $view = view('message.layout.message-bubble', compact('messages_collection'))->render();
+                return response()->json(['html' => $view]);
+            } else {
+                return redirect()->route('messages.show', $id);
+            }
+        }
+    }
+
+
+    public function getAllParticipant($id){
+        try {
+            $thread = Thread::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
+        }
+
+        $participants = $thread->participants()->with('user.info')->get();
+        $view = view('message.layout.message-participant-list', compact('participants'))->render();
+        return response()->json(['html' => $view]);
+    }
+
+    public function removeParticipant($id,Request $request){
+        try {
+            $thread = Thread::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
+        }
+
+        $this->validate($request, [
+            'removeUsers' => 'required'
+        ]);
+
+        $participants = $request->removeUsers;
+        if (count($participants)>0) {
+            $thread->removeParticipant($participants);
+        }
+        return response()->json(['status' => 1]);
+
+    }
+}
 // 增加参与者
 //if (Input::has('recipients')) {
 //    $thread->addParticipant(Input::get('recipients'));

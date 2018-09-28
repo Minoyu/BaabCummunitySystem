@@ -24,6 +24,8 @@
         </small>
     </h1>
     <div class="news-content-primary-text">
-        {!! $news->content !!}
+        <div class="photo-gallery">
+            {!! $news->content !!}
+        </div>
     </div>
 </div>

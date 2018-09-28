@@ -13,6 +13,10 @@
     <title>@yield('titleContent')@yield('title') - {{__('index.app_name')}}</title>
 
     <!-- Styles -->
+    {{--PhotoSwipe--}}
+    <link href="/photoswipe/photoswipe.css" rel="stylesheet">
+    <link href="/photoswipe/default-skin/default-skin.css" rel="stylesheet">
+    {{--PhotoSwipe End--}}
     <link href="/layui/css/layui.css" rel="stylesheet" type="text/css">
     <link href="/css/swiper-4.3.5.min.css" rel="stylesheet" type="text/css">
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
@@ -47,12 +51,18 @@
     @if (app()->isLocal())
         @include('sudosu::user-selector')
     @endif
+    {{--PhotoSwipe-HTML--}}
+    @include('layout.photoswipe-html')
     <!-- Js -->
+    {{--PhotoSwipe Js--}}
+    <script src="/photoswipe/photoswipe.min.js"></script>
+    <script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
     <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
     <script src="/layui/layui.js"></script>
     <script src="/js/swiper-4.3.5.min.js"></script>
     <script src="/js/mdui.min.js"></script>
-    <script src="/js/wangEditor.min.js"></script>
+    <script src="/js/wangEditor.js"></script>
     <script src="/js/main_2018091101.js"></script>
 </body>
 </html>

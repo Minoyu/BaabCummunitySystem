@@ -23,6 +23,9 @@ body {
     height: auto;
     max-height: 40px;
 }
+figure{
+    margin: 0;
+}
 /*小屏设备右下按钮底部边距*/
 @media (max-width: 599px) {
     .mdui-fab-fixed, .mdui-fab-wrapper {
@@ -2004,7 +2007,7 @@ body {
 
 @media (max-width: 599px) {
     .topic-content-primary-text img{
-        max-width: 100% !important;
+        max-width: 90% !important;
     }
 }
 
@@ -2876,3 +2879,21 @@ body {
     -webkit-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+.message-img{
+    max-width: 40%;
+    border-radius: 8px;
+    margin-left: 53px;
+    margin-top: -25px;
+    margin-bottom: 10px;
+}
+
+.message-bubble-right + .photo-gallery{
+    text-align: right;
+}
+.message-bubble-right + .photo-gallery .message-img{
+    margin-left: 0;
+    margin-right: 53px;
+}
+
+

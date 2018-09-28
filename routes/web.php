@@ -68,16 +68,11 @@ Route::group(['middleware'=>'auth:web'],function (){
         Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
         Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
         Route::get('{id}/history', ['as' => 'messages.show.history', 'uses' => 'MessagesController@showHistory']);
-        Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
-    });
+        Route::post('{id}/allParticipants', ['as' => 'messages.show.participants', 'uses' => 'MessagesController@getAllParticipant']);
+        Route::post('{id}/removeParticipants', ['as' => 'messages.remove.participants', 'uses' => 'MessagesController@removeParticipant']);
 
-    Route::group(['prefix' => 'testMessages'], function () {
-        Route::get('/', ['as' => 'messages', 'uses' => 'MessagesController@index']);
-        Route::get('create', ['as' => 'messages.create', 'uses' => 'MessagesController@create']);
-        Route::post('/', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
-        Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
-        Route::get('{id}/history', ['as' => 'messages.show.history', 'uses' => 'MessagesController@showHistory']);
         Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
+        Route::post('{id}/photo', ['as' => 'messages.updatePhoto', 'uses' => 'MessagesController@updatePhoto']);
     });
 
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');

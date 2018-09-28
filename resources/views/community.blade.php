@@ -6,7 +6,8 @@
 @section('content')
     {{--PC端分两栏 移动端侧边栏隐藏--}}
     <div class="mdui-row">
-        <div class="mdui-col-md-9 mdui-col-xs-12" style="padding-top: 20px; ">
+        {{--<div class="mdui-col-md-9 mdui-col-xs-12" style="padding-top: 20px; ">--}}
+        <div class="mdui-col-md-12 mdui-col-xs-12" style="padding-top: 20px; ">
             <div class="mdui-card content-card">
                 {{--一级分区列表--}}
                 @include('community.left-zones-list')
@@ -16,9 +17,9 @@
 
 
         </div>
-        <div class="mdui-col-md-3 mdui-col-xs-12" style="padding-top: 20px; ">
-            侧边栏
-        </div>
+        {{--<div class="mdui-col-md-3 mdui-col-xs-12" style="padding-top: 20px; ">--}}
+            {{--侧边栏--}}
+        {{--</div>--}}
     </div>
     <a href="{{route('communityTopicCreate')}}" mdui-tooltip="{content: '{{__('community.createTopics')}}', position: 'left'}" class="mdui-fab mdui-fab-fixed mdui-color-pink-accent">
         <i class="mdui-icon material-icons">add</i>

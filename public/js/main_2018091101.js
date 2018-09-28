@@ -329,7 +329,7 @@ if ($$('#editorToolbar').length>0){
         editorProgress = $$('#editor-progress');
         $$.each(files, function (i, file) {
             editorProgress.show();
-            ImgToBase64(file, 900, function (base64) {
+            ImgToBase64(file, 1280, function (base64) {
                 $$.ajax({
                     method: 'POST',
                     url: serverUrl,
@@ -345,7 +345,7 @@ if ($$('#editorToolbar').length>0){
                         if (data.status===1){
                             // insert 是获取图片 url 后，插入到编辑器的方法
                             // 上传代码返回结果之后，将图片插入到编辑器中
-                            insert(data.src);
+                            insert(data.link,data.slink,data.size);
                             editorProgress.hide();
                         }
                     }
@@ -2472,6 +2472,38 @@ function handleMessagePageSend(threadId) {
     }
 }
 
+function handlePhotoMessagePageSend(threadId,obj) {
+    var photo = obj.files[0];
+    messageSendBtn.animateCss('zoomOutRight',function () {
+        messageSendBtn.hide();
+        messageSendLoading.show();
+        ImgToBase64(photo, 1280, function (base64) {
+            $$.ajax({
+                method: 'POST',
+                url: '/messages/'+threadId+'/photo',
+                headers: {
+                    'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    img_data: base64,
+                },
+                success: function (data) {
+                    data=JSON.parse(data);
+                    messageContentList.append(data.html);
+                    messageContentList.scrollTop( messageContentList[0].scrollHeight);
+                },
+                complete:function () {
+                    setTimeout(function () {
+                        messageSendLoading.hide();
+                        messageSendBtn.show();
+                    },500);
+                }
+            });
+        });
+
+    });
+}
+
 //社区话题移动端页面顶部用户信息
 var messageContentMoreFunBar = new mdui.Collapse('#messageContentMoreFunBar');
 var messageContentMoreFunBarItem = $$('#messageContentMoreFunBarItem');
@@ -2486,3 +2518,290 @@ messageContentMoreFunBarItem.on('open.mdui.collapse',function () {
 messageContentMoreFunBarItem.on('close.mdui.collapse',function () {
     messageContentMoreFunBtn.removeClass('message-content-form-textarea-btn-45');
 });
+
+//显示全部参与者对话框
+var messageParticipantDialog = new mdui.Dialog('#messageParticipantDialog');
+
+function handleShowAllParticipants(threadId) {
+    messageParticipantDialog.open();
+    $$.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: '/messages/'+threadId+'/allParticipants',
+        statusCode: {
+            500: function (xhr, textStatus) {
+                mdui.alert('Server internal error<br/>服务器内部错误');
+            }
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            $$('#messageParticipantDialogContent').empty();
+            $$('#messageParticipantDialogContent').append(data.html);
+            messageParticipantDialog.handleUpdate();
+        }
+    });
+}
+
+function handleRemoveParticipants(threadId) {
+    var messageParticipantDialogloading = $$("#messageParticipantDialogloading");
+    var messageParticipantDialogOK = $$("#messageParticipantDialogOK");
+    messageParticipantDialogOK.hide();
+    messageParticipantDialogloading.show();
+
+    var removeUsers_ids=[];
+    $$('input[name="participants"]').each(function(i,value){
+        if (!$$(value).is(':checked')){
+            removeUsers_ids.push($$(this).val());//向数组中添加元素
+        }
+    });
+
+    $$.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: '/messages/'+threadId+'/removeParticipants',
+        data:{
+            removeUsers:removeUsers_ids
+        },
+        statusCode: {
+            500: function (xhr, textStatus) {
+                mdui.alert('Server internal error<br/>服务器内部错误');
+            }
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            messageParticipantDialog.close();
+        },
+        complete:function () {
+            messageParticipantDialogloading.hide();
+            messageParticipantDialogOK.show();
+        }
+    });
+}
+
+/*********************************************************
+ * PhotoSwipe
+ * */
+var initPhotoSwipeFromDOM = function(gallerySelector) {
+
+    // parse slide data (url, title, size ...) from DOM elements
+    // (children of gallerySelector)
+    var parseThumbnailElements = function(el) {
+        var thumbElements = el.childNodes,
+            numNodes = thumbElements.length,
+            items = [],
+            figureEl,
+            linkEl,
+            size,
+            item;
+
+        for(var i = 0;i < numNodes; i++) {
+            if (thumbElements[i].nodeName !=="FIGURE"){
+                continue;
+            }
+            figureEl = thumbElements[i]; // <figure> element
+
+            // include only element nodes
+            if(figureEl.nodeType !== 1) {
+                continue;
+            }
+
+            linkEl = figureEl.children[0]; // <a> element
+
+            size = linkEl.getAttribute('data-size').split('x');
+
+            // create slide object
+            item = {
+                src: linkEl.getAttribute('href'),
+                w: parseInt(size[0], 10),
+                h: parseInt(size[1], 10)
+            };
+
+
+
+            if(figureEl.children.length > 1) {
+                // <figcaption> content
+                item.title = figureEl.children[1].innerHTML;
+            }
+
+            if(linkEl.children.length > 0) {
+                // <img> thumbnail element, retrieving thumbnail url
+                item.msrc = linkEl.children[0].getAttribute('src');
+            }
+
+            item.el = figureEl; // save link to element for getThumbBoundsFn
+            items.push(item);
+        }
+        return items;
+    };
+
+    // find nearest parent element
+    var closest = function closest(el, fn) {
+        return el && ( fn(el) ? el : closest(el.parentNode, fn) );
+    };
+
+    // triggers when user clicks on thumbnail
+    var onThumbnailsClick = function(e) {
+        e = e || window.event;
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+
+        var eTarget = e.target || e.srcElement;
+
+        // find root element of slide
+        var clickedListItem = closest(eTarget, function(el) {
+            return (el.tagName && el.tagName.toUpperCase() === 'FIGURE');
+        });
+
+        if(!clickedListItem) {
+            return;
+        }
+
+        // find index of clicked item by looping through all child nodes
+        // alternatively, you may define index via data- attribute
+        var clickedGallery = clickedListItem.parentNode,
+            childNodes = clickedListItem.parentNode.childNodes,
+            numChildNodes = childNodes.length,
+            nodeIndex = 0,
+            index;
+
+        for (var i = 0; i < numChildNodes; i++) {
+            if(childNodes[i].nodeType !== 1) {
+                continue;
+            }
+
+            if(childNodes[i] === clickedListItem) {
+                index = nodeIndex;
+                break;
+            }
+            nodeIndex++;
+        }
+
+
+
+        if(index >= 0) {
+            // open PhotoSwipe if valid index found
+            openPhotoSwipe( index, clickedGallery );
+        }
+        return false;
+    };
+
+    // parse picture index and gallery index from URL (#&pid=1&gid=2)
+    var photoswipeParseHash = function() {
+        var hash = window.location.hash.substring(1),
+            params = {};
+
+        if(hash.length < 5) {
+            return params;
+        }
+
+        var vars = hash.split('&');
+        for (var i = 0; i < vars.length; i++) {
+            if(!vars[i]) {
+                continue;
+            }
+            var pair = vars[i].split('=');
+            if(pair.length < 2) {
+                continue;
+            }
+            params[pair[0]] = pair[1];
+        }
+
+        if(params.gid) {
+            params.gid = parseInt(params.gid, 10);
+        }
+
+        return params;
+    };
+
+    var openPhotoSwipe = function(index, galleryElement, disableAnimation, fromURL) {
+        var pswpElement = document.querySelectorAll('.pswp')[0],
+            gallery,
+            options,
+            items;
+
+        items = parseThumbnailElements(galleryElement);
+
+        // define options (if needed)
+        options = {
+
+            // define gallery index (for URL)
+            galleryUID: galleryElement.getAttribute('data-pswp-uid'),
+
+            getThumbBoundsFn: function(index) {
+                // See Options -> getThumbBoundsFn section of documentation for more info
+                var thumbnail = items[index].el.getElementsByTagName('img')[0], // find thumbnail
+                    pageYScroll = window.pageYOffset || document.documentElement.scrollTop,
+                    rect = thumbnail.getBoundingClientRect();
+
+                return {x:rect.left, y:rect.top + pageYScroll, w:rect.width};
+            }
+
+        };
+
+        // PhotoSwipe opened from URL
+        if(fromURL) {
+            if(options.galleryPIDs) {
+                // parse real index when custom PIDs are used
+                // http://photoswipe.com/documentation/faq.html#custom-pid-in-url
+                for(var j = 0; j < items.length; j++) {
+                    if(items[j].pid == index) {
+                        options.index = j;
+                        break;
+                    }
+                }
+            } else {
+                // in URL indexes start from 1
+                options.index = parseInt(index, 10) - 1;
+            }
+        } else {
+            options.index = parseInt(index, 10);
+        }
+
+        // exit if index not found
+        if( isNaN(options.index) ) {
+            return;
+        }
+
+        if(disableAnimation) {
+            options.showAnimationDuration = 0;
+        }
+
+        // Pass data to PhotoSwipe and initialize it
+        gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
+        gallery.init();
+    };
+
+    // loop through all gallery elements and bind events
+    var galleryElements = document.querySelectorAll( gallerySelector );
+
+    for(var i = 0, l = galleryElements.length; i < l; i++) {
+        galleryElements[i].setAttribute('data-pswp-uid', i+1);
+        // galleryElements[i].onclick = onThumbnailsClick;
+        $$.each(galleryElements[i].childNodes, function (i, value) {
+            if (value.nodeName == "FIGURE") {
+                $$.each(value.childNodes, function (i, value) {
+                    if (value.nodeName == "A") {
+                        value.onclick = onThumbnailsClick;
+                    }
+                })
+            }
+        })
+
+    }
+
+    // Parse URL and open gallery if it contains #&pid=3&gid=1
+    var hashData = photoswipeParseHash();
+    if(hashData.pid && hashData.gid) {
+        openPhotoSwipe( hashData.pid ,  galleryElements[ hashData.gid - 1 ], true, true );
+    }
+};
+
+// execute above function
+initPhotoSwipeFromDOM('.photo-gallery');
+
+/********************************
+ * END PhotoSwipe
+ * */

@@ -22,7 +22,12 @@
                         From {{$thread['participantsString']}}
                     @endif
                 </span>
-                - {{ $thread['lastMessage']->body }}
+                -
+                @if(strpos($thread['lastMessage']->body, '<figure>'))
+                    [Picture]
+                @else
+                    {{ $thread['lastMessage']->body }}
+                @endif
             </div>
             <div class="mdui-list-item-text">
                 {{ $thread['lastMessage']->created_at->diffForHumans() }}

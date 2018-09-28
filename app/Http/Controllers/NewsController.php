@@ -305,7 +305,8 @@ class NewsController extends Controller
     /**
      * uploadImg
      * @param Request $request
-     * @return string
+     * @return false|string
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function uploadImg(Request $request)
     {
@@ -324,26 +325,43 @@ class NewsController extends Controller
             $ext = 'jpeg'; // 扩展名
 
             // 上传文件
-            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-            // 如果宽大于900 裁剪图片
+            // 如果宽大于1280 裁剪图片
             $img=Image::make($realPath);
-            if ($img->width()>900){
-                $img->resize(900, null, function($constraint){		// 调整图像的宽到900，并约束宽高比(高自动)
+            if ($img->width()>1280){
+                $img->resize(1280, null, function($constraint){		// 调整图像的宽到1280，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
+            }
+            $width = $img ->width();
+            $height = $img ->height();
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '@'.$width.'x'.$height .'@' . uniqid() . '.' . $ext;
+            //存储大图
+            Storage::disk('newsImg')->put($filename, file_get_contents($realPath));
+
+            //图片压缩处理缩略图
+            $smallImg = Image::make($realPath);
+            if ($smallImg->width()>400) {
+                $smallImg->resize(400, null, function ($constraint) {        // 调整图像的宽到400，并约束宽高比(高自动)
                     $constraint->aspectRatio();
                 })->save();
             }
 
+            $s_filename = 's-'.$filename;
             // 使用communityTopicImg本地存储空间（目录）
-            $bool = Storage::disk('newsImg')->put($filename, file_get_contents($realPath));
+            Storage::disk('newsImg')->put($s_filename, file_get_contents($realPath));
+
             $img_url = "/uploads/news/img/" . $filename;
-            return json_encode(["status" => 1, "src" => $img_url]);//ajax
+            $simg_url = "/uploads/news/img/" . $s_filename;
+            $size = $width . 'x' . $height ;
+            return json_encode(["status" => 1, "link" => $img_url, "slink" => $simg_url, "size" => $size]);//ajax
         }
     }
 
     /**
      * uploadReplyImg
      * @param Request $request
-     * @return string
+     * @return false|string
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function uploadReplyImg(Request $request)
     {
@@ -368,27 +386,43 @@ class NewsController extends Controller
             $ext = 'jpeg'; // 扩展名
 
             // 上传文件
-            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '-' . uniqid() . '.' . $ext;
-
+            // 如果宽大于1280 裁剪图片
             $img=Image::make($realPath);
-            if ($img->width()>600){
-                $img->resize(600, null, function($constraint){		// 调整图像的宽到600，并约束宽高比(高自动)
+            if ($img->width()>1280){
+                $img->resize(1280, null, function($constraint){		// 调整图像的宽到1280，并约束宽高比(高自动)
+                    $constraint->aspectRatio();
+                })->save();
+            }
+            $width = $img ->width();
+            $height = $img ->height();
+            $filename = $user->id . '-' . date('Y-m-d-H-i-s') . '@'.$width.'x'.$height .'@' . uniqid() . '.' . $ext;
+            //存储大图
+            Storage::disk('newsReplyImg')->put($filename, file_get_contents($realPath));
+
+            //图片压缩处理缩略图
+            $smallImg = Image::make($realPath);
+            if ($smallImg->width()>400) {
+                $smallImg->resize(400, null, function ($constraint) {        // 调整图像的宽到400，并约束宽高比(高自动)
                     $constraint->aspectRatio();
                 })->save();
             }
 
-            // 使用我们新建的uploads本地存储空间（目录）
-            // 这里的userCover是配置文件的名称
-            $bool = Storage::disk('newsReplyImg')->put($filename, file_get_contents($realPath));
+            $s_filename = 's-'.$filename;
+            // 使用communityTopicImg本地存储空间（目录）
+            Storage::disk('newsReplyImg')->put($s_filename, file_get_contents($realPath));
+
             $img_url = "/uploads/news/reply/img/" . $filename;
-            return json_encode(["status" => 1, "src" => $img_url]);//ajax
+            $simg_url = "/uploads/news/reply/img/" . $s_filename;
+            $size = $width .'x' . $height ;
+            return json_encode(["status" => 1, "link" => $img_url, "slink" => $simg_url, "size" => $size]);//ajax
         }
     }
 
     /**
      * 处理上传的新闻封面
      * @param Request $request
-     * @return string
+     * @return false|string
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function uploadCover(Request $request){
         $this->authorize('uploadImgs',News::class);

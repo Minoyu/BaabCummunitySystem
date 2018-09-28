@@ -43,7 +43,7 @@
     <script src="/layui/layui.js"></script>
     <script src="/js/swiper-4.3.5.min.js"></script>
     <script src="/js/mdui.min.js"></script>
-    <script src="/js/wangEditor.min.js"></script>
+    <script src="/js/wangEditor.js"></script>
     <script src="/js/main_2018091101.js"></script>
     <script src="/js/admin.js"></script>
 </body>

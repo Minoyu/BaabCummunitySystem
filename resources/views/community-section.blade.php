@@ -6,9 +6,17 @@
 @section('content')
     {{--PC端分两栏 移动端侧边栏隐藏--}}
     <div class="mdui-row">
-        <div class="mdui-col-md-9 mdui-col-xs-12" style="padding-top: 20px; ">
+        {{--<div class="mdui-col-md-9 mdui-col-xs-12" style="padding-top: 20px; ">--}}
+        <div class="mdui-col-md-12 mdui-col-xs-12" style="padding-top: 20px; ">
             <div class="mdui-card content-card community-section-content">
-                <img src="{{$section->img_url}}" class="community-section-top-img mdui-hoverable">
+                <div class="photo-gallery">
+                    <figure>
+                        <a href="{{$section->img_url}}" data-size="400x400">
+                            <img src="{{$section->img_url}}" class="community-section-top-img mdui-hoverable" />
+                        </a>
+                        <figcaption class="mdui-hidden">{{$section->name}}</figcaption>
+                    </figure>
+                </div>
                 <div class="community-section-top-txt-area">
                     <div class="community-section-top-name">{{$section->name}}</div>
                     <div class="community-section-top-sub-area">
@@ -31,9 +39,9 @@
             </div>
 
         </div>
-        <div class="mdui-col-md-3 mdui-hidden-sm-down">
-            侧边栏
-        </div>
+        {{--<div class="mdui-col-md-3 mdui-hidden-sm-down">--}}
+            {{--侧边栏--}}
+        {{--</div>--}}
     </div>
     <a href="{{route('communityTopicCreate',['zone_id'=>$section->communityZone->id,'section_id'=>$section->id])}}" mdui-tooltip="{content: '{{__('community.createTopics')}}', position: 'left'}" class="mdui-fab mdui-fab-fixed mdui-color-pink-accent">
         <i class="mdui-icon material-icons">add</i>

@@ -21,8 +21,17 @@
                     </label>
                     <input class="mdui-hidden" id="personalCenterAvatarUploadInput" type="file" onchange="handleAvatarUpdate(this,'userAvatar')" accept="image/jpeg,image/png">
                 </div>
+                <img src="{{$user->info->avatar_url}}" class="avatar mdui-hoverable userAvatar">
+            @else
+                <div class="photo-gallery">
+                    <figure>
+                        <a href="{{$user->info->avatar_url}}" data-size="400x400">
+                            <img src="{{$user->info->avatar_url}}" class="avatar mdui-hoverable userAvatar">
+                        </a>
+                        <figcaption class="mdui-hidden">{{$user->name}}'s Avatar</figcaption>
+                    </figure>
+                </div>
             @endif
-            <img src="{{$user->info->avatar_url}}" class="avatar mdui-hoverable userAvatar">
         </div>
         <div class="username-cover">{{$user->name}}</div>
         <div class="meta">
