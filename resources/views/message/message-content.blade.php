@@ -9,7 +9,7 @@
         <ul id="messageContentList" class="message-bubble-list" style="margin-bottom: 65px;height: 410px;overflow-y: scroll;overflow-x: hidden;">
             @if($messageTooMuch)
                 <button onclick="jumpTo('{{route('messages.show.history',$thread->id)}}')" class="mdui-btn mdui-btn-dense mdui-center mdui-color-grey-200" style="border-radius: 16px;">
-                    <i class="mdui-icon material-icons mdui-icon-left">more</i>
+                    <i class="mdui-icon material-icons mdui-icon-left">history</i>
                     {{__('layout.loadMore')}}
                 </button>
             @endif
@@ -29,7 +29,7 @@
                             </label>
                             <input class="mdui-hidden" id="sendPhotoMessage" type="file" onchange="handlePhotoMessagePageSend('{{$thread->id}}',this)" accept="image/jpeg,image/png">
                             <button onclick="handleShowAllParticipants('{{$thread->id}}')" class="mdui-btn"><i class="mdui-icon material-icons">group</i></button>
-                            <button type="button" class="mdui-btn"><i class="mdui-icon material-icons">person_add</i></button>
+                            <button onclick="handleGetParticipantsToSelect('{{$thread->id}}')" class="mdui-btn"><i class="mdui-icon material-icons">person_add</i></button>
                             <a href="{{route('messages.show.history',$thread->id)}}" class="mdui-btn"><i class="mdui-icon material-icons">history</i></a>
                         </div>
                     </div>
@@ -47,4 +47,5 @@
         </div>
     </div>
     @include('message.layout.message-participant-dialog')
+    @include('message.layout.message-add-participant-dialog')
 @endsection

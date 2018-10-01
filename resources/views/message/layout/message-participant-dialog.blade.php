@@ -4,9 +4,10 @@
         <div class="mdui-spinner mdui-spinner-colorful mdui-center"></div>
     </div>
     <div class="mdui-dialog-actions">
-        <button onclick="handleRemoveParticipants('{{$thread->id}}')" class="mdui-btn mdui-ripple">
+        {{--<button onclick="handleRemoveParticipants('{{$thread->id}}')" class="mdui-btn mdui-ripple">--}}
+        <button class="mdui-btn mdui-ripple" mdui-dialog-close>
             <span id="messageParticipantDialogOK">OK</span>
-            <div class="mdui-spinner mdui-spinner-colorful" style="display:none" id="messageParticipantDialogloading"></div>
+            {{--<div class="mdui-spinner mdui-spinner-colorful" style="display:none" id="messageParticipantDialogloading"></div>--}}
         </button>
     </div>
 </div>

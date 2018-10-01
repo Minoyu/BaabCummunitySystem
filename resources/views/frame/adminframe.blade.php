@@ -16,8 +16,8 @@
     <link href="/css/swiper-4.3.5.min.css" rel="stylesheet" type="text/css">
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
     <link href="/css/animate.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.bootcss.com/ionicons/4.1.2/css/ionicons.min.css" rel="stylesheet">
-    <link href="/css/main_2018091103.css" rel="stylesheet" type="text/css">
+    <link href="/css/ionicons.min.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
     <link href="/css/admin.css" rel="stylesheet" type="text/css">
 </head>
 <body class="mdui-appbar-with-toolbar mdui-drawer-body-left">
@@ -39,12 +39,12 @@
     @endif
 
     <!-- Js -->
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.slim.min.js"></script>
+    <script src="/js/jquery.min.js"></script>
     <script src="/layui/layui.js"></script>
     <script src="/js/swiper-4.3.5.min.js"></script>
     <script src="/js/mdui.min.js"></script>
     <script src="/js/wangEditor.js"></script>
-    <script src="/js/main_2018091101.js"></script>
+    <script src="/js/main.js"></script>
     <script src="/js/admin.js"></script>
 </body>
 </html>

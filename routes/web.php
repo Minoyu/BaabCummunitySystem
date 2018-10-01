@@ -69,7 +69,9 @@ Route::group(['middleware'=>'auth:web'],function (){
         Route::get('{id}', ['as' => 'messages.show', 'uses' => 'MessagesController@show']);
         Route::get('{id}/history', ['as' => 'messages.show.history', 'uses' => 'MessagesController@showHistory']);
         Route::post('{id}/allParticipants', ['as' => 'messages.show.participants', 'uses' => 'MessagesController@getAllParticipant']);
-        Route::post('{id}/removeParticipants', ['as' => 'messages.remove.participants', 'uses' => 'MessagesController@removeParticipant']);
+//        Route::post('{id}/removeParticipants', ['as' => 'messages.remove.participants', 'uses' => 'MessagesController@removeParticipant']);
+        Route::post('{id}/addParticipants', ['as' => 'messages.add.participants', 'uses' => 'MessagesController@addParticipant']);
+        Route::post('{id}/showParticipantsToSelect', ['as' => 'messages.show.participantsToSelect', 'uses' => 'MessagesController@showParticipantToSelect']);
 
         Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
         Route::post('{id}/photo', ['as' => 'messages.updatePhoto', 'uses' => 'MessagesController@updatePhoto']);

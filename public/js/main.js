@@ -2491,6 +2491,8 @@ function handlePhotoMessagePageSend(threadId,obj) {
                     data=JSON.parse(data);
                     messageContentList.append(data.html);
                     messageContentList.scrollTop( messageContentList[0].scrollHeight);
+                    //相册重新初始化
+                    initPhotoSwipeFromDOM('.photo-gallery');
                 },
                 complete:function () {
                     setTimeout(function () {
@@ -2544,6 +2546,31 @@ function handleShowAllParticipants(threadId) {
     });
 }
 
+//显示添加参与者对话框
+var addParticipantDialog = new mdui.Dialog('#addParticipantDialog');
+
+function handleGetParticipantsToSelect(threadId) {
+    addParticipantDialog.open();
+    $$.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: '/messages/'+threadId+'/showParticipantsToSelect',
+        statusCode: {
+            500: function (xhr, textStatus) {
+                mdui.alert('Server internal error<br/>服务器内部错误');
+            }
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            $$('#addParticipantDialogContent').empty();
+            $$('#addParticipantDialogContent').append(data.html);
+            addParticipantDialog.handleUpdate();
+        }
+    });
+}
+
 function handleRemoveParticipants(threadId) {
     var messageParticipantDialogloading = $$("#messageParticipantDialogloading");
     var messageParticipantDialogOK = $$("#messageParticipantDialogOK");
@@ -2578,6 +2605,44 @@ function handleRemoveParticipants(threadId) {
         complete:function () {
             messageParticipantDialogloading.hide();
             messageParticipantDialogOK.show();
+        }
+    });
+}
+
+function handleAddParticipants(threadId) {
+    var addParticipantDialogloading = $$("#addParticipantDialogloading");
+    var addParticipantDialogOK = $$("#addParticipantDialogOK");
+    addParticipantDialogOK.hide();
+    addParticipantDialogloading.show();
+
+    var addUsers_ids=[];
+    $$('input[name="participants_to_add"]').each(function(i,value){
+        if ($$(value).is(':checked')){
+            addUsers_ids.push($$(this).val());//向数组中添加元素
+        }
+    });
+
+    $$.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+        },
+        method: 'POST',
+        url: '/messages/'+threadId+'/addParticipants',
+        data:{
+            addUsers:addUsers_ids
+        },
+        statusCode: {
+            500: function (xhr, textStatus) {
+                mdui.alert('Server internal error<br/>服务器内部错误');
+            }
+        },
+        success: function (data) {
+            data = JSON.parse(data);
+            addParticipantDialog.close();
+        },
+        complete:function () {
+            addParticipantDialogloading.hide();
+            addParticipantDialogOK.show();
         }
     });
 }

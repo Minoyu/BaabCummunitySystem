@@ -79,7 +79,7 @@ class MessagesController extends Controller
 
         $messageTooMuch = false;
         $messagesCount = $thread->messages()->count();
-        $messages = $thread->messages()->with('user.info')->get()->slice($messagesCount-$perPage);
+        $messages = $thread->messages()->with('user.info')->get()->slice($messagesCount>$perPage?$messagesCount-$perPage:0);
 
         if ($messagesCount>$perPage){
             $messageTooMuch = true;
@@ -190,7 +190,7 @@ class MessagesController extends Controller
         } catch (ModelNotFoundException $e) {
             return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
         }
-        $thread->activateAllParticipants();
+//        $thread->activateAllParticipants();
         // Message
         $message = Message::create([
             'thread_id' => $thread->id,
@@ -231,7 +231,7 @@ class MessagesController extends Controller
         } catch (ModelNotFoundException $e) {
             return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
         }
-        $thread->activateAllParticipants();
+//        $thread->activateAllParticipants();
         $user = Auth::user();
 
         if ($request->isMethod('post')) {
@@ -320,28 +320,54 @@ class MessagesController extends Controller
             return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
         }
 
-        $participants = $thread->participants()->with('user.info')->get();
-        $view = view('message.layout.message-participant-list', compact('participants'))->render();
+        $creator = $thread->creator()->with('info')->first();
+        $participants = $thread->participants()->where('user_id','!=',$creator->id)->with('user.info')->get();
+        $view = view('message.layout.message-participant-list', compact('participants','creator'))->render();
         return response()->json(['html' => $view]);
     }
 
-    public function removeParticipant($id,Request $request){
+//    public function removeParticipant($id,Request $request){
+//        try {
+//            $thread = Thread::findOrFail($id);
+//        } catch (ModelNotFoundException $e) {
+//            return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
+//        }
+//
+//        $participants = $request->removeUsers;
+//        $thread->removeParticipant($participants);
+//        return response()->json(['status' => 1]);
+//
+//    }
+//
+
+
+    public function addParticipant($id,Request $request){
         try {
             $thread = Thread::findOrFail($id);
         } catch (ModelNotFoundException $e) {
             return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
         }
 
-        $this->validate($request, [
-            'removeUsers' => 'required'
-        ]);
-
-        $participants = $request->removeUsers;
-        if (count($participants)>0) {
-            $thread->removeParticipant($participants);
-        }
+        $participants = $request->addUsers;
+        $thread->addParticipant($participants);
         return response()->json(['status' => 1]);
 
+    }
+
+    public function showParticipantToSelect($id){
+        try {
+            $thread = Thread::findOrFail($id);
+        } catch (ModelNotFoundException $e) {
+            return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
+        }
+
+        $participantsIds = [];
+        foreach($thread->participants as $participant){
+            array_push($participantsIds,$participant->user->id);
+        }
+        $followings = Auth::user()->followings()->whereNotIn('id', $participantsIds)->get();
+        $view = view('message.layout.message-add-participant-list', compact('followings'))->render();
+        return response()->json(['html' => $view]);
     }
 }
 // 增加参与者

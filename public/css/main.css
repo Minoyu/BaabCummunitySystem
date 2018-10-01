@@ -26,6 +26,10 @@ body {
 figure{
     margin: 0;
 }
+.mdui-container {
+    overflow-x: hidden;
+    padding-bottom: 5px;
+}
 /*小屏设备右下按钮底部边距*/
 @media (max-width: 599px) {
     .mdui-fab-fixed, .mdui-fab-wrapper {
