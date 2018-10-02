@@ -17,9 +17,9 @@
                     {{--@php dd($thread['creatorIsMe']) @endphp--}}
                     {{$thread['participantsCount']}}P ·
                     @if($thread['lastMessageIsMe'])
-                        To {{$thread['participantsString']}}
+                        From Me
                     @else
-                        From {{$thread['participantsString']}}
+                        From {{$thread['lastMessageUser']->name}}
                     @endif
                 </span>
                 -

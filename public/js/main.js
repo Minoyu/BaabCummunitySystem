@@ -2612,8 +2612,6 @@ function handleRemoveParticipants(threadId) {
 function handleAddParticipants(threadId) {
     var addParticipantDialogloading = $$("#addParticipantDialogloading");
     var addParticipantDialogOK = $$("#addParticipantDialogOK");
-    addParticipantDialogOK.hide();
-    addParticipantDialogloading.show();
 
     var addUsers_ids=[];
     $$('input[name="participants_to_add"]').each(function(i,value){
@@ -2621,31 +2619,40 @@ function handleAddParticipants(threadId) {
             addUsers_ids.push($$(this).val());//向数组中添加元素
         }
     });
-
-    $$.ajax({
-        headers: {
-            'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-        },
-        method: 'POST',
-        url: '/messages/'+threadId+'/addParticipants',
-        data:{
-            addUsers:addUsers_ids
-        },
-        statusCode: {
-            500: function (xhr, textStatus) {
-                mdui.alert('Server internal error<br/>服务器内部错误');
+    if (addUsers_ids.length>0){
+        addParticipantDialogOK.hide();
+        addParticipantDialogloading.show();
+        $$.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            method: 'POST',
+            url: '/messages/'+threadId+'/addParticipants',
+            data:{
+                addUsers:addUsers_ids
+            },
+            statusCode: {
+                500: function (xhr, textStatus) {
+                    mdui.alert('Server internal error<br/>服务器内部错误');
+                }
+            },
+            success: function (data) {
+                data = JSON.parse(data);
+                addParticipantDialog.close();
+            },
+            complete:function () {
+                addParticipantDialogloading.hide();
+                addParticipantDialogOK.show();
             }
-        },
-        success: function (data) {
-            data = JSON.parse(data);
-            addParticipantDialog.close();
-        },
-        complete:function () {
-            addParticipantDialogloading.hide();
-            addParticipantDialogOK.show();
-        }
-    });
+        });
+    }else{
+        addParticipantDialog.close();
+    }
 }
+
+//显示创建话题对话框
+var createMessageContentDialog = new mdui.Dialog('#createMessageContentDialog');
+
 
 /*********************************************************
  * PhotoSwipe

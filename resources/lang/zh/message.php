@@ -8,6 +8,7 @@
 return [
     //全局
     'messages'=> '消息',
+    'newMessages'=> '新私信',
     'notifications'=> '通知',
     'notificationCenter'=> '通知中心',
 

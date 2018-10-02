@@ -16,6 +16,6 @@
             </div>
         </div>
     </div>
-    {{--@include('admin.layout.msg')--}}
+    @include('message.layout.message-create-content-dialog')
 
 @endsection

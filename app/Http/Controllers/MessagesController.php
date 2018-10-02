@@ -39,7 +39,6 @@ class MessagesController extends Controller
 
         $thread_collection = collect([]);
         foreach ($threads as $thread){
-            $participantsString = $thread->participantsString(Auth::id());
             $participantsCount = $thread->participants()->count();
             $lastMessage = $thread->latestMessage;
             $lastMessageUser = $thread->latestMessage->user()->with('info')->first();
@@ -48,7 +47,6 @@ class MessagesController extends Controller
             $unreadCount = $thread->userUnreadMessagesCount(Auth::id());
             $thread_collection->push(compact(
                 'thread',
-                'participantsString',
                 'participantsCount',
                 'lastMessage',
                 'lastMessageUser',
