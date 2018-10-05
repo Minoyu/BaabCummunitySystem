@@ -505,9 +505,8 @@ function loginSubmit() {
                 $$('.dialog-top-tip-button').addClass('mdui-hidden');
                 $$('.username').text(data.user.name);
                 $$('.personalCenterUrl').attr('href','/user/'+data.user.id);
-                console.log(data.user.name);
                 $$('#loginSuccessful').removeClass('mdui-hidden');
-                $$('#loginSuccessIcon').animateCss('rotateIn')
+                $$('#loginSuccessIcon').animateCss('rotateIn');
                 loginDialog.handleUpdate();
                 setTimeout(function(){
                     //使用  setTimeout（）方法设定定时3000毫秒
@@ -1778,95 +1777,99 @@ followDialogDom.on('close.mdui.dialog', function () {
 
 //Ajax话题投票
 function ajaxHandleFollowUser(followUrl,unfollowUrl,userId,obj,numClass) {
-    var num = $$('.'+numClass);
-    var text = obj.getElementsByTagName("span")[0];
-    var icon = obj.getElementsByTagName("i")[0];
-    if ($$(obj).hasClass('mdui-color-pink-accent')){
-        //已经投票过
-        $$.ajax({
-            method: 'POST',
-            url: unfollowUrl,
-            headers: {
-                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                id:userId
-            },
-            success: function (data) {
-                data=JSON.parse(data);
-                if (data.status === 1){
-                    $$(obj).removeClass('mdui-color-pink-accent');
-                    $$(obj).addClass('mdui-text-color-pink-accent');
-                    $$(icon).html('&#xe87e;');
-                    $$(text).text($$('input[name="__follow"]').val());
-                    $$(icon).animateCss('jello');
-                    num.text(data.follower_count);
-                }else{
-                    mdui.snackbar(data.msg,{
-                        position:'top',
-                        timeout:0,
-                        buttonText:'ok'
-                    });
-                }
-            },
-            statusCode: {
-                422: function (data) {
-                    data=JSON.parse(data.response);
-                    mdui.snackbar(data.errors.content,{
-                        position:'top',
-                        timeout:0,
-                        buttonText:'ok'
-                    });
-                },
-                401: function (data) {
-                    handleNotLogged();
-                }
-            }
-
-        });
+    if ($$('meta[name="isLogged"]').attr('content')!=='1'){
+        handleNotLogged();
     }else{
-        //还未投票过
-        $$.ajax({
-            method: 'POST',
-            url: followUrl,
-            headers: {
-                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
-            },
-            data: {
-                id:userId
-            },
-            success: function (data) {
-                data=JSON.parse(data);
-                if (data.status === 1){
-                    $$(obj).addClass('mdui-color-pink-accent');
-                    $$(obj).removeClass('mdui-text-color-pink-accent');
-                    $$(icon).html('&#xe87d;');
-                    $$(text).text($$('input[name="__followed"]').val());
-                    $$(icon).animateCss('swing');
-                    num.text(data.follower_count)
-                }else{
-                    mdui.snackbar(data.msg,{
-                        position:'top',
-                        timeout:0,
-                        buttonText:'ok'
-                    });
-                }
-            },
-            statusCode: {
-                422: function (data) {
-                    data=JSON.parse(data.response);
-                    mdui.snackbar(data.errors.content,{
-                        position:'top',
-                        timeout:0,
-                        buttonText:'ok'
-                    });
+        var num = $$('.'+numClass);
+        var text = obj.getElementsByTagName("span")[0];
+        var icon = obj.getElementsByTagName("i")[0];
+        if ($$(obj).hasClass('mdui-color-pink-accent')){
+            //已经投票过
+            $$.ajax({
+                method: 'POST',
+                url: unfollowUrl,
+                headers: {
+                    'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
                 },
-                401: function (data) {
-                    handleNotLogged();
+                data: {
+                    id:userId
+                },
+                success: function (data) {
+                    data=JSON.parse(data);
+                    if (data.status === 1){
+                        $$(obj).removeClass('mdui-color-pink-accent');
+                        $$(obj).addClass('mdui-text-color-pink-accent');
+                        $$(icon).html('&#xe87e;');
+                        $$(text).text($$('input[name="__follow"]').val());
+                        $$(icon).animateCss('jello');
+                        num.text(data.follower_count);
+                    }else{
+                        mdui.snackbar(data.msg,{
+                            position:'top',
+                            timeout:0,
+                            buttonText:'ok'
+                        });
+                    }
+                },
+                statusCode: {
+                    422: function (data) {
+                        data=JSON.parse(data.response);
+                        mdui.snackbar(data.errors.content,{
+                            position:'top',
+                            timeout:0,
+                            buttonText:'ok'
+                        });
+                    },
+                    401: function (data) {
+                        handleNotLogged();
+                    }
                 }
-            }
 
-        });
+            });
+        }else{
+            //还未投票过
+            $$.ajax({
+                method: 'POST',
+                url: followUrl,
+                headers: {
+                    'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    id:userId
+                },
+                success: function (data) {
+                    data=JSON.parse(data);
+                    if (data.status === 1){
+                        $$(obj).addClass('mdui-color-pink-accent');
+                        $$(obj).removeClass('mdui-text-color-pink-accent');
+                        $$(icon).html('&#xe87d;');
+                        $$(text).text($$('input[name="__followed"]').val());
+                        $$(icon).animateCss('swing');
+                        num.text(data.follower_count)
+                    }else{
+                        mdui.snackbar(data.msg,{
+                            position:'top',
+                            timeout:0,
+                            buttonText:'ok'
+                        });
+                    }
+                },
+                statusCode: {
+                    422: function (data) {
+                        data=JSON.parse(data.response);
+                        mdui.snackbar(data.errors.content,{
+                            position:'top',
+                            timeout:0,
+                            buttonText:'ok'
+                        });
+                    },
+                    401: function (data) {
+                        handleNotLogged();
+                    }
+                }
+
+            });
+        }
     }
 }
 
@@ -2652,6 +2655,124 @@ function handleAddParticipants(threadId) {
 
 //显示创建话题对话框
 var createMessageContentDialog = new mdui.Dialog('#createMessageContentDialog');
+var createMessageSelectReceiversDialog = new mdui.Dialog('#createMessageSelectReceiversDialog');
+var messageReceiverIds = [];
+
+function selectReceiversToCreateMessage() {
+    if ($$('meta[name="isLogged"]').attr('content')!=='1'){
+        handleNotLogged();
+    }else {
+        createMessageSelectReceiversDialog.open();
+        $$.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+            },
+            method: 'POST',
+            url: '/messages/showFollowingsToSelect',
+            statusCode: {
+                500: function (xhr, textStatus) {
+                    mdui.alert('Server internal error<br/>服务器内部错误');
+                }
+            },
+            success: function (data) {
+                data = JSON.parse(data);
+                $$('#createMessageSelectReceiversDialogContent').empty();
+                $$('#createMessageSelectReceiversDialogContent').append(data.html);
+                createMessageSelectReceiversDialog.handleUpdate();
+            }
+        });
+    }
+}
+
+function handleSelectedReceiversToSendMessage() {
+    if ($$('meta[name="isLogged"]').attr('content')!=='1'){
+        handleNotLogged();
+    }else{
+        var addUsers_ids=[];
+        $$('input[name="participants_to_add"]').each(function(i,value){
+            if ($$(value).is(':checked')){
+                addUsers_ids.push($$(this).val());//向数组中添加元素
+            }
+        });
+        if (!addUsers_ids.length>0){
+            mdui.snackbar({
+                message: "You haven't chosen the receiver yet.",
+                buttonText: 'OK',
+                position: 'top',
+            });
+        }else{
+            showCreateMessageDialog(addUsers_ids);
+            createMessageSelectReceiversDialog.close();
+        }
+    }
+}
+
+function showCreateMessageDialog(receiverIds) {
+    if ($$('meta[name="isLogged"]').attr('content')!=='1'){
+        handleNotLogged();
+    }else {
+        $$('#createMessagePage').show();
+        $$('#createMessageSuccess').hide();
+        createMessageContentDialog.open();
+        messageReceiverIds = receiverIds;
+    }
+}
+
+$$('#createMessageContentDialogBtn').on('click',function () {
+    if (messageReceiverIds && messageReceiverIds.length>0){
+        var createMessageSubject = $$('input[name="createMessageSubject"]').val();
+        var createMessageContent = $$('textarea[name="createMessageContent"]').val();
+
+        var createMessageContentDialogloading = $$("#createMessageContentDialogloading");
+        var createMessageContentDialogSend = $$("#createMessageContentDialogSend");
+
+        if (!createMessageSubject){
+            mdui.snackbar({
+                message: "Subject can't be empty.",
+                buttonText: 'OK',
+                position: 'top',
+            });
+        }else if(!createMessageContent){
+            mdui.snackbar({
+                message: "Message content can't be empty.",
+                buttonText: 'OK',
+                position: 'top',
+            });
+        }else{
+            createMessageContentDialogSend.hide();
+            createMessageContentDialogloading.show();
+
+            $$.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $$('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'POST',
+                url: '/messages/',
+                data:{
+                    subject:createMessageSubject,
+                    message:createMessageContent,
+                    recipients:messageReceiverIds,
+                },
+                statusCode: {
+                    500: function (xhr, textStatus) {
+                        mdui.alert('Server internal error<br/>服务器内部错误');
+                    }
+                },
+                success: function (data) {
+                    data = JSON.parse(data);
+                    $$('#createMessagePage').hide();
+                    $$('#createMessageSuccess').show();
+                    createMessageContentDialog.handleUpdate();
+                    $$('#messageSendSuccessIcon').animateCss('fadeInLeft');
+                },
+                complete:function () {
+                    createMessageContentDialogloading.hide();
+                    createMessageContentDialogSend.show();
+                }
+            });
+        }
+    }
+});
 
 
 /*********************************************************

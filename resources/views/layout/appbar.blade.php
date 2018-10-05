@@ -48,7 +48,12 @@
         @if(!Auth::check())
             <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">account_circle</i></button>
         @else
-            <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon"><img src="{{Auth::user()->info->avatar_url}}"></button>
+            <button id="appbar-right-menu-btn" class="mdui-btn mdui-btn-icon">
+                <img src="{{Auth::user()->info->avatar_url}}">
+                @if($messageUnreadCount > 0 || $notificationUnreadCount > 0)
+                    <span class="layui-badge-dot" style="position: absolute;right: 5px;"></span>
+                @endif
+            </button>
         @endif
         @include('layout.appbar-right-menu')
     </div>

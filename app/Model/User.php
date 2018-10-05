@@ -11,6 +11,10 @@ use Overtrue\LaravelFollow\Traits\CanBeFollowed;
 use Jcc\LaravelVote\Vote;
 use Spatie\Permission\Traits\HasRoles;
 
+/**
+ * Class User
+ * @package App\Model
+ */
 class User extends Authenticatable
 {
     use Notifiable,Messagable,CanFollow,CanBeFollowed,Vote,HasRoles,SoftDeletes;

@@ -19,4 +19,5 @@
     </div>
     <input class="mdui-hidden" name="__follow" value="{{__('user.follow')}}"/>
     <input class="mdui-hidden" name="__followed" value="{{__('user.followed')}}"/>
+    @include('layout.footer-fab')
 @endsection

@@ -22,4 +22,5 @@
             @include('news-content.side-clumn')
         </div>
     </div>
+    @include('layout.footer-fab')
 @endsection

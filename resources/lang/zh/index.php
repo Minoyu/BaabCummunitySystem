@@ -7,6 +7,8 @@
 
 return [
     //全局
+    'from'=>'来自',
+
     'app_name'=> env('APP_ZH_NAME','留学生网站'),
     'login'=>'登录',
     'loginNow'=>'登录就现在',

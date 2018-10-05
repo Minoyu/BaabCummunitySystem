@@ -53,6 +53,9 @@
     @endif
     {{--PhotoSwipe-HTML--}}
     @include('layout.photoswipe-html')
+    {{--Messages Dialog--}}
+    @include('message.layout.message-create-content-dialog')
+    @include('message.layout.message-create-select-user-dialog')
     <!-- Js -->
     {{--PhotoSwipe Js--}}
     <script src="/photoswipe/photoswipe.min.js"></script>

@@ -7,6 +7,8 @@
 
 return [
     //全局
+    'from'=>'From',
+
     'app_name'=> env('APP_EN_NAME','AfricaSystem'),
     'login'=>'Login',
     'loginNow'=>'Login Now',

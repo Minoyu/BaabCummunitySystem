@@ -29,4 +29,5 @@
     {{--新闻卡片--}}
     {{--@include('news.newspage-bottom')--}}
     {{----}}
+    @include('layout.footer-fab')
 @endsection

@@ -36,4 +36,5 @@
             @include('news-sec.side-clumn')
         </div>
     </div>
+    @include('layout.footer-fab')
 @endsection

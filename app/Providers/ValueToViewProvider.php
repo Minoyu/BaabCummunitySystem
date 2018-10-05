@@ -15,17 +15,27 @@ class ValueToViewProvider extends ServiceProvider
     public function boot()
     {
         //
-        view()->composer(['message.layout.left-type-list','message.layout.left-type-list-mini',],function($view){
+        view()->composer([
+            'message.layout.left-type-list',
+            'message.layout.left-type-list-mini',
+            'layout.drawer',
+            'layout.appbar-right-menu',
+            'layout.appbar',
+            ],function($view){
             if (Auth::check()){
                 $messageUnreadCount = Auth::user()->newThreadsCount();
+                $notificationUnreadCount = Auth::user()->unreadNotifications()->count();
             }else{
                 $messageUnreadCount = 0;
+                $notificationUnreadCount = 0;
             }
 
             $view->with([
                 'messageUnreadCount'=>$messageUnreadCount,
+                'notificationUnreadCount'=>$notificationUnreadCount,
             ]);
         });
+
     }
 
     /**

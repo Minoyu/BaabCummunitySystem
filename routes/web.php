@@ -72,9 +72,14 @@ Route::group(['middleware'=>'auth:web'],function (){
 //        Route::post('{id}/removeParticipants', ['as' => 'messages.remove.participants', 'uses' => 'MessagesController@removeParticipant']);
         Route::post('{id}/addParticipants', ['as' => 'messages.add.participants', 'uses' => 'MessagesController@addParticipant']);
         Route::post('{id}/showParticipantsToSelect', ['as' => 'messages.show.participantsToSelect', 'uses' => 'MessagesController@showParticipantToSelect']);
+        Route::post('/showFollowingsToSelect', ['as' => 'messages.show.participantsToSelect', 'uses' => 'MessagesController@showFollowingsToSelect']);
 
         Route::put('{id}', ['as' => 'messages.update', 'uses' => 'MessagesController@update']);
         Route::post('{id}/photo', ['as' => 'messages.updatePhoto', 'uses' => 'MessagesController@updatePhoto']);
+    });
+
+    Route::group(['prefix' => 'notifications'], function () {
+        Route::get('/', ['as' => 'notifications', 'uses' => 'NotificationController@index']);
     });
 
     Route::get('/auth/logout','AuthController@logout')->name('userLogout');

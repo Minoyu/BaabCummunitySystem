@@ -57,7 +57,7 @@
             <i class="mdui-icon mdui-fab-opened material-icons">favorite</i>
         </button>
         <div class="mdui-fab-dial">
-            <button class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue mdui-text-color-white" mdui-tooltip="{content: '{{__('message.newMessages')}}', position: 'left'}"><i class="mdui-icon material-icons">message</i></button>
+            <button onclick="selectReceiversToCreateMessage()" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-blue mdui-text-color-white" mdui-tooltip="{content: '{{__('message.newMessages')}}', position: 'left'}"><i class="mdui-icon material-icons">message</i></button>
             <a href="{{route('communityTopicCreate',['zone_id'=>$zone->id])}}" class="mdui-fab mdui-fab-mini mdui-ripple mdui-color-pink-accent" mdui-tooltip="{content: '{{__('community.createTopics')}}', position: 'left'}"><i class="mdui-icon material-icons">bubble_chart</i></a>
         </div>
     </div>

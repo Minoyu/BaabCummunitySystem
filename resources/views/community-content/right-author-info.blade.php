@@ -98,19 +98,24 @@
         @if(Auth::id() != $topic->user->id)
             @if(Auth::check() && $topic->user->isFollowedBy(Auth::user()))
                 <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$topic->user->id}}',this)" class="mdui-btn mdui-color-pink-accent mdui-center side-card-user-btn">
-                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87d;</i>
+                    <i class="mdui-icon material-icons mdui-icon-left" style="font-size: 20px;">&#xe87d;</i>
                     <span>{{__('user.followed')}}</span>
                 </a>
             @else
                 <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$topic->user->id}}',this)" class="mdui-btn mdui-text-color-pink-accent mdui-center side-card-user-btn">
-                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87e;</i>
+                    <i class="mdui-icon material-icons mdui-icon-left" style="font-size: 20px;">&#xe87e;</i>
                     <span>{{__('user.follow')}}</span>
                 </a>
             @endif
+            <a onclick="showCreateMessageDialog([{{$topic->user->id}}])" class="mdui-btn mdui-text-color-blue mdui-center side-card-user-btn">
+                <i class="mdui-icon material-icons mdui-icon-left" style="font-size: 20px;">email</i>
+                <span>{{__('message.message')}}</span>
+            </a>
+        @else
+            <a href="{{route('showPersonalCenter',$topic->user->id)}}" class="mdui-btn mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn">
+                <i class="mdui-icon material-icons mdui-icon-left">account_circle</i>
+                {{__('index.personalCenter')}}
+            </a>
         @endif
-        <a href="{{route('showPersonalCenter',$topic->user->id)}}" class="mdui-btn mdui-color-grey-100 mdui-ripple mdui-center mdui-m-t-1 side-card-user-btn mdui-hoverable">
-            <i class="mdui-icon material-icons">account_circle</i>
-            {{__('index.personalCenter')}}
-        </a>
     </div>
 </div>

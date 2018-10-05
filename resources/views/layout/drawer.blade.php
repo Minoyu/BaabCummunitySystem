@@ -33,10 +33,27 @@
             </li>
         </a>
 
-        <a href="{{route('showCommunity')}}">
+        <a href="{{route('messages')}}">
             <li class="mdui-list-item mdui-ripple">
-                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-pink">&#xe6dd;</i>
-                <div class="mdui-list-item-content">{{__('index.community')}}</div>
+                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-pink">message</i>
+                <div class="mdui-list-item-content">
+                    {{__('message.messages')}}
+                    <span class="layui-badge mdui-text-color-white @if($messageUnreadCount == 0) layui-bg-gray @endif" style="height: 14px;line-height: 15px;">
+                        {{$messageUnreadCount}}
+                    </span>
+                </div>
+            </li>
+        </a>
+
+        <a href="{{route('notifications')}}">
+            <li class="mdui-list-item mdui-ripple">
+                <i class="mdui-list-item-icon mdui-icon material-icons mdui-text-color-pink">notifications_active</i>
+                <div class="mdui-list-item-content">
+                    {{__('message.notifications')}}
+                    <span class="layui-badge mdui-text-color-white @if($notificationUnreadCount == 0) layui-bg-gray @endif" style="height: 14px;line-height: 15px;">
+                        {{$notificationUnreadCount}}
+                    </span>
+                </div>
             </li>
         </a>
 

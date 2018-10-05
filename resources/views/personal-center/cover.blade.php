@@ -69,21 +69,26 @@
             @endif
 
         </div>
-        @if($userIsMe)
-            <a onclick="openEditUserInfoDialog()" class="right-btn mdui-btn mdui-btn-raised">{{__('user.editProfile')}}</a>
-        @else
-            @if(Auth::check() && $user->isFollowedBy(Auth::user()))
-                <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this,'pc-followerCount')" class="right-btn mdui-btn mdui-color-pink-accent mdui-btn-raised">
-                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87d;</i>
-                    <span>{{__('user.followed')}}</span>
-                </a>
+        <div class="right-btn">
+            @if($userIsMe)
+                <a onclick="openEditUserInfoDialog()" class="mdui-btn mdui-btn-raised" style="background: #ffffff;">{{__('user.editProfile')}}</a>
             @else
-                <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this,'pc-followerCount')" class="right-btn mdui-btn mdui-text-color-pink-accent mdui-btn-raised">
-                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87e;</i>
-                    <span>{{__('user.follow')}}</span>
+                @if(Auth::check() && $user->isFollowedBy(Auth::user()))
+                    <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this,'pc-followerCount')" style="background: #ffffff;" class="mdui-btn mdui-color-pink-accent mdui-btn-raised">
+                        <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87d;</i>
+                        <span>{{__('user.followed')}}</span>
+                    </a>
+                @else
+                    <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this,'pc-followerCount')" style="background: #ffffff;" class="mdui-btn mdui-text-color-pink-accent mdui-btn-raised">
+                        <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">&#xe87e;</i>
+                        <span>{{__('user.follow')}}</span>
+                    </a>
+                @endif
+                <a onclick="showCreateMessageDialog([{{$user->id}}])" class="mdui-btn mdui-color-blue-accent mdui-m-l-1 mdui-btn-raised">
+                    <i class="mdui-icon material-icons" style="margin-top: -2px;font-size: 20px;">email</i>
+                    <span>{{__('message.message')}}</span>
                 </a>
             @endif
-
-        @endif
+        </div>
     </div>
 </div>

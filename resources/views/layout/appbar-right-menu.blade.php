@@ -3,7 +3,13 @@
         @if(Auth::check())
             <a href="{{route('showPersonalCenter',Auth::user()->id)}}"><img class="user-profile mdui-hoverable userAvatar" src="{{Auth::user()->info->avatar_url}}" /></a>
             <h2 class="appbar-menu-title">{{Auth::user()->name}}</h2>
-            <h3 class="appbar-menu-subtitle">{{Auth::user()->info->motto}}</h3>
+            <h3 class="appbar-menu-subtitle">
+                @if(Auth::user()->info->motto)
+                    {{Auth::user()->info->motto}}
+                @else
+                    {{__('user.noMotto')}}
+                @endif
+            </h3>
         @else
             <a onclick="openLoginDialog()"><img class="user-profile mdui-hoverable" src="/imgs/user_profile.png" /></a>
             <h2 class="appbar-menu-title">{{__('index.welcome')}}</h2>
@@ -15,13 +21,33 @@
         @endif
 
     </div>
-    <div class="mdui-divider"></div>
+    <li class="mdui-menu-item">
+        <a href="{{route('messages')}}" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">message</i>
+            {{__('message.messages')}}
+            <span class="layui-badge mdui-text-color-white @if($messageUnreadCount == 0) layui-bg-gray @endif" style="height: 14px;line-height: 15px;">
+                {{$messageUnreadCount}}
+            </span>
+        </a>
+    </li>
+    <li class="mdui-menu-item">
+        <a href="{{route('messages')}}" class="mdui-ripple">
+            <i class="mdui-menu-item-icon mdui-icon material-icons">notifications_active</i>
+            {{__('message.notifications')}}
+            <span class="layui-badge mdui-text-color-white @if($notificationUnreadCount == 0) layui-bg-gray @endif" style="height: 14px;line-height: 15px;">
+                {{$notificationUnreadCount}}
+            </span>
+        </a>
+    </li>
     @if(Auth::check())
         <li class="mdui-menu-item">
             <a href="{{route('showPersonalCenter',Auth::user()->id)}}" class="mdui-ripple">
                 <i class="mdui-menu-item-icon mdui-icon material-icons">beach_access</i>{{__('index.personalCenter')}}
             </a>
         </li>
+    @endif
+    <div class="mdui-divider"></div>
+    @if(Auth::check())
         <li class="mdui-menu-item">
             <a href="{{route('userLogout')}}" class="mdui-ripple">
                 <i class="mdui-menu-item-icon mdui-icon material-icons">exit_to_app</i>{{__('auth.logout')}}

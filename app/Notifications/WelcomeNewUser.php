@@ -59,7 +59,7 @@ class WelcomeNewUser extends Notification implements ShouldQueue
             //
             'type'=>'user.new.welcome',
             'userName'=>$notifiable->name,
-            'welcomeTopicLink'=>'https://baab.club/community/topic/31',
+            'welcomeTopicLink'=>'/community/topic/31',
         ];
     }
 }

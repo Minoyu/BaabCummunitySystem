@@ -101,11 +101,17 @@ figure{
     line-height: 14px;
     font-size: 12px;
     position: absolute;
-    top: 50px;
+    top: 53px;
     left: 85px;
-    width:160px;
+    width: 160px;
     white-space: initial;
     opacity: .7;
+    height: 28px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
 }
 
 .appbar-menu-subtitle button{
@@ -781,14 +787,14 @@ figure{
     min-height: 250px;
     padding: 0 10px 62px
 }
-.login-dialog .success .icon,.register-dialog .success .icon,.reset-dialog .success .icon {
+.login-dialog .success .icon,.register-dialog .success .icon,.reset-dialog .success .icon , #createMessageContentDialog .success .icon {
     font-size: 100px;
 }
-.login-dialog .success h3,.register-dialog .success h3,.reset-dialog .success h3 {
+.login-dialog .success h3,.register-dialog .success h3,.reset-dialog .success h3 , #createMessageContentDialog .success h3 {
     text-align: center;
     opacity: 0.8;
 }
-.login-dialog .success .btns,.register-dialog .success .btns,.reset-dialog .success .btns {
+.login-dialog .success .btns,.register-dialog .success .btns,.reset-dialog .success .btns , #createMessageContentDialog .success .btns {
     margin-top: 30px;
     text-align: center;
 }
@@ -1720,7 +1726,6 @@ figure{
     border-bottom: 1px solid rgba(255, 255, 255, 0.7);
 }
 .user-center-cover-info .right-btn {
-    background-color: #fff;
     color: rgba(0, 0, 0, 0.87);
     width: auto;
     font-size: 15px;
@@ -2744,7 +2749,7 @@ figure{
 }
 
 #appbar-right-menu-btn img{
-    width: 70%;
+    width: 60%;
     height: auto;
     border-radius: 50%
 }
@@ -2900,4 +2905,25 @@ figure{
     margin-right: 53px;
 }
 
+.notify-card .mdui-card-primary-title{
+    font-size: 20px;
+    line-height: 30px;
+}
+.notify-card .mdui-card-primary-subtitle{
+    opacity: unset;
+    color: #666;
+}
+.notify-card .mdui-card-header{
+    height: 56px;
+    border-radius: 10px;
+}
+
+.notify-card .mdui-card-actions .mdui-btn{
+    min-width: auto;
+    padding: 0 8px;
+    height: 26px;
+    margin: 3px;
+    line-height: 26px;
+    border-radius: 5px;
+}
 

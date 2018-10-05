@@ -149,17 +149,22 @@ class MessagesController extends Controller
      *
      * @return mixed
      */
-    public function store()
+    public function store(Request $request)
     {
-        $input = Input::all();
+        $this->validate($request,[
+            'subject'=>'required|min:1',
+            'message'=>'required|min:1',
+            'recipients'=>'required',
+        ]);
+
         $thread = Thread::create([
-            'subject' => $input['subject'],
+            'subject' => $request->subject,
         ]);
         // Message
         Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => $input['message'],
+            'body' => $request->message,
         ]);
         // Sender
         Participant::create([
@@ -168,10 +173,9 @@ class MessagesController extends Controller
             'last_read' => new Carbon,
         ]);
         // Recipients
-        if (Input::has('recipients')) {
-            $thread->addParticipant($input['recipients']);
-        }
-        return redirect()->route('messages');
+        $thread->addParticipant($request->recipients);
+
+        return response()->json(['status'=>1,'thread'=>$thread]);
     }
 
     /**
@@ -364,6 +368,12 @@ class MessagesController extends Controller
             array_push($participantsIds,$participant->user->id);
         }
         $followings = Auth::user()->followings()->whereNotIn('id', $participantsIds)->get();
+        $view = view('message.layout.message-add-participant-list', compact('followings'))->render();
+        return response()->json(['html' => $view]);
+    }
+
+    public function showFollowingsToSelect(){
+        $followings = Auth::user()->followings()->get();
         $view = view('message.layout.message-add-participant-list', compact('followings'))->render();
         return response()->json(['html' => $view]);
     }

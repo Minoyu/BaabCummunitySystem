@@ -23,19 +23,19 @@
                 @if($user->info->motto)
                     {{$user->info->motto}}
                 @else
-                    此用户还未添加一句话介绍
+                    {{__('user.noMotto')}}
                 @endif
             </div>
             @if((Auth::check() && $user->id != Auth::id()) || !Auth::check())
                 @if( Auth::check() && $user->isFollowedBy(Auth::user()))
                     <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this)" class="mdui-btn mdui-btn-dense mdui-color-pink-accent">
                         <i class="mdui-icon material-icons mdui-icon-left">&#xe87d;</i>
-                        <span>已关注</span>
+                        <span>{{__('user.followed')}}</span>
                     </a>
                 @else
                     <a onclick="ajaxHandleFollowUser('{{route('userFollowOther')}}','{{route('userUnfollowOther')}}','{{$user->id}}',this)" class="mdui-btn mdui-btn-dense mdui-text-color-pink-accent">
                         <i class="mdui-icon material-icons mdui-icon-left">&#xe87e;</i>
-                        <span>关注</span>
+                        <span>{{__('user.follow')}}</span>
                     </a>
                 @endif
             @endif
