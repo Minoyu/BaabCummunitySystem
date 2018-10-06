@@ -158,13 +158,13 @@ class MessagesController extends Controller
         ]);
 
         $thread = Thread::create([
-            'subject' => $request->subject,
+            'subject' => clean($request->subject,'message_content'),
         ]);
         // Message
         Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => $request->message,
+            'body' => clean($request->message,'message_content'),
         ]);
         // Sender
         Participant::create([
@@ -197,7 +197,7 @@ class MessagesController extends Controller
         $message = Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => Input::get('message'),
+            'body' => clean(Input::get('message'),'message_content'),
         ]);
         // Add replier as a participant
         $participant = Participant::firstOrCreate([

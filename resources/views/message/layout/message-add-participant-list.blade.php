@@ -11,6 +11,10 @@
             </label>
         @endforeach
     @else
-        No followings
+        <span class="loading-tip-text mdui-m-t-1 mdui-m-b-3" style="font-size: 15px">
+            <i class="mdui-icon material-icons mdui-center mdui-text-color-grey-600 mdui-m-t-5 mdui-m-b-3" style="font-size: 50px">supervisor_account</i>
+            {!! __('message.emptyFollowings') !!}
+            <br>
+        </span>
     @endif
 </div>

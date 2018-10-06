@@ -6,8 +6,17 @@
         @case('community.topic.replied')
             @include('message.notify-card.community-topic-replied')
         @break
+        @case('community.reply.replied')
+            @include('message.notify-card.community-reply-replied')
+        @break
+        @case('news.reply.replied')
+            @include('message.notify-card.news-reply-replied')
+        @break
         @case('user.followed')
-            ceshi
+            @include('message.notify-card.user-followed')
+        @break
+        @case('user.new.welcome')
+            @include('message.notify-card.user-new-welcome')
         @break
     @endswitch
 @endforeach

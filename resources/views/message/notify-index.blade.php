@@ -7,6 +7,7 @@
 
 @section('right-content')
     @include('message.layout.notify-item-data')
+    {{$notify->links()}}
     {{--Js所需翻译库--}}
     <input class="mdui-hidden" name="__follow" value="{{__('user.follow')}}"/>
     <input class="mdui-hidden" name="__followed" value="{{__('user.followed')}}"/>

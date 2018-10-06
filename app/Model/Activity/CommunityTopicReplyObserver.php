@@ -46,7 +46,7 @@ class CommunityTopicReplyObserver
 
         //不回复本人和话题作者时通知原回复者
         if (preg_match('/@(.*?)-/',$replyContent,$replyToId)){
-            if (($replyTo = User::find($replyToId[1]))&& ($replyTo !=Auth::user()||$replyTo!=$reply->communityTopic->user)){
+            if (($replyTo = User::find($replyToId[1]))&& ($replyTo->id !=Auth::id() && $replyTo->id!=$reply->communityTopic->user->id)){
                 $replyTo->notify(new CommunityReplyReplied($reply));
             }
         };

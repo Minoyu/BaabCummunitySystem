@@ -31,7 +31,7 @@
         </a>
     </li>
     <li class="mdui-menu-item">
-        <a href="{{route('messages')}}" class="mdui-ripple">
+        <a href="{{route('notifications')}}" class="mdui-ripple">
             <i class="mdui-menu-item-icon mdui-icon material-icons">notifications_active</i>
             {{__('message.notifications')}}
             <span class="layui-badge mdui-text-color-white @if($notificationUnreadCount == 0) layui-bg-gray @endif" style="height: 14px;line-height: 15px;">

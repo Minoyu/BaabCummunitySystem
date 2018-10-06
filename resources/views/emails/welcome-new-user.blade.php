@@ -5,9 +5,9 @@
 ## Thank you for being a member of Baabclub.
 
 ## So , what is Baab.Club?
-BaabClub is a new community build for international students mainly from Africa. Foreign students in China can find a lot of useful information here to solve their problems in the life and if you want to start some business between China and Africa,this website can help u.
+BaabClub is a new community build for international students mainly from Africa. Foreign students in China can find a lot of useful information here to solve your problems in the life and If you want to start some business between China and Africa , this website can help u .
 
-For example, you can exchange old things here, rent your beloved house, and make friends with people who share the same aspirations in foreign countries. Broaden your relationship network or even look for a love 😂.
+For example, you can exchange old things here, rent your beloved house and get the goods here then send them to your country . Make friends with people who share the same aspirations in foreign countries. Broaden your relationship network or even look for a love 😂.
 
 Also, u can ask questions here or ask for help if there is something inconvenient or difficult in your life. I'm sure BaabClub's enthusiastic volunteers or others will do what they can to help u.
 
@@ -33,7 +33,7 @@ Volunteers' Phone number :18896657331 Tony.
 
 u can scan the Wechat QR code to contact
 
-![QR Code](https://baab.club/uploads/community/topic/img/1-2018-09-07-20-58-57-5b92761197dd0.jpeg)
+![QR Code](https://baab.club/uploads/community/topic/img/1-2018-10-06-13-54-06-5bb84dfe77773.jpeg)
 
 If you find a very serious Bug in the community, contact me from scan the wechat QR code.
 

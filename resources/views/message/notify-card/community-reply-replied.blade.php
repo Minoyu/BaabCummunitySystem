@@ -2,14 +2,13 @@
     <!-- 卡片的标题和副标题 -->
     <div class="mdui-card-primary mdui-p-y-1">
         <div class="mdui-card-primary-title">
-            <i class="mdui-icon material-icons mdui-text-color-indigo" style="padding-bottom: 3px;">reply</i>
-            {{__('message.topicRepliedTitle')}}
+            <i class="mdui-icon material-icons mdui-text-color-teal" style="padding-bottom: 3px;">reply</i>
+            {{__('message.commentRepliedTitle')}}
         </div>
         <div class="mdui-card-primary-subtitle">
             @if(!$notification['isRead'])
                 <span class="layui-badge">NEW</span>
             @endif
-
             <i class="mdui-icon material-icons" style="font-size: 16px">access_time</i>
             {{$notification['created_at']->diffForHumans()}}
             <br>
@@ -19,6 +18,7 @@
                     {{$notification['topic']->title}}
                 </a>
             </i>
+
         </div>
     </div>
 

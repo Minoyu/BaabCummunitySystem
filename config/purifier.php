@@ -22,6 +22,12 @@ return [
     'cachePath'     => storage_path('app/purifier'),
     'cacheFileMode' => 0755,
     'settings'      => [
+        'message_content' => [
+            'HTML.Doctype'             => 'XHTML 1.0 Transitional',
+            'HTML.Allowed'             => '',
+            'CSS.AllowedProperties'    => '',
+            'AutoFormat.RemoveEmpty'   => true,
+        ],
         'topic_content' => [
             'HTML.Doctype'             => 'XHTML 1.0 Transitional',
             'HTML.Allowed'             => 'div,b,strong,i,em,a[href|title],ul,ol,ol[start],li,p[style],br,span[style],img[width|height|alt|src],*[style|class|data-size],pre,hr,code,h2,h3,h4,h5,h6,blockquote,del,table,thead,tbody,tr,th,td,figure,figcaption',

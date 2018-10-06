@@ -2,21 +2,21 @@
     <!-- 卡片的标题和副标题 -->
     <div class="mdui-card-primary mdui-p-y-1">
         <div class="mdui-card-primary-title">
-            <i class="mdui-icon material-icons mdui-text-color-indigo" style="padding-bottom: 3px;">reply</i>
-            {{__('message.topicRepliedTitle')}}
+            <i class="mdui-icon material-icons mdui-text-color-green" style="padding-bottom: 3px;">reply</i>
+            {{__('message.commentRepliedTitle')}}
         </div>
         <div class="mdui-card-primary-subtitle">
             @if(!$notification['isRead'])
                 <span class="layui-badge">NEW</span>
             @endif
-
             <i class="mdui-icon material-icons" style="font-size: 16px">access_time</i>
             {{$notification['created_at']->diffForHumans()}}
             <br>
-            {{__('message.underTopic')}}
+
+            {{__('message.underNews')}}
             <i>
-                <a href="{{route('showCommunityContent',$notification['topic']->id)}}">
-                    {{$notification['topic']->title}}
+                <a href="{{route('showNewsContent',$notification['news']->id)}}">
+                    {{$notification['news']->title}}
                 </a>
             </i>
         </div>
@@ -51,7 +51,7 @@
 
     <!-- 卡片的按钮 -->
     <div class="mdui-card-actions mdui-p-y-0">
-        <a href="{{route('showCommunityContent',$notification['topic']->id)}}#reply-{{$notification['reply']->id}}" class="mdui-btn mdui-btn-dense mdui-float-right mdui-ripple mdui-color-blue-400 mdui-text-color-white">
+        <a href="{{route('showNewsContent',$notification['news']->id)}}#reply-{{$notification['news']->id}}" class="mdui-btn mdui-btn-dense mdui-float-right mdui-ripple mdui-color-blue-400 mdui-text-color-white">
             {{__('admin.view')}}
             <i class="mdui-icon material-icons mdui-icon-left">remove_red_eye</i>
         </a>

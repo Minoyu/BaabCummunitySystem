@@ -15,6 +15,9 @@ return [
     'messageCenter'=> '消息中心',
     'sendSuccess'=>'消息已成功发送',
     'underTopic'=>'话题',
+    'underNews'=>'新闻',
+    'emptyMessage'=>'尝试发送你的第一条消息 !',
+    'emptyFollowings'=>'没有已关注的用户可选 <br> 你可以先关注一些其他人',
 
     //notify
     'topicRepliedTitle'=>'你的话题已有回复回复',
