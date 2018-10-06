@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 use App\Model\User;
+use App\Notifications\NewMessage;
 use Carbon\Carbon;
 use Cmgmyr\Messenger\Models\Message;
 use Cmgmyr\Messenger\Models\Participant;
@@ -10,6 +11,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
@@ -135,16 +137,6 @@ class MessagesController extends Controller
     }
 
     /**
-     * Creates a new message thread.
-     *
-     * @return mixed
-     */
-    public function create()
-    {
-        $users = User::where('id', '!=', Auth::id())->get();
-        return view('messenger.create', compact('users'));
-    }
-    /**
      * Stores a new message thread.
      *
      * @return mixed
@@ -157,14 +149,17 @@ class MessagesController extends Controller
             'recipients'=>'required',
         ]);
 
+        $subject = clean($request->subject,'message_content');
+        $content = clean($request->message,'message_content');
+
         $thread = Thread::create([
-            'subject' => clean($request->subject,'message_content'),
+            'subject' => $subject,
         ]);
         // Message
         Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => clean($request->message,'message_content'),
+            'body' => $content,
         ]);
         // Sender
         Participant::create([
@@ -174,6 +169,9 @@ class MessagesController extends Controller
         ]);
         // Recipients
         $thread->addParticipant($request->recipients);
+
+        $recipients = User::findOrFail($request->recipients);
+        Notification::send($recipients,new NewMessage($subject,Auth::user()->name,$content));
 
         return response()->json(['status'=>1,'thread'=>$thread]);
     }
@@ -194,10 +192,12 @@ class MessagesController extends Controller
         }
 //        $thread->activateAllParticipants();
         // Message
+        $content = clean(Input::get('message'),'message_content');
+
         $message = Message::create([
             'thread_id' => $thread->id,
             'user_id' => Auth::id(),
-            'body' => clean(Input::get('message'),'message_content'),
+            'body' => $content,
         ]);
         // Add replier as a participant
         $participant = Participant::firstOrCreate([
@@ -206,6 +206,13 @@ class MessagesController extends Controller
         ]);
         $participant->last_read = new Carbon;
         $participant->save();
+
+        $otherParticipants = $thread->participants()->where('user_id','!=',Auth::id())->get();
+        $otherUsers =[];
+        foreach($otherParticipants as $otherParticipant){
+            array_push($otherUsers,$otherParticipant->user);
+        }
+        Notification::send($otherUsers,new NewMessage($thread->subject,Auth::user()->name,$content));
 
         $messages_collection = collect([]);
         $senderIsMe = true;
@@ -301,6 +308,13 @@ class MessagesController extends Controller
             $participant->last_read = new Carbon;
             $participant->save();
 
+            $otherParticipants = $thread->participants()->where('user_id','!=',Auth::id())->get();
+            $otherUsers =[];
+            foreach($otherParticipants as $otherParticipant){
+                array_push($otherUsers,$otherParticipant->user);
+            }
+            Notification::send($otherUsers,new NewMessage($thread->subject,Auth::user()->name,'[Photo]'));
+
             $messages_collection = collect([]);
             $senderIsMe = true;
             $messages_collection->push(compact('message', 'senderIsMe'));
@@ -322,7 +336,7 @@ class MessagesController extends Controller
             return redirect()->route('messages')->withErrors(['The conversation with ID: ' . $id . ' was not found.']);
         }
 
-        $creator = $thread->creator()->with('info')->first();
+        $creator = $thread->messages()->oldest()->first()->user;
         $participants = $thread->participants()->where('user_id','!=',$creator->id)->with('user.info')->get();
         $view = view('message.layout.message-participant-list', compact('participants','creator'))->render();
         return response()->json(['html' => $view]);
