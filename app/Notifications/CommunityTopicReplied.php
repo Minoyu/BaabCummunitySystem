@@ -48,7 +48,7 @@ class CommunityTopicReplied extends Notification implements ShouldQueue
             ->greeting('Hello! '.$notifiable->name.', Your Topic <i>'.$this->reply->communityTopic->title.'</i> has been replied')
             ->line('Replier : '.$this->reply->user->name)
             ->line('Content : '.strip_tags($this->reply->content))
-            ->action('VIEW & REPLY', url(route('showCommunityContent',$this->reply->communityTopic->id).'#reply-'.$this->reply->id))
+            ->action('VIEW & REPLY', route('showCommunityContent',$this->reply->communityTopic->id).'#reply-'.$this->reply->id)
             ->line('<br>Thank you for your participation in community!');
     }
 
@@ -68,7 +68,7 @@ class CommunityTopicReplied extends Notification implements ShouldQueue
             'replyId'=>$this->reply->id,
             'replyContent'=>$this->reply->content,
             'replierId'=>$this->reply->user->id,
-            'replierName'=>$this->reply->user->id,
+            'replierName'=>$this->reply->user->name,
         ];
     }
 }

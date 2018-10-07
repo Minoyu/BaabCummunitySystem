@@ -25,7 +25,7 @@ class NotificationController extends Controller
                     try {
                         $topic = CommunityTopic::findOrFail($notification->data['topicId']);
                         $reply = CommunityTopicReply::findOrFail($notification->data['replyId']);
-                        $replier = User::findOrFail($notification->data['replierId'])->with('info')->first();
+                        $replier = User::with('info')->findOrFail($notification->data['replierId']);
                     } catch (ModelNotFoundException $e) {
                         $notification->markAsRead();
                         break;
@@ -47,7 +47,7 @@ class NotificationController extends Controller
                     try{
                         $topic = CommunityTopic::findOrFail($notification->data['topicId']);
                         $reply = CommunityTopicReply::findOrFail($notification->data['replyId']);
-                        $replier = User::findOrFail($notification->data['replierId'])->with('info')->first();
+                        $replier = User::with('info')->findOrFail($notification->data['replierId']);
                     } catch (ModelNotFoundException $e) {
                         $notification->markAsRead();
                         break;
@@ -69,7 +69,7 @@ class NotificationController extends Controller
                     try{
                         $news = News::findOrFail($notification->data['newsId']);
                         $reply = NewsReply::findOrFail($notification->data['replyId']);
-                        $replier = User::findOrFail($notification->data['replierId'])->with('info')->first();
+                        $replier = User::with('info')->findOrFail($notification->data['replierId']);
                     } catch (ModelNotFoundException $e) {
                         $notification->markAsRead();
                         break;
@@ -89,7 +89,7 @@ class NotificationController extends Controller
                 case 'user.followed':
                     $type = 'user.followed';
                     try{
-                        $user = User::findOrFail($notification->data['userId'])->with('info')->first();
+                        $user = User::with('info')->findOrFail($notification->data['userId']);
                     } catch (ModelNotFoundException $e) {
                         $notification->markAsRead();
                         break;

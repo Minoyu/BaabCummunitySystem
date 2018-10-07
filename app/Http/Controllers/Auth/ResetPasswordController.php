@@ -26,10 +26,10 @@ class ResetPasswordController extends Controller
         ],$messages);
         $user = User::where('email',$request->email)->firstOrFail();
 //        Return new ResetPassword($user);
-        $mailTo = $request->email;
+        $email = $request->email;
         $token = str_random(40);
         $created_at = Carbon::now();
-        if ($passwordReset = PasswordReset::find($mailTo)){
+        if ($passwordReset = PasswordReset::find($email)){
             $passwordReset -> update(compact('token','created_at'));
         }else{
             PasswordReset::create(compact('email','token','created_at'));
@@ -51,7 +51,7 @@ class ResetPasswordController extends Controller
             ['created_at','>',Carbon::parse('-10 minutes')],
         ];
         if ($passwordReset = PasswordReset::where($query)->first()){
-            $user = $passwordReset->user;
+            $user = $passwordReset->user();
             return view('auth.reset-password-page',compact('user','token'));
         }else{
             return view('auth.reset-password-failed');
@@ -63,7 +63,7 @@ class ResetPasswordController extends Controller
             'password'=>'required|min:6|confirmed'
         ]);
         if ($passwordReset = PasswordReset::where('token',$token)->first()){
-            $user = $passwordReset->user;
+            $user = $passwordReset->user();
             $password = bcrypt($request->password);
             $user->update(compact('password'));
             $passwordReset->delete();

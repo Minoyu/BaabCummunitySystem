@@ -285,14 +285,12 @@ class MessagesController extends Controller
             $simg_url = "/uploads/message/img/" . $s_filename;
             $size = $width . 'x' . $height;
 
-            $html = '  
-            <div class="photo-gallery">      
+            $html = '       
                 <figure>
                   <a href="'.$img_url.'" data-size="'.$size.'">
                       <img src="'.$simg_url.'" class="message-img animated zoomInRight"/>
                   </a>
-                </figure>
-            </div>';
+                </figure>';
 
             // Message
             $message = Message::create([

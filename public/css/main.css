@@ -2897,10 +2897,10 @@ figure{
     margin-bottom: 10px;
 }
 
-.message-bubble-right + .photo-gallery{
+.message-bubble-right + figure{
     text-align: right;
 }
-.message-bubble-right + .photo-gallery .message-img{
+.message-bubble-right + figure .message-img{
     margin-left: 0;
     margin-right: 53px;
 }

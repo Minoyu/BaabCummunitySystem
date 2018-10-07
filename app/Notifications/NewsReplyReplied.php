@@ -49,7 +49,7 @@ class NewsReplyReplied extends Notification implements ShouldQueue
             ->greeting('Hello! '.$notifiable->name.', Your Comment under the News <i>'.$this->reply->news->title.'</i> has been replied!')
             ->line('Replier : '.$this->reply->user->name)
             ->line('Content : '.strip_tags($this->reply->content))
-            ->action('VIEW & REPLY', url(route('showNewsContent',$this->reply->news->id).'#reply-'.$this->reply->id))
+            ->action('VIEW & REPLY', route('showNewsContent',$this->reply->news->id).'#reply-'.$this->reply->id)
             ->line('<br>Thank you for your participation in BaabClub!');
     }
 
@@ -69,7 +69,7 @@ class NewsReplyReplied extends Notification implements ShouldQueue
             'replyId'=>$this->reply->id,
             'replyContent'=>$this->reply->content,
             'replierId'=>$this->reply->user->id,
-            'replierName'=>$this->reply->user->id,
+            'replierName'=>$this->reply->user->name,
         ];
     }
 }

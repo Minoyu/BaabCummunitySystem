@@ -51,7 +51,7 @@ class NewMessage extends Notification implements ShouldQueue
             ->line('Subject : '.$this->subject)
             ->line('Sender : '.$this->sender)
             ->line('Content : '.strip_tags($this->content))
-            ->action('VIEW & REPLY', url(route('messages')))
+            ->action('VIEW & REPLY', route('messages'))
             ->line('<br>Thank you for your participation in community!');
     }
 

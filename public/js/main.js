@@ -2492,7 +2492,7 @@ function handlePhotoMessagePageSend(threadId,obj) {
                 },
                 success: function (data) {
                     data=JSON.parse(data);
-                    messageContentList.append(data.html);
+                    $$('#messageContentListToAdd').append(data.html);
                     messageContentList.scrollTop( messageContentList[0].scrollHeight);
                     //相册重新初始化
                     initPhotoSwipeFromDOM('.photo-gallery');
@@ -2861,6 +2861,10 @@ var initPhotoSwipeFromDOM = function(gallerySelector) {
             index;
 
         for (var i = 0; i < numChildNodes; i++) {
+            if (childNodes[i].nodeName !=="FIGURE"){
+                continue;
+            }
+
             if(childNodes[i].nodeType !== 1) {
                 continue;
             }

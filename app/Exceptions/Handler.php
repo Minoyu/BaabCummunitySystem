@@ -53,14 +53,21 @@ class Handler extends ExceptionHandler
         return parent::render($request, $exception);
     }
 
+    /**
+     * 未登录后的行为
+     * @param \Illuminate\Http\Request $request
+     * @param AuthenticationException $exception
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
+     */
     protected function unauthenticated($request, AuthenticationException $exception)
     {
+        $redirectUrl = isset(parse_url(url()->previous())['path'])?parse_url(url()->previous())['path'].'?notLogged=true':'/?notLogged=true';
         return $request->expectsJson()
             ? response()->json(['message' => $exception->getMessage()], 401)
 
 //            : redirect()->guest(route('notLogin'));
 //            : redirect()->to(redirect()->getUrlGenerator()->previous().'?notLogged=true');
 //          url解析
-            : redirect()->to(parse_url(url()->previous())['path'].'?notLogged=true');
+            : redirect()->to($redirectUrl);
     }
 }

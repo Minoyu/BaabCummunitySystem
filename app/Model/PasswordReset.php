@@ -14,7 +14,8 @@ class PasswordReset extends Model
     protected $primaryKey = 'email';
 
     public function user(){
-        return $this->belongsTo(User::class,'email','email');
+        $user = User::where('email',$this->email)->first();
+        return $user;
     }
 
 }

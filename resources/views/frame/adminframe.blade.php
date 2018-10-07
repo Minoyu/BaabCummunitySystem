@@ -17,7 +17,7 @@
     <link href="/css/mdui.min.css" rel="stylesheet" type="text/css">
     <link href="/css/animate.css" rel="stylesheet" type="text/css">
     <link href="/css/ionicons.min.css" rel="stylesheet">
-    <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/css/main.css?v=2018100701" rel="stylesheet" type="text/css">
     <link href="/css/admin.css" rel="stylesheet" type="text/css">
 </head>
 <body class="mdui-appbar-with-toolbar mdui-drawer-body-left">
@@ -44,7 +44,7 @@
     <script src="/js/swiper-4.3.5.min.js"></script>
     <script src="/js/mdui.min.js"></script>
     <script src="/js/wangEditor.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.js?v=2018100701"></script>
     <script src="/js/admin.js"></script>
 </body>
 </html>
