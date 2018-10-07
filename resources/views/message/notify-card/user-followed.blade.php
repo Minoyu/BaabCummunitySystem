@@ -25,8 +25,8 @@
             </a>
         </div>
         <div class="mdui-card-header-subtitle">
-            @if($notification['user']->motto)
-                {{$notification['user']->motto}}
+            @if($notification['user']->info->motto)
+                {{$notification['user']->info->motto}}
             @else
                 {{__('user.noMotto')}}
             @endif

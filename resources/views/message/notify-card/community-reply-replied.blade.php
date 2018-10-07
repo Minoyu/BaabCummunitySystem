@@ -40,8 +40,8 @@
             </a>
         </div>
         <div class="mdui-card-header-subtitle">
-            @if($notification['replier']->motto)
-                {{$notification['replier']->motto}}
+            @if($notification['replier']->info->motto)
+                {{$notification['replier']->info->motto}}
             @else
                 {{__('user.noMotto')}}
             @endif
