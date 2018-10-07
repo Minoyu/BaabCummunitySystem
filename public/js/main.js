@@ -2774,6 +2774,12 @@ $$('#createMessageContentDialogBtn').on('click',function () {
     }
 });
 
+var editorToolBar = document.querySelector('.editor-toolbar');
+var origOffsetY = editorToolBar.offsetTop;
+function onScroll(e) {
+    window.scrollY >= origOffsetY ? editorToolBar.classList.add('sticky') : editorToolBar.classList.remove('sticky');
+}
+document.addEventListener('scroll', onScroll);
 
 /*********************************************************
  * PhotoSwipe

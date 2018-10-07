@@ -26,6 +26,22 @@ body {
 figure{
     margin: 0;
 }
+
+.sticky{
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+}
+
+.w-e-panel-container{
+    position: fixed !important;
+    top: 30% !important;
+}
+
+.w-e-panel-tab-content{
+    background-color: #f6f6f6;
+}
+
 .mdui-container {
     overflow-x: hidden;
     padding-bottom: 5px;
