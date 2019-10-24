@@ -8,23 +8,30 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Activitylog\Models\Activity;
 
-class UserObserver{
+class UserObserver
+{
 
     /**
      * 监听用户创建事件
      * @param User $user
      */
-    public function created(User $user){
-        $userId =$user->id;
-        $userName = $user->name;
-        $event = 'user.created';
-        activity()->on($user)
-            ->withProperties(compact(
-                'userId',
-                'userName',
-                'event'))
-            ->log('用户加入社区');
-        $user->notify(new WelcomeNewUser());
+    public function created(User $user)
+    {
+        try {
+            $userId = $user->id;
+            $userName = $user->name;
+            $event = 'user.created';
+            activity()->on($user)
+                ->withProperties(compact(
+                    'userId',
+                    'userName',
+                    'event'
+                ))
+                ->log('用户加入社区');
+            $user->notify(new WelcomeNewUser());
+        } catch (\Throwable $e) {
+            echo ("我出错啦！" + $e);
+        }
     }
 
     public function deleted(User $user)
@@ -39,33 +46,33 @@ class UserObserver{
         ])->delete();
 
         //所有表的关联删除
-        DB::table('activity_log')->where('causer_id',$user->id)->delete();
-        DB::table('community_topic_replies')->where('user_id',$user->id)->delete();
-        DB::table('community_topics')->where('user_id',$user->id)->delete();
-        DB::table('followables')->where('user_id',$user->id)->delete();
+        DB::table('activity_log')->where('causer_id', $user->id)->delete();
+        DB::table('community_topic_replies')->where('user_id', $user->id)->delete();
+        DB::table('community_topics')->where('user_id', $user->id)->delete();
+        DB::table('followables')->where('user_id', $user->id)->delete();
         DB::table('followables')
-            ->where('followable_id',$user->id)
-            ->where('followable_type','App\Model\User')
+            ->where('followable_id', $user->id)
+            ->where('followable_type', 'App\Model\User')
             ->delete();
         DB::table('model_has_permissions')
-            ->where('model_id',$user->id)
-            ->where('model_type','App\Model\User')
+            ->where('model_id', $user->id)
+            ->where('model_type', 'App\Model\User')
             ->delete();
         DB::table('model_has_roles')
-            ->where('model_id',$user->id)
-            ->where('model_type','App\Model\User')
+            ->where('model_id', $user->id)
+            ->where('model_type', 'App\Model\User')
             ->delete();
         DB::table('news')
-            ->where('user_id',$user->id)
+            ->where('user_id', $user->id)
             ->delete();
         DB::table('news_replies')
-            ->where('user_id',$user->id)
+            ->where('user_id', $user->id)
             ->delete();
         DB::table('users_info')
-            ->where('user_id',$user->id)
+            ->where('user_id', $user->id)
             ->delete();
         DB::table('votes')
-            ->where('user_id',$user->id)
+            ->where('user_id', $user->id)
             ->delete();
     }
 }
