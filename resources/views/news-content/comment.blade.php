@@ -4,7 +4,9 @@
             <div class="title"><i class="mdui-icon material-icons">comment</i>{{__('layout.createCommentHeader')}}</div>
                 <img src="{{\Auth::user()->info->avatar_url}}" class="avatar-img mdui-hoverable">
                 <div class="comment-edit-area">
-                    <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="news-reply"></div>
+                    <div class="editor-toolbar-container">
+                        <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="news-reply"></div>
+                    </div>
                     <div class="editor-middle-bar">{{__('layout.saySomething')}}</div>
                     <div id="editorText" class="editor-text mdui-hoverable" ></div>
                     <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>

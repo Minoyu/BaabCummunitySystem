@@ -42,7 +42,9 @@
             </select>
 
             <h3 class="create-page-part-title mdui-text-color-indigo mdui-m-t-4">3.{{__('admin.topicContent')}}</h3>
-            <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
+            <div class="editor-toolbar-container">
+                <div class="mdui-m-t-1 editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
+            </div>
             <div class="editor-middle-bar">{{__('admin.editArea')}}</div>
             <div id="editorText" class="editor-text-for-create-page mdui-hoverable" >{!! $topic->content !!}</div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>

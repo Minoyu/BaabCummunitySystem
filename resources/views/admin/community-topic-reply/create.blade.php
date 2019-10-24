@@ -10,7 +10,9 @@
             @include('admin.layout.msg')
 
             <h3 class="admin-index-title mdui-text-color-indigo mdui-m-t-2">{{__('admin.replyContent')}}</h3>
-            <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
+            <div class="editor-toolbar-container">
+                <div class="mdui-m-t-1 admin-editor-toolbar mdui-hoverable" id="editorToolbar" type="community-topic"></div>
+            </div>
             <div class="admin-editor-middle-bar">{{__('admin.editArea')}}</div>
             <div id="editorText" class="admin-editor-text mdui-hoverable" ></div>
             <textarea id="editorTextArea" name="content" class="mdui-hidden"></textarea>
