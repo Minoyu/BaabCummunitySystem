@@ -22,7 +22,6 @@ class UserObserver{
             ->withProperties(compact(
                 'userId',
                 'userName',
-                'userAvatar',
                 'event'))
             ->log('用户加入社区');
         $user->notify(new WelcomeNewUser());

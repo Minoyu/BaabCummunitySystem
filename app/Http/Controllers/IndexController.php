@@ -133,7 +133,6 @@ class IndexController extends Controller
             'hotTopics',
             'newTopics',
             'newsCollections',
-            'communitySections',
             'communityZones',
             'topicCollections',
             'businessCollections',
